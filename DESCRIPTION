@@ -6,9 +6,10 @@ Description: Simulate and plot general experimental crosses
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 Depends:
-    R (>= 2.15.0),
+    R (>= 2.15.0)
 Imports:
-    stats
+    stats,
+    graphics
 Suggests:
     qtl,
     devtools,

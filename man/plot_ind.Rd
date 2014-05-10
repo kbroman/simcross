@@ -3,12 +3,12 @@
 \alias{plot_ind}
 \title{Plot an individual}
 \usage{
-plot_ind(ind, center, chrlength = 30, width = 3, gap = 3,
+plot_ind(ind, center, chrlength = 30, chrwidth = 3, gap = 3,
   col = CCcolors(), border = "black", lend = 1, ljoin = 1,
   allborders = FALSE, ...)
 }
 \arguments{
-\item{ind}{An individual object, as output by \code{\link{create.parent}}
+\item{ind}{An individual object, as output by \code{\link{create_parent}}
 or \code{\link{cross}}}
 
 \item{center}{(x,y) vector for the center of the individual}

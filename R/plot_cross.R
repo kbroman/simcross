@@ -30,7 +30,7 @@ function() {
 #'
 #' Add an individual, as a pair of chromosomes, to a plot
 #'
-#' @param ind An individual object, as output by \code{\link{create.parent}}
+#' @param ind An individual object, as output by \code{\link{create_parent}}
 #' or \code{\link{cross}}
 #' @param center (x,y) vector for the center of the individual
 #' @param chrlength Length of chromosomes
@@ -60,7 +60,7 @@ function() {
 #' plot_ind(kid, loc[[3]])
 #' plot_crosslines(loc[[1]], loc[[2]], loc[[3]])
 plot_ind <-
-function(ind, center, chrlength=30, width=3, gap=3, col=CCcolors(),
+function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
          border="black", lend=1, ljoin=1, allborders=FALSE, ...)
 {
   max_alleles <- max(sapply(ind, function(a) max(a[2,])))
@@ -85,7 +85,7 @@ function(ind, center, chrlength=30, width=3, gap=3, col=CCcolors(),
     end <- pos[length(pos)]
     pos <- (pos-start)*(bottom-top)/(end-start) + top
 
-    left <- center[1] + sgn*(gap/2+width)
+    left <- center[1] + sgn*(gap/2+chrwidth)
     right <- center[1] + sgn*gap/2
 
     rect(left,  top, right, bottom,
@@ -102,7 +102,7 @@ function(ind, center, chrlength=30, width=3, gap=3, col=CCcolors(),
     }
 
     if(!is.na(border) && !is.null(border)) # draw border
-      rect(center[1] + sgn*(gap/2+width), top,
+      rect(center[1] + sgn*(gap/2+chrwidth), top,
            center[1] + sgn*gap/2,         bottom,
            col=NA, border=border, lend=lend, ljoin=ljoin, ...)
   }

@@ -1,0 +1,17 @@
+Package: simcross
+Version: 0.1-1
+Date: 5/9/2014
+Title: Simulate experimental crosses
+Description: Simulate and plot general experimental crosses
+Author: Karl W Broman <kbroman@biostat.wisc.edu>
+Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
+Depends:
+    R (>= 2.15.0),
+Imports:
+    stats
+Suggests:
+    qtl,
+    devtools,
+    roxygen2
+License: GPL-3
+URL: http://github.com/kbroman/simcross

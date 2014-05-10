@@ -33,8 +33,8 @@ function() {
 #' @param ind An individual object, as output by \code{\link{create.parent}}
 #' or \code{\link{cross}}
 #' @param center (x,y) vector for the center of the individual
-#' @param length Length of chromosomes
-#' @param width Width of chromsomes
+#' @param chrlength Length of chromosomes
+#' @param chrwidth Width of chromsomes
 #' @param gap Gap between chromsomes
 #' @param col Vector of colors
 #' @param border Color for border
@@ -54,11 +54,13 @@ function() {
 #' kid <- cross(mom, dad)
 #' plot(0,0, type="n", xlim=c(0, 100), ylim=c(0,100),
 #'      xaxt="n", yaxt="n", xlab="", ylab="")
-#' plot_ind(mom, c(25, 66), length=50)
-#' plot_ind(dad, c(75, 66), length=50)
-#' plot_ind(kid, c(50, 25), length=50)
+#' loc <- list(c(25,75), c(75,75), c(50,25))
+#' plot_ind(mom, loc[[1]])
+#' plot_ind(dad, loc[[2]])
+#' plot_ind(kid, loc[[3]])
+#' plot_crosslines(loc[[1]], loc[[2]], loc[[3]])
 plot_ind <-
-function(ind, center, length=30, width=3, gap=3, col=CCcolors(),
+function(ind, center, chrlength=30, width=3, gap=3, col=CCcolors(),
          border="black", lend=1, ljoin=1, allborders=FALSE, ...)
 {
   max_alleles <- max(sapply(ind, function(a) max(a[2,])))
@@ -72,8 +74,8 @@ function(ind, center, length=30, width=3, gap=3, col=CCcolors(),
     allele <- ind[[i]][2,]
 
     # rescale pos
-    top <- center[2]+length/2
-    bottom <- center[2]-length/2
+    top <- center[2]+chrlength/2
+    bottom <- center[2]-chrlength/2
     if(diff(par("usr")[3:4]) < 0) { # small values at top of figure
       tmp <- top
       top <- bottom
@@ -104,4 +106,78 @@ function(ind, center, length=30, width=3, gap=3, col=CCcolors(),
            center[1] + sgn*gap/2,         bottom,
            col=NA, border=border, lend=lend, ljoin=ljoin, ...)
   }
+  invisible(NULL)
+}
+
+#  plot_ind
+#
+#' Plot an individual
+#'
+#' Add an individual, as a pair of chromosomes, to a plot
+#'
+#' @param momloc An (x,y) vector with center location for mother
+#' @param dadloc An (x,y) vector with center location for mother
+#' @param kidsloc Either an (x,y) vector with center location for a kid,
+#' or a list of such for multiple kids
+#' @param gap Gap arrows and points/rectangles
+#' @param cex Character expansion for x point
+#' @param chrlength Length of chromosomes
+#' @param lwd Line width for points, segments, and arrows
+#' @param arrow_length The \code{length} parameter in the call to
+#' \code{\link[graphics]{arrows}}
+#' @param ... Additional arguments passed to arrows() and segments()
+#'
+#' @return None.
+#'
+#' @importFrom graphics points arrows
+#' @keywords hplot
+#' @export
+#' @examples
+#' mom <- create_parent(100, 1:2)
+#' dad <- create_parent(100, 3:4)
+#' kids <- lapply(1:4, function(junk) cross(mom, dad))
+#' plot(0,0, type="n", xlim=c(0, 100), ylim=c(0,100),
+#'      xaxt="n", yaxt="n", xlab="", ylab="")
+#' loc <- list(c(25,75), c(75,75), c(12.5,25), c(37.5,25), c(62.5, 25), c(87.5,25))
+#' plot_ind(mom, loc[[1]])
+#' plot_ind(dad, loc[[2]])
+#' for(i in 1:4) plot_ind(kids[[i]], loc[[i+2]])
+#' plot_crosslines(loc[[1]], loc[[2]], loc[3:6])
+plot_crosslines <-
+function(momloc, dadloc, kidsloc, gap=3, chrlength=30, cex=1.5,
+         lwd=2, arrow_length=0.1, ...)
+{
+  stopifnot(length(momloc)==2, length(dadloc)==2)
+
+  point <- colMeans(rbind(momloc, dadloc))
+  points(point[1], point[2], pch=4, cex=cex, lwd=2)
+
+  if(!is.list(kidsloc)) { # 1 kid
+    stopifnot(length(kidsloc)==2)
+    sgn <- sign(kidsloc[2] - point[2])
+    arrows(point[1], point[2]+sgn*gap, kidsloc[1], kidsloc[2]-sgn*(chrlength/2+gap),
+           lwd=lwd, length=arrow_length, ...)
+  } else { # multiple kids
+    if(any(vapply(kidsloc, length, 2) != 2))
+      stop("kidsloc must be a list of vectors of length 2")
+
+    kidx <- vapply(kidsloc, "[", 0, 1)
+    kidy <- vapply(kidsloc, "[", 0, 2)
+
+    ave <- c(mean(kidx), mean(kidy))
+    midpt <- c((point[1]+ave[1])/2, (point[2]+ave[2])/2)
+    sgn <- sign(ave[2] - point[2])
+
+    segments(point[1], point[2]+sgn*gap, point[1], midpt[2],
+             lwd=lwd, ...)
+
+    segments(min(kidx), midpt[2], max(kidx), midpt[2],
+             lwd=lwd, ...)
+
+    arrows(kidx, rep(midpt[2], length(kidx)),
+           kidx, kidy-sgn*(chrlength/2+gap),
+           lwd=lwd, length=arrow_length, ...)
+  }
+
+  invisible(NULL)
 }

@@ -3,8 +3,9 @@
 \alias{plot_ind}
 \title{Plot an individual}
 \usage{
-plot_ind(ind, center, length = 30, width = 3, gap = 3, col = CCcolors(),
-  border = "black", lend = 1, ljoin = 1, allborders = FALSE, ...)
+plot_ind(ind, center, chrlength = 30, width = 3, gap = 3,
+  col = CCcolors(), border = "black", lend = 1, ljoin = 1,
+  allborders = FALSE, ...)
 }
 \arguments{
 \item{ind}{An individual object, as output by \code{\link{create.parent}}
@@ -12,9 +13,9 @@ or \code{\link{cross}}}
 
 \item{center}{(x,y) vector for the center of the individual}
 
-\item{length}{Length of chromosomes}
+\item{chrlength}{Length of chromosomes}
 
-\item{width}{Width of chromsomes}
+\item{chrwidth}{Width of chromsomes}
 
 \item{gap}{Gap between chromsomes}
 
@@ -42,9 +43,11 @@ dad <- create_parent(100, 3:4)
 kid <- cross(mom, dad)
 plot(0,0, type="n", xlim=c(0, 100), ylim=c(0,100),
      xaxt="n", yaxt="n", xlab="", ylab="")
-plot_ind(mom, c(25, 66), length=50)
-plot_ind(dad, c(75, 66), length=50)
-plot_ind(kid, c(50, 25), length=50)
+loc <- list(c(25,75), c(75,75), c(50,25))
+plot_ind(mom, loc[[1]])
+plot_ind(dad, loc[[2]])
+plot_ind(kid, loc[[3]])
+plot_crosslines(loc[[1]], loc[[2]], loc[[3]])
 }
 \keyword{hplot}
 

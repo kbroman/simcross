@@ -4,7 +4,7 @@
 \title{Plot an individual}
 \usage{
 plot_crosslines(momloc, dadloc, kidsloc, gap = 3, chrlength = 30,
-  cex = 1.5, lwd = 2, arrow_length = 0.1, ...)
+  cex = 1.5, lwd = 2, arrow_length = 0.1, col = "white", ...)
 }
 \arguments{
 \item{momloc}{An (x,y) vector with center location for mother}
@@ -24,6 +24,8 @@ or a list of such for multiple kids}
 
 \item{arrow_length}{The \code{length} parameter in the call to
 \code{\link[graphics]{arrows}}}
+
+\item{col}{Color of lines and points}
 
 \item{...}{Additional arguments passed to arrows() and segments()}
 }

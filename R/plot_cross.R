@@ -88,18 +88,12 @@ function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
     left <- center[1] + sgn*(gap/2+chrwidth)
     right <- center[1] + sgn*gap/2
 
-    rect(left,  top, right, bottom,
-         col=col[allele[1]],
-         border=NA, lend=lend, ljoin=ljoin, ...)
-
     internalborder <- ifelse(allborders, border, NA)
-    if(length(pos) > 2) {
-      for(j in 2:length(pos))
-        rect(rep(left, length(pos)-1),  pos[-length(pos)],
-             rep(right, length(pos)-1), pos[-1],
-             col=col[allele[-1]],
-             border=internalborder, lend=lend, ljoin=ljoin, ...)
-    }
+    for(j in 2:length(pos))
+      rect(rep(left, length(pos)-1),  pos[-length(pos)],
+           rep(right, length(pos)-1), pos[-1],
+           col=col[allele[-1]],
+           border=internalborder, lend=lend, ljoin=ljoin, ...)
 
     if(!is.na(border) && !is.null(border)) # draw border
       rect(center[1] + sgn*(gap/2+chrwidth), top,
@@ -125,6 +119,7 @@ function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
 #' @param lwd Line width for points, segments, and arrows
 #' @param arrow_length The \code{length} parameter in the call to
 #' \code{\link[graphics]{arrows}}
+#' @param col Color of lines and points
 #' @param ... Additional arguments passed to arrows() and segments()
 #'
 #' @return None.
@@ -145,18 +140,18 @@ function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
 #' plot_crosslines(loc[[1]], loc[[2]], loc[3:6])
 plot_crosslines <-
 function(momloc, dadloc, kidsloc, gap=3, chrlength=30, cex=1.5,
-         lwd=2, arrow_length=0.1, ...)
+         lwd=2, arrow_length=0.1, col="white", ...)
 {
   stopifnot(length(momloc)==2, length(dadloc)==2)
 
   point <- colMeans(rbind(momloc, dadloc))
-  points(point[1], point[2], pch=4, cex=cex, lwd=2)
+  points(point[1], point[2], pch=4, cex=cex, lwd=2, col=col, ...)
 
   if(!is.list(kidsloc)) { # 1 kid
     stopifnot(length(kidsloc)==2)
     sgn <- sign(kidsloc[2] - point[2])
-    arrows(point[1], point[2]+sgn*gap, kidsloc[1], kidsloc[2]-sgn*(chrlength/2+gap),
-           lwd=lwd, length=arrow_length, ...)
+    arrows(point[1], point[2]+sgn*gap*2, kidsloc[1], kidsloc[2]-sgn*(chrlength/2+gap),
+           lwd=lwd, length=arrow_length, col=col, ...)
   } else { # multiple kids
     if(any(vapply(kidsloc, length, 2) != 2))
       stop("kidsloc must be a list of vectors of length 2")
@@ -169,14 +164,14 @@ function(momloc, dadloc, kidsloc, gap=3, chrlength=30, cex=1.5,
     sgn <- sign(ave[2] - point[2])
 
     segments(point[1], point[2]+sgn*gap, point[1], midpt[2],
-             lwd=lwd, ...)
+             lwd=lwd, col=col, ...)
 
     segments(min(kidx), midpt[2], max(kidx), midpt[2],
-             lwd=lwd, ...)
+             lwd=lwd, col=col, ...)
 
     arrows(kidx, rep(midpt[2], length(kidx)),
            kidx, kidy-sgn*(chrlength/2+gap),
-           lwd=lwd, length=arrow_length, ...)
+           lwd=lwd, length=arrow_length, col=col, ...)
   }
 
   invisible(NULL)

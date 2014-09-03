@@ -1,6 +1,6 @@
-## sim_cross.R
+## sim_meiosis.R
 
-# meiosis_sub <- 
+# meiosis_sub <-
 #
 # Simulate the locations of crossovers on a meiotic product
 # via the chi-square model (m=0 corresponds to no interference)
@@ -13,7 +13,7 @@ function(L, m=10, obligate.chiasma=TRUE)
 {
   if(obligate.chiasma) { # adjust mean no. chiasmata
     if(L <= 50) stop("L must be > 50 cM")
-    if(m==0) f <- function(Lstar,f.L,f.m=0) f.L-Lstar/(1-exp(-Lstar/50)) 
+    if(m==0) f <- function(Lstar,f.L,f.m=0) f.L-Lstar/(1-exp(-Lstar/50))
     else {
       f <- function(Lstar,f.L,f.m=0)
         {
@@ -60,7 +60,7 @@ function(L, m=10, obligate.chiasma=TRUE)
       else xo <- sort(sample(chi.loc,n.xo,replace=FALSE))
     }
   }
-    
+
   if(length(xo) == 0) xo <- NULL
   xo
 }
@@ -89,7 +89,7 @@ function(L, allele=1)
   if(length(allele) == 1) allele <- rep(allele,2)
   if(length(allele) != 2)
     stop("allele should be of length 1 or 2")
-  
+
   list(mat=rbind(c(0,L),allele[1]),
        pat=rbind(c(0,L),allele[2]))
 }
@@ -129,7 +129,7 @@ function(parent, m=10, obligate.chiasma=TRUE)
 
   else {
     for(i in 1:length(product)) {
-      if(i == 1) 
+      if(i == 1)
         result <- parent[[a]][,parent[[a]][1,]<product[1],drop=FALSE]
       else {
         temp <- parent[[a]][1,]>=product[i-1] & parent[[a]][1,]<product[i]
@@ -146,7 +146,7 @@ function(parent, m=10, obligate.chiasma=TRUE)
   # clean out excess stuff in the result
   if(ncol(result)>2) {
     keep <- rep(TRUE,ncol(result))
-    for(i in 2:(ncol(result)-1)) 
+    for(i in 2:(ncol(result)-1))
       if(result[2,i] == result[2,i+1])
         keep[i] <- FALSE
   }
@@ -173,7 +173,7 @@ function(parent, m=10, obligate.chiasma=TRUE)
 #' @param male If TRUE, simulate a male (matters only if \code{xchr=TRUE})
 #' @return A matrix with two rows: locations of crossovers, and the
 #' allele in each segment
-#' 
+#'
 #' @keywords datagen
 #' @export
 #'
@@ -196,109 +196,4 @@ function(mom, dad, m=10, obligate.chiasma=TRUE, xchr=FALSE, male=FALSE)
       return(list(mat=meiosis(mom,m,obligate.chiasma),
                   pat=dad$mat))
   }
-}
-
-# these functions aren't very good
-ri2 <-
-function(L,n.gen=20,m=10,obligate.chiasma=TRUE)
-{
-  f1 <- create_parent(L,c(1,2))
-  par1 <- cross(f1,f1,m,obligate.chiasma)
-  par2 <- cross(f1,f1,m,obligate.chiasma)
-  for(i in 1:n.gen) {
-    c1 <- cross(par1,par2,m,obligate.chiasma)
-    c2 <- cross(par1,par2,m,obligate.chiasma)
-    par1 <- c1
-    par2 <- c2
-  }
-  par1
-}
-
-ri8 <-
-function(L,n.gen=20,m=10,obligate.chiasma=TRUE)
-{
-  f1a <- create_parent(L,c(1,2))
-  f1b <- create_parent(L,c(3,4))
-  f1c <- create_parent(L,c(5,6))
-  f1d <- create_parent(L,c(7,8))
-  par1 <- cross(f1a,f1b,m,obligate.chiasma)
-  par2 <- cross(f1c,f1d,m,obligate.chiasma)
-  if(length(n.gen)==1) {
-    for(i in 1:(n.gen+1)) {
-      c1 <- cross(par1,par2,m,obligate.chiasma)
-      c2 <- cross(par1,par2,m,obligate.chiasma)
-      par1 <- c1
-      par2 <- c2
-    }
-    return(par1)
-  }
-  else {
-    result <- vector("list",length(n.gen))
-    names(result) <- n.gen
-    n.gen <- c(-1,n.gen)
-    for(j in 2:length(n.gen)) {
-      for(i in (n.gen[j-1]+2):(n.gen[j]+1)) {
-        c1 <- cross(par1,par2,m,obligate.chiasma)
-        c2 <- cross(par1,par2,m,obligate.chiasma)
-        par1 <- c1
-        par2 <- c2
-      }
-      result[[j-1]] <- par1
-    }
-    return(result)
-  }
-        
-}
-    
-    
-# where_het
-#
-#' Find heterozygous regions
-#'
-#' Find regions of heterozygosity in an individual
-#'
-#' @param ind An individual object, as output be \code{\link{create_parent}}
-#' or \code{\link{cross}}
-#' @return A matrix with two columns; each row indicates the start
-#' and end of a region where the individual is heterozygous
-#'
-#' @export
-#' @examples
-#' mom <- create_parent(100, 1:2)
-#' dad <- create_parent(100, 1:2)
-#' child <- cross(mom, dad)
-#' where_het(child)
-where_het <-
-function(ind)
-{
-  if(ncol(ind$mat)==ncol(ind$pat) && all(ind$mat == ind$pat)) {
-    return(NULL)
-  }
-  u <- sort(unique(c(ind$mat[1,],ind$pat[1,])))
-  het <- NULL
-  for(i in 2:length(u)) {
-    mat <- ind$mat[,ind$mat[1,] >= u[i],drop=FALSE]
-    mat <- mat[2,1]
-
-    pat <- ind$pat[,ind$pat[1,] >= u[i],drop=FALSE]
-    pat <- pat[2,1]
-
-    if(mat!=pat) { # heterozygous
-      if(is.null(het)) het <- cbind(u[i-1],u[i])
-      else het <- rbind(het,c(u[i-1],u[i]))
-    }
-  }
-
-  # clean up
-  if(nrow(het) > 1) {
-    keep <- rep(TRUE,nrow(het))
-    for(j in 2:nrow(het)) {
-      if(het[j,1] == het[j-1,2]) {
-        het[j,1] <- het[j-1,1]
-        keep[j-1] <- FALSE
-      }
-    }
-    het <- het[keep,,drop=FALSE]
-  }
-  het
 }

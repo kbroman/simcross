@@ -1,7 +1,7 @@
 ## sim_ril.R
 
 # these functions aren't very good
-ri2 <-
+sim_ri2 <-
 function(L,n.gen=20,m=10,obligate.chiasma=TRUE, selfing=FALSE)
 {
   f1 <- create_parent(L,c(1,2))
@@ -23,7 +23,7 @@ function(L,n.gen=20,m=10,obligate.chiasma=TRUE, selfing=FALSE)
   par1
 }
 
-ri8 <-
+sim_ri8 <-
 function(L,n.gen=20,m=10,obligate.chiasma=TRUE, selfing=FALSE)
 {
   f1a <- create_parent(L,c(1,2))

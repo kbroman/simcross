@@ -43,16 +43,27 @@ function(ngen=12, npairs=30, nkids_per=5, design=c("nosib", "random"))
             }
         }
 
-        kids <- 1:(npairs*2)+max(id)
+        if(i < ngen) {
+            kids <- 1:(npairs*2)+max(id)
 
-        id <- c(id, kids)
-        mom <- c(mom, rep(moms, each=2))
-        dad <- c(dad, rep(dads, each=2))
-        sex <- c(sex, rep(c(0,1), npairs))
-        gen <- c(gen, rep(i, npairs*2))
+            id <- c(id, kids)
+            mom <- c(mom, rep(moms, each=2))
+            dad <- c(dad, rep(dads, each=2))
+            sex <- c(sex, rep(c(0,1), npairs))
+            gen <- c(gen, rep(i, npairs*2))
 
-        moms <- kids[seq(1, length(kids), by=2)]
-        dads <- kids[seq(2, length(kids), by=2)]
+            moms <- kids[seq(1, length(kids), by=2)]
+            dads <- kids[seq(2, length(kids), by=2)]
+        }
+        else { # last generation: expand
+            kids <- 1:(npairs*nkids_per)+max(id)
+
+            id <- c(id, kids)
+            mom <- c(mom, rep(moms, each=nkids_per))
+            dad <- c(dad, rep(dads, each=nkids_per))
+            sex <- c(sex, rep(c(0,1), ceiling(npairs*nkids_per/2))[1:(npairs*nkids_per)])
+            gen <- c(gen, rep(i, npairs*nkids_per))
+        }
     }
 
     cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)

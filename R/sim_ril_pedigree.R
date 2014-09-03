@@ -47,8 +47,6 @@ function(ngen=20, selfing=FALSE, parents=1:8, firstind=max(parents)+1)
         gen <- rep(0:2, c(8, 4, 2))
         nextid <- firstind + 6
     }
-    print(c(length(id), length(mom), length(dad), length(sex), length(gen)))
-
 
     if(selfing) {
         # just need one individual to start
@@ -59,14 +57,16 @@ function(ngen=20, selfing=FALSE, parents=1:8, firstind=max(parents)+1)
         gen <- c(gen, max(gen)+1)
         nextid <- nextid + 1
 
-        last_outcross <- max(gen)
-        for(g in 1:ngen) {
-            mom <- c(mom, id[length(id)])
-            dad <- c(dad, id[length(id)])
-            id <- c(id, nextid)
-            sex <- c(sex, 0)
-            gen <- c(gen, last_outcross+g)
-            nextid <- nextid + 1
+        if(ngen > 0) {
+            last_outcross <- max(gen)
+            for(g in 1:ngen) {
+                mom <- c(mom, id[length(id)])
+                dad <- c(dad, id[length(id)])
+                id <- c(id, nextid)
+                sex <- c(sex, 0)
+                gen <- c(gen, last_outcross+g)
+                nextid <- nextid + 1
+            }
         }
     }
     else {
@@ -77,14 +77,16 @@ function(ngen=20, selfing=FALSE, parents=1:8, firstind=max(parents)+1)
         gen <- c(gen, rep(max(gen)+1, 2))
         nextid <- nextid + 2
 
-        last_outcross <- max(gen)
-        for(g in 1:ngen) {
-            mom <- c(mom, rep(id[length(id)-1], 2))
-            dad <- c(dad, rep(id[length(id)], 2))
-            id <- c(id, nextid+0:1)
-            sex <- c(sex, 0, 1)
-            gen <- c(gen, rep(last_outcross+g, 2))
-            nextid <- nextid + 2
+        if(ngen > 0) {
+            last_outcross <- max(gen)
+            for(g in 1:ngen) {
+                mom <- c(mom, rep(id[length(id)-1], 2))
+                dad <- c(dad, rep(id[length(id)], 2))
+                id <- c(id, nextid+0:1)
+                sex <- c(sex, 0, 1)
+                gen <- c(gen, rep(last_outcross+g, 2))
+                nextid <- nextid + 2
+            }
         }
     }
 

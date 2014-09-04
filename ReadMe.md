@@ -32,6 +32,19 @@ install_github("kbroman/simcross")
 
 ---
 
+### Vignette
+
+A vignette describing the use of the package is available from within
+R. Load the package and then use the `vignette` function.
+
+```S
+library(simcross)
+vignette("simcross", package="simcross")
+```
+
+
+---
+
 ### License
 
 This package is free software; you can redistribute it and/or modify it

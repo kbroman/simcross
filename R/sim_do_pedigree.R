@@ -90,12 +90,12 @@ function(ngen=12, npairs=30, ccgen=rep(0, npairs), nkids_per=5,
         }
 
         if(i < ngen) {
-            id <- 1:(npairs*2)+cur_nind
+            id <- 1:(npairs*2) + cur_nind
 
-            mom <- c(mom, rep(moms, each=2))
-            dad <- c(dad, rep(dads, each=2))
-            sex <- c(sex, rep(c(0,1), npairs))
-            gen <- c(gen, rep(i, npairs*2))
+            mom <- rep(moms, each=2)
+            dad <- rep(dads, each=2)
+            sex <- rep(c(0,1), npairs)
+            gen <- rep(i, npairs*2)
 
             moms <- id[seq(1, length(id), by=2)]
             dads <- id[seq(2, length(id), by=2)]
@@ -103,14 +103,15 @@ function(ngen=12, npairs=30, ccgen=rep(0, npairs), nkids_per=5,
         else { # last generation: expand
             id <- 1:(npairs*nkids_per)+cur_nind
 
-            mom <- c(mom, rep(moms, each=nkids_per))
-            dad <- c(dad, rep(dads, each=nkids_per))
-            sex <- c(sex, rep(c(0,1), ceiling(npairs*nkids_per/2))[1:(npairs*nkids_per)])
-            gen <- c(gen, rep(i, npairs*nkids_per))
+            mom <- rep(moms, each=nkids_per)
+            dad <- rep(dads, each=nkids_per)
+            sex <- rep(c(0,1), ceiling(npairs*nkids_per/2))[1:(npairs*nkids_per)]
+            gen <- rep(i, npairs*nkids_per)
         }
         cur_nind <- max(id)
 
-        result <- rbind(result, cbind(id, mom, dad, sex, gen, rep(1, length(id))))
+        newrows <- cbind(id, mom, dad, sex, gen, rep(1, length(id)))
+        result <- rbind(result, newrows)
     }
 
     result

@@ -16,6 +16,19 @@
 #' father ID, sex, and generation.  Founders have \code{0} for mother
 #' and father ID. Sex is coded 0 for female and 1 for male.
 #'
+#' @details Advanced intercross lines (AIL) are generated from a pair of inbred lines.
+#' We cross them and then cross the F1 to generate \code{npair} breeding pairs.
+#' The subsequent \code{ngen} outbreeding generations then proceed by
+#' crossing a male and female from the preceding generation (mated
+#' completely at random, with \code{design="random"}, or avoiding
+#' siblings, with \code{design="nosib"}). Each breeding pair gives a
+#' single female and a single male to the next generation, except at
+#' the last generation \code{nkids_per} offspring are mated, in equal
+#' numbers male and female. (If \code{nkids_per} is an odd number, the
+#' number of males and females in each sibship will differ by one,
+#' alternating between sibships, with one additional female and then
+#' one additional male.
+#'
 #' @export
 #' @keywords datagen
 #'

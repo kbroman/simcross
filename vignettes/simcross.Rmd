@@ -1,0 +1,101 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{R/simcross User Guide}
+
+# R/simcross User Guide
+
+[R/simcross](https://github.com/kbroman/simcross) is an
+[R](http://www.r-project.org) package to simulate genotypes from an
+experimental cross. The aim is flexibility rather than speed.
+
+Currently, only the chi-square model (Zhao et al. 1995) is available for simulating
+meiosis; optionally, you may require an obligate chiasma on the
+four-strand bundle. The chi-square model has a single parameter, `m`, that
+controls the strength of interference: `m=0` corresponds to no
+crossover interference; `m=10` corresponds approximately to the level
+of interference seen in mice (Broman et al. 2002).
+
+## Basic functions
+
+There are two basic functions for simulating a cross:
+`create_parent` and `cross`.
+
+`create_parent` parent is for generating a parent object, either an
+inbred individual or the F<sub>1</sub> offspring of two inbred
+individuals. It takes two arguments: the length of the chromosome in
+cM, and the allele or pair of alleles.
+
+Here's how to generate two inbred individuals, one from each of strain
+1 and strain 2, and an F<sub>1</sub> individual.
+
+```{r set.seed, echo=FALSE, results="hide"}
+set.seed(80605732)
+```
+
+```{r create_parent}
+library(simcross)
+p1 <- create_parent(100, 1)
+p2 <- create_parent(100, 2)
+f1 <- create_parent(100, 1:2)
+```
+
+The `cross` function is used to generate one progeny from the cross
+between two individuals.
+The input is a pair of individuals (e.g., as produced by
+`create_parent`), the interference parameter `m` (default `m=10`), 
+`obligate.chiasma` to indicate whether there is an obligate chiasma on the
+four-strand bundle at meiosis (default `obligate.chiasma=TRUE`), `xchr` to indicate whether the
+chromosome being simulated is the X chromosome (`FALSE`, the default, to simulate an
+autosome), and `male` to indicate whether the offspring is to be male
+(which only matters if `xchr=TRUE`).
+
+Here's an example, to generate an F<sub>2</sub> individual.
+
+```{r sim_f2}
+f2 <- cross(f1, f1)
+print(f2)
+```
+
+The output is list with two components: the maternal and paternal
+chromosomes. Each chromsome is a numeric matrix with two rows. The
+first row includes positions and the second row includes alleles. The
+alleles in the second row indicate the alleles in intervals to the
+left of that location.
+
+In the example above, the paternal chromosome is a non-recombinant `2`
+chromosome. The maternal chromosome has a single crossover, with the
+the `1` allele up to `r round(f2$mat[1,2], 1)` cM and the `2` allele
+for the remainder of the chromosome.
+
+There's also a function `meiosis` for simulating a meiotic product
+from a single individual; the `cross` function calls `meiosis` twice
+(once for each parent) and then combines the results into a single
+individual.
+
+## Generating pedigrees
+
+The functions `sim_ril_pedigree`, `sim_ail_pedigree`, and
+`sim_do_pedigree`.
+
+## Simulating from a pedigree
+
+The function `sim_from_pedigree`.
+
+## Generating marker data
+
+The function `convert2gen`.
+
+
+
+
+## References
+
+Zhao H, Speed TP, McPeek MS (1995)
+[Statistical analysis of crossover interference using the chi-square model](http://www.genetics.org/content/139/2/1045.short).
+Genetics 139:1045-1056
+
+Broman KW, Rowe LB, Churchill GA, Paigen K (2002)
+[Crossover interference in the mouse](http://www.genetics.org/content/160/3/1123.short).
+Genetics 160:1123-1131
+
+<!-- the following to make it look nicer -->
+<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

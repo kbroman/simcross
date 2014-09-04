@@ -13,6 +13,8 @@ sim_do_pedigree(ngen = 12, npairs = 30, ccgen = rep(0, npairs),
 
 \item{ccgen}{Vector of same length as npairs, with the number of generations for each CC line}
 
+\item{nkids_per}{Number of offspring per pair for the last generation}
+
 \item{design}{How to choose crosses: either random but avoiding siblings, or completely at random}
 }
 \value{

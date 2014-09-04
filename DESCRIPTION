@@ -1,5 +1,5 @@
 Package: simcross
-Version: 0.1-4
+Version: 0.1-5
 Date: 9/3/2014
 Title: Simulate experimental crosses
 Description: Simulate and plot general experimental crosses
@@ -12,6 +12,7 @@ Imports:
     graphics
 Suggests:
     qtl,
+    testthat,
     devtools,
     roxygen2
 License: GPL-3

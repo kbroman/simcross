@@ -9,6 +9,29 @@ and plotting general experimental crosses.
 
 ---
 
+### Installation
+
+R/simcross is early in development and so is not yet available on
+[CRAN](http://cran.r-project.org).
+
+You can install R/simcross from its
+[GitHub repository](http://github.com/kbroman/simcross). You first need to
+install the [devtools](https://github.com/hadley/devtools) package.
+
+```S
+install.packages(c("qtl", "jsonlite", "devtools"))
+```
+
+Then install R/simcross using the `install_github` function in the
+[devtools](http://github.com/hadley/devtools) package.
+
+```S
+library(devtools)
+install_github("kbroman/simcross)
+```
+
+---
+
 ### License
 
 This package is free software; you can redistribute it and/or modify it

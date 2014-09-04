@@ -1,11 +1,6 @@
 
 ## ToDo list for [R/simcross](http://github.com/kbroman/simcross)
 
-- finish off DO pedigree generation; double-check things
-- function to check a pedigree table
-  - parents before children
-  - both parents =0 or neither
-  - father is male; mother is female
 - grab pedigree data from qtlrel and include as an example
 - apply marker object to IBD process to get marker data
 - function to grab genotype at a given site, as two-column matrix

@@ -19,7 +19,7 @@ You can install R/simcross from its
 install the [devtools](https://github.com/hadley/devtools) package.
 
 ```S
-install.packages(c("qtl", "jsonlite", "devtools"))
+install.packages("devtools")
 ```
 
 Then install R/simcross using the `install_github` function in the
@@ -27,7 +27,7 @@ Then install R/simcross using the `install_github` function in the
 
 ```S
 library(devtools)
-install_github("kbroman/simcross)
+install_github("kbroman/simcross")
 ```
 
 ---

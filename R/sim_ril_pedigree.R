@@ -16,7 +16,7 @@
 #' @keywords datagen
 #'
 #' @examples
-#' tab <- sim_precc_pedigree(7)
+#' tab <- sim_ril_pedigree(7)
 sim_ril_pedigree <-
 function(ngen=20, selfing=FALSE, parents=1:8, firstind=max(parents)+1)
 {

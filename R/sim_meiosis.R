@@ -150,7 +150,6 @@ function(parent, m=10, obligate.chiasma=TRUE)
       if(result[2,i] == result[2,i+1])
         keep[i] <- FALSE
   }
-#  print(result)
   result[,keep,drop=FALSE]
 }
 

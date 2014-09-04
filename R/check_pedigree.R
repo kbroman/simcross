@@ -2,7 +2,8 @@
 #
 #' Check a pedigree for errors
 #'
-#' Perform a series of checks on the tabular data for a pedigree, checking for problems
+#' Perform a series of checks on the tabular data for a pedigree,
+#' checking for problems
 #'
 #' @param pedigree Numeric matrix with four columns: ID, mom ID, dad
 #' ID, sex. Sex is coded as \code{0}=female, \code{1}=male. There can
@@ -10,7 +11,8 @@
 #' @param ignore_sex If TRUE, ignore the sex values completely
 #' (appropriate for hermaphroditic species.)
 #'
-#' @return TRUE (invisibly) if everything is okay; otherwise gives an error.
+#' @return TRUE (invisibly) if everything is okay; otherwise gives an
+#' error.
 #'
 #' @details The parents should be listed before any of their
 #' offspring. Founders should have 0's for mother and father; all

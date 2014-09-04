@@ -2,13 +2,17 @@
 #
 #' Simulate diversity outcross pedigree
 #'
-#' Simulate a diversity outcross pedigree (a table of individual, mom, dad, sex)
+#' Simulate a diversity outcross pedigree (a table of individual, mom,
+#' dad, sex)
 #'
 #' @param ngen Number of generations of outbreeding
 #' @param npairs Number of breeding pairs at each generation
-#' @param ccgen Vector of same length as npairs, with the number of generations for each CC line
-#' @param nkids_per Number of offspring per pair for the last generation
-#' @param design How to choose crosses: either random but avoiding siblings, or completely at random
+#' @param ccgen Vector of same length as npairs, with the number of
+#' generations for each CC line
+#' @param nkids_per Number of offspring per pair for the last
+#' generation
+#' @param design How to choose crosses: either random but avoiding
+#' siblings, or completely at random
 #'
 #' @return A matrix with six columns: individual ID, mother ID, father
 #' ID, sex, generation, and 1/0 indicator for whether DO or pre-DO.
@@ -27,7 +31,8 @@ function(ngen=12, npairs=30, ccgen=rep(0, npairs), nkids_per=5, design=c("nosib"
     stopifnot(length(ccgen) == npairs)
     stopifnot(all(ccgen >= 0))
 
-    # initial generation : need to double each strain; 1-8 are the mothers; 9-16 are the corresponding dads
+    # initial generation : need to double each strain
+    #     1-8 are the mothers; 9-16 are the corresponding dads
     id <- 1:16
     mom <- rep(0, 16)
     dad <- rep(0, 16)

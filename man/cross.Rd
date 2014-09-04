@@ -7,11 +7,11 @@ cross(mom, dad, m = 10, obligate.chiasma = TRUE, xchr = FALSE,
   male = FALSE)
 }
 \arguments{
-\item{mom}{An individual object, as produced by \code{\link{create_parent}}
-or \code{\link{cross}}}
+\item{mom}{An individual object, as produced by
+\code{\link{create_parent}} or \code{\link{cross}}}
 
-\item{dad}{An individual object, as produced by \code{\link{create_parent}}
-or \code{\link{cross}}}
+\item{dad}{An individual object, as produced by
+\code{\link{create_parent}} or \code{\link{cross}}}
 
 \item{m}{interference parameter for chi-square model}
 
@@ -20,7 +20,8 @@ obligate chiasma on the four-strand bundle}
 
 \item{xchr}{If TRUE, simulate X chromosome}
 
-\item{male}{If TRUE, simulate a male (matters only if \code{xchr=TRUE})}
+\item{male}{If TRUE, simulate a male (matters only if
+\code{xchr=TRUE})}
 }
 \value{
 A matrix with two rows: locations of crossovers, and the

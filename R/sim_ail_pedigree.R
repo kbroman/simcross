@@ -2,15 +2,19 @@
 #
 #' Simulate AIL pedigree
 #'
-#' Simulate a pedigree for advanced intercross lines (a table of individual, mom, dad, sex)
+#' Simulate a pedigree for advanced intercross lines (a table of
+#' individual, mom, dad, sex)
 #'
 #' @param ngen Number of generations of outbreeding
 #' @param npairs Number of breeding pairs at each generation
-#' @param nkids_per Number of offspring per pair for the last generation
-#' @param design How to choose crosses: either random but avoiding siblings, or completely at random
+#' @param nkids_per Number of offspring per pair for the last
+#' generation
+#' @param design How to choose crosses: either random but avoiding
+#' siblings, or completely at random
 #'
-#' @return A matrix with five columns: individual ID, mother ID, father ID, sex, and generation.
-#' Founders have \code{0} for mother and father ID. Sex is coded 0 for female and 1 for male.
+#' @return A matrix with five columns: individual ID, mother ID,
+#' father ID, sex, and generation.  Founders have \code{0} for mother
+#' and father ID. Sex is coded 0 for female and 1 for male.
 #'
 #' @export
 #' @keywords datagen

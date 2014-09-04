@@ -2,15 +2,18 @@
 #
 #' Generate a ril pedigree
 #'
-#' Generate a pedigree for multi-way recombinant inbred lines (a table of individual, mom, dad, sex)
+#' Generate a pedigree for multi-way recombinant inbred lines (a table
+#' of individual, mom, dad, sex)
 #'
 #' @param ngen Number of generations of inbreeding
 #' @param selfing If TRUE, use selfing
-#' @param parents Vector of length 2, 4, or 8, indicating the parents' IDs
+#' @param parents Vector of length 2, 4, or 8, indicating the parents'
+#' IDs
 #' @param firstind Positive integer to assign to the first child
 #'
-#' @return A matrix with five columns: individual ID, mother ID, father ID, sex, and generation.
-#' Founders have \code{0} for mother and father ID. Sex is coded 0 for female and 1 for male.
+#' @return A matrix with five columns: individual ID, mother ID,
+#' father ID, sex, and generation.  Founders have \code{0} for mother
+#' and father ID. Sex is coded 0 for female and 1 for male.
 #'
 #' @export
 #' @keywords datagen

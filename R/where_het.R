@@ -6,10 +6,11 @@
 #'
 #' Find regions of heterozygosity in an individual
 #'
-#' @param ind An individual object, as output be \code{\link{create_parent}}
-#' or \code{\link{cross}}
-#' @return A matrix with two columns; each row indicates the start
-#' and end of a region where the individual is heterozygous
+#' @param ind An individual object, as output be
+#' \code{\link{create_parent}} or \code{\link{cross}}
+#'
+#' @return A matrix with two columns; each row indicates the start and
+#' end of a region where the individual is heterozygous
 #'
 #' @export
 #' @examples

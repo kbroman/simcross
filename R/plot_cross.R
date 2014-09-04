@@ -22,7 +22,7 @@ function() {
     "CAST"=rgb(  0,160,  0,maxColorValue=255),
     "PWK" =rgb(240,  0,  0,maxColorValue=255),
     "WSB" =rgb(144,  0,224,maxColorValue=255))
-}  
+}
 
 #  plot_ind
 #
@@ -30,8 +30,8 @@ function() {
 #'
 #' Add an individual, as a pair of chromosomes, to a plot
 #'
-#' @param ind An individual object, as output by \code{\link{create_parent}}
-#' or \code{\link{cross}}
+#' @param ind An individual object, as output by
+#' \code{\link{create_parent}} or \code{\link{cross}}
 #' @param center (x,y) vector for the center of the individual
 #' @param chrlength Length of chromosomes
 #' @param chrwidth Width of chromsomes
@@ -111,8 +111,8 @@ function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
 #'
 #' @param momloc An (x,y) vector with center location for mother
 #' @param dadloc An (x,y) vector with center location for mother
-#' @param kidsloc Either an (x,y) vector with center location for a kid,
-#' or a list of such for multiple kids
+#' @param kidsloc Either an (x,y) vector with center location for a
+#' kid, or a list of such for multiple kids
 #' @param gap Gap arrows and points/rectangles
 #' @param cex Character expansion for x point
 #' @param chrlength Length of chromosomes

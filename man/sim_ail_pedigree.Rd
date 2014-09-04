@@ -11,16 +11,20 @@ sim_ail_pedigree(ngen = 12, npairs = 30, nkids_per = 5,
 
 \item{npairs}{Number of breeding pairs at each generation}
 
-\item{nkids_per}{Number of offspring per pair for the last generation}
+\item{nkids_per}{Number of offspring per pair for the last
+generation}
 
-\item{design}{How to choose crosses: either random but avoiding siblings, or completely at random}
+\item{design}{How to choose crosses: either random but avoiding
+siblings, or completely at random}
 }
 \value{
-A matrix with five columns: individual ID, mother ID, father ID, sex, and generation.
-Founders have \code{0} for mother and father ID. Sex is coded 0 for female and 1 for male.
+A matrix with five columns: individual ID, mother ID,
+father ID, sex, and generation.  Founders have \code{0} for mother
+and father ID. Sex is coded 0 for female and 1 for male.
 }
 \description{
-Simulate a pedigree for advanced intercross lines (a table of individual, mom, dad, sex)
+Simulate a pedigree for advanced intercross lines (a table of
+individual, mom, dad, sex)
 }
 \examples{
 tab <- sim_ail_pedigree(12, 30)

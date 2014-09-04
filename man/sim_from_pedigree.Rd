@@ -18,7 +18,8 @@ columns being individual ID, mom ID, dad ID, and sex (female as
 \item{m}{Crossover interference parameter, for chi-square model
 (m=0 corresponds to no interference).}
 
-\item{obligate.chiasma}{If TRUE, 4-strand bundle has at least one chiasma.}
+\item{obligate.chiasma}{If TRUE, 4-strand bundle has at least one
+chiasma.}
 }
 \value{
 A list whose each component is the data for one individual,

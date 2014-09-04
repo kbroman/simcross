@@ -11,7 +11,8 @@
 #' @param xchr If TRUE, simulate X chromosome.
 #' @param m Crossover interference parameter, for chi-square model
 #' (m=0 corresponds to no interference).
-#' @param obligate.chiasma If TRUE, 4-strand bundle has at least one chiasma.
+#' @param obligate.chiasma If TRUE, 4-strand bundle has at least one
+#' chiasma.
 #'
 #' @return A list whose each component is the data for one individual,
 #' as produced by the \code{\link{cross}} function.  Those results are

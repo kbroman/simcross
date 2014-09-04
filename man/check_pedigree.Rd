@@ -14,10 +14,12 @@ be additional columns, but they'll be ignored.}
 (appropriate for hermaphroditic species.)}
 }
 \value{
-TRUE (invisibly) if everything is okay; otherwise gives an error.
+TRUE (invisibly) if everything is okay; otherwise gives an
+error.
 }
 \description{
-Perform a series of checks on the tabular data for a pedigree, checking for problems
+Perform a series of checks on the tabular data for a pedigree,
+checking for problems
 }
 \details{
 The parents should be listed before any of their

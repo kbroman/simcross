@@ -11,8 +11,8 @@ plot_crosslines(momloc, dadloc, kidsloc, gap = 3, chrlength = 30,
 
 \item{dadloc}{An (x,y) vector with center location for mother}
 
-\item{kidsloc}{Either an (x,y) vector with center location for a kid,
-or a list of such for multiple kids}
+\item{kidsloc}{Either an (x,y) vector with center location for a
+kid, or a list of such for multiple kids}
 
 \item{gap}{Gap arrows and points/rectangles}
 

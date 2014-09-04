@@ -162,15 +162,17 @@ function(parent, m=10, obligate.chiasma=TRUE)
 #' Simulate the cross of two individuals to create a
 #' single progeny
 #'
-#' @param mom An individual object, as produced by \code{\link{create_parent}}
-#' or \code{\link{cross}}
-#' @param dad An individual object, as produced by \code{\link{create_parent}}
-#' or \code{\link{cross}}
+#' @param mom An individual object, as produced by
+#' \code{\link{create_parent}} or \code{\link{cross}}
+#' @param dad An individual object, as produced by
+#' \code{\link{create_parent}} or \code{\link{cross}}
 #' @param m interference parameter for chi-square model
 #' @param obligate.chiasma If TRUE, simulate meiosis with an
 #' obligate chiasma on the four-strand bundle
 #' @param xchr If TRUE, simulate X chromosome
-#' @param male If TRUE, simulate a male (matters only if \code{xchr=TRUE})
+#' @param male If TRUE, simulate a male (matters only if
+#' \code{xchr=TRUE})
+#'
 #' @return A matrix with two rows: locations of crossovers, and the
 #' allele in each segment
 #'

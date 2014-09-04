@@ -11,11 +11,14 @@ sim_do_pedigree(ngen = 12, npairs = 30, ccgen = rep(0, npairs),
 
 \item{npairs}{Number of breeding pairs at each generation}
 
-\item{ccgen}{Vector of same length as npairs, with the number of generations for each CC line}
+\item{ccgen}{Vector of same length as npairs, with the number of
+generations for each CC line}
 
-\item{nkids_per}{Number of offspring per pair for the last generation}
+\item{nkids_per}{Number of offspring per pair for the last
+generation}
 
-\item{design}{How to choose crosses: either random but avoiding siblings, or completely at random}
+\item{design}{How to choose crosses: either random but avoiding
+siblings, or completely at random}
 }
 \value{
 A matrix with six columns: individual ID, mother ID, father
@@ -24,7 +27,8 @@ Founders have \code{0} for mother and father ID. Sex is coded 0 for
 female and 1 for male.
 }
 \description{
-Simulate a diversity outcross pedigree (a table of individual, mom, dad, sex)
+Simulate a diversity outcross pedigree (a table of individual, mom,
+dad, sex)
 }
 \examples{
 tab <- sim_do_pedigree(8, 30, rep(6, 30))

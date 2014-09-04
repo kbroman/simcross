@@ -11,16 +11,19 @@ sim_ril_pedigree(ngen = 20, selfing = FALSE, parents = 1:8,
 
 \item{selfing}{If TRUE, use selfing}
 
-\item{parents}{Vector of length 2, 4, or 8, indicating the parents' IDs}
+\item{parents}{Vector of length 2, 4, or 8, indicating the parents'
+IDs}
 
 \item{firstind}{Positive integer to assign to the first child}
 }
 \value{
-A matrix with five columns: individual ID, mother ID, father ID, sex, and generation.
-Founders have \code{0} for mother and father ID. Sex is coded 0 for female and 1 for male.
+A matrix with five columns: individual ID, mother ID,
+father ID, sex, and generation.  Founders have \code{0} for mother
+and father ID. Sex is coded 0 for female and 1 for male.
 }
 \description{
-Generate a pedigree for multi-way recombinant inbred lines (a table of individual, mom, dad, sex)
+Generate a pedigree for multi-way recombinant inbred lines (a table
+of individual, mom, dad, sex)
 }
 \examples{
 tab <- sim_ril_pedigree(7)

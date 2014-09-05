@@ -14,5 +14,9 @@ test_that("simple test of get_geno", {
     geno <- get_geno(dat, 30)
     expect_equivalent(geno, ex_geno)
 
+    ex_geno <- rbind(c(1,2), c(2,2), c(2, 1))
+    geno <- get_geno(dat, 0)
+    expect_equivalent(geno, ex_geno)
+
 })
 

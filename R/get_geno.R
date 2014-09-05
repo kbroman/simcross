@@ -28,6 +28,7 @@ function(xodat, position)
 {
   if(position < 0 || position > max(xodat[[1]][[1]][1,]))
     warning("position is outside the range of the data")
+  if(position == 0) position <- -1
 
   output <- matrix(ncol=2, nrow=length(xodat))
 
@@ -35,8 +36,8 @@ function(xodat, position)
     for(j in 1:2) {
       dat <- xodat[[i]][[j]]
 
-      wh <- max(which(dat[1,] <= position))
-      output[i,j] <- dat[2, max(which(dat[1,] <= position)) + 1]
+      wh <- which(dat[1,] <= position)
+      output[i,j] <- ifelse(length(wh) > 0, dat[2, max(wh)+1], dat[2,1])
     }
   }
 

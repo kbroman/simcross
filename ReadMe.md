@@ -1,5 +1,7 @@
 ## R/simcross
 
+[![Build Status](https://travis-ci.org/hadley/devtools.png?branch=master)](https://travis-ci.org/hadley/devtools)
+
 copyright (c) 2014, [Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
 
 ---

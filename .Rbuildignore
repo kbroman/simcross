@@ -2,3 +2,4 @@
 ^ReadMe.md$
 \.gitignore
 Makefile
+^\.travis\.yml$

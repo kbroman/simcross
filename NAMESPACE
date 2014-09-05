@@ -2,7 +2,7 @@
 
 export(CCcolors)
 export(check_pedigree)
-export(convert2gen)
+export(convert2geno)
 export(create_parent)
 export(cross)
 export(meiosis)

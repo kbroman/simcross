@@ -36,5 +36,8 @@ mom <- create_parent(100, 1:2)
 dad <- create_parent(100, 1:2)
 child <- cross(mom, dad)
 }
+\seealso{
+\code{\link{create_parent}}, \code{\link{meiosis}}
+}
 \keyword{datagen}
 

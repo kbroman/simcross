@@ -47,6 +47,8 @@
 #'
 #' @keywords datagen
 #' @export
+#' @seealso \code{\link{sim_from_pedigree}},
+#' \code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}}
 #'
 #' @examples
 #' tab <- sim_do_pedigree(8, 30, rep(6, 30))

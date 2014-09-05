@@ -79,6 +79,7 @@ function(L, m=10, obligate.chiasma=FALSE)
 #'
 #' @keywords datagen
 #' @export
+#' @seealso \code{\link{cross}}, \code{\link{meiosis}}
 #'
 #' @examples
 #' create_parent(100, 1)
@@ -111,6 +112,7 @@ function(L, allele=1)
 #'
 #' @keywords datagen
 #' @export
+#' @seealso \code{\link{create_parent}}, \code{\link{cross}}
 #'
 #' @examples
 #' ind <- create_parent(100, 1:2)
@@ -177,6 +179,7 @@ function(parent, m=10, obligate.chiasma=FALSE)
 #'
 #' @keywords datagen
 #' @export
+#' @seealso \code{\link{create_parent}}, \code{\link{meiosis}}
 #'
 #' @examples
 #' mom <- create_parent(100, 1:2)

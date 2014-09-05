@@ -22,5 +22,8 @@ Create a parent object
 create_parent(100, 1)
 create_parent(100, 1:2)
 }
+\seealso{
+\code{\link{cross}}, \code{\link{meiosis}}
+}
 \keyword{datagen}
 

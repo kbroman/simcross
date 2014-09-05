@@ -27,5 +27,8 @@ dat <- sim_from_pedigree(tab)
 # get genotype at position 30 cM
 geno <- get_geno(dat, 30)
 }
+\seealso{
+\code{\link{sim_from_pedigree}}, \code{\link{convert2geno}}
+}
 \keyword{utilities}
 

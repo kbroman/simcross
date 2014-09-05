@@ -49,5 +49,8 @@ plot_ind(dad, loc[[2]])
 plot_ind(kid, loc[[3]])
 plot_crosslines(loc[[1]], loc[[2]], loc[[3]])
 }
+\seealso{
+\code{\link{plot_crosslines}}
+}
 \keyword{hplot}
 

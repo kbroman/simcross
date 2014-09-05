@@ -35,5 +35,9 @@ if \code{ignore_sex=TRUE}.)
 tab <- sim_ril_pedigree(7)
 check_pedigree(tab)
 }
+\seealso{
+\code{\link{sim_from_pedigree}},
+\code{\link{sim_ril_pedigree}}
+}
 \keyword{utilities}
 

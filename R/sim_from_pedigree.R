@@ -23,6 +23,9 @@
 #'
 #' @export
 #' @keywords datagen
+#' @seealso \code{\link{check_pedigree}},
+#' \code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}},
+#' \code{\link{sim_ril_pedigree}}
 #'
 #' @examples
 #' # simulate AIL pedigree

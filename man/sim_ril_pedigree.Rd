@@ -28,5 +28,9 @@ of individual, mom, dad, sex)
 \examples{
 tab <- sim_ril_pedigree(7)
 }
+\seealso{
+\code{\link{sim_from_pedigree}},
+\code{\link{sim_ail_pedigree}}, \code{\link{sim_do_pedigree}}
+}
 \keyword{datagen}
 

@@ -13,6 +13,8 @@
 #' end of a region where the individual is heterozygous
 #'
 #' @export
+#' @seealso \code{\link{sim_from_pedigree}},
+#' \code{\link{convert2geno}}
 #' @examples
 #' mom <- create_parent(100, 1:2)
 #' dad <- create_parent(100, 1:2)

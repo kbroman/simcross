@@ -48,6 +48,7 @@ function() {
 #' @importFrom graphics rect
 #' @keywords hplot
 #' @export
+#' @seealso \code{\link{plot_crosslines}}
 #' @examples
 #' mom <- create_parent(100, 1:2)
 #' dad <- create_parent(100, 3:4)
@@ -103,11 +104,11 @@ function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
   invisible(NULL)
 }
 
-#  plot_ind
+#  plot_crosslines
 #
-#' Plot an individual
+#' Plot cross lines
 #'
-#' Add an individual, as a pair of chromosomes, to a plot
+#' Add lines for a cross
 #'
 #' @param momloc An (x,y) vector with center location for mother
 #' @param dadloc An (x,y) vector with center location for mother
@@ -127,6 +128,7 @@ function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
 #' @importFrom graphics points arrows
 #' @keywords hplot
 #' @export
+#' @seealso \code{\link{plot_ind}}
 #' @examples
 #' mom <- create_parent(100, 1:2)
 #' dad <- create_parent(100, 3:4)

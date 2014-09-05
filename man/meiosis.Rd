@@ -25,5 +25,8 @@ Output a random meiotic product from an input individual.
 ind <- create_parent(100, 1:2)
 prod <- meiosis(ind)
 }
+\seealso{
+\code{\link{create_parent}}, \code{\link{cross}}
+}
 \keyword{datagen}
 

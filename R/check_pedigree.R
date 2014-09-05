@@ -25,6 +25,8 @@
 #'
 #' @export
 #' @keywords utilities
+#' @seealso \code{\link{sim_from_pedigree}},
+#' \code{\link{sim_ril_pedigree}}
 #'
 #' @examples
 #' tab <- sim_ril_pedigree(7)

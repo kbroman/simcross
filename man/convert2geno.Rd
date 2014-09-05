@@ -31,5 +31,8 @@ names(map) <- paste0("marker", seq(along=map))
 # convert data to marker genotypes
 geno <- convert2geno(dat, map)
 }
+\seealso{
+\code{\link{get_geno}}, \code{\link{sim_from_pedigree}}
+}
 \keyword{utilities}
 

@@ -38,5 +38,10 @@ tab <- sim_ail_pedigree(12, 30)
 # simulate data from that pedigree
 dat <- sim_from_pedigree(tab)
 }
+\seealso{
+\code{\link{check_pedigree}},
+\code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}},
+\code{\link{sim_ril_pedigree}}
+}
 \keyword{datagen}
 

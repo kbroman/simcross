@@ -43,5 +43,9 @@ one additional male.
 \examples{
 tab <- sim_ail_pedigree(12, 30)
 }
+\seealso{
+\code{\link{sim_from_pedigree}},
+\code{\link{sim_ril_pedigree}}, \code{\link{sim_do_pedigree}}
+}
 \keyword{datagen}
 

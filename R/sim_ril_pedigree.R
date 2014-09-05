@@ -16,6 +16,8 @@
 #' and father ID. Sex is coded 0 for female and 1 for male.
 #'
 #' @export
+#' @seealso \code{\link{sim_from_pedigree}},
+#' \code{\link{sim_ail_pedigree}}, \code{\link{sim_do_pedigree}}
 #' @keywords datagen
 #'
 #' @examples

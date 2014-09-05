@@ -22,4 +22,8 @@ dad <- create_parent(100, 1:2)
 child <- cross(mom, dad)
 where_het(child)
 }
+\seealso{
+\code{\link{sim_from_pedigree}},
+\code{\link{convert2geno}}
+}
 

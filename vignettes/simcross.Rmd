@@ -82,7 +82,7 @@ The function `sim_from_pedigree`.
 
 ## Generating marker data
 
-The function `convert2gen`.
+The function `convert2geno`.
 
 
 

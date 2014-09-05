@@ -9,7 +9,7 @@
 #' @importFrom stats uniroot rpois qpois dpois rbinom runif
 #
 meiosis_sub <-
-function(L, m=10, obligate.chiasma=TRUE)
+function(L, m=10, obligate.chiasma=FALSE)
 {
   if(obligate.chiasma) { # adjust mean no. chiasmata
     if(L <= 50) stop("L must be > 50 cM")
@@ -116,7 +116,7 @@ function(L, allele=1)
 #' ind <- create_parent(100, 1:2)
 #' prod <- meiosis(ind)
 meiosis <-
-function(parent, m=10, obligate.chiasma=TRUE)
+function(parent, m=10, obligate.chiasma=FALSE)
 {
   L <- parent$mat[1,ncol(parent$mat)]
   if(abs(parent$pat[1,ncol(parent$pat)] - L) > 1e-13)
@@ -183,7 +183,7 @@ function(parent, m=10, obligate.chiasma=TRUE)
 #' dad <- create_parent(100, 1:2)
 #' child <- cross(mom, dad)
 cross <-
-function(mom, dad, m=10, obligate.chiasma=TRUE, xchr=FALSE, male=FALSE)
+function(mom, dad, m=10, obligate.chiasma=FALSE, xchr=FALSE, male=FALSE)
 {
   if(!xchr) {
     return(list(mat=meiosis(mom,m,obligate.chiasma),

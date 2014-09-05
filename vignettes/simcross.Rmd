@@ -43,7 +43,7 @@ between two individuals.
 The input is a pair of individuals (e.g., as produced by
 `create_parent`), the interference parameter `m` (default `m=10`), 
 `obligate.chiasma` to indicate whether there is an obligate chiasma on the
-four-strand bundle at meiosis (default `obligate.chiasma=TRUE`), `xchr` to indicate whether the
+four-strand bundle at meiosis (default `obligate.chiasma=FALSE`), `xchr` to indicate whether the
 chromosome being simulated is the X chromosome (`FALSE`, the default, to simulate an
 autosome), and `male` to indicate whether the offspring is to be male
 (which only matters if `xchr=TRUE`).

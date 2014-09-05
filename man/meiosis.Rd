@@ -3,7 +3,7 @@
 \alias{meiosis}
 \title{Simulate meiosis}
 \usage{
-meiosis(parent, m = 10, obligate.chiasma = TRUE)
+meiosis(parent, m = 10, obligate.chiasma = FALSE)
 }
 \arguments{
 \item{parent}{An individual object, as output by

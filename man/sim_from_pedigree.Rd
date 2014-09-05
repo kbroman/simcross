@@ -4,7 +4,7 @@
 \title{Simulate a pedigree}
 \usage{
 sim_from_pedigree(pedigree, L = 100, xchr = FALSE, m = 10,
-  obligate.chiasma = TRUE)
+  obligate.chiasma = FALSE)
 }
 \arguments{
 \item{pedigree}{Matrix describing a pedigree, with first four

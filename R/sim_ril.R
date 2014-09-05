@@ -2,7 +2,7 @@
 
 # these functions aren't very good
 sim_ri2 <-
-function(L,n.gen=20,m=10,obligate.chiasma=TRUE, selfing=FALSE)
+function(L,n.gen=20,m=10,obligate.chiasma=FALSE, selfing=FALSE)
 {
   f1 <- create_parent(L,c(1,2))
   par1 <- cross(f1,f1,m,obligate.chiasma)
@@ -24,7 +24,7 @@ function(L,n.gen=20,m=10,obligate.chiasma=TRUE, selfing=FALSE)
 }
 
 sim_ri8 <-
-function(L,n.gen=20,m=10,obligate.chiasma=TRUE, selfing=FALSE)
+function(L,n.gen=20,m=10,obligate.chiasma=FALSE, selfing=FALSE)
 {
   f1a <- create_parent(L,c(1,2))
   f1b <- create_parent(L,c(3,4))

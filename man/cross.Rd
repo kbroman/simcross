@@ -3,7 +3,7 @@
 \alias{cross}
 \title{Cross two individuals}
 \usage{
-cross(mom, dad, m = 10, obligate.chiasma = TRUE, xchr = FALSE,
+cross(mom, dad, m = 10, obligate.chiasma = FALSE, xchr = FALSE,
   male = FALSE)
 }
 \arguments{

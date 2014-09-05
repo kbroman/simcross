@@ -30,7 +30,7 @@
 #' # simulate data from that pedigree
 #' dat <- sim_from_pedigree(tab)
 sim_from_pedigree <-
-function(pedigree, L=100, xchr=FALSE, m=10, obligate.chiasma=TRUE)
+function(pedigree, L=100, xchr=FALSE, m=10, obligate.chiasma=FALSE)
 {
     if(length(unique(pedigree[,1])) != nrow(pedigree))
         stop("IDs must be unique")

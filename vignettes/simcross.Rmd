@@ -1,5 +1,7 @@
+<!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{R/simcross User Guide}
+-->
 
 # R/simcross User Guide
 

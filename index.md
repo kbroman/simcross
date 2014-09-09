@@ -12,6 +12,8 @@ It is intended to be a companion to [R/qtl](http://www.rqtl.org).
 R/simcross is early in development and so is not yet available on
 [CRAN](http://cran.r-project.org).
 
+### Installation
+
 You can install R/simcross from its
 [GitHub repository](http://github.com/kbroman/simcross). You first need to
 install the [devtools](https://github.com/hadley/devtools) package.

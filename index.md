@@ -9,10 +9,10 @@ tagline: simulation of general experimental crosses
 crosses, including advanced intercross lines and the diversity outcross.
 It is intended to be a companion to [R/qtl](http://www.rqtl.org).
 
+### Installation
+
 R/simcross is early in development and so is not yet available on
 [CRAN](http://cran.r-project.org).
-
-### Installation
 
 You can install R/simcross from its
 [GitHub repository](http://github.com/kbroman/simcross). You first need to

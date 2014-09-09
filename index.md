@@ -16,27 +16,21 @@ You can install R/simcross from its
 [GitHub repository](http://github.com/kbroman/simcross). You first need to
 install the [devtools](https://github.com/hadley/devtools) package.
 
-```
-install.packages("devtools")
-```
+    install.packages("devtools")
 
 Then install R/simcross using the `install_github` function in the
 [devtools](http://github.com/hadley/devtools) package.
 
-```
-library(devtools)
-install_github("kbroman/simcross")
-```
+    library(devtools)
+    install_github("kbroman/simcross")
 
 ### Vignette
 
 A vignette describing the use of the package is available from within
 R. Load the package and then use the `vignette` function.
 
-```
-library(simcross)
-vignette("simcross", package="simcross")
-```
+    library(simcross)
+    vignette("simcross", package="simcross")
 
 ---
 

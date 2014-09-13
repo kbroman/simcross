@@ -18,6 +18,10 @@ test_that("simple test of get_geno", {
     geno <- get_geno(dat, 0)
     expect_equivalent(geno, ex_geno)
 
+    ex_geno <- rbind(c(1,1), c(2,2), c(2, 2))
+    geno <- get_geno(dat, 100)
+    expect_equivalent(geno, ex_geno)
+
     expect_error(get_geno(dat, -1))
     expect_error(get_geno(dat, 101))
 

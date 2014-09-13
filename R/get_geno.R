@@ -29,6 +29,7 @@ function(xodat, position)
   if(position < 0 || position > max(xodat[[1]][[1]][1,]))
     stop("position is outside the range of the data")
   if(position == 0) position <- -1
+  if(position == max(xodat[[1]][[1]][1,])) position <- position - 0.001
 
   output <- matrix(ncol=2, nrow=length(xodat))
 

@@ -26,10 +26,15 @@
 get_geno <-
 function(xodat, position)
 {
-  if(position < 0 || position > max(xodat[[1]][[1]][1,]))
+  L <- max(xodat[[1]][[1]][1,])
+
+  if(position < 0 || position > L)
     stop("position is outside the range of the data")
   if(position == 0) position <- -1
-  if(position == max(xodat[[1]][[1]][1,])) position <- position - 0.001
+
+  tol <- 1e-8
+  if(position > L - tol)
+      position <- L - tol
 
   output <- matrix(ncol=2, nrow=length(xodat))
 

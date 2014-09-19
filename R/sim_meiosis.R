@@ -1,70 +1,5 @@
 ## sim_meiosis.R
 
-# meiosis_sub <-
-#
-# Simulate the locations of crossovers on a meiotic product
-# via the chi-square model (m=0 corresponds to no interference)
-# and potentially with an obligate chiasma.
-#
-#' @importFrom stats uniroot rpois qpois dpois rbinom runif
-#
-meiosis_sub <-
-function(L, m=10, obligate.chiasma=FALSE)
-{
-  if(obligate.chiasma) { # adjust mean no. chiasmata
-    if(L <= 50) stop("L must be > 50 cM")
-    if(m==0) f <- function(Lstar,f.L,f.m=0) f.L-Lstar/(1-exp(-Lstar/50))
-    else {
-      f <- function(Lstar,f.L,f.m=0)
-        {
-          lambdastar <- Lstar/50*(f.m+1)
-          temp <- lambdastar
-          for(i in 1:length(temp))
-            temp[i] <- sum(exp(-lambdastar[i] + (0:f.m)*log(lambdastar[i])-
-                               lgamma((0:f.m)+1)) * (f.m+1-(0:f.m))/(f.m+1))
-          f.L - Lstar/(1-temp)
-        }
-    }
-
-    Lstar <- uniroot(f,c(1e-5,L+1),f.m=m,f.L=L)$root
-  }
-  else Lstar <- L
-
-  if(m==0) { # no interference
-    if(!obligate.chiasma)  # no obligate chiasma
-      n.xo <- rpois(1,Lstar/100)
-    else {
-      up <- qpois(1e-14,Lstar/50,lower.tail=FALSE)
-      p <- dpois(1:up,Lstar/50)/ppois(0,Lstar/50)
-      n.chi <- sample(1:up,1,prob=p)
-      n.xo <- rbinom(1,n.chi,0.5)
-    }
-    if(n.xo==0) xo <- NULL
-    else xo <- sort(runif(n.xo,0,L))
-  }
-  else { # chi-square model
-    n.chi <- 0
-    while(n.chi == 0) {
-      n.pts <- rpois(1,Lstar/50*(m+1))
-      first <- sample(1:(m+1),1)
-      if(first <= n.pts || !obligate.chiasma) n.chi <- 1
-    }
-    if(first > n.pts)
-      xo <- NULL
-    else {
-      pt.loc <- sort(runif(n.pts,0,L))
-      chi.loc <- pt.loc[seq(first,length(pt.loc),by=m+1)]
-      n.xo <- rbinom(1,length(chi.loc),0.5)
-      if(n.xo==0) xo <- NULL
-      else if(length(chi.loc)==1) xo <- chi.loc
-      else xo <- sort(sample(chi.loc,n.xo,replace=FALSE))
-    }
-  }
-
-  if(length(xo) == 0) xo <- NULL
-  xo
-}
-
 # create_parent
 #
 #' Create a parent object
@@ -72,10 +7,13 @@ function(L, m=10, obligate.chiasma=FALSE)
 #' Create a parent object
 #'
 #' @param L chromosome length in cM
-#' @param allele vector of alleles, of length 1 or 2
-#' @return a list with two components, for the two chromosomes.
-#' Each is a matrix with two rows: locations of crossovers, and
-#' the alleles in the segments
+#' @param allele vector of integers for alleles, of length 1 or 2
+#'
+#' @return A list with two components, for the individual's two
+#' chromosomes.  Each is a list with two components: an integer vector
+#' of alleles in chromosome intervals, and a numeric vector of
+#' locations of the right-endpoints of those intervals; these two
+#' vectors should have the same length.
 #'
 #' @keywords datagen
 #' @export
@@ -85,16 +23,62 @@ function(L, m=10, obligate.chiasma=FALSE)
 #' create_parent(100, 1)
 #' create_parent(100, 1:2)
 create_parent <-
-function(L, allele=1)
+function(L, allele=1L)
 {
-  if(length(allele) == 1) allele <- rep(allele,2)
-  if(length(allele) != 2)
-    stop("allele should be of length 1 or 2")
+    if(length(allele) == 1) allele <- rep(allele,2)
+    if(length(allele) != 2)
+        stop("allele should be of length 1 or 2")
+    if(!is.integer(allele)) {
+        if(!is.numeric(allele))
+            stop("allele should be a vector with 1 or 2 integers")
+        allele <- as.integer(allele)
+    }
 
-  list(mat=rbind(c(0,L),allele[1]),
-       pat=rbind(c(0,L),allele[2]))
+    list(mat=list(alleles=allele[1], locations=L),
+         pat=list(alleles=allele[2], locations=L))
 }
 
+
+# check that data for an individual conforms to expected format
+check_individual <-
+function(ind, tol=1e-12)
+{
+    # list with two components, named "mat" and "pat"
+    if(!is.list(ind) || length(ind)!=2 ||
+       !all(names(ind) == c("mat", "pat")))
+        stop('ind should be list with "mat" and "pat"')
+
+    # check each chromosome
+    for(i in 1:2) {
+        # list with "alleles" and "locations" components
+        if(!is.list(ind[[i]]) || length(ind[[i]])!=2 ||
+           !all(names(ind[[i]]) == c("alleles", "locations")))
+            stop('chromosome should be list with "alleles" and "locations"')
+
+        # length(alleles) = length(location)-1
+        if(length(ind[[i]]$alleles) != length(ind[[i]]$locations))
+            stop("length(alleles) != length(locations)")
+
+        # locations numeric
+        if(!is.numeric(ind[[i]]$locations))
+            stop("locations should be numeric")
+
+        # alleles integer
+        if(!is.numeric(ind[[i]]$alleles))
+            stop("alleles should be integers")
+
+        # locations non-decreasing
+        if( min(diff(ind[[i]]$locations)) < 0)
+            stop("locations should be non-decreasing")
+    }
+
+    # start and end positions are the same
+    starts <- vapply(ind, function(a) a$location[1], 0.0)
+    ends <- vapply(ind, function(a) a$location[length(a$location)], 0.0)
+    stopifnot(abs(diff(starts)) < tol, abs(diff(ends)) < tol)
+
+    TRUE
+}
 
 # meiosis
 #
@@ -105,10 +89,12 @@ function(L, allele=1)
 #' @param parent An individual object, as output by
 #' \code{\link{create_parent}} or \code{\link{cross}}
 #' @param m interference parameter for chi-square model
-#' @param obligate.chiasma If TRUE, simulate meiosis with an
-#' obligate chiasma on the four-strand bundle
-#' @return A matrix with two rows: locations of crossovers, and the
-#' allele in each segment
+#' @param p Proportion of chiasmata coming from no-interference process.
+#'
+#' @return A list with two components: an integer vector of alleles in
+#' chromosome intervals, and a numeric vector of locations of the
+#' right-endpoints of those intervals; these two vectors should have
+#' the same length.
 #'
 #' @keywords datagen
 #' @export
@@ -118,41 +104,57 @@ function(L, allele=1)
 #' ind <- create_parent(100, 1:2)
 #' prod <- meiosis(ind)
 meiosis <-
-function(parent, m=10, obligate.chiasma=FALSE)
+function(parent, m=10, p=0)
 {
-  L <- parent$mat[1,ncol(parent$mat)]
-  if(abs(parent$pat[1,ncol(parent$pat)] - L) > 1e-13)
-    stop("There is a problem with the parent's data structure.")
+    tol <- 1e-12
+    L <- max(parent$mat$locations)
+    if(abs(L - max(parent$pat$locations)) > tol)
+        stop("parent's two chromosomes are not the same length")
 
-  product <- meiosis_sub(L, m, obligate.chiasma)
-  a <- sample(1:2,1)
+    product <- sim_crossovers(L, m, p)
+    cur_allele <- sample(1:2,1) # first allele
 
-  if(length(product)==0) return(parent[[a]])
+    if(length(product)==0) return(parent[[cur_allele]])
+    else {
+        product <- c(-1, product)
+        loc <- alle <- NULL
+        for(i in 2:length(product)) {
+            interval <- which(parent[[cur_allele]]$locations >= product[i-1] & parent[[cur_allele]]$locations < product[i])
+            loc <- c(loc, parent[[cur_allele]]$locations[interval])
+            alle <- c(alle, parent[[cur_allele]]$alleles[interval])
 
-  else {
-    for(i in 1:length(product)) {
-      if(i == 1)
-        result <- parent[[a]][,parent[[a]][1,]<product[1],drop=FALSE]
-      else {
-        temp <- parent[[a]][1,]>=product[i-1] & parent[[a]][1,]<product[i]
-        result <- cbind(result,parent[[a]][,temp])
-      }
-      u <- parent[[a]][2,parent[[a]][1,]>=product[i]]
-      result <- cbind(result,c(product[i],u[1]))
-      a <- 3-a
+            toright <- parent[[cur_allele]]$locations>=product[i]
+            next_allele <- parent[[cur_allele]]$alleles[toright][1]
+
+            loc <- c(loc, product[i])
+            alle <- c(alle, next_allele)
+
+            cur_allele <- 3 - cur_allele # 1 -> 2 or 2 -> 1
+
+        }
+        toright <- which(parent[[cur_allele]]$locations >= max(product))
+        loc <- c(loc, parent[[cur_allele]]$locations[toright])
+        alle <- c(alle, parent[[cur_allele]]$alleles[toright])
     }
-    temp <- parent[[a]][1,]>=product[length(product)]
-    result <- cbind(result,parent[[a]][,temp])
-  }
 
-  # clean out excess stuff in the result
-  if(ncol(result)>2) {
-    keep <- rep(TRUE,ncol(result))
-    for(i in 2:(ncol(result)-1))
-      if(result[2,i] == result[2,i+1])
-        keep[i] <- FALSE
-  }
-  result[,keep,drop=FALSE]
+    clean_meiosis(loc, alle)
+}
+
+# clean up meiotic product
+#  - no two adjacent alleles need be the same
+clean_meiosis <-
+function(loc, alle)
+{
+    if(length(loc) > 1) {
+        keep <- rep(TRUE, length(loc))
+        for(i in 1:(length(loc)-1))
+            if(alle[i] == alle[i+1])
+                keep[i] <- FALSE
+        loc <- loc[keep]
+        alle <- alle[keep]
+    }
+
+    list(alleles=alle, locations=loc)
 }
 
 
@@ -164,18 +166,20 @@ function(parent, m=10, obligate.chiasma=FALSE)
 #' single progeny
 #'
 #' @param mom An individual object, as produced by
-#' \code{\link{create_parent}} or \code{\link{cross}}
+#' \code{\link{create_parent}} or this function.
 #' @param dad An individual object, as produced by
-#' \code{\link{create_parent}} or \code{\link{cross}}
+#' \code{\link{create_parent}} or this function.
 #' @param m interference parameter for chi-square model
-#' @param obligate.chiasma If TRUE, simulate meiosis with an
-#' obligate chiasma on the four-strand bundle
+#' @param p proption of crossovers coming from no-interference process
 #' @param xchr If TRUE, simulate X chromosome
 #' @param male If TRUE, simulate a male (matters only if
 #' \code{xchr=TRUE})
 #'
-#' @return A matrix with two rows: locations of crossovers, and the
-#' allele in each segment
+#' @return A list with two components, for the individual's two
+#' chromosomes.  Each is a list with two components: an integer vector
+#' of alleles in chromosome intervals, and a numeric vector of
+#' locations of the right-endpoints of those intervals; these two
+#' vectors should have the same length.
 #'
 #' @keywords datagen
 #' @export
@@ -186,18 +190,18 @@ function(parent, m=10, obligate.chiasma=FALSE)
 #' dad <- create_parent(100, 1:2)
 #' child <- cross(mom, dad)
 cross <-
-function(mom, dad, m=10, obligate.chiasma=FALSE, xchr=FALSE, male=FALSE)
+function(mom, dad, m=10, p=0, xchr=FALSE, male=FALSE)
 {
-  if(!xchr) {
-    return(list(mat=meiosis(mom,m,obligate.chiasma),
-                pat=meiosis(dad,m,obligate.chiasma)))
-  }
-  else {
-    if(male)
-      return(list(mat=meiosis(mom,m,obligate.chiasma),
-                  pat=dad$pat))
-    else
-      return(list(mat=meiosis(mom,m,obligate.chiasma),
-                  pat=dad$mat))
-  }
+    if(!xchr) {
+        return(list(mat=meiosis(mom,m,p),
+                    pat=meiosis(dad,m,p)))
+    }
+    else {
+        if(male)
+            return(list(mat=meiosis(mom,m,p),
+                        pat=dad$pat))
+        else
+            return(list(mat=meiosis(mom,m,p),
+                        pat=dad$mat))
+    }
 }

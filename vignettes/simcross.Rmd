@@ -9,12 +9,16 @@
 [R](http://www.r-project.org) package to simulate genotypes from an
 experimental cross. The aim is flexibility rather than speed.
 
-Currently, only the chi-square model (Zhao et al. 1995) is available for simulating
-meiosis; optionally, you may require an obligate chiasma on the
-four-strand bundle. The chi-square model has a single parameter, `m`, that
-controls the strength of interference: `m=0` corresponds to no
-crossover interference; `m=10` corresponds approximately to the level
-of interference seen in mice (Broman et al. 2002).
+Meiosis is simulated following the Stahl model (Copenhaver et
+al. 2002) with the interference parameter being an integer. In this
+model, chiasmata locations are the superposition of two processes: a
+proportion `p` come from a process exhibiting no interference, and the
+remainder (proportion `1-p`) come from a process following the
+chi-square model (Foss et al. 1993; Zhao et al. 1995). This, with
+`p=0`, the model reduces to the chi-square model. The case `m=0` (or
+`p=1`) corresponds to the no interference model.  Broman et al. (2002)
+estimated `m=10` for the level of interference in the mouse (assuming
+`p=0`).
 
 ## Basic functions
 
@@ -30,7 +34,7 @@ Here's how to generate two inbred individuals, one from each of strain
 1 and strain 2, and an F<sub>1</sub> individual.
 
 ```{r set.seed, echo=FALSE, results="hide"}
-set.seed(80605732)
+set.seed(80605735)
 ```
 
 ```{r create_parent}
@@ -41,14 +45,13 @@ f1 <- create_parent(100, 1:2)
 ```
 
 The `cross` function is used to generate one progeny from the cross
-between two individuals.
-The input is a pair of individuals (e.g., as produced by
-`create_parent`), the interference parameter `m` (default `m=10`), 
-`obligate.chiasma` to indicate whether there is an obligate chiasma on the
-four-strand bundle at meiosis (default `obligate.chiasma=FALSE`), `xchr` to indicate whether the
-chromosome being simulated is the X chromosome (`FALSE`, the default, to simulate an
-autosome), and `male` to indicate whether the offspring is to be male
-(which only matters if `xchr=TRUE`).
+between two individuals.  The input is a pair of individuals (e.g., as
+produced by `create_parent`), the interference parameter `m` (default
+`m=10`), the parameter `p` for the Stahl model (default `p=0`), `xchr`
+to indicate whether the chromosome being simulated is the X chromosome
+(`FALSE`, the default, to simulate an autosome), and `male` to
+indicate whether the offspring is to be male (which only matters if
+`xchr=TRUE`).
 
 Here's an example, to generate an F<sub>2</sub> individual.
 
@@ -58,14 +61,14 @@ print(f2)
 ```
 
 The output is list with two components: the maternal and paternal
-chromosomes. Each chromsome is a numeric matrix with two rows. The
-first row includes positions and the second row includes alleles. The
-alleles in the second row indicate the alleles in intervals to the
-left of that location.
+chromosomes. Each chromsome is a list with the allele in a set of
+intervals, and the locations of the left end points of the intervals.
 
-In the example above, the paternal chromosome is a non-recombinant `2`
-chromosome. The maternal chromosome has a single crossover, with the
-the `1` allele up to `r round(f2$mat[1,2], 1)` cM and the `2` allele
+In the example above, the maternal chromosome is a non-recombinant `1`
+chromosome. The paternal chromosome has two crossovers, with the
+the `2` allele up to `r round(f2$pat$locations[1], 1)` cM, the `1` allele
+in the interval `r round(f2$pat$locations[1], 1)` &ndash;
+`r round(f2$pat$locations[2], 1)`, and the `2` allele
 for the remainder of the chromosome.
 
 There's also a function `meiosis` for simulating a meiotic product
@@ -91,13 +94,21 @@ The function `convert2geno` and `get_geno`.
 
 ## References
 
-Zhao H, Speed TP, McPeek MS (1995)
-[Statistical analysis of crossover interference using the chi-square model](http://www.genetics.org/content/139/2/1045.short).
-Genetics 139:1045-1056
-
 Broman KW, Rowe LB, Churchill GA, Paigen K (2002)
 [Crossover interference in the mouse](http://www.genetics.org/content/160/3/1123.short).
 Genetics 160:1123-1131
+
+Copenhaver, G. P., Housworth, E. A. and Stahl, F. W. (2002)
+[Crossover interference in arabidopsis](http://www.genetics.org/content/160/4/1631.short).
+Genetics 160:1631-1639.
+
+Foss, E., Lande, R., Stahl, F. W. and Steinberg, C. M. (1993)
+[Chiasma interference as a function of genetic distance](http://www.genetics.org/content/133/3/681.short).
+Genetics 133:681-691.
+
+Zhao H, Speed TP, McPeek MS (1995)
+[Statistical analysis of crossover interference using the chi-square model](http://www.genetics.org/content/139/2/1045.short).
+Genetics 139:1045-1056
 
 <!-- the following to make it look nicer -->
 <link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

@@ -50,6 +50,7 @@ function() {
 #' @export
 #' @seealso \code{\link{plot_crosslines}}
 #' @examples
+#' \dontshow{set.seed(67452378)}
 #' mom <- create_parent(100, 1:2)
 #' dad <- create_parent(100, 3:4)
 #' kid <- cross(mom, dad)
@@ -64,15 +65,15 @@ plot_ind <-
 function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
          border="black", lend=1, ljoin=1, allborders=FALSE, ...)
 {
-  max_alleles <- max(sapply(ind, function(a) max(a[2,])))
+  max_alleles <- max(sapply(ind, function(a) max(a$alleles)))
   if(max_alleles > length(col))
     stop("Need more colors: length(col)=", length(col), " but max allele = ", max_alleles)
 
   for(i in 1:2) {
     sgn <- i*2-3
     chr <- ind[[i]]
-    pos <- ind[[i]][1,]
-    allele <- ind[[i]][2,]
+    pos <- c(0, ind[[i]]$locations)
+    allele <- ind[[i]]$alleles
 
     # rescale pos
     top <- center[2]+chrlength/2
@@ -93,7 +94,7 @@ function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
     for(j in 2:length(pos))
       rect(rep(left, length(pos)-1),  pos[-length(pos)],
            rep(right, length(pos)-1), pos[-1],
-           col=col[allele[-1]],
+           col=col[allele],
            border=internalborder, lend=lend, ljoin=ljoin, ...)
 
     if(!is.na(border) && !is.null(border)) # draw border
@@ -130,6 +131,7 @@ function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
 #' @export
 #' @seealso \code{\link{plot_ind}}
 #' @examples
+#' \dontshow{set.seed(67452378)}
 #' mom <- create_parent(100, 1:2)
 #' dad <- create_parent(100, 3:4)
 #' kids <- lapply(1:4, function(junk) cross(mom, dad))

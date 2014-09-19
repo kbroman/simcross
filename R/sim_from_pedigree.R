@@ -1,6 +1,6 @@
 # sim_from_pedigree
 #
-#' Simulate a pedigree
+#' Simulate genotypes for pedigree
 #'
 #' Simulate genotypes along one chromosome for a pedigree
 #'
@@ -11,15 +11,16 @@
 #' @param xchr If TRUE, simulate X chromosome.
 #' @param m Crossover interference parameter, for chi-square model
 #' (m=0 corresponds to no interference).
-#' @param obligate.chiasma If TRUE, 4-strand bundle has at least one
-#' chiasma.
+#' @param p proption of crossovers coming from no-interference process
 #'
-#' @return A list whose each component is the data for one individual,
-#' as produced by the \code{\link{cross}} function.  Those results are
-#' a list of two matrices, corresponding to the maternal and paternal
-#' chromosomes. The chromosomes are represented as a matrix with two
-#' rows: a vector of positions, and the alleles at each position (and
-#' in interval to left).
+#' @return A list with each component being the data for one
+#' individual, as produced by the \code{\link{cross}} function.  Those
+#' results are a list with two components, corresponding to the
+#' maternal and paternal chromosomes. The chromosomes are represented
+#' as lists with two components: an integer vector of alleles in
+#' chromosome intervals, and a numeric vector of locations of the
+#' right-endpoints of those intervals; these two vectors should have
+#' the same length.
 #'
 #' @export
 #' @keywords datagen
@@ -33,7 +34,7 @@
 #' # simulate data from that pedigree
 #' dat <- sim_from_pedigree(tab)
 sim_from_pedigree <-
-function(pedigree, L=100, xchr=FALSE, m=10, obligate.chiasma=FALSE)
+function(pedigree, L=100, xchr=FALSE, m=10, p=0)
 {
     if(length(unique(pedigree[,1])) != nrow(pedigree))
         stop("IDs must be unique")
@@ -58,7 +59,7 @@ function(pedigree, L=100, xchr=FALSE, m=10, obligate.chiasma=FALSE)
             }
 
             result[[i]] <- cross(result[[mom]], result[[dad]],
-                                 m=m, obligate.chiasma=obligate.chiasma,
+                                 m=m, p=p,
                                  xchr=xchr, male=pedigree[i,4]==1)
         }
     }

@@ -3,20 +3,18 @@
 \alias{cross}
 \title{Cross two individuals}
 \usage{
-cross(mom, dad, m = 10, obligate.chiasma = FALSE, xchr = FALSE,
-  male = FALSE)
+cross(mom, dad, m = 10, p = 0, xchr = FALSE, male = FALSE)
 }
 \arguments{
 \item{mom}{An individual object, as produced by
-\code{\link{create_parent}} or \code{\link{cross}}}
+\code{\link{create_parent}} or this function.}
 
 \item{dad}{An individual object, as produced by
-\code{\link{create_parent}} or \code{\link{cross}}}
+\code{\link{create_parent}} or this function.}
 
 \item{m}{interference parameter for chi-square model}
 
-\item{obligate.chiasma}{If TRUE, simulate meiosis with an
-obligate chiasma on the four-strand bundle}
+\item{p}{proption of crossovers coming from no-interference process}
 
 \item{xchr}{If TRUE, simulate X chromosome}
 
@@ -24,8 +22,11 @@ obligate chiasma on the four-strand bundle}
 \code{xchr=TRUE})}
 }
 \value{
-A matrix with two rows: locations of crossovers, and the
-allele in each segment
+A list with two components, for the individual's two
+chromosomes.  Each is a list with two components: an integer vector
+of alleles in chromosome intervals, and a numeric vector of
+locations of the right-endpoints of those intervals; these two
+vectors should have the same length.
 }
 \description{
 Simulate the cross of two individuals to create a

@@ -26,7 +26,7 @@
 get_geno <-
 function(xodat, position)
 {
-  L <- max(xodat[[1]][[1]][1,])
+  L <- max(xodat[[1]]$mat$locations)
 
   if(position < 0 || position > L)
     stop("position is outside the range of the data")
@@ -42,8 +42,10 @@ function(xodat, position)
     for(j in 1:2) {
       dat <- xodat[[i]][[j]]
 
-      wh <- which(dat[1,] <= position)
-      output[i,j] <- ifelse(length(wh) > 0, dat[2, max(wh)+1], dat[2,1])
+      toleft <- which(dat$locations <= position)
+      output[i,j] <- ifelse(length(toleft) > 0,
+                            dat$alleles[max(toleft)+1],
+                            dat$alleles[1])
     }
   }
 

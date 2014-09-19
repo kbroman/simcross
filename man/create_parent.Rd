@@ -3,17 +3,19 @@
 \alias{create_parent}
 \title{Create a parent object}
 \usage{
-create_parent(L, allele = 1)
+create_parent(L, allele = 1L)
 }
 \arguments{
 \item{L}{chromosome length in cM}
 
-\item{allele}{vector of alleles, of length 1 or 2}
+\item{allele}{vector of integers for alleles, of length 1 or 2}
 }
 \value{
-a list with two components, for the two chromosomes.
-Each is a matrix with two rows: locations of crossovers, and
-the alleles in the segments
+A list with two components, for the individual's two
+chromosomes.  Each is a list with two components: an integer vector
+of alleles in chromosome intervals, and a numeric vector of
+locations of the right-endpoints of those intervals; these two
+vectors should have the same length.
 }
 \description{
 Create a parent object

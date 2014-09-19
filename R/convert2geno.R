@@ -31,7 +31,7 @@ convert2geno <-
 function(xodat, map)
 {
   if(map[1] != 0) map <- map - map[1]
-  if(max(map) > max(xodat[[1]][[1]][1,]))
+  if(max(map) > max(xodat[[1]]$mat$locations))
     warning("maximum simulated position is less than the length of the map.")
 
   output <- list(matrix(ncol=length(map), nrow=length(xodat)),
@@ -40,9 +40,8 @@ function(xodat, map)
     for(j in 1:2) {
       dat <- xodat[[i]][[j]]
 
-      wh <- sapply(map, function(a,b) max(which(b <= a)), dat[1,])
-      output[[j]][i,wh==ncol(dat)] <- dat[2,ncol(dat)]
-      output[[j]][i,wh<ncol(dat)] <- dat[2,wh[wh <ncol(dat)]+1]
+      toright <- sapply(map, function(marpos, loc) min(which(loc >= marpos)), dat$locations)
+      output[[j]][i,] <- dat$alleles[toright]
     }
   }
 

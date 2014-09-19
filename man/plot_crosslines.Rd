@@ -36,6 +36,7 @@ None.
 Add lines for a cross
 }
 \examples{
+\dontshow{set.seed(67452378)}
 mom <- create_parent(100, 1:2)
 dad <- create_parent(100, 3:4)
 kids <- lapply(1:4, function(junk) cross(mom, dad))

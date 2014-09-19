@@ -38,6 +38,7 @@ None.
 Add an individual, as a pair of chromosomes, to a plot
 }
 \examples{
+\dontshow{set.seed(67452378)}
 mom <- create_parent(100, 1:2)
 dad <- create_parent(100, 3:4)
 kid <- cross(mom, dad)

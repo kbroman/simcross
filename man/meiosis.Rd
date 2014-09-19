@@ -3,7 +3,7 @@
 \alias{meiosis}
 \title{Simulate meiosis}
 \usage{
-meiosis(parent, m = 10, obligate.chiasma = FALSE)
+meiosis(parent, m = 10, p = 0)
 }
 \arguments{
 \item{parent}{An individual object, as output by
@@ -11,12 +11,13 @@ meiosis(parent, m = 10, obligate.chiasma = FALSE)
 
 \item{m}{interference parameter for chi-square model}
 
-\item{obligate.chiasma}{If TRUE, simulate meiosis with an
-obligate chiasma on the four-strand bundle}
+\item{p}{Proportion of chiasmata coming from no-interference process.}
 }
 \value{
-A matrix with two rows: locations of crossovers, and the
-allele in each segment
+A list with two components: an integer vector of alleles in
+chromosome intervals, and a numeric vector of locations of the
+right-endpoints of those intervals; these two vectors should have
+the same length.
 }
 \description{
 Output a random meiotic product from an input individual.

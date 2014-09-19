@@ -10,10 +10,9 @@
 #' @param allele vector of integers for alleles, of length 1 or 2
 #'
 #' @return A list with two components, for the individual's two
-#' chromosomes.  Each is a list with two components: an integer vector
-#' of alleles in chromosome intervals, and a numeric vector of
-#' locations of the right-endpoints of those intervals; these two
-#' vectors should have the same length.
+#' chromosomes.  Each is a data frame with two columns: alleles in
+#' chromosome intervals (as integers), and locations of the
+#' right endpoints of those intervals.
 #'
 #' @keywords datagen
 #' @export
@@ -34,8 +33,8 @@ function(L, allele=1L)
         allele <- as.integer(allele)
     }
 
-    list(mat=list(alleles=allele[1], locations=L),
-         pat=list(alleles=allele[2], locations=L))
+    list(mat=data.frame(alleles=allele[1], locations=L),
+         pat=data.frame(alleles=allele[2], locations=L))
 }
 
 
@@ -50,10 +49,10 @@ function(ind, tol=1e-12)
 
     # check each chromosome
     for(i in 1:2) {
-        # list with "alleles" and "locations" components
-        if(!is.list(ind[[i]]) || length(ind[[i]])!=2 ||
+        # data.frame with "alleles" and "locations" components
+        if(!is.data.frame(ind[[i]]) || ncol(ind[[i]])!=2 ||
            !all(names(ind[[i]]) == c("alleles", "locations")))
-            stop('chromosome should be list with "alleles" and "locations"')
+            stop('chromosome should be data frame with "alleles" and "locations"')
 
         # length(alleles) = length(location)-1
         if(length(ind[[i]]$alleles) != length(ind[[i]]$locations))
@@ -91,10 +90,9 @@ function(ind, tol=1e-12)
 #' @param m interference parameter for chi-square model
 #' @param p Proportion of chiasmata coming from no-interference process.
 #'
-#' @return A list with two components: an integer vector of alleles in
-#' chromosome intervals, and a numeric vector of locations of the
-#' right-endpoints of those intervals; these two vectors should have
-#' the same length.
+#' @return A data frame with two columns: alleles in
+#' chromosome intervals (as integers), and locations of the
+#' right endpoints of those intervals.
 #'
 #' @keywords datagen
 #' @export
@@ -119,7 +117,8 @@ function(parent, m=10, p=0)
         product <- c(-1, product)
         loc <- alle <- NULL
         for(i in 2:length(product)) {
-            interval <- which(parent[[cur_allele]]$locations >= product[i-1] & parent[[cur_allele]]$locations < product[i])
+            interval <- which(parent[[cur_allele]]$locations >= product[i-1] &
+                              parent[[cur_allele]]$locations < product[i])
             loc <- c(loc, parent[[cur_allele]]$locations[interval])
             alle <- c(alle, parent[[cur_allele]]$alleles[interval])
 
@@ -154,7 +153,7 @@ function(loc, alle)
         alle <- alle[keep]
     }
 
-    list(alleles=alle, locations=loc)
+    data.frame(alleles=alle, locations=loc)
 }
 
 
@@ -176,10 +175,9 @@ function(loc, alle)
 #' \code{xchr=TRUE})
 #'
 #' @return A list with two components, for the individual's two
-#' chromosomes.  Each is a list with two components: an integer vector
-#' of alleles in chromosome intervals, and a numeric vector of
-#' locations of the right-endpoints of those intervals; these two
-#' vectors should have the same length.
+#' chromosomes.  Each is a data frame with two columns: alleles in
+#' chromosome intervals (as integers), and locations of the
+#' right endpoints of those intervals.
 #'
 #' @keywords datagen
 #' @export

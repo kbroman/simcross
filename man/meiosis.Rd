@@ -14,10 +14,9 @@ meiosis(parent, m = 10, p = 0)
 \item{p}{Proportion of chiasmata coming from no-interference process.}
 }
 \value{
-A list with two components: an integer vector of alleles in
-chromosome intervals, and a numeric vector of locations of the
-right-endpoints of those intervals; these two vectors should have
-the same length.
+A data frame with two columns: alleles in
+chromosome intervals (as integers), and locations of the
+right endpoints of those intervals.
 }
 \description{
 Output a random meiotic product from an input individual.

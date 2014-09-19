@@ -23,10 +23,9 @@ cross(mom, dad, m = 10, p = 0, xchr = FALSE, male = FALSE)
 }
 \value{
 A list with two components, for the individual's two
-chromosomes.  Each is a list with two components: an integer vector
-of alleles in chromosome intervals, and a numeric vector of
-locations of the right-endpoints of those intervals; these two
-vectors should have the same length.
+chromosomes.  Each is a data frame with two columns: alleles in
+chromosome intervals (as integers), and locations of the
+right endpoints of those intervals.
 }
 \description{
 Simulate the cross of two individuals to create a

@@ -3,3 +3,5 @@
 \.gitignore
 Makefile
 ^\.travis\.yml$
+inst/doc/simcross\.md
+inst/doc/simcross\.html

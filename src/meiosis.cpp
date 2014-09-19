@@ -10,6 +10,8 @@ int random_int(const int low, const int high)
 // L = length of chr in cM
 // m = interference paramater (m=0 is no interference)
 // p = prop'n chiasmata from no-interference mechanism
+//' @useDynLib simcross
+//' @importFrom Rcpp sourceCpp
 // [[Rcpp::export]]
 NumericVector sim_crossovers(const double L, const int m, const double p)
 {

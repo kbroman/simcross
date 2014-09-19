@@ -1,8 +1,13 @@
 
 ## ToDo list for [R/simcross](http://github.com/kbroman/simcross)
 
-- implement basic meiosis code in c++ with Rcpp
-  (use Stahl model)
+- Add a bunch of tests
+
+- Move some stuff to c++ with Rcpp:
+
+  - meiosis, clean_meiosis
+  - convert2geno
+  - get_geno
 
 - grab pedigree data from qtlrel and include as an example
 - apply marker object to IBD process to get marker data

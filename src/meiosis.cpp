@@ -1,7 +1,6 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-
 // single random integer from {low, low+1, ..., high}
 int random_int(const int low, const int high)
 {
@@ -37,7 +36,6 @@ NumericVector sim_crossovers(const double L, const int m, const double p)
     int n_chi=0;
     for(int pt_index=first; pt_index < n_points; pt_index += (m+1), n_chi++)
         point_locations[n_chi] = point_locations[pt_index];
-    n_chi++;
 
     // combine interference and no interference chiasma locations
     NumericVector chi_locations(n_chi + n_nichi);

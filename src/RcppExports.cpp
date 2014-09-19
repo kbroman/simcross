@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // sim_crossovers
-NumericVector sim_crossovers(const double L, const int m, const double p);
+NumericVector sim_crossovers(const double L, const int m = 10, const double p = 0);
 RcppExport SEXP simcross_sim_crossovers(SEXP LSEXP, SEXP mSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;

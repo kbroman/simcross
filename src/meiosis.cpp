@@ -1,11 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-// single random integer from {low, low+1, ..., high}
-int random_int(const int low, const int high)
-{
-    return (int)R::runif((double)low, double(high+1));
-}
+#include "random.h"
 
 // L = length of chr in cM
 // m = interference paramater (m=0 is no interference)

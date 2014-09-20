@@ -78,6 +78,8 @@ function(ind, tol=1e-12)
     TRUE
 }
 
+# note: function sim_crossovers in C++
+
 # meiosis
 #
 #' Simulate meiosis

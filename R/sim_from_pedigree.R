@@ -38,6 +38,7 @@ function(pedigree, L=100, xchr=FALSE, m=10, p=0)
 {
     if(length(unique(pedigree[,1])) != nrow(pedigree))
         stop("IDs must be unique")
+    rownames(pedigree) <- pedigree[,1]
 
     result <- vector("list", nrow(pedigree))
     names(result) <- as.character(pedigree[,1])
@@ -46,8 +47,8 @@ function(pedigree, L=100, xchr=FALSE, m=10, p=0)
         if(pedigree[i,2]==0 || pedigree[i,3]==0) # founder
             result[[i]] <- create_parent(L, allele=pedigree[i,1])
         else {
-            mom <- which(pedigree[,1]==pedigree[i,2])
-            dad <- which(pedigree[,1]==pedigree[i,3])
+            mom <- pedigree[pedigree[i,2],1]
+            dad <- pedigree[pedigree[i,3],1]
 
             if(length(mom) < 1 || length(dad) < 1) {
                 print(pedigree[i,,drop=FALSE])
@@ -65,3 +66,6 @@ function(pedigree, L=100, xchr=FALSE, m=10, p=0)
     }
     result
 }
+
+
+

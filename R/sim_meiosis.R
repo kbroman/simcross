@@ -54,20 +54,19 @@ function(ind, tol=1e-12)
            !all(names(ind[[i]]) == c("alleles", "locations")))
             stop('chromosome should be data frame with "alleles" and "locations"')
 
-        # length(alleles) = length(location)-1
-        if(length(ind[[i]]$alleles) != length(ind[[i]]$locations))
-            stop("length(alleles) != length(locations)")
+        alleles <- ind[[i]]$alleles
+        locations <- ind[[i]]$locations
 
         # locations numeric
-        if(!is.numeric(ind[[i]]$locations))
+        if(!is.numeric(locations))
             stop("locations should be numeric")
 
         # alleles integer
-        if(!is.numeric(ind[[i]]$alleles))
+        if(!is.integer(alleles))
             stop("alleles should be integers")
 
         # locations non-decreasing
-        if( min(diff(ind[[i]]$locations)) < 0)
+        if( min(diff(locations)) < 0)
             stop("locations should be non-decreasing")
     }
 

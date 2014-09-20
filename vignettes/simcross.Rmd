@@ -72,8 +72,8 @@ in the interval `r round(f2$pat$locations[1], 1)` &ndash;
 `r round(f2$pat$locations[2], 1)`, and the `2` allele
 for the remainder of the chromosome.
 
-There's also a function `meiosis` for simulating a meiotic product
-from a single individual; the `cross` function calls `meiosis` twice
+There's also a function `sim_meiosis` for simulating a meiotic product
+from a single individual; the `cross` function calls `sim_meiosis` twice
 (once for each parent) and then combines the results into a single
 individual.
 

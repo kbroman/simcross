@@ -1,7 +1,7 @@
 
 ## ToDo list for [R/simcross](http://github.com/kbroman/simcross)
 
-- Add a bunch of tests
+- Add tests convert2geno, sim_ril_pedigree, sim_from_pedigree
 
 - Move some stuff to c++ with Rcpp:
 

@@ -66,7 +66,7 @@ function(ind, tol=1e-12)
             stop("alleles should be integers")
 
         # locations non-decreasing
-        if( min(diff(locations)) < 0)
+        if( length(locations) > 1 && min(diff(locations)) < 0 )
             stop("locations should be non-decreasing")
     }
 

@@ -94,3 +94,154 @@ NumericVector sim_crossovers(const double L, const int m=10, const double p=0)
 
     return xo_locations;
 }
+
+
+
+//' Simulate meiosis
+//'
+//' Output a random meiotic product from an input individual.
+//'
+//' @param parent An individual object, as output by
+//' \code{\link{create_parent}} or \code{\link{cross}}
+//' @param m interference parameter for chi-square model
+//' @param p Proportion of chiasmata coming from no-interference process.
+//'
+//' @return A data frame with two columns: alleles in
+//' chromosome intervals (as integers), and locations of the
+//' right endpoints of those intervals.
+//'
+//' @keywords datagen
+//' @export
+//' @seealso \code{\link{create_parent}}, \code{\link{cross}}
+//'
+//' @examples
+//' ind <- create_parent(100, 1:2)
+//' prod <- sim_meiosis(ind)
+// [[Rcpp::export]]
+DataFrame sim_meiosis(List parent, const int m=10, const double p=0.0)
+{
+    const double tol=1e-12;
+
+    DataFrame mat, pat;
+    mat = parent[0];
+    pat = parent[1];
+
+    IntegerVector matalle = mat[0];
+    NumericVector matloc  = mat[1];
+
+    IntegerVector patalle = pat[0];
+    NumericVector patloc  = pat[1];
+
+    double L = max(matloc);
+    if(fabs(L - max(patloc)) > tol)
+        Rf_error("parent's two chromosomes are not the same length");
+
+    // simulate crossover locations; add -1 to the beginning
+    NumericVector tmp = sim_crossovers(L, m, p);
+    NumericVector product(tmp.size() + 1);
+    product[0] = -1.0;
+    for(int i=0; i<tmp.size(); i++) product[i+1] = tmp[i];
+
+    int cur_allele = random_int(0, 1); // first allele
+
+    int biggest_length = product.size() + matloc.size() + patloc.size();
+    NumericVector loc(biggest_length);
+    IntegerVector alle(biggest_length);
+
+    int curpos = 0;
+    if(product.size()==1) {
+        if(cur_allele==0) return mat;
+        else return pat;
+    }
+    else {
+        int i, j;
+        for(i=1; i<product.size(); i++) {
+
+            if(cur_allele==0) { // mat chr
+                for(j=0; j<matloc.size(); j++) {
+                    if(matloc[j] >= product[i-1] && matloc[j] < product[i]) {
+                        loc[curpos] = matloc[j];
+                        alle[curpos] = matalle[j];
+                        curpos++;
+                    }
+                    else if(matloc[j] > product[i]) break;
+                }
+                loc[curpos] = product[i];
+                alle[curpos] = matalle[j];
+                curpos++;
+            }
+            else { // pat chr
+                for(j=0; j<patloc.size(); j++) {
+                    if(patloc[j] >= product[i-1] && patloc[j] < product[i]) {
+                        loc[curpos] = patloc[j];
+                        alle[curpos] = patalle[j];
+                        curpos++;
+                    }
+                    else if(patloc[j] > product[i]) break;
+                }
+                loc[curpos] = product[i];
+                alle[curpos] = patalle[j];
+                curpos++;
+            }
+
+            cur_allele = 1 - cur_allele;
+
+        }
+
+        double lastxo = max(product);
+
+        if(cur_allele==0) { // mat chr
+            for(j=0; j<matloc.size(); j++) {
+                if(matloc[j] > lastxo) {
+                    loc[curpos] = matloc[j];
+                    alle[curpos] = matalle[j];
+                    curpos++;
+                }
+            }
+        }
+        else { // pat chr
+            for(j=0; j<patloc.size(); j++) {
+                if(patloc[j] > lastxo) {
+                    loc[curpos] = patloc[j];
+                    alle[curpos] = patalle[j];
+                    curpos++;
+                }
+            }
+        }
+    }
+
+    if(curpos > 1) { // clean up repeated alleles
+
+        NumericVector loc_clean(curpos);
+        IntegerVector alle_clean(curpos);
+
+        loc_clean[0] = loc[0];
+        alle_clean[0] = alle[0];
+        int lastpos=0;
+
+        for(int i=1; i<curpos; i++) {
+            if(alle_clean[lastpos] == alle[i]) {
+                loc_clean[lastpos] = loc[i];
+            }
+            else {
+                lastpos++;
+                loc_clean[lastpos] = loc[i];
+                alle_clean[lastpos] = alle[i];
+            }
+        }
+        curpos = lastpos+1;
+        loc = loc_clean;
+        alle = alle_clean;
+    }
+
+    NumericVector loc_result(curpos);
+    IntegerVector alle_result(curpos);
+    for(int i=0; i<curpos; i++) {
+        loc_result[i] = loc[i];
+        alle_result[i] = alle[i];
+    }
+
+    DataFrame result =  List::create(Named("alleles")= alle_result, Named("locations")=loc_result);
+
+    return result;
+}

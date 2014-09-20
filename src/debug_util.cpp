@@ -9,3 +9,11 @@ void print_vector(NumericVector x)
         Rcout << x[i] << ' ';
     Rcout << '\n';
 }
+
+void print_vector(IntegerVector x)
+{
+    int n=x.size();
+    for(int i=0; i<n; i++)
+        Rcout << x[i] << ' ';
+    Rcout << '\n';
+}

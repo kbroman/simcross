@@ -46,3 +46,27 @@ sim_crossovers <- function(L, m = 10L, p = 0) {
     .Call('simcross_sim_crossovers', PACKAGE = 'simcross', L, m, p)
 }
 
+#' Simulate meiosis
+#'
+#' Output a random meiotic product from an input individual.
+#'
+#' @param parent An individual object, as output by
+#' \code{\link{create_parent}} or \code{\link{cross}}
+#' @param m interference parameter for chi-square model
+#' @param p Proportion of chiasmata coming from no-interference process.
+#'
+#' @return A data frame with two columns: alleles in
+#' chromosome intervals (as integers), and locations of the
+#' right endpoints of those intervals.
+#'
+#' @keywords datagen
+#' @export
+#' @seealso \code{\link{create_parent}}, \code{\link{cross}}
+#'
+#' @examples
+#' ind <- create_parent(100, 1:2)
+#' prod <- sim_meiosis(ind)
+sim_meiosis <- function(parent, m = 10L, p = 0.0) {
+    .Call('simcross_sim_meiosis', PACKAGE = 'simcross', parent, m, p)
+}
+

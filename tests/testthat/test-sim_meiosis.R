@@ -1,5 +1,5 @@
 
-context("sim_meiosis")
+context("meiosis")
 
 test_that("create_parent works", {
 
@@ -106,10 +106,10 @@ test_that("simulations of meiosis and crosses work", {
 
     set.seed(seed)
     expected2 <- data.frame(alleles=c(1L, 2L, 1L, 2L), locations=c(expected, 300))
-    expect_equal(meiosis(f1, m=10, p=0.3), expected2)
+    expect_equal(sim_meiosis(f1, m=10, p=0.3), expected2)
 
     expected3 <- data.frame(alleles=c(2L, 1L, 2L), locations=c(another_set, 300))
-    expect_equal(meiosis(f1, m=3, p=0.01), expected3)
+    expect_equal(sim_meiosis(f1, m=3, p=0.01), expected3)
 
     set.seed(seed)
     f2 <- cross(f1, f1, m=10, p=0.3)
@@ -118,7 +118,7 @@ test_that("simulations of meiosis and crosses work", {
     expect_equal(f2, expected)
 
     set.seed(seed)
-    junk <- meiosis(f1, m=10, p=0.3)
+    junk <- sim_meiosis(f1, m=10, p=0.3)
     f2 <- cross(f1, f1, m=3, p=0.01)
     expected <- list(mat=expected3,
                      pat=data.frame(alleles=c(2L, 1L, 2L, 1L),

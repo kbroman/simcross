@@ -33,8 +33,8 @@ function(L, allele=1L)
         allele <- as.integer(allele)
     }
 
-    list(mat=data.frame(alleles=allele[1], locations=L),
-         pat=data.frame(alleles=allele[2], locations=L))
+    list(mat=list(alleles=allele[1], locations=L),
+         pat=list(alleles=allele[2], locations=L))
 }
 
 
@@ -49,8 +49,8 @@ function(ind, tol=1e-12)
 
     # check each chromosome
     for(i in 1:2) {
-        # data.frame with "alleles" and "locations" components
-        if(!is.data.frame(ind[[i]]) || ncol(ind[[i]])!=2 ||
+        # list with "alleles" and "locations" components
+        if(!is.list(ind[[i]]) || length(ind[[i]])!=2 ||
            !all(names(ind[[i]]) == c("alleles", "locations")))
             stop('chromosome should be data frame with "alleles" and "locations"')
 

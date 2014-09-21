@@ -118,11 +118,11 @@ NumericVector sim_crossovers(const double L, const int m=10, const double p=0)
 //' ind <- create_parent(100, 1:2)
 //' prod <- sim_meiosis(ind)
 // [[Rcpp::export]]
-DataFrame sim_meiosis(List parent, const int m=10, const double p=0.0)
+List sim_meiosis(List parent, const int m=10, const double p=0.0)
 {
     const double tol=1e-12;
 
-    DataFrame mat, pat;
+    List mat, pat;
     mat = parent[0];
     pat = parent[1];
 

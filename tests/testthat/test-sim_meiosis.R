@@ -3,18 +3,18 @@ context("meiosis")
 
 test_that("create_parent works", {
 
-    expected_p1 <- list(mat=data.frame(alleles=1L, locations=100.0),
-                        pat=data.frame(alleles=1L, locations=100.0))
+    expected_p1 <- list(mat=list(alleles=1L, locations=100.0),
+                        pat=list(alleles=1L, locations=100.0))
 
     expect_equal(create_parent(100, 1), expected_p1)
 
-    expected_p2 <- list(mat=data.frame(alleles=2L, locations=100.0),
-                        pat=data.frame(alleles=2L, locations=100.0))
+    expected_p2 <- list(mat=list(alleles=2L, locations=100.0),
+                        pat=list(alleles=2L, locations=100.0))
 
     expect_equal(create_parent(100, 2), expected_p2)
 
-    expected_f1 <- list(mat=data.frame(alleles=1L, locations=100.0),
-                        pat=data.frame(alleles=2L, locations=100.0))
+    expected_f1 <- list(mat=list(alleles=1L, locations=100.0),
+                        pat=list(alleles=2L, locations=100.0))
 
     expect_equal(create_parent(100, 1:2), expected_f1)
 
@@ -36,14 +36,14 @@ test_that("create_parent works", {
 
 test_that("check_individual works", {
 
-    expected_p1 <- list(mat=data.frame(alleles=1L, locations=100.0),
-                        pat=data.frame(alleles=1L, locations=100.0))
+    expected_p1 <- list(mat=list(alleles=1L, locations=100.0),
+                        pat=list(alleles=1L, locations=100.0))
 
-    expected_p2 <- list(mat=data.frame(alleles=2L, locations=100.0),
-                        pat=data.frame(alleles=2L, locations=100.0))
+    expected_p2 <- list(mat=list(alleles=2L, locations=100.0),
+                        pat=list(alleles=2L, locations=100.0))
 
-    expected_f1 <- list(mat=data.frame(alleles=1L, locations=100.0),
-                        pat=data.frame(alleles=2L, locations=100.0))
+    expected_f1 <- list(mat=list(alleles=1L, locations=100.0),
+                        pat=list(alleles=2L, locations=100.0))
 
     # should be clean
     expect_true(check_individual(expected_p1))
@@ -55,30 +55,30 @@ test_that("check_individual works", {
     expect_error(check_individual(list(mat=NULL, pat=NULL)))
 
     # alleles not integers
-    z <- list(mat=data.frame(alleles=1, locations=100),
-              pat=data.frame(alleles=2, locations=100))
+    z <- list(mat=list(alleles=1, locations=100),
+              pat=list(alleles=2, locations=100))
     expect_error(check_individual(z))
-    z <- list(mat=data.frame(alleles="a", locations=100),
-              pat=data.frame(alleles="b", locations=100))
+    z <- list(mat=list(alleles="a", locations=100),
+              pat=list(alleles="b", locations=100))
     expect_error(check_individual(z))
 
     # wrong orders
-    z <- list(mat=data.frame(locations=100, alleles=1L),
-              pat=data.frame(alleles=1L, locations=100))
+    z <- list(mat=list(locations=100, alleles=1L),
+              pat=list(alleles=1L, locations=100))
     expect_error(check_individual(z))
-    z <- list(mat=data.frame(alleles=1L, locations=100),
-              pat=data.frame(locations=100, alleles=1L))
+    z <- list(mat=list(alleles=1L, locations=100),
+              pat=list(locations=100, alleles=1L))
     expect_error(check_individual(z))
-    z <- list(pat=data.frame(alleles=2L, locations=100),
-              mat=data.frame(alleles=1L, locations=100))
+    z <- list(pat=list(alleles=2L, locations=100),
+              mat=list(alleles=1L, locations=100))
     expect_error(check_individual(z))
 
     # locations not in order
-    z <- list(mat=data.frame(alleles=c(2L, 1L), locations=c(5, 100)),
-              pat=data.frame(alleles=c(1L, 2L), locations=c(100, 85)))
+    z <- list(mat=list(alleles=c(2L, 1L), locations=c(5, 100)),
+              pat=list(alleles=c(1L, 2L), locations=c(100, 85)))
     expect_error(check_individual(z))
-    z <- list(mat=data.frame(alleles=c(2L, 1L), locations=c(500, 100)),
-              pat=data.frame(alleles=c(1L, 2L), locations=c(100, 105)))
+    z <- list(mat=list(alleles=c(2L, 1L), locations=c(500, 100)),
+              pat=list(alleles=c(1L, 2L), locations=c(100, 105)))
     expect_error(check_individual(z))
 })
 
@@ -105,23 +105,23 @@ test_that("simulations of meiosis and crosses work", {
     expect_equal(create_parent(300, 1:2), f1)
 
     set.seed(seed)
-    expected2 <- data.frame(alleles=c(1L, 2L, 1L, 2L), locations=c(expected, 300))
+    expected2 <- list(alleles=c(1L, 2L, 1L, 2L), locations=c(expected, 300))
     expect_equal(sim_meiosis(f1, m=10, p=0.3), expected2)
 
-    expected3 <- data.frame(alleles=c(2L, 1L, 2L), locations=c(another_set, 300))
+    expected3 <- list(alleles=c(2L, 1L, 2L), locations=c(another_set, 300))
     expect_equal(sim_meiosis(f1, m=3, p=0.01), expected3)
 
     set.seed(seed)
     f2 <- cross(f1, f1, m=10, p=0.3)
     expected <- list(mat=expected2,
-                     pat=data.frame(alleles=c(1L, 2L), locations=c(124.580098665319, 300)))
+                     pat=list(alleles=c(1L, 2L), locations=c(124.580098665319, 300)))
     expect_equal(f2, expected)
 
     set.seed(seed)
     junk <- sim_meiosis(f1, m=10, p=0.3)
     f2 <- cross(f1, f1, m=3, p=0.01)
     expected <- list(mat=expected3,
-                     pat=data.frame(alleles=c(2L, 1L, 2L, 1L),
+                     pat=list(alleles=c(2L, 1L, 2L, 1L),
                      locations=c(130.79544918146, 201.651784661226, 251.381423673593, 300)))
     expect_equal(f2, expected)
 
@@ -131,10 +131,10 @@ test_that("simulations of meiosis and crosses work", {
     f1a <- cross(p1, p2)
     f2a <- cross(p1, p2)
     sib <- cross(f1a, f2a)
-    expected <- list(mat=data.frame(alleles=c(3L, 1L, 2L, 3L, 4L, 2L, 1L, 4L),
+    expected <- list(mat=list(alleles=c(3L, 1L, 2L, 3L, 4L, 2L, 1L, 4L),
                                     locations=c(49.9227490508929, 115.871118125506, 146.964924945496, 173.550174990669,
                                                 187.015442247503, 211.255158483982, 262.606337293983, 300.0)),
-                     pat=data.frame(alleles=c(2L, 1L, 4L, 3L, 1L, 2L, 3L, 4L),
+                     pat=list(alleles=c(2L, 1L, 4L, 3L, 1L, 2L, 3L, 4L),
                                     locations=c(9.019920299761, 16.7069100541994, 21.4588083559647, 73.5785636818036,
                                                 167.808948992752, 186.267593340017, 283.901682123542, 300.0)))
     expect_equal(sib, expected)

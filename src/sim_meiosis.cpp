@@ -241,9 +241,5 @@ DataFrame sim_meiosis(List parent, const int m=10, const double p=0.0)
         alle_result[i] = alle[i];
     }
 
-    List result_list =  List::create(Named("alleles")=alle_result, Named("locations")=loc_result);
-    result_list.attr("class") = "data.frame";
-    DataFrame result =  as<DataFrame>(wrap(result_list));
-
-    return result;
+    return List::create(Named("alleles")= alle_result, Named("locations")=loc_result);
 }

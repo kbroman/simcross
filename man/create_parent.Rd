@@ -12,9 +12,9 @@ create_parent(L, allele = 1L)
 }
 \value{
 A list with two components, for the individual's two
-chromosomes.  Each is a data frame with two columns: alleles in
-chromosome intervals (as integers), and locations of the
-right endpoints of those intervals.
+chromosomes.  Each is a list with alleles in chromosome intervals
+(as integers) and locations of the right endpoints of those
+intervals.
 }
 \description{
 Create a parent object

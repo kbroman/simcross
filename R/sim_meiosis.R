@@ -10,9 +10,9 @@
 #' @param allele vector of integers for alleles, of length 1 or 2
 #'
 #' @return A list with two components, for the individual's two
-#' chromosomes.  Each is a data frame with two columns: alleles in
-#' chromosome intervals (as integers), and locations of the
-#' right endpoints of those intervals.
+#' chromosomes.  Each is a list with alleles in chromosome intervals
+#' (as integers) and locations of the right endpoints of those
+#' intervals.
 #'
 #' @keywords datagen
 #' @export
@@ -52,7 +52,7 @@ function(ind, tol=1e-12)
         # list with "alleles" and "locations" components
         if(!is.list(ind[[i]]) || length(ind[[i]])!=2 ||
            !all(names(ind[[i]]) == c("alleles", "locations")))
-            stop('chromosome should be data frame with "alleles" and "locations"')
+            stop('chromosome should be list with "alleles" and "locations"')
 
         alleles <- ind[[i]]$alleles
         locations <- ind[[i]]$locations
@@ -100,9 +100,9 @@ function(ind, tol=1e-12)
 #' \code{xchr=TRUE})
 #'
 #' @return A list with two components, for the individual's two
-#' chromosomes.  Each is a data frame with two columns: alleles in
-#' chromosome intervals (as integers), and locations of the
-#' right endpoints of those intervals.
+#' chromosomes.  Each is a list with alleles in chromosome intervals
+#' (as integers) and locations of the right endpoints of those
+#' intervals.
 #'
 #' @keywords datagen
 #' @export

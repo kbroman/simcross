@@ -112,9 +112,8 @@ NumericVector cpp_sim_crossovers(const double L, const int m=10, const double p=
 //' @param m interference parameter for chi-square model
 //' @param p Proportion of chiasmata coming from no-interference process.
 //'
-//' @return A data frame with two columns: alleles in
-//' chromosome intervals (as integers), and locations of the
-//' right endpoints of those intervals.
+//' @return A list with alleles in chromosome intervals (as integers)
+//' and locations of the right endpoints of those intervals.
 //'
 //' @keywords datagen
 //' @export

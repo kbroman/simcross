@@ -14,9 +14,8 @@ sim_meiosis(parent, m = 10L, p = 0)
 \item{p}{Proportion of chiasmata coming from no-interference process.}
 }
 \value{
-A data frame with two columns: alleles in
-chromosome intervals (as integers), and locations of the
-right endpoints of those intervals.
+A list with alleles in chromosome intervals (as integers)
+and locations of the right endpoints of those intervals.
 }
 \description{
 Output a random meiotic product from an input individual.

@@ -63,9 +63,8 @@ sim_crossovers <- function(L, m = 10L, p = 0.0) {
 #' @param m interference parameter for chi-square model
 #' @param p Proportion of chiasmata coming from no-interference process.
 #'
-#' @return A data frame with two columns: alleles in
-#' chromosome intervals (as integers), and locations of the
-#' right endpoints of those intervals.
+#' @return A list with alleles in chromosome intervals (as integers)
+#' and locations of the right endpoints of those intervals.
 #'
 #' @keywords datagen
 #' @export

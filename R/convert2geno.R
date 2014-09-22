@@ -54,6 +54,9 @@ function(xodat, map)
   else # otherwise, use binary codes
     output <- 2^output[[1]] + 2^output[[2]]
 
+  # force as integers
+  output <- matrix(as.integer(output), ncol=ncol(output))
+
   dimnames(output) <- list(names(xodat), names(map))
 
   output

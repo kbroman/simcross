@@ -51,8 +51,32 @@ test_that("convert2geno works for 2-allele case", {
 
     expect_equal(expected, convert2geno(dat, map))
 
+    # with founder genotypes
+    founder_geno <- rbind(rep(1, length(map)),
+                          rep(2, length(map)))
+    expect_equal(expected, convert2geno(dat, map, founder_geno))
 
+    # switch founder alleles
+    founder_geno <- rbind(rep(2, length(map)),
+                          rep(1, length(map)))
+    expected2 <- 4 - expected
+    expect_equal(expected2, convert2geno(dat, map, founder_geno))
 
+    # random founder alleles
+    founder_geno <- rbind(c(2, 1, 2, 2, 2, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1,
+                            2, 2, 2, 1, 1, 2),
+                          c(2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 1, 2,
+                            2, 2, 1, 2, 2, 2))
+    expected3 <- expected
+    for(i in 1:ncol(expected3)) {
+        if(founder_geno[1,i]==1 & founder_geno[2,i]==1)
+            expected3[,i] <- 1
+        else if(founder_geno[1,i]==2 & founder_geno[2,i]==2)
+            expected3[,i] <- 3
+        else if(founder_geno[1,i]==2 & founder_geno[2,i]==1)
+            expected3[,i] <- 4-expected[,i]
+    }
+    expect_equal(expected3, convert2geno(dat, map, founder_geno))
 
 })
 
@@ -120,4 +144,35 @@ test_that("convert2geno works for 8-allele case", {
 
     expect_equal(expected, convert2geno(dat, map))
 
+
+    founder_geno <- rbind(c(2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 1, 1, 1,
+                            2, 1, 1, 1, 2, 2),
+                          c(2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2,
+                            1, 1, 2, 1, 1, 2),
+                          c(2, 2, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2,
+                            1, 2, 2, 2, 1, 1),
+                          c(1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2,
+                            2, 1, 1, 2, 1, 1),
+                          c(2, 2, 1, 1, 2, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2,
+                            1, 2, 2, 2, 1, 2),
+                          c(1, 2, 2, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1,
+                            1, 2, 2, 1, 1, 2),
+                          c(2, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 1,
+                            1, 2, 2, 2, 1, 1),
+                          c(2, 2, 2, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 1, 2,
+                            2, 2, 2, 2, 1, 1))
+    founder_geno <- matrix(as.integer(founder_geno), ncol=ncol(founder_geno))
+
+    expected2 <- rbind(c(3, 3, 3, 2, 1, 3, 2, 1, 3, 3, 3, 3, 3, 1, 3, 1,
+                         3, 3, 3, 1, 1),
+                       c(3, 3, 3, 1, 1, 3, 2, 1, 3, 3, 3, 3, 3, 1, 3, 1,
+                         3, 3, 3, 1, 1),
+                       c(3, 3, 3, 2, 1, 3, 2, 1, 3, 3, 3, 3, 3, 1, 3, 1,
+                         3, 3, 3, 1, 1),
+                       c(3, 3, 3, 1, 1, 3, 2, 1, 3, 3, 3, 3, 3, 1, 3, 1,
+                         3, 3, 3, 1, 1))
+    expected2 <- matrix(as.integer(expected2), nrow=nrow(expected2))
+    dimnames(expected2) <- list(as.character(1:4), paste0("marker", 1:21))
+
+    expect_equal(expected2, convert2geno(dat, map, founder_geno))
 })

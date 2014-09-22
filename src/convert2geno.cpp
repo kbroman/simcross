@@ -4,11 +4,15 @@ using namespace Rcpp;
 #include "convert2geno.h"
 
 // [[Rcpp::export]]
-IntegerMatrix cpp_convert2geno(List xodat, NumericVector map)
+IntegerMatrix cpp_convert2geno(List xodat, NumericVector map, IntegerMatrix founder_geno)
 {
     int n_ind = xodat.size();
     int n_mar = map.size();
     IntegerMatrix matmatrix(n_mar, n_ind), patmatrix(n_mar, n_ind);
+
+    // size of founder geno matrix
+    // (ignored if 0)
+    int size_founder_geno = founder_geno.nrow() * founder_geno.ncol();
 
     for(int i=0; i<n_ind; i++) {
         List ind = xodat[i];
@@ -27,7 +31,14 @@ IntegerMatrix cpp_convert2geno(List xodat, NumericVector map)
     int max_geno_pat = max(patmatrix);
     int max_geno = max_geno_mat > max_geno_pat ? max_geno_mat : max_geno_pat;
 
-    return combine_mat_and_pat_geno(matmatrix, patmatrix, max_geno);
+    if(size_founder_geno > 0 && founder_geno.nrow() >= max_geno) {
+        // convert to SNP genotypes using founder genotypes
+        return combine_mat_and_pat_geno_wfounders(matmatrix, patmatrix, founder_geno);
+    }
+    else {
+        // convert to 1/2/3 or binary code
+        return combine_mat_and_pat_geno(matmatrix, patmatrix, max_geno);
+    }
 }
 
 
@@ -69,3 +80,17 @@ IntegerMatrix combine_mat_and_pat_geno(IntegerMatrix matmatrix, IntegerMatrix pa
     
     return matmatrix;
 }
+
+IntegerMatrix combine_mat_and_pat_geno_wfounders(IntegerMatrix matmatrix, IntegerMatrix patmatrix, IntegerMatrix founder_geno)
+{
+    int n_mar = matmatrix.nrow();
+    int n_ind = matmatrix.ncol();
+
+    for(int i=0; i<n_mar; i++)
+        for(int j=0; j<n_ind; j++)
+            matmatrix(i,j) = founder_geno( matmatrix(i,j) - 1, i) + 
+                founder_geno( patmatrix(i,j) - 1, i) - 1;
+
+    return matmatrix;
+}
+

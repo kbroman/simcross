@@ -6,15 +6,16 @@
 using namespace Rcpp;
 
 // cpp_convert2geno
-IntegerMatrix cpp_convert2geno(List xodat, NumericVector map);
-RcppExport SEXP simcross_cpp_convert2geno(SEXP xodatSEXP, SEXP mapSEXP) {
+IntegerMatrix cpp_convert2geno(List xodat, NumericVector map, IntegerMatrix founder_geno);
+RcppExport SEXP simcross_cpp_convert2geno(SEXP xodatSEXP, SEXP mapSEXP, SEXP founder_genoSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< List >::type xodat(xodatSEXP );
         Rcpp::traits::input_parameter< NumericVector >::type map(mapSEXP );
-        IntegerMatrix __result = cpp_convert2geno(xodat, map);
+        Rcpp::traits::input_parameter< IntegerMatrix >::type founder_geno(founder_genoSEXP );
+        IntegerMatrix __result = cpp_convert2geno(xodat, map, founder_geno);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

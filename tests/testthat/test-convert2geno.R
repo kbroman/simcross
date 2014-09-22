@@ -46,7 +46,7 @@ test_that("convert2geno works for 2-allele case", {
                       c(2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 2, 3, 1, 1, 1, 1),
                       c(2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 1),
                       c(3, 2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 3, 1, 2, 2, 1))
-    expected <- matrix(as.integer(expected), nrow=4)
+    storage.mode(expected) <- "integer"
     dimnames(expected) <- list(as.character(1:4), paste0("marker", 1:21))
 
     expect_equal(expected, convert2geno(dat, map))
@@ -139,7 +139,7 @@ test_that("convert2geno works for 8-allele case", {
                         32, 32, 32, 32, 32, 32, 32, 8, 8),
                       c(256, 256, 130, 256, 256, 4, 129, 256, 256, 256, 256, 256, 32,
                         32, 32, 32, 32, 32, 32, 8, 8))
-    expected <- matrix(as.integer(expected), nrow=4)
+    storage.mode(expected) <- "integer"
     dimnames(expected) <- list(as.character(1:4), paste0("marker", 1:21))
 
     expect_equal(expected, convert2geno(dat, map))
@@ -161,7 +161,7 @@ test_that("convert2geno works for 8-allele case", {
                             1, 2, 2, 2, 1, 1),
                           c(2, 2, 2, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 1, 2,
                             2, 2, 2, 2, 1, 1))
-    founder_geno <- matrix(as.integer(founder_geno), ncol=ncol(founder_geno))
+    storage.mode(founder_geno) <- "integer"
 
     expected2 <- rbind(c(3, 3, 3, 2, 1, 3, 2, 1, 3, 3, 3, 3, 3, 1, 3, 1,
                          3, 3, 3, 1, 1),
@@ -171,7 +171,7 @@ test_that("convert2geno works for 8-allele case", {
                          3, 3, 3, 1, 1),
                        c(3, 3, 3, 1, 1, 3, 2, 1, 3, 3, 3, 3, 3, 1, 3, 1,
                          3, 3, 3, 1, 1))
-    expected2 <- matrix(as.integer(expected2), nrow=nrow(expected2))
+    storage.mode(expected2) <- "integer"
     dimnames(expected2) <- list(as.character(1:4), paste0("marker", 1:21))
 
     expect_equal(expected2, convert2geno(dat, map, founder_geno))

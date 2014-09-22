@@ -22,7 +22,7 @@
 #' create_parent(100, 1)
 #' create_parent(100, 1:2)
 create_parent <-
-function(L, allele=1L)
+function(L, allele=1)
 {
     if(length(allele) == 1) allele <- rep(allele,2)
     if(length(allele) != 2)
@@ -30,7 +30,7 @@ function(L, allele=1L)
     if(!is.integer(allele)) {
         if(!is.numeric(allele))
             stop("allele should be a vector with 1 or 2 integers")
-        allele <- as.integer(allele)
+        storage.mode(allele) <- "integer"
     }
 
     list(mat=list(alleles=allele[1], locations=L),

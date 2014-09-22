@@ -3,7 +3,7 @@
 \alias{create_parent}
 \title{Create a parent object}
 \usage{
-create_parent(L, allele = 1L)
+create_parent(L, allele = 1)
 }
 \arguments{
 \item{L}{chromosome length in cM}

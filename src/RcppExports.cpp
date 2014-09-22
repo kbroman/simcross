@@ -23,14 +23,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_get_geno
-IntegerMatrix cpp_get_geno(List xodat, double position);
+IntegerMatrix cpp_get_geno(const List xodat, const double position);
 RcppExport SEXP simcross_cpp_get_geno(SEXP xodatSEXP, SEXP positionSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< List >::type xodat(xodatSEXP );
-        Rcpp::traits::input_parameter< double >::type position(positionSEXP );
+        Rcpp::traits::input_parameter< const List >::type xodat(xodatSEXP );
+        Rcpp::traits::input_parameter< const double >::type position(positionSEXP );
         IntegerMatrix __result = cpp_get_geno(xodat, position);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
@@ -56,13 +56,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // sim_meiosis
-List sim_meiosis(List parent, const int m = 10, const double p = 0.0);
+List sim_meiosis(const List parent, const int m = 10, const double p = 0.0);
 RcppExport SEXP simcross_sim_meiosis(SEXP parentSEXP, SEXP mSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< List >::type parent(parentSEXP );
+        Rcpp::traits::input_parameter< const List >::type parent(parentSEXP );
         Rcpp::traits::input_parameter< const int >::type m(mSEXP );
         Rcpp::traits::input_parameter< const double >::type p(pSEXP );
         List __result = sim_meiosis(parent, m, p);

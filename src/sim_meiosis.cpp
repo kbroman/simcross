@@ -123,7 +123,7 @@ NumericVector cpp_sim_crossovers(const double L, const int m=10, const double p=
 //' ind <- create_parent(100, 1:2)
 //' prod <- sim_meiosis(ind)
 // [[Rcpp::export]]
-List sim_meiosis(List parent, const int m=10, const double p=0.0)
+List sim_meiosis(const List parent, const int m=10, const double p=0.0)
 {
     RNGScope scope; // to set/reset random number seed
 

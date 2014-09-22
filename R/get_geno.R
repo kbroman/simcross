@@ -36,19 +36,7 @@ function(xodat, position)
   if(position > L - tol)
       position <- L - tol
 
-  output <- matrix(ncol=2, nrow=length(xodat))
-
-  for(i in seq(along=xodat)) {
-    for(j in 1:2) {
-      dat <- xodat[[i]][[j]]
-
-      toleft <- which(dat$locations <= position)
-      output[i,j] <- ifelse(length(toleft) > 0,
-                            dat$alleles[max(toleft)+1],
-                            dat$alleles[1])
-    }
-  }
-
+  output <- cpp_get_geno(xodat, position)
   dimnames(output) <- list(names(xodat), c("mat", "pat"))
 
   output

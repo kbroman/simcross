@@ -21,6 +21,22 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// cpp_get_geno
+IntegerMatrix cpp_get_geno(List xodat, double position);
+RcppExport SEXP simcross_cpp_get_geno(SEXP xodatSEXP, SEXP positionSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< List >::type xodat(xodatSEXP );
+        Rcpp::traits::input_parameter< double >::type position(positionSEXP );
+        IntegerMatrix __result = cpp_get_geno(xodat, position);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // sim_crossovers
 NumericVector sim_crossovers(const double L, const int m = 10, const double p = 0.0);
 RcppExport SEXP simcross_sim_crossovers(SEXP LSEXP, SEXP mSEXP, SEXP pSEXP) {

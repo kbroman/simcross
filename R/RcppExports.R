@@ -5,6 +5,10 @@ cpp_convert2geno <- function(xodat, map) {
     .Call('simcross_cpp_convert2geno', PACKAGE = 'simcross', xodat, map)
 }
 
+cpp_get_geno <- function(xodat, position) {
+    .Call('simcross_cpp_get_geno', PACKAGE = 'simcross', xodat, position)
+}
+
 #' Simulate crossover locations using the Stahl model
 #'
 #'

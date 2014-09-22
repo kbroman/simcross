@@ -2,6 +2,7 @@
 using namespace Rcpp;
 
 #include "random.h"
+#include "sim_meiosis.h"
 
 //' Simulate crossover locations using the Stahl model
 //'
@@ -49,6 +50,13 @@ NumericVector sim_crossovers(const double L, const int m=10, const double p=0.0)
 {
     RNGScope scope; // to set/reset random number seed
 
+    return cpp_sim_crossovers(L, m, p);
+
+}
+
+// internal function
+NumericVector cpp_sim_crossovers(const double L, const int m=10, const double p=0.0)
+{
     // chiasma and intermediate points
     int n_points = R::rpois(L/50.0*(double)(m+1)*(1.0-p));
     NumericVector point_locations = runif(n_points, 0.0, L);
@@ -118,6 +126,8 @@ NumericVector sim_crossovers(const double L, const int m=10, const double p=0.0)
 // [[Rcpp::export]]
 List sim_meiosis(List parent, const int m=10, const double p=0.0)
 {
+    RNGScope scope; // to set/reset random number seed
+
     const double tol=1e-12; // for comparison of chr lengths in parents
 
     List mat, pat;
@@ -135,7 +145,7 @@ List sim_meiosis(List parent, const int m=10, const double p=0.0)
         Rf_error("parent's two chromosomes are not the same length");
 
     // simulate crossover locations; add -1 to the beginning
-    NumericVector tmp = sim_crossovers(L, m, p);
+    NumericVector tmp = cpp_sim_crossovers(L, m, p);
     NumericVector product(tmp.size() + 1);
     product[0] = -1.0;
     std::copy(tmp.begin(), tmp.end(), product.begin()+1);

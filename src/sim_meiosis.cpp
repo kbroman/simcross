@@ -51,7 +51,7 @@ NumericVector sim_crossovers(const double L, const int m=10, const double p=0)
 
     // chiasma and intermediate points
     int n_points = R::rpois(L/50.0*(double)(m+1)*(1.0-p));
-    NumericVector point_locations = runif(n_points, 0.0, L);
+    NumericVector point_locations = R::runif(n_points, 0.0, L);
     point_locations.sort();
 
     // which point is the first chiasma?
@@ -61,10 +61,10 @@ NumericVector sim_crossovers(const double L, const int m=10, const double p=0)
 
     int n_nichi; // no. chiasma from no interference process
     if(p > 0) {
-        n_nichi = R::rpois(L/100.0*p);
+        n_nichi = R::rpois(L/50.0*p);
     }
     else n_nichi = 0;
-    NumericVector nichi_locations = runif(n_nichi, 0.0, L);
+    NumericVector nichi_locations = R::runif(n_nichi, 0.0, L);
     
     // move every (m+1)st point back to front
     int n_chi=0;
@@ -140,7 +140,7 @@ List sim_meiosis(List parent, const int m=10, const double p=0.0)
     product[0] = -1.0;
     std::copy(tmp.begin(), tmp.end(), product.begin()+1);
 
-    int cur_allele = random_int(0, 1); // first allele
+    int cur_allele = random_int(0, 1); // first allele (0 or 1)
 
     int biggest_length = product.size() + matloc.size() + patloc.size();
     NumericVector loc(biggest_length);

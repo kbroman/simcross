@@ -23,7 +23,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // sim_meiosis
-DataFrame sim_meiosis(List parent, const int m = 10, const double p = 0.0);
+List sim_meiosis(List parent, const int m = 10, const double p = 0.0);
 RcppExport SEXP simcross_sim_meiosis(SEXP parentSEXP, SEXP mSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
@@ -32,7 +32,7 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< List >::type parent(parentSEXP );
         Rcpp::traits::input_parameter< const int >::type m(mSEXP );
         Rcpp::traits::input_parameter< const double >::type p(pSEXP );
-        DataFrame __result = sim_meiosis(parent, m, p);
+        List __result = sim_meiosis(parent, m, p);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

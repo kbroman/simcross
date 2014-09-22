@@ -73,10 +73,8 @@ NumericVector sim_crossovers(const double L, const int m=10, const double p=0)
 
     // combine interference and no interference chiasma locations
     NumericVector chi_locations(n_chi + n_nichi);
-    for(int i=0; i<n_chi; i++)
-        chi_locations[i] = point_locations[i];
-    for(int i=0; i<n_nichi; i++)
-        chi_locations[i+n_chi] = nichi_locations[i];
+    std::copy(point_locations.begin(), point_locations.begin()+n_chi, chi_locations.begin());
+    std::copy(nichi_locations.begin(), nichi_locations.end(), chi_locations.begin()+n_chi);
     chi_locations.sort();
 
     // thin by 1/2
@@ -140,7 +138,7 @@ List sim_meiosis(List parent, const int m=10, const double p=0.0)
     NumericVector tmp = sim_crossovers(L, m, p);
     NumericVector product(tmp.size() + 1);
     product[0] = -1.0;
-    for(int i=0; i<tmp.size(); i++) product[i+1] = tmp[i];
+    std::copy(tmp.begin(), tmp.end(), product.begin()+1);
 
     int cur_allele = random_int(0, 1); // first allele
 
@@ -234,12 +232,11 @@ List sim_meiosis(List parent, const int m=10, const double p=0.0)
         alle = alle_clean;
     }
 
+    // copy over to short vectors
     NumericVector loc_result(curpos);
     IntegerVector alle_result(curpos);
-    for(int i=0; i<curpos; i++) {
-        loc_result[i] = loc[i];
-        alle_result[i] = alle[i];
-    }
+    std::copy(loc.begin(), loc.begin()+curpos, loc_result.begin());
+    std::copy(alle.begin(), alle.begin()+curpos, alle_result.begin());
 
     return List::create(Named("alleles")= alle_result, Named("locations")=loc_result);
 }

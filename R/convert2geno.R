@@ -52,7 +52,7 @@ function(xodat, map)
     output[!is.na(output) & output==4] <- 3
   }
   else # otherwise, use binary codes
-    output <- 2^output[[1]] + 2^output[[2]]
+    output <- 2^(output[[1]]-1) + 2^(output[[2]]-1)
 
   # force as integers
   output <- matrix(as.integer(output), ncol=ncol(output))

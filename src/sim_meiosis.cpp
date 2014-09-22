@@ -45,18 +45,13 @@ using namespace Rcpp;
 //' @importFrom Rcpp sourceCpp
 //'
 // [[Rcpp::export]]
-NumericVector sim_crossovers(const double L, const int m=10, const double p=0)
+NumericVector sim_crossovers(const double L, const int m=10, const double p=0.0)
 {
     RNGScope scope; // to set/reset random number seed
 
-    return cpp_sim_crossovers(L, m, p);
-}
-
-NumericVector cpp_sim_crossovers(const double L, const int m=10, const double p=0)
-{
     // chiasma and intermediate points
     int n_points = R::rpois(L/50.0*(double)(m+1)*(1.0-p));
-    NumericVector point_locations = R::runif(n_points, 0.0, L);
+    NumericVector point_locations = runif(n_points, 0.0, L);
     point_locations.sort();
 
     // which point is the first chiasma?
@@ -69,7 +64,7 @@ NumericVector cpp_sim_crossovers(const double L, const int m=10, const double p=
         n_nichi = R::rpois(L/50.0*p);
     }
     else n_nichi = 0;
-    NumericVector nichi_locations = R::runif(n_nichi, 0.0, L);
+    NumericVector nichi_locations = runif(n_nichi, 0.0, L);
     
     // move every (m+1)st point back to front
     int n_chi=0;
@@ -85,7 +80,7 @@ NumericVector cpp_sim_crossovers(const double L, const int m=10, const double p=
     // thin by 1/2
     int n_xo=0;
     for(int i=0; i<n_chi+n_nichi; i++) {
-        if(R::runif(0.0, 1.0) < 0.5) { // flip coin -> chiasma
+        if(R::unif_rand() < 0.5) { // flip coin -> chiasma
             chi_locations[n_xo] = chi_locations[i];
             n_xo++;
         }
@@ -123,9 +118,7 @@ NumericVector cpp_sim_crossovers(const double L, const int m=10, const double p=
 // [[Rcpp::export]]
 List sim_meiosis(List parent, const int m=10, const double p=0.0)
 {
-    RNGScope scope; // to set/reset random number seed
-
-    const double tol=1e-12; // for comparison of 
+    const double tol=1e-12; // for comparison of chr lengths in parents
 
     List mat, pat;
     mat = parent[0];
@@ -142,7 +135,7 @@ List sim_meiosis(List parent, const int m=10, const double p=0.0)
         Rf_error("parent's two chromosomes are not the same length");
 
     // simulate crossover locations; add -1 to the beginning
-    NumericVector tmp = cpp_sim_crossovers(L, m, p);
+    NumericVector tmp = sim_crossovers(L, m, p);
     NumericVector product(tmp.size() + 1);
     product[0] = -1.0;
     std::copy(tmp.begin(), tmp.end(), product.begin()+1);

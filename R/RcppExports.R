@@ -42,7 +42,7 @@
 #' @useDynLib simcross
 #' @importFrom Rcpp sourceCpp
 #'
-sim_crossovers <- function(L, m = 10L, p = 0) {
+sim_crossovers <- function(L, m = 10L, p = 0.0) {
     .Call('simcross_sim_crossovers', PACKAGE = 'simcross', L, m, p)
 }
 

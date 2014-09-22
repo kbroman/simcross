@@ -27,11 +27,7 @@ IntegerMatrix cpp_convert2geno(List xodat, NumericVector map)
     int max_geno_pat = max(patmatrix);
     int max_geno = max_geno_mat > max_geno_pat ? max_geno_mat : max_geno_pat;
 
-    IntegerVector result_vector = combine_mat_and_pat_geno(matmatrix, patmatrix, max_geno);
-    IntegerMatrix result(n_mar, n_ind);
-    std::copy(result_vector.begin(), result_vector.end(), result.begin());
-
-    return result;
+    return combine_mat_and_pat_geno(matmatrix, patmatrix, max_geno);
 }
 
 
@@ -58,14 +54,16 @@ IntegerVector convertchr2geno(List chr, NumericVector map)
     return output;
 }
 
-IntegerVector combine_mat_and_pat_geno(IntegerVector matmatrix, IntegerVector patmatrix, int max_geno)
+IntegerMatrix combine_mat_and_pat_geno(IntegerMatrix matmatrix, IntegerMatrix patmatrix, int max_geno)
 {
+    int n = matmatrix.nrow() * matmatrix.ncol();
+
     if(max_geno == 2) {
-        for(int i=0; i<matmatrix.size(); i++)
+        for(int i=0; i<n; i++)
             matmatrix[i] = matmatrix[i] + patmatrix[i] - 1;
     }
     else {  // multi-allele case
-        for(int i=0; i<matmatrix.size(); i++)
+        for(int i=0; i<n; i++)
             matmatrix[i] = (1 << (matmatrix[i]-1)) + (1 << (patmatrix[i] - 1));
     }
     

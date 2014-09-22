@@ -5,6 +5,22 @@
 
 using namespace Rcpp;
 
+// cpp_convert2geno
+IntegerMatrix cpp_convert2geno(List xodat, NumericVector map);
+RcppExport SEXP simcross_cpp_convert2geno(SEXP xodatSEXP, SEXP mapSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< List >::type xodat(xodatSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type map(mapSEXP );
+        IntegerMatrix __result = cpp_convert2geno(xodat, map);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // sim_crossovers
 NumericVector sim_crossovers(const double L, const int m = 10, const double p = 0.0);
 RcppExport SEXP simcross_sim_crossovers(SEXP LSEXP, SEXP mSEXP, SEXP pSEXP) {

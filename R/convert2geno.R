@@ -34,28 +34,7 @@ function(xodat, map)
   if(max(map) > max(xodat[[1]]$mat$locations))
     warning("maximum simulated position is less than the length of the map.")
 
-  output <- list(matrix(ncol=length(map), nrow=length(xodat)),
-                 matrix(ncol=length(map), nrow=length(xodat)))
-  for(i in seq(along=xodat)) {
-    for(j in 1:2) {
-      dat <- xodat[[i]][[j]]
-
-      toright <- sapply(map, function(marpos, loc) min(which(loc >= marpos)), dat$locations)
-      output[[j]][i,] <- dat$alleles[toright]
-    }
-  }
-
-  if(max(unlist(output)) == 2) { # 2 alleles, so use 1/2/3 codes
-    output <- output[[1]] + output[[2]] # becomes 2/3/4
-    output[!is.na(output) & output==2] <- 1
-    output[!is.na(output) & output==3] <- 2
-    output[!is.na(output) & output==4] <- 3
-  }
-  else # otherwise, use binary codes
-    output <- 2^(output[[1]]-1) + 2^(output[[2]]-1)
-
-  # force as integers
-  output <- matrix(as.integer(output), ncol=ncol(output))
+  output <- t(.Call('simcross_cpp_convert2geno', PACKAGE = 'simcross', xodat, map))
 
   dimnames(output) <- list(names(xodat), names(map))
 

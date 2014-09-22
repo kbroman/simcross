@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/kbroman/simcross.png?branch=master)](https://travis-ci.org/kbroman/simcross)
 
-copyright (c) 2014, [Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
+copyright (c) 2014, [Karl W Broman](http://kbroman.org)
 
 ---
 

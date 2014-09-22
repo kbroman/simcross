@@ -4,7 +4,7 @@ using namespace Rcpp;
 #include "convert2geno.h"
 
 // [[Rcpp::export]]
-IntegerMatrix cpp_convert2geno(List xodat, NumericVector map, IntegerMatrix founder_geno)
+IntegerMatrix cpp_convert2geno(const List xodat, const NumericVector map, const IntegerMatrix founder_geno)
 {
     int n_ind = xodat.size();
     int n_mar = map.size();
@@ -42,7 +42,7 @@ IntegerMatrix cpp_convert2geno(List xodat, NumericVector map, IntegerMatrix foun
 }
 
 
-IntegerVector convertchr2geno(List chr, NumericVector map)
+IntegerVector convertchr2geno(const List chr, const NumericVector map)
 {
     IntegerVector alleles = chr[0];
     NumericVector locations = chr[1];
@@ -65,32 +65,36 @@ IntegerVector convertchr2geno(List chr, NumericVector map)
     return output;
 }
 
-IntegerMatrix combine_mat_and_pat_geno(IntegerMatrix matmatrix, IntegerMatrix patmatrix, int max_geno)
-{
-    int n = matmatrix.nrow() * matmatrix.ncol();
-
-    if(max_geno == 2) {
-        for(int i=0; i<n; i++)
-            matmatrix[i] = matmatrix[i] + patmatrix[i] - 1;
-    }
-    else {  // multi-allele case
-        for(int i=0; i<n; i++)
-            matmatrix[i] = (1 << (matmatrix[i]-1)) + (1 << (patmatrix[i] - 1));
-    }
-    
-    return matmatrix;
-}
-
-IntegerMatrix combine_mat_and_pat_geno_wfounders(IntegerMatrix matmatrix, IntegerMatrix patmatrix, IntegerMatrix founder_geno)
+IntegerMatrix combine_mat_and_pat_geno(const IntegerMatrix matmatrix, const IntegerMatrix patmatrix, const int max_geno)
 {
     int n_mar = matmatrix.nrow();
     int n_ind = matmatrix.ncol();
+    int n = n_mar * n_ind;
+    IntegerMatrix result(n_mar, n_ind);
+
+    if(max_geno == 2) {
+        for(int i=0; i<n; i++)
+            result[i] = matmatrix[i] + patmatrix[i] - 1;
+    }
+    else {  // multi-allele case
+        for(int i=0; i<n; i++)
+            result[i] = (1 << (matmatrix[i]-1)) + (1 << (patmatrix[i] - 1));
+    }
+    
+    return result;
+}
+
+IntegerMatrix combine_mat_and_pat_geno_wfounders(const IntegerMatrix matmatrix, const IntegerMatrix patmatrix, const IntegerMatrix founder_geno)
+{
+    int n_mar = matmatrix.nrow();
+    int n_ind = matmatrix.ncol();
+    IntegerMatrix result(n_mar, n_ind);
 
     for(int i=0; i<n_mar; i++)
         for(int j=0; j<n_ind; j++)
-            matmatrix(i,j) = founder_geno( matmatrix(i,j) - 1, i) + 
+            result(i,j) = founder_geno( matmatrix(i,j) - 1, i) + 
                 founder_geno( patmatrix(i,j) - 1, i) - 1;
 
-    return matmatrix;
+    return result;
 }
 

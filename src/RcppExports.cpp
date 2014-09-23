@@ -39,8 +39,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // fromR_sim_crossovers
-NumericVector fromR_sim_crossovers(const double L, const int m = 10, const double p = 0.0);
-RcppExport SEXP simcross_fromR_sim_crossovers(SEXP LSEXP, SEXP mSEXP, SEXP pSEXP) {
+NumericVector fromR_sim_crossovers(const double L, const int m, const double p, const bool obligate_chiasma, const double Lstar);
+RcppExport SEXP simcross_fromR_sim_crossovers(SEXP LSEXP, SEXP mSEXP, SEXP pSEXP, SEXP obligate_chiasmaSEXP, SEXP LstarSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -48,7 +48,9 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< const double >::type L(LSEXP );
         Rcpp::traits::input_parameter< const int >::type m(mSEXP );
         Rcpp::traits::input_parameter< const double >::type p(pSEXP );
-        NumericVector __result = fromR_sim_crossovers(L, m, p);
+        Rcpp::traits::input_parameter< const bool >::type obligate_chiasma(obligate_chiasmaSEXP );
+        Rcpp::traits::input_parameter< const double >::type Lstar(LstarSEXP );
+        NumericVector __result = fromR_sim_crossovers(L, m, p, obligate_chiasma, Lstar);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -56,8 +58,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // fromR_sim_meiosis
-List fromR_sim_meiosis(const List parent, const int m = 10, const double p = 0.0);
-RcppExport SEXP simcross_fromR_sim_meiosis(SEXP parentSEXP, SEXP mSEXP, SEXP pSEXP) {
+List fromR_sim_meiosis(const List parent, const int m, const double p, const bool obligate_chiasma, const double Lstar);
+RcppExport SEXP simcross_fromR_sim_meiosis(SEXP parentSEXP, SEXP mSEXP, SEXP pSEXP, SEXP obligate_chiasmaSEXP, SEXP LstarSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -65,7 +67,9 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< const List >::type parent(parentSEXP );
         Rcpp::traits::input_parameter< const int >::type m(mSEXP );
         Rcpp::traits::input_parameter< const double >::type p(pSEXP );
-        List __result = fromR_sim_meiosis(parent, m, p);
+        Rcpp::traits::input_parameter< const bool >::type obligate_chiasma(obligate_chiasmaSEXP );
+        Rcpp::traits::input_parameter< const double >::type Lstar(LstarSEXP );
+        List __result = fromR_sim_meiosis(parent, m, p, obligate_chiasma, Lstar);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

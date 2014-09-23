@@ -9,11 +9,11 @@ fromR_get_geno <- function(xodat, position) {
     .Call('simcross_fromR_get_geno', PACKAGE = 'simcross', xodat, position)
 }
 
-fromR_sim_crossovers <- function(L, m = 10L, p = 0.0) {
-    .Call('simcross_fromR_sim_crossovers', PACKAGE = 'simcross', L, m, p)
+fromR_sim_crossovers <- function(L, m, p, obligate_chiasma, Lstar) {
+    .Call('simcross_fromR_sim_crossovers', PACKAGE = 'simcross', L, m, p, obligate_chiasma, Lstar)
 }
 
-fromR_sim_meiosis <- function(parent, m = 10L, p = 0.0) {
-    .Call('simcross_fromR_sim_meiosis', PACKAGE = 'simcross', parent, m, p)
+fromR_sim_meiosis <- function(parent, m, p, obligate_chiasma, Lstar) {
+    .Call('simcross_fromR_sim_meiosis', PACKAGE = 'simcross', parent, m, p, obligate_chiasma, Lstar)
 }
 

@@ -94,6 +94,10 @@ function(ind, tol=1e-12)
 #' @param m Interference paramater (\code{m=0} is no interference)
 #' @param p Proportion of chiasmata from no-interference mechanism
 #' (\code{p=0} gives pure chi-square model)
+#' @param obligate_chiasma If TRUE, require an obligate chiasma on the
+#' 4-strand bundle at meiosis.
+#' @param Lstar Adjusted chromosome length, if
+#' \gcode{obligate_chiasma=TRUE}. Calculated if not provided.
 #'
 #' @return Numeric vector of crossover locations, in cM
 #'
@@ -120,9 +124,16 @@ function(ind, tol=1e-12)
 #' @importFrom Rcpp sourceCpp
 #'
 sim_crossovers <-
-function(L, m=10, p=0.0)
+function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 {
-    .Call('simcross_fromR_sim_crossovers', PACKAGE = 'simcross', L, m, p)
+    if(missing(Lstar) || is.null(Lstar)) {
+        if(obligate_chiasma)
+            Lstar <- calc_Lstar(L, m, p)
+        else Lstar <- L
+    }
+
+    .Call('simcross_fromR_sim_crossovers', PACKAGE = 'simcross',
+          L, m, p, obligate_chiasma, Lstar)
 }
 
 
@@ -134,6 +145,10 @@ function(L, m=10, p=0.0)
 #' \code{\link{create_parent}} or \code{\link{cross}}
 #' @param m interference parameter for chi-square model
 #' @param p Proportion of chiasmata coming from no-interference process.
+#' @param obligate_chiasma If TRUE, require an obligate chiasma on the
+#' 4-strand bundle at meiosis.
+#' @param Lstar Adjusted chromosome length, if
+#' \gcode{obligate_chiasma=TRUE}. Calculated if not provided.
 #'
 #' @return A list with alleles in chromosome intervals (as integers)
 #' and locations of the right endpoints of those intervals.
@@ -146,9 +161,17 @@ function(L, m=10, p=0.0)
 #' ind <- create_parent(100, 1:2)
 #' prod <- sim_meiosis(ind)
 sim_meiosis <-
-function(parent, m=10, p=0.0)
+function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 {
-    .Call('simcross_fromR_sim_meiosis', PACKAGE = 'simcross', parent, m, p)
+    if(missing(Lstar) || is.null(Lstar)) {
+        L <- max(parent$mat$locations)
+        if(obligate_chiasma)
+            Lstar <- calc_Lstar(L, m, p)
+        else Lstar <- L
+    }
+
+    .Call('simcross_fromR_sim_meiosis', PACKAGE = 'simcross',
+          parent, m, p, obligate_chiasma, Lstar)
 }
 
 
@@ -168,6 +191,10 @@ function(parent, m=10, p=0.0)
 #' @param xchr If TRUE, simulate X chromosome
 #' @param male If TRUE, simulate a male (matters only if
 #' \code{xchr=TRUE})
+#' @param obligate_chiasma If TRUE, require an obligate chiasma on the
+#' 4-strand bundle at meiosis.
+#' @param Lstar Adjusted chromosome length, if
+#' \gcode{obligate_chiasma=TRUE}. Calculated if not provided.
 #'
 #' @return A list with two components, for the individual's two
 #' chromosomes.  Each is a list with alleles in chromosome intervals
@@ -183,18 +210,26 @@ function(parent, m=10, p=0.0)
 #' dad <- create_parent(100, 1:2)
 #' child <- cross(mom, dad)
 cross <-
-function(mom, dad, m=10, p=0, xchr=FALSE, male=FALSE)
+function(mom, dad, m=10, p=0, xchr=FALSE, male=FALSE,
+         obligate_chiasma=FALSE, Lstar)
 {
+    if(missing(Lstar) || is.null(Lstar)) {
+        L <- max(mom$mat$locations)
+        if(obligate_chiasma)
+            Lstar <- calc_Lstar(L, m, p)
+        else Lstar <- L
+    }
+
     if(!xchr) {
-        return(list(mat=sim_meiosis(mom,m,p),
-                    pat=sim_meiosis(dad,m,p)))
+        return(list(mat=sim_meiosis(mom, m, p, obligate_chiasma, Lstar),
+                    pat=sim_meiosis(dad, m, p, obligate_chiasma, Lstar)))
     }
     else {
         if(male)
-            return(list(mat=sim_meiosis(mom,m,p),
+            return(list(mat=sim_meiosis(mom, m, p, obligate_chiasma, Lstar),
                         pat=dad$pat))
         else
-            return(list(mat=sim_meiosis(mom,m,p),
+            return(list(mat=sim_meiosis(mom, m, p, obligate_chiasma, Lstar),
                         pat=dad$mat))
     }
 }

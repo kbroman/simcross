@@ -12,6 +12,8 @@
 #' @param m Crossover interference parameter, for chi-square model
 #' (m=0 corresponds to no interference).
 #' @param p proption of crossovers coming from no-interference process
+#' @param obligate_chiasma If TRUE, require an obligate chiasma on the
+#' 4-strand bundle at meiosis.
 #'
 #' @return A list with each component being the data for one
 #' individual, as produced by the \code{\link{cross}} function.  Those
@@ -34,7 +36,7 @@
 #' # simulate data from that pedigree
 #' dat <- sim_from_pedigree(tab)
 sim_from_pedigree <-
-function(pedigree, L=100, xchr=FALSE, m=10, p=0)
+function(pedigree, L=100, xchr=FALSE, m=10, p=0, obligate_chiasma=FALSE)
 {
     if(length(unique(pedigree[,1])) != nrow(pedigree))
         stop("IDs must be unique")
@@ -42,6 +44,9 @@ function(pedigree, L=100, xchr=FALSE, m=10, p=0)
 
     result <- vector("list", nrow(pedigree))
     names(result) <- as.character(pedigree[,1])
+
+    if(obligate_chiasma) Lstar <- calc_Lstar(L, m, p)
+    else Lstar <- L
 
     for(i in 1:nrow(pedigree)) {
         if(pedigree[i,2]==0 || pedigree[i,3]==0) # founder
@@ -61,7 +66,9 @@ function(pedigree, L=100, xchr=FALSE, m=10, p=0)
 
             result[[i]] <- cross(result[[mom]], result[[dad]],
                                  m=m, p=p,
-                                 xchr=xchr, male=pedigree[i,4]==1)
+                                 xchr=xchr, male=pedigree[i,4]==1,
+                                 obligate_chiasma=obligate_chiasma,
+                                 Lstar=Lstar)
         }
     }
     result

@@ -86,19 +86,18 @@ test_that("simulations of meiosis and crosses work", {
 
     # these are all rather contrived, but it's a start
 
-    seed <- 79251218
+    seed <- 79251223
     set.seed(seed)
 
-    expected <- c( 68.7383935321122, 98.0440387269482, 203.116941684857,
-                  223.119586869143, 283.80087793339)
+    expected <- c(36.1079982714728, 103.768769977614, 204.360923892818, 243.400833732449)
     expect_equal(sim_crossovers(300, 10, 0.3), expected)
 
     allele <- ifelse(runif(1) < 0.5, 1L, 2L)
-    expect_equal(allele, 1L)
+    expect_equal(allele, 2L)
 
     another_set <- sim_crossovers(300, 3, 0.01)
     another_allele <- ifelse(runif(1) < 0.5, 1L, 2L)
-    expect_equal(another_allele, 2L)
+    expect_equal(another_allele, 1L)
 
     p1 <- create_parent(300, 1)
     p2 <- create_parent(300, 2)
@@ -106,25 +105,25 @@ test_that("simulations of meiosis and crosses work", {
     expect_equal(create_parent(300, 1:2), f1)
 
     set.seed(seed)
-    expected2 <- list(alleles=c(1L, 2L, 1L, 2L, 1L, 2L), locations=c(expected, 300))
+    expected2 <- list(alleles=c(2L, 1L, 2L, 1L, 2L), locations=c(expected, 300))
     expect_equal(sim_meiosis(f1, m=10, p=0.3), expected2)
 
-    expected3 <- list(alleles=c(2L, 1L), locations=c(another_set, 300))
+    expected3 <- list(alleles=c(1L, 2L, 1L), locations=c(another_set, 300))
     expect_equal(sim_meiosis(f1, m=3, p=0.01), expected3)
 
     set.seed(seed)
     f2 <- cross(f1, f1, m=10, p=0.3)
     expected <- list(mat=expected2,
-                     pat=list(alleles=c(2L, 1L, 2L, 1L),
-                              locations=c(9.91861398797482, 70.0290891341865, 247.787916194648, 300)))
+                     pat=list(alleles=2L,
+                              locations=300))
     expect_equal(f2, expected)
 
     set.seed(seed)
     junk <- sim_meiosis(f1, m=10, p=0.3)
     f2 <- cross(f1, f1, m=3, p=0.01)
     expected <- list(mat=expected3,
-                     pat=list(alleles=c(2L, 1L, 2L),
-                     locations=c(9.91861398797482, 247.787916194648, 300)))
+                     pat=list(alleles=c(1L, 2L, 1L, 2L),
+                     locations=c(66.7880860157311, 198.827338172123, 285.253091622144, 300)))
     expect_equal(f2, expected)
 
     set.seed(seed)
@@ -133,12 +132,14 @@ test_that("simulations of meiosis and crosses work", {
     f1a <- cross(p1, p2)
     f2a <- cross(p1, p2)
     sib <- cross(f1a, f2a)
-    expected <- list(mat=list(alleles=c(3L, 1L, 2L, 3L, 4L, 2L, 1L, 4L),
-                                    locations=c(49.9227490508929, 115.871118125506, 146.964924945496, 173.550174990669,
-                                                187.015442247503, 211.255158483982, 262.606337293983, 300.0)),
-                     pat=list(alleles=c(2L, 1L, 4L, 3L, 1L, 2L, 3L, 4L),
-                                    locations=c(9.019920299761, 16.7069100541994, 21.4588083559647, 73.5785636818036,
-                                                167.808948992752, 186.267593340017, 283.901682123542, 300.0)))
+    expected <- list(mat=list(alleles=c(4L, 3L, 2L, 3L, 2L, 1L, 4L),
+                                    locations=c(113.656340399757,
+                                                119.926706166007, 151.954430225305, 188.945353589952,
+                                                214.686310663819, 242.297911760397, 300)),
+                     pat=list(alleles=c(4L, 3L, 4L, 3L, 4L),
+                                    locations=c(130.161284795031, 178.185045230202, 224.519506352954,
+                                                250.761620071717, 300)))
+
     expect_equal(sib, expected)
 
 })

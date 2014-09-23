@@ -18,21 +18,45 @@ NumericVector fromR_sim_crossovers(const double L, const int m, const double p,
 NumericVector cpp_sim_crossovers(const double L, const int m, const double p,
                                  const bool obligate_chiasma, const double Lstar)
 {
-    // chiasma and intermediate points
-    int n_points = R::rpois(L/50.0*(double)(m+1)*(1.0-p));
+    if(m==0) { // no-interference model is a lot easier
+        int n_xo;
+
+        if(obligate_chiasma) {
+            // rejection sampling to get at least one chiasma
+            while((n_xo = R::rpois(Lstar/50.0)) == 0);
+
+            n_xo = R::rbinom((double)n_xo, 0.5);
+        }
+        else n_xo = R::rpois(L/50.0);
+        
+        return runif(n_xo, 0.0, L);
+    }
+
+
+    int n_points, first, n_nichi, n_ichi;
+
+    int lambda1 = Lstar/50.0 * (m+1) * (1.0 - p);
+    int lambda2 = Lstar/50.0 * p;
+
+    while(1) {
+        // chiasma and intermediate points
+        n_points = R::rpois(lambda1);
+
+        // which point is the first chiasma?
+        first = random_int(0, m);
+        if(first > n_points) n_ichi = 0;
+        else n_ichi = n_points/(m+1) + (int)(first < n_points % (m+1));
+
+        // no. chiasma from no interference process
+        if(p > 0) n_nichi = R::rpois(lambda2);
+        else n_nichi = 0;
+
+        if(!obligate_chiasma || n_ichi + n_nichi > 0) break;
+    }
+      
     NumericVector point_locations = runif(n_points, 0.0, L);
     point_locations.sort();
 
-    // which point is the first chiasma?
-    int first;
-    if(m==0) first = 0;
-    else first = random_int(0, m); // random integer from {0, 1, ..., m}
-
-    int n_nichi; // no. chiasma from no interference process
-    if(p > 0) {
-        n_nichi = R::rpois(L/50.0*p);
-    }
-    else n_nichi = 0;
     NumericVector nichi_locations = runif(n_nichi, 0.0, L);
     
     // move every (m+1)st point back to front

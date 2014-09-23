@@ -3,7 +3,8 @@
 \alias{cross}
 \title{Cross two individuals}
 \usage{
-cross(mom, dad, m = 10, p = 0, xchr = FALSE, male = FALSE)
+cross(mom, dad, m = 10, p = 0, xchr = FALSE, male = FALSE,
+  obligate_chiasma = FALSE, Lstar)
 }
 \arguments{
 \item{mom}{An individual object, as produced by
@@ -20,6 +21,12 @@ cross(mom, dad, m = 10, p = 0, xchr = FALSE, male = FALSE)
 
 \item{male}{If TRUE, simulate a male (matters only if
 \code{xchr=TRUE})}
+
+\item{obligate_chiasma}{If TRUE, require an obligate chiasma on the
+4-strand bundle at meiosis.}
+
+\item{Lstar}{Adjusted chromosome length, if
+\code{obligate_chiasma=TRUE}. Calculated if not provided.}
 }
 \value{
 A list with two components, for the individual's two

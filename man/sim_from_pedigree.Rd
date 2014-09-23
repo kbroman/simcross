@@ -3,7 +3,8 @@
 \alias{sim_from_pedigree}
 \title{Simulate genotypes for pedigree}
 \usage{
-sim_from_pedigree(pedigree, L = 100, xchr = FALSE, m = 10, p = 0)
+sim_from_pedigree(pedigree, L = 100, xchr = FALSE, m = 10, p = 0,
+  obligate_chiasma = FALSE)
 }
 \arguments{
 \item{pedigree}{Matrix describing a pedigree, with first four
@@ -18,6 +19,9 @@ columns being individual ID, mom ID, dad ID, and sex (female as
 (m=0 corresponds to no interference).}
 
 \item{p}{proption of crossovers coming from no-interference process}
+
+\item{obligate_chiasma}{If TRUE, require an obligate chiasma on the
+4-strand bundle at meiosis.}
 }
 \value{
 A list with each component being the data for one

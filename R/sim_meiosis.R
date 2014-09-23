@@ -97,7 +97,7 @@ function(ind, tol=1e-12)
 #' @param obligate_chiasma If TRUE, require an obligate chiasma on the
 #' 4-strand bundle at meiosis.
 #' @param Lstar Adjusted chromosome length, if
-#' \gcode{obligate_chiasma=TRUE}. Calculated if not provided.
+#' \code{obligate_chiasma=TRUE}. Calculated if not provided.
 #'
 #' @return Numeric vector of crossover locations, in cM
 #'
@@ -148,7 +148,7 @@ function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 #' @param obligate_chiasma If TRUE, require an obligate chiasma on the
 #' 4-strand bundle at meiosis.
 #' @param Lstar Adjusted chromosome length, if
-#' \gcode{obligate_chiasma=TRUE}. Calculated if not provided.
+#' \code{obligate_chiasma=TRUE}. Calculated if not provided.
 #'
 #' @return A list with alleles in chromosome intervals (as integers)
 #' and locations of the right endpoints of those intervals.
@@ -194,7 +194,7 @@ function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 #' @param obligate_chiasma If TRUE, require an obligate chiasma on the
 #' 4-strand bundle at meiosis.
 #' @param Lstar Adjusted chromosome length, if
-#' \gcode{obligate_chiasma=TRUE}. Calculated if not provided.
+#' \code{obligate_chiasma=TRUE}. Calculated if not provided.
 #'
 #' @return A list with two components, for the individual's two
 #' chromosomes.  Each is a list with alleles in chromosome intervals

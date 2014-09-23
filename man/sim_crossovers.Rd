@@ -3,7 +3,7 @@
 \alias{sim_crossovers}
 \title{Simulate crossover locations using the Stahl model}
 \usage{
-sim_crossovers(L, m = 10, p = 0)
+sim_crossovers(L, m = 10, p = 0, obligate_chiasma = FALSE, Lstar)
 }
 \arguments{
 \item{L}{length of chr in cM}
@@ -12,6 +12,12 @@ sim_crossovers(L, m = 10, p = 0)
 
 \item{p}{Proportion of chiasmata from no-interference mechanism
 (\code{p=0} gives pure chi-square model)}
+
+\item{obligate_chiasma}{If TRUE, require an obligate chiasma on the
+4-strand bundle at meiosis.}
+
+\item{Lstar}{Adjusted chromosome length, if
+\code{obligate_chiasma=TRUE}. Calculated if not provided.}
 }
 \value{
 Numeric vector of crossover locations, in cM

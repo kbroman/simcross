@@ -3,7 +3,7 @@
 \alias{sim_meiosis}
 \title{Simulate meiosis}
 \usage{
-sim_meiosis(parent, m = 10, p = 0)
+sim_meiosis(parent, m = 10, p = 0, obligate_chiasma = FALSE, Lstar)
 }
 \arguments{
 \item{parent}{An individual object, as output by
@@ -12,6 +12,12 @@ sim_meiosis(parent, m = 10, p = 0)
 \item{m}{interference parameter for chi-square model}
 
 \item{p}{Proportion of chiasmata coming from no-interference process.}
+
+\item{obligate_chiasma}{If TRUE, require an obligate chiasma on the
+4-strand bundle at meiosis.}
+
+\item{Lstar}{Adjusted chromosome length, if
+\code{obligate_chiasma=TRUE}. Calculated if not provided.}
 }
 \value{
 A list with alleles in chromosome intervals (as integers)

@@ -2,16 +2,7 @@
 ## ToDo list for [R/simcross](http://github.com/kbroman/simcross)
 
 - Add tests convert2geno, sim_ril_pedigree, sim_from_pedigree
-
-- Move some stuff to c++ with Rcpp:
-
-  - meiosis, clean_meiosis
-  - convert2geno
-  - get_geno
-
 - grab pedigree data from qtlrel and include as an example
-- apply marker object to IBD process to get marker data
-- function to grab genotype at a given site, as two-column matrix
 - how to handle multiple chromosomes?
 - convert data to R/qtl cross object
 - a bit more detail in the ReadMe
@@ -21,4 +12,4 @@
 - Add reference re chi-square model
 - Refer to pre-CC probability paper regarding generation numbers and
   how they are different than what's in the output
-
+- document sim_ril and sim_ril8

@@ -4,7 +4,7 @@ using namespace Rcpp;
 #include "get_geno.h"
 
 // [[Rcpp::export]]
-IntegerMatrix cpp_get_geno(const List xodat, const double position)
+IntegerMatrix fromR_get_geno(const List xodat, const double position)
 {
     int n_ind = xodat.size();
     IntegerMatrix result(n_ind, 2);

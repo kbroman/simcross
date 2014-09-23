@@ -78,8 +78,78 @@ function(ind, tol=1e-12)
     TRUE
 }
 
-# note: function sim_crossovers in src/sim_meiosis.cpp
-# note: function sim_meiosis in src/sim_meiosis.cpp
+#' Simulate crossover locations using the Stahl model
+#'
+#'
+#' Simulate crossover locations on a single meiotic product using the
+#' Stahl model.
+#'
+#' @details Chiasma locations are a superposition of two
+#' processes: a proportion p exhibiting no interference, and a
+#' proportion (1-p) following the chi-square model with interference
+#' parameter m.  Crossover locations are derived by thinning the
+#' chiasma locations with probability 1/2.
+#'
+#' @param L length of chr in cM
+#' @param m Interference paramater (\code{m=0} is no interference)
+#' @param p Proportion of chiasmata from no-interference mechanism
+#' (\code{p=0} gives pure chi-square model)
+#'
+#' @return Numeric vector of crossover locations, in cM
+#'
+#' @keywords datagen
+#'
+#' @examples
+#' x <- sim_crossovers(200, 10, 0)
+#' x <- sim_crossovers(200, 10, 0.04)
+#'
+#' @references
+#' Copenhaver, G. P., Housworth, E. A. and Stahl, F. W. (2002) Crossover
+#' interference in arabidopsis.  \emph{Genetics} \bold{160}, 1631--1639.
+#'
+#' Foss, E., Lande, R., Stahl, F. W. and Steinberg, C. M. (1993) Chiasma
+#' interference as a function of genetic distance. \emph{Genetics}
+#' \bold{133}, 681--691.
+#'
+#' Zhao, H., Speed, T. P. and McPeek, M. S. (1995) Statistical analysis
+#' of crossover interference using the chi-square model.  \emph{Genetics}
+#' \bold{139}, 1045--1056.
+#'
+#' @export
+#' @useDynLib simcross
+#' @importFrom Rcpp sourceCpp
+#'
+sim_crossovers <-
+function(L, m=10, p=0.0)
+{
+    .Call('simcross_fromR_sim_crossovers', PACKAGE = 'simcross', L, m, p)
+}
+
+
+#' Simulate meiosis
+#'
+#' Output a random meiotic product from an input individual.
+#'
+#' @param parent An individual object, as output by
+#' \code{\link{create_parent}} or \code{\link{cross}}
+#' @param m interference parameter for chi-square model
+#' @param p Proportion of chiasmata coming from no-interference process.
+#'
+#' @return A list with alleles in chromosome intervals (as integers)
+#' and locations of the right endpoints of those intervals.
+#'
+#' @keywords datagen
+#' @export
+#' @seealso \code{\link{create_parent}}, \code{\link{cross}}
+#'
+#' @examples
+#' ind <- create_parent(100, 1:2)
+#' prod <- sim_meiosis(ind)
+sim_meiosis <-
+function(parent, m=10, p=0.0)
+{
+    .Call('simcross_fromR_sim_meiosis', PACKAGE = 'simcross', parent, m, p)
+}
 
 
 # cross
@@ -127,4 +197,39 @@ function(mom, dad, m=10, p=0, xchr=FALSE, male=FALSE)
             return(list(mat=sim_meiosis(mom,m,p),
                         pat=dad$mat))
     }
+}
+
+# calculate reduced length to give expected no. chiasmata when conditioning on >= 1
+#
+# L and Lstar are in cM
+calc_Lstar <-
+function(L, m=0, p=0)
+{
+    if(L <= 50) stop("Must have L > 50")
+    if(m < 0) stop("Must have m==0")
+    if(!is.integer(m) && m %% 1 > 1e-8) {
+        warning("m must be an non-negative integer; rounding")
+        m <- round(m)
+    }
+    if(p < 0 || p > 1)
+        stop("p must be in [0, 1]")
+    if(p==1) { # if p == 1, might as well take m=0, p=0
+        m <- 0
+        p <- 0
+    }
+
+    func_to_zero <- function(Lstar, L, m=0, p=0) {
+        if(m==0)
+            denom <- 1 - exp(-Lstar/50)
+        else {
+            lambda1 <- Lstar/50 * (m+1) * (1-p)
+            lambda2 <- Lstar/50 * p
+            denom <- 1 - sum(dpois(0:m, lambda1) * (m+1 - (0:m))/(m+1)) * exp(-lambda2)
+        }
+
+        2*L - 2*Lstar / denom
+    }
+
+    uniroot(func_to_zero, c(1e-8, L), L=L, m=m, p=p,
+            tol=sqrt(.Machine$double.eps))$root
 }

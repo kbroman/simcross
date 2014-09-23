@@ -3,7 +3,7 @@
 \alias{sim_crossovers}
 \title{Simulate crossover locations using the Stahl model}
 \usage{
-sim_crossovers(L, m = 10L, p = 0)
+sim_crossovers(L, m = 10, p = 0)
 }
 \arguments{
 \item{L}{length of chr in cM}

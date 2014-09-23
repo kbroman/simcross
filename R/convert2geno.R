@@ -70,7 +70,7 @@ function(xodat, map, founder_geno)
           stop("founder_geno must contain only 1's and 2's")
   }
 
-  output <- t(.Call('simcross_cpp_convert2geno', PACKAGE = 'simcross',
+  output <- t(.Call('simcross_fromR_convert2geno', PACKAGE = 'simcross',
                     xodat, map, founder_geno))
 
   dimnames(output) <- list(names(xodat), names(map))

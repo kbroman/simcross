@@ -4,49 +4,8 @@ using namespace Rcpp;
 #include "random.h"
 #include "sim_meiosis.h"
 
-//' Simulate crossover locations using the Stahl model
-//'
-//'
-//' Simulate crossover locations on a single meiotic product using the
-//' Stahl model. 
-//'
-//' @details Chiasma locations are a superposition of two
-//' processes: a proportion p exhibiting no interference, and a
-//' proportion (1-p) following the chi-square model with interference
-//' parameter m.  Crossover locations are derived by thinning the
-//' chiasma locations with probability 1/2.
-//'
-//' @param L length of chr in cM
-//' @param m Interference paramater (\code{m=0} is no interference)
-//' @param p Proportion of chiasmata from no-interference mechanism
-//' (\code{p=0} gives pure chi-square model)
-//'
-//' @return Numeric vector of crossover locations, in cM
-//'
-//' @keywords datagen
-//'
-//' @examples
-//' x <- sim_crossovers(200, 10, 0)
-//' x <- sim_crossovers(200, 10, 0.04)
-//'
-//' @references
-//' Copenhaver, G. P., Housworth, E. A. and Stahl, F. W. (2002) Crossover
-//' interference in arabidopsis.  \emph{Genetics} \bold{160}, 1631--1639.
-//'
-//' Foss, E., Lande, R., Stahl, F. W. and Steinberg, C. M. (1993) Chiasma
-//' interference as a function of genetic distance. \emph{Genetics}
-//' \bold{133}, 681--691.
-//'
-//' Zhao, H., Speed, T. P. and McPeek, M. S. (1995) Statistical analysis
-//' of crossover interference using the chi-square model.  \emph{Genetics}
-//' \bold{139}, 1045--1056.
-//'
-//' @export
-//' @useDynLib simcross
-//' @importFrom Rcpp sourceCpp
-//'
 // [[Rcpp::export]]
-NumericVector sim_crossovers(const double L, const int m=10, const double p=0.0)
+NumericVector fromR_sim_crossovers(const double L, const int m=10, const double p=0.0)
 {
     RNGScope scope; // to set/reset random number seed
 
@@ -103,27 +62,8 @@ NumericVector cpp_sim_crossovers(const double L, const int m=10, const double p=
 
 
 
-//' Simulate meiosis
-//'
-//' Output a random meiotic product from an input individual.
-//'
-//' @param parent An individual object, as output by
-//' \code{\link{create_parent}} or \code{\link{cross}}
-//' @param m interference parameter for chi-square model
-//' @param p Proportion of chiasmata coming from no-interference process.
-//'
-//' @return A list with alleles in chromosome intervals (as integers)
-//' and locations of the right endpoints of those intervals.
-//'
-//' @keywords datagen
-//' @export
-//' @seealso \code{\link{create_parent}}, \code{\link{cross}}
-//'
-//' @examples
-//' ind <- create_parent(100, 1:2)
-//' prod <- sim_meiosis(ind)
 // [[Rcpp::export]]
-List sim_meiosis(const List parent, const int m=10, const double p=0.0)
+List fromR_sim_meiosis(const List parent, const int m=10, const double p=0.0)
 {
     RNGScope scope; // to set/reset random number seed
 

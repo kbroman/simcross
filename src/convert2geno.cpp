@@ -4,7 +4,7 @@ using namespace Rcpp;
 #include "convert2geno.h"
 
 // [[Rcpp::export]]
-IntegerMatrix cpp_convert2geno(const List xodat, const NumericVector map, const IntegerMatrix founder_geno)
+IntegerMatrix fromR_convert2geno(const List xodat, const NumericVector map, const IntegerMatrix founder_geno)
 {
     int n_ind = xodat.size();
     int n_mar = map.size();

@@ -16,15 +16,14 @@ convert2geno(xodat, map, founder_geno)
 results are 1/2/3 genotypes}
 }
 \value{
-A numeric matrix of genotypes, individuals x markers.
+If \code{founder_geno} is provided or there are just two
+founders, the result is a numeric matrix of genotypes, individuals
+x markers, with genotypes 1/2/3 codes for 11/12/22 genotypes.
 
-If \code{founder_geno} is provided, the genotypes are 1/2/3 codes
-for 11/12/22 genotypes.
-
-If \code{founder_geno} is \emph{not} provided, then if there are
-just two alleles, the genotypes are coded as 1/2/3 (assuming first
-founder is homozygous 11 and second founder is homozygous 22). If
-there are more than two alleles, a binary code is used.
+If \code{founder_geno} is not provided and there are more than two
+founders, the result is a 3-dimensional array, individuals x
+markers x alleles, with the third dimensional corresponding to the
+maternal and paternal allele.
 }
 \description{
 Convert the continuous crossover location information produced by
@@ -51,6 +50,8 @@ fg <- matrix(sample(1:2, 8*length(map), repl=TRUE), nrow=8)
 fg <- rbind(fg, fg)
 # convert dat to SNP genotypes
 geno <- convert2geno(dat, map, fg)
+# if fg not provided, result is a 3d array
+genoarray <- convert2geno(dat, map)
 }
 \seealso{
 \code{\link{get_geno}}, \code{\link{sim_from_pedigree}},

@@ -130,21 +130,16 @@ test_that("convert2geno works for 8-allele case", {
     map <- seq(0, 100, by=5)
     names(map) <- paste0("marker", seq(along=map))
 
-    # expected genotype matrix (force integers)
-    expected <- rbind(c(256, 256, 130, 130, 256, 130, 129, 256, 256, 256, 256, 256,
-                        32, 32, 32, 32, 32, 32, 32, 8, 8),
-                      c(256, 256, 256, 256, 256, 4, 129, 256, 256, 256, 256, 256, 32,
-                        32, 32, 32, 32, 32, 32, 8, 8),
-                      c(256, 256, 130, 130, 256, 130, 129, 256, 256, 256, 256, 256,
-                        32, 32, 32, 32, 32, 32, 32, 8, 8),
-                      c(256, 256, 130, 256, 256, 4, 129, 256, 256, 256, 256, 256, 32,
-                        32, 32, 32, 32, 32, 32, 8, 8))
+    # Use get_geno to construct expected array
+    expected <- array(dim=c(length(dat), length(map), 2))
+    dimnames(expected) <- list(names(dat), names(map), c("mat", "pat"))
+    for(i in seq(along=map))
+        expected[,i,] <- get_geno(dat, map[i])
     storage.mode(expected) <- "integer"
-    dimnames(expected) <- list(as.character(1:4), paste0("marker", 1:21))
 
     expect_equal(expected, convert2geno(dat, map))
 
-
+    # now test with use of founder genotypes
     founder_geno <- rbind(c(2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 1, 1, 1,
                             2, 1, 1, 1, 2, 2),
                           c(2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2,

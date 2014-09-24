@@ -22,6 +22,22 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// fromR_convert2genoarray
+IntegerVector fromR_convert2genoarray(const List xodat, const NumericVector map);
+RcppExport SEXP simcross_fromR_convert2genoarray(SEXP xodatSEXP, SEXP mapSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< const List >::type xodat(xodatSEXP );
+        Rcpp::traits::input_parameter< const NumericVector >::type map(mapSEXP );
+        IntegerVector __result = fromR_convert2genoarray(xodat, map);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // fromR_get_geno
 IntegerMatrix fromR_get_geno(const List xodat, const double position);
 RcppExport SEXP simcross_fromR_get_geno(SEXP xodatSEXP, SEXP positionSEXP) {

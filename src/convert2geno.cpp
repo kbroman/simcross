@@ -3,6 +3,7 @@ using namespace Rcpp;
 
 #include "convert2geno.h"
 
+// for 2 founders or for case that founder_geno is provided
 // [[Rcpp::export]]
 IntegerMatrix fromR_convert2geno(const List xodat, const NumericVector map, const IntegerMatrix founder_geno)
 {
@@ -36,7 +37,7 @@ IntegerMatrix fromR_convert2geno(const List xodat, const NumericVector map, cons
         return combine_mat_and_pat_geno_wfounders(matmatrix, patmatrix, founder_geno);
     }
     else {
-        // convert to 1/2/3 or binary code
+        // convert to 1/2/3
         return combine_mat_and_pat_geno(matmatrix, patmatrix, max_geno);
     }
 }
@@ -67,20 +68,20 @@ IntegerVector convertchr2geno(const List chr, const NumericVector map)
 
 IntegerMatrix combine_mat_and_pat_geno(const IntegerMatrix matmatrix, const IntegerMatrix patmatrix, const int max_geno)
 {
+    // don't allow max_geno > 2 here; return empty matrix
+    if(max_geno > 2) {
+        IntegerMatrix result(0,0);
+        return result;
+    }
+
     int n_mar = matmatrix.nrow();
     int n_ind = matmatrix.ncol();
     int n = n_mar * n_ind;
     IntegerMatrix result(n_mar, n_ind);
 
-    if(max_geno == 2) {
-        for(int i=0; i<n; i++)
-            result[i] = matmatrix[i] + patmatrix[i] - 1;
-    }
-    else {  // multi-allele case
-        for(int i=0; i<n; i++)
-            result[i] = (1 << (matmatrix[i]-1)) + (1 << (patmatrix[i] - 1));
-    }
-    
+    for(int i=0; i<n; i++)
+        result[i] = matmatrix[i] + patmatrix[i] - 1;
+
     return result;
 }
 
@@ -98,3 +99,31 @@ IntegerMatrix combine_mat_and_pat_geno_wfounders(const IntegerMatrix matmatrix, 
     return result;
 }
 
+
+// this is for the case with >2 founders but not founder genotype matrix
+// [[Rcpp::export]]
+IntegerVector fromR_convert2genoarray(const List xodat, const NumericVector map)
+{
+    int n_ind = xodat.size();
+    int n_mar = map.size();
+    int matrix_size = n_ind * n_mar;
+    //    IntegerVector result(n_mar, n_ind, 2);
+    IntegerVector result(matrix_size * 2);
+
+    for(int i=0; i<n_ind; i++) {
+        List ind = xodat[i];
+        List mat = ind[0];
+        List pat = ind[1];
+
+        // convert mat and pat chr to genotype matrices
+        IntegerVector matdata = convertchr2geno(mat, map);
+        std::copy(matdata.begin(), matdata.end(), result.begin()+i*n_mar);
+
+        IntegerVector patdata = convertchr2geno(pat, map);
+        std::copy(patdata.begin(), patdata.end(), result.begin()+i*n_mar+matrix_size);
+    }
+
+    result.attr("dim") = Dimension(n_mar, n_ind, 2);
+
+    return result;
+}

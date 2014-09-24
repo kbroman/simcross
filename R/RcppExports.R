@@ -5,6 +5,10 @@ fromR_convert2geno <- function(xodat, map, founder_geno) {
     .Call('simcross_fromR_convert2geno', PACKAGE = 'simcross', xodat, map, founder_geno)
 }
 
+fromR_convert2genoarray <- function(xodat, map) {
+    .Call('simcross_fromR_convert2genoarray', PACKAGE = 'simcross', xodat, map)
+}
+
 fromR_get_geno <- function(xodat, position) {
     .Call('simcross_fromR_get_geno', PACKAGE = 'simcross', xodat, position)
 }

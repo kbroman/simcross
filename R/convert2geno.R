@@ -12,15 +12,14 @@
 #' \code{length(map)}) of founder genotypes coded as 1/2. If provided,
 #' results are 1/2/3 genotypes
 #'
-#' @return A numeric matrix of genotypes, individuals x markers.
+#' @return If \code{founder_geno} is provided or there are just two
+#' founders, the result is a numeric matrix of genotypes, individuals
+#' x markers, with genotypes 1/2/3 codes for 11/12/22 genotypes.
 #'
-#' If \code{founder_geno} is provided, the genotypes are 1/2/3 codes
-#' for 11/12/22 genotypes.
-#'
-#' If \code{founder_geno} is \emph{not} provided, then if there are
-#' just two alleles, the genotypes are coded as 1/2/3 (assuming first
-#' founder is homozygous 11 and second founder is homozygous 22). If
-#' there are more than two alleles, a binary code is used.
+#' If \code{founder_geno} is not provided and there are more than two
+#' founders, the result is a 3-dimensional array, individuals x
+#' markers x alleles, with the third dimensional corresponding to the
+#' maternal and paternal allele.
 #'
 #' @export
 #' @keywords utilities
@@ -48,6 +47,8 @@
 #' fg <- rbind(fg, fg)
 #' # convert dat to SNP genotypes
 #' geno <- convert2geno(dat, map, fg)
+#' # if fg not provided, result is a 3d array
+#' genoarray <- convert2geno(dat, map)
 convert2geno <-
 function(xodat, map, founder_geno)
 {
@@ -55,10 +56,12 @@ function(xodat, map, founder_geno)
   if(max(map) > max(xodat[[1]]$mat$locations))
     warning("maximum simulated position is less than the length of the map.")
 
+  # maximum founder genotype
+  max_geno <- max(sapply(xodat, function(a) max(a$mat$alleles, a$pat$alleles)))
+
   if(missing(founder_geno) || is.null(founder_geno))
       founder_geno <- matrix(nrow=0, ncol=0)
   else {
-      max_geno <- max(sapply(xodat, function(a) max(a$mat$alleles, a$pat$alleles)))
       if(nrow(founder_geno) < max_geno)
           stop("founder_geno should have at least ", max_geno,
                " rows but has ", nrow(founder_geno))
@@ -71,10 +74,20 @@ function(xodat, map, founder_geno)
           stop("founder_geno must contain only 1's and 2's")
   }
 
-  output <- t(.Call('simcross_fromR_convert2geno', PACKAGE = 'simcross',
-                    xodat, map, founder_geno))
+  if(length(founder_geno) > 0 || max_geno <= 2) {
+      output <- t(.Call('simcross_fromR_convert2geno', PACKAGE = 'simcross',
+                        xodat, map, founder_geno))
 
-  dimnames(output) <- list(names(xodat), names(map))
+      dimnames(output) <- list(names(xodat), names(map))
+  }
+  else {
+      output <- .Call('simcross_fromR_convert2genoarray', PACKAGE = 'simcross',
+                      xodat, map)
+      # output was markers x ind x alleles; switch first two dimensions
+      output <- aperm(output, c(2, 1, 3))
+
+      dimnames(output) <- list(names(xodat), names(map), c("mat", "pat"))
+  }
 
   output
 }

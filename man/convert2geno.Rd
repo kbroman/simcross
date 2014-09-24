@@ -53,7 +53,8 @@ fg <- rbind(fg, fg)
 geno <- convert2geno(dat, map, fg)
 }
 \seealso{
-\code{\link{get_geno}}, \code{\link{sim_from_pedigree}}
+\code{\link{get_geno}}, \code{\link{sim_from_pedigree}},
+\code{\link{geno2array}}
 }
 \keyword{utilities}
 

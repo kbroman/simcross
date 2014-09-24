@@ -24,7 +24,8 @@
 #'
 #' @export
 #' @keywords utilities
-#' @seealso \code{\link{get_geno}}, \code{\link{sim_from_pedigree}}
+#' @seealso \code{\link{get_geno}}, \code{\link{sim_from_pedigree}},
+#' \code{\link{geno2array}}
 #'
 #' @examples
 #' # simulate AIL pedigree

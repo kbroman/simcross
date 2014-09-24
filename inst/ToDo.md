@@ -1,6 +1,9 @@
 
 ## ToDo list for [R/simcross](http://github.com/kbroman/simcross)
 
+- Add convert2genoarray function, giving results like that produced by
+  geno2array, but without the loss of phase information. (Also an
+  opportunity to work with 3-d arrays in C++.)
 - Add tests sim_ril_pedigree, sim_from_pedigree
 - how to handle multiple chromosomes?
 - convert data to R/qtl cross object

@@ -12,13 +12,25 @@ experimental cross. The aim is flexibility rather than speed.
 Meiosis is simulated following the Stahl model (Copenhaver et
 al. 2002) with the interference parameter being an integer. In this
 model, chiasmata locations are the superposition of two processes: a
-proportion `p` come from a process exhibiting no interference, and the
-remainder (proportion `1-p`) come from a process following the
-chi-square model (Foss et al. 1993; Zhao et al. 1995). This, with
-`p=0`, the model reduces to the chi-square model. The case `m=0` (or
-`p=1`) corresponds to the no interference model.  Broman et al. (2002)
-estimated `m=10` for the level of interference in the mouse (assuming
-`p=0`).
+proportion _p_ come from a process exhibiting no interference, and the
+remainder (proportion 1-_p_) come from a process following the
+chi-square model (Foss et al. 1993; Zhao et al. 1995). Thus, with
+_p_=0, the model reduces to the chi-square model.  The chi-square
+model has a single parameter, _m_, which is a non-negative integer and
+controls the strength of interference. _m_=0 corresponds to no
+interference.  Broman et al. (2002) estimated _m_=10 for the level of
+interference in the mouse (derived assuming _p_=0).
+
+In many organisms, there is always at least one chiasmata on the
+four-strand bundle at meiosis. Simulations with
+[R/simcross](https://github.com/kbroman/simcross) may be performed
+with this assumption; the same model is used, but with rejection
+sampling to get results conditional on there being at least one
+chiasma. Note that this isn't an assumption of an obligate
+_crossover_; if there is exactly one chiasma on the four-strand
+bundle, then a random meiotic product will have 0 or 1 crossover, with
+probability 1/2 each. Also note that, with the obligate chiasma
+assumption, chromosomes must be greater than 50 cM. And note that
 
 ## Basic functions
 

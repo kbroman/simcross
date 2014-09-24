@@ -52,8 +52,8 @@ function(pedigree, L=100, xchr=FALSE, m=10, p=0, obligate_chiasma=FALSE)
         if(pedigree[i,2]==0 || pedigree[i,3]==0) # founder
             result[[i]] <- create_parent(L, allele=pedigree[i,1])
         else {
-            mom <- pedigree[pedigree[i,2],1]
-            dad <- pedigree[pedigree[i,3],1]
+            mom <- which(pedigree[,1]==pedigree[i,2])
+            dad <- which(pedigree[,1]==pedigree[i,3])
 
             if(length(mom) < 1 || length(dad) < 1) {
                 print(pedigree[i,,drop=FALSE])

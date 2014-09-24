@@ -22,18 +22,19 @@ interference. _m_=0 corresponds to no interference.  Broman et
 al. (2002) estimated _m_=10 for the level of interference in the mouse
 (derived assuming _p_=0).  The chi-square model is a special case of
 the gamma model (McPeek and Speed 1995) which has a positive parameter
-_&nu;_; with _&nu;_ = _m_ + 1.
+_&nu;_; the chi-square model corresponds to the case that _m_ = _&nu;_
+&ndash; 1 is an integer.
 
-In many organisms, there is always at least one chiasma on the
-four-strand bundle at meiosis. Simulations with
+In many organisms, there is always at least one chiasma for each pair
+of homologous chromosomes at meiosis. Simulations with
 [R/simcross](https://github.com/kbroman/simcross) may be performed
 with this assumption; the same model is used, but with rejection
 sampling to get results conditional on there being at least one
 chiasma. Note that this isn't an assumption of an obligate
-_crossover_; if there is exactly one chiasma on the four-strand
-bundle, then a random meiotic product will have 0 or 1 crossover, with
-probability 1/2 each. Also note that, with the obligate chiasma
-assumption, chromosomes must be greater than 50 cM. And note that
+_crossover_; if there is exactly one chiasma, then a random meiotic
+product will have 0 or 1 crossover, with probability 1/2 each. Also
+note that, with the obligate chiasma assumption, chromosomes must be
+greater than 50 cM.
 
 ## Basic functions
 
@@ -173,10 +174,42 @@ offspring in each.
 
 ### AIL pedigree
 
+Advanced intercross lines (AIL) are formed by crossing two inbred
+lines to form the F<sub>1</sub> hybrids, intercrossing to form the
+F<sub>2</sub> generation, and then performing repeated intercrosses
+with some large set of breeding pairs. At each generation, the mating
+pairs are chosen at random, often with an effort to avoid matings
+between sibling pairs. I would prefer the term &ldquo;advanced
+intercross _populations_,&rdquo; as it's a set of heterozygous,
+genetically distinct individual; they aren't really _lines_.
+
 `sim_ail_pedigree` generates a pedigree matrix for 2-way advanced
-intercross lines.
+intercross lines. Unlike `sim_ril_pedigree` and `sim_4way_pedigree`,
+this is actually a simulation, as the mating pairs at each generation
+are chosen at random. The arguments are `ngen` (number of
+generations), `npairs` (number of mating pairs at each generation),
+`nkids_per` (for number of kids per sibship in the last generation),
+and `design` (`"nosib"` to avoid matings between siblings, or
+`"random"` to form the matings completely at random).  At each
+generation, each mating pair gives two offspring (one male and one
+female) for the next generation. At the last generation, there are
+`nkids_per` offspring per mating pair, to give a total of
+`npairs*nkids_per` at the last generation.
+
+Here's an example of the use of `sim_ail_pedigree`:
+
+```{r sim_ail_ped}
+tab <- sim_ail_pedigree(12, 100, 5)
+nrow(tab)
+table(tab[,"gen"])
+```
+
+With 100 breeding pairs and 5 kids per pair in last generation, we
+have 200 individuals for most generations and 500 at the end.
 
 ### Diversity Outcross pedigree
+
+
 
 
 ## Simulating from a pedigree
@@ -208,13 +241,15 @@ McPeek MS, Speed TP (1995)
 [Modeling interference in genetic recombination](http://www.genetics.org/content/139/2/1031.short).
 Genetics 139:1031-1044
 
+Mott R, Flint J (2002)
+[Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks](http://www.ge
+netics.org/content/160/4/1609.short).
+Genetics 160:1609-1618
+
 Svenson KL, Gatti DM, Valdar W, Welsh CE, Cheng R, Chesler EJ, Palmer
 AA, McMillan L, Churchill GA (2012)
 [High-resolution genetic mapping using the mouse Diversity Outbred population.](http://www.genetics.org/content/190/2/437.short)
 Genetics 190:437-447
-
-
-
 
 Zhao H, Speed TP, McPeek MS (1995)
 [Statistical analysis of crossover interference using the chi-square model](http://www.genetics.org/content/139/2/1045.short).

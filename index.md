@@ -29,7 +29,7 @@ Then install R/simcross using the `install_github` function in the
 ### Vignette
 
 A vignette describing the use of the package is available from within
-R (and [also here](assets/vignettes/simcross.html). Load the package
+R (and [also here](assets/vignettes/simcross.html)). Load the package
 and then use the `vignette` function.
 
     library(simcross)

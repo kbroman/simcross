@@ -54,8 +54,7 @@ geno <- convert2geno(dat, map, fg)
 genoarray <- convert2geno(dat, map)
 }
 \seealso{
-\code{\link{get_geno}}, \code{\link{sim_from_pedigree}},
-\code{\link{geno2array}}
+\code{\link{get_geno}}, \code{\link{sim_from_pedigree}}
 }
 \keyword{utilities}
 

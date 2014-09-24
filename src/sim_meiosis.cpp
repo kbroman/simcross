@@ -3,6 +3,7 @@ using namespace Rcpp;
 
 #include "random.h"
 #include "sim_meiosis.h"
+#include "debug_util.h"
 
 // [[Rcpp::export]]
 NumericVector fromR_sim_crossovers(const double L, const int m, const double p,
@@ -37,8 +38,8 @@ NumericVector cpp_sim_crossovers(const double L, const int m, const double p,
 
     int n_points, first, n_nichi, n_ichi;
 
-    int lambda1 = Lstar/50.0 * (m+1) * (1.0 - p);
-    int lambda2 = Lstar/50.0 * p;
+    double lambda1 = Lstar/50.0 * (double)(m+1) * (1.0 - p);
+    double lambda2 = Lstar/50.0 * p;
 
     while(1) {
         // chiasma and intermediate points
@@ -47,7 +48,7 @@ NumericVector cpp_sim_crossovers(const double L, const int m, const double p,
         // which point is the first chiasma?
         first = random_int(0, m);
         if(first > n_points) n_ichi = 0;
-        else n_ichi = n_points/(m+1) + (int)(first < n_points % (m+1));
+        else n_ichi = n_points/(m+1) + (int)(first < (n_points % (m+1)));
 
         // no. chiasma from no interference process
         if(p > 0) n_nichi = R::rpois(lambda2);
@@ -55,16 +56,18 @@ NumericVector cpp_sim_crossovers(const double L, const int m, const double p,
 
         if(!obligate_chiasma || n_ichi + n_nichi > 0) break;
     }
-      
+
+    // locations of chiasmata and intermediate points for process w/ interference
     NumericVector point_locations = runif(n_points, 0.0, L);
     point_locations.sort();
 
-    NumericVector nichi_locations = runif(n_nichi, 0.0, L);
-    
     // move every (m+1)st point back to front
     int n_chi=0;
-    for(int pt_index=first; pt_index < n_points; pt_index += (m+1), n_chi++)
-        point_locations[n_chi] = point_locations[pt_index];
+    for(int j=first; j < n_points; j += (m+1), n_chi++)
+        point_locations[n_chi] = point_locations[j];
+
+    // chiasma locations from non-interference process
+    NumericVector nichi_locations = runif(n_nichi, 0.0, L);
 
     // combine interference and no interference chiasma locations
     NumericVector chi_locations(n_chi + n_nichi);
@@ -82,8 +85,7 @@ NumericVector cpp_sim_crossovers(const double L, const int m, const double p,
     }
 
     NumericVector xo_locations(n_xo);
-    for(int i=0; i<n_xo; i++)
-        xo_locations[i] = chi_locations[i];
+    std::copy(chi_locations.begin(), chi_locations.begin()+n_xo, xo_locations.begin());
 
     return xo_locations;
 }

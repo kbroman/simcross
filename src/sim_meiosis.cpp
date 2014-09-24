@@ -12,6 +12,7 @@ NumericVector fromR_sim_crossovers(const double L, const int m, const double p,
 
     return cpp_sim_crossovers(L, m, p, obligate_chiasma, Lstar);
 
+
 }
 
 // internal function
@@ -27,11 +28,12 @@ NumericVector cpp_sim_crossovers(const double L, const int m, const double p,
 
             n_xo = R::rbinom((double)n_xo, 0.5);
         }
-        else n_xo = R::rpois(L/50.0);
+        else {
+            n_xo = R::rpois(L/100.0);
+        }
         
         return runif(n_xo, 0.0, L);
     }
-
 
     int n_points, first, n_nichi, n_ichi;
 

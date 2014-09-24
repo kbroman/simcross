@@ -143,3 +143,16 @@ test_that("simulations of meiosis and crosses work", {
     expect_equal(sib, expected)
 
 })
+
+
+test_that("average no. crossovers match expectation", {
+
+    set.seed(82271836)
+
+    x <- replicate(10000, sim_crossovers(L=100, m=0, p=0))
+    expect_equal(mean(sapply(x, length)), 1, tol=0.005)
+
+    x <- replicate(10000, sim_crossovers(L=100, m=0, p=0, obligate_chiasma=TRUE))
+    expect_equal(mean(sapply(x, length)), 1, tol=0.005)
+
+})

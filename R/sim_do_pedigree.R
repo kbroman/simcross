@@ -116,5 +116,6 @@ function(ngen=12, npairs=30, ccgen=rep(0, npairs), nkids_per=5,
         result <- rbind(result, newrows)
     }
 
+    storage.mode(result) <- "integer"
     result
 }

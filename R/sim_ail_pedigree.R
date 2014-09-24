@@ -85,5 +85,7 @@ function(ngen=12, npairs=30, nkids_per=5, design=c("nosib", "random"))
         }
     }
 
-    cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
+    result <- cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
+    storage.mode(result) <- "integer"
+    result
 }

@@ -95,5 +95,7 @@ function(ngen=20, selfing=FALSE, parents=1:8, firstind=max(parents)+1)
         }
     }
 
-    cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
+    result <- cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
+    storage.mode(result) <- "integer"
+    result
 }

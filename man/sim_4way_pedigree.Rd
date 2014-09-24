@@ -43,7 +43,7 @@ tab3 <- sim_4way_pedigree(ngen=2, rep(12, 10))
 \seealso{
 \code{\link{sim_from_pedigree}},
 \code{\link{sim_ril_pedigree}}, \code{\link{sim_do_pedigree}},
-\code{\link{sim_fullsib_pedigree}}
+\code{\link{sim_ail_pedigree}}
 }
 \keyword{datagen}
 

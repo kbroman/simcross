@@ -27,7 +27,7 @@
 #' @keywords datagen
 #' @seealso \code{\link{sim_from_pedigree}},
 #' \code{\link{sim_ril_pedigree}}, \code{\link{sim_do_pedigree}},
-#' \code{\link{sim_fullsib_pedigree}}
+#' \code{\link{sim_ail_pedigree}}
 #'
 #' @examples
 #' # 100 F1s between heterozygous parents

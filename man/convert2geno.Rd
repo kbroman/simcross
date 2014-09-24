@@ -42,7 +42,7 @@ names(map) <- paste0("marker", seq(along=map))
 geno <- convert2geno(dat, map)
 
 # simulate DO pedigree
-tab <- sim_do_pedigree(5, 30)
+tab <- sim_do_pedigree(8)
 # simulate data from that pedigree
 dat <- sim_from_pedigree(tab)
 # simulate founder snp alleles

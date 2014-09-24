@@ -225,18 +225,19 @@ interference. <em>m</em>=0 corresponds to no interference.  Broman et
 al. (2002) estimated <em>m</em>=10 for the level of interference in the mouse
 (derived assuming <em>p</em>=0).  The chi-square model is a special case of
 the gamma model (McPeek and Speed 1995) which has a positive parameter
-<em>&nu;</em>; with <em>&nu;</em> = <em>m</em> + 1.</p>
+<em>&nu;</em>; the chi-square model corresponds to the case that <em>m</em> = <em>&nu;</em>
+&ndash; 1 is an integer.</p>
 
-<p>In many organisms, there is always at least one chiasma on the
-four-strand bundle at meiosis. Simulations with
+<p>In many organisms, there is always at least one chiasma for each pair
+of homologous chromosomes at meiosis. Simulations with
 <a href="https://github.com/kbroman/simcross">R/simcross</a> may be performed
 with this assumption; the same model is used, but with rejection
 sampling to get results conditional on there being at least one
 chiasma. Note that this isn&#39;t an assumption of an obligate
-<em>crossover</em>; if there is exactly one chiasma on the four-strand
-bundle, then a random meiotic product will have 0 or 1 crossover, with
-probability &frac12; each. Also note that, with the obligate chiasma
-assumption, chromosomes must be greater than 50 cM. And note that</p>
+<em>crossover</em>; if there is exactly one chiasma, then a random meiotic
+product will have 0 or 1 crossover, with probability &frac12; each. Also
+note that, with the obligate chiasma assumption, chromosomes must be
+greater than 50 cM.</p>
 
 <h2>Basic functions</h2>
 
@@ -253,10 +254,14 @@ cM, and the allele or pair of alleles.</p>
 chromosome.</p>
 
 <pre><code class="r">library(simcross)
-p1 &lt;- create_parent(100, 1)
-p2 &lt;- create_parent(100, 2)
-f1 &lt;- create_parent(100, 1:2)
+p1 &lt;- create_parent(L=100, allele=1)
+p2 &lt;- create_parent(L=100, allele=2)
+f1 &lt;- create_parent(L=100, allele=1:2)
 </code></pre>
+
+<p>You don&#39;t need to specify the arguments by name (e.g., in that last
+line you could just write <code>create_parent(100, 1:2)</code>); I&#39;m doing so
+here just to better document the names of the arguments.</p>
 
 <p>The <code>cross</code> function is used to generate one offspring from the cross
 between two individuals.  The input is a pair of individuals (e.g., as
@@ -295,11 +300,19 @@ chromosomes. Each chromsome is a list with the allele in a set
 of intervals, and the locations of the right endpoints of the
 intervals.</p>
 
+<p>By default, we use <code>m=10</code>, <code>p=0</code>, and <code>obligate_chiasma=FALSE</code>. The
+chromosome length is taken from the input parent objects (<code>f1</code> in this case).
+If we wanted to do the simulation with no crossover interference, but
+with an obligate chiasma, we&#39;d use:</p>
+
+<pre><code class="r">f2 &lt;- cross(f1, f1, m=0, obligate_chiasma=TRUE)
+</code></pre>
+
 <p>In the example above, the maternal chromosome is a non-recombinant <code>2</code>
 chromosome. The paternal chromosome has two crossovers, with the
-the <code>1</code> allele up to 19.4 cM, the <code>2</code> allele
-in the interval 19.4 &ndash;
-51.3, and the <code>1</code> allele
+the <code>1</code> allele up to 25.9 cM, the <code>2</code> allele
+in the interval 25.9 &ndash;
+100, and the <code>1</code> allele
 for the remainder of the chromosome.</p>
 
 <p>Behind the scenes, there are two additional
@@ -366,14 +379,16 @@ matrices for different cross designs: <code>sim_ril_pedigree</code>,
 <h3>RIL pedigree</h3>
 
 <p><code>sim_ril_pedigree</code> generates a pedigree matrix for a single
-recombinant inbred line. The arguments are <code>ngen</code> (number of
-generations of inbreeding), <code>selfing</code> (default <code>FALSE</code>, for sibling
-mating), <code>parents</code> (a vector of integers for the parents; the length
-must be 2, 4, or 8, and corresponds to the number of founder lines),
-and <code>firstind</code>, the ID number to attach to the first individual
-following the parents (so that the pedigree matrices for multiple RIL
-may be <code>rbind</code>-ed together). Not that there&#39;s no real <em>simulation</em>
-here; the result is entirely deterministic.)</p>
+recombinant inbred line derived from 2, 4, or 8 founder
+lines. (Examples include the Collaborative Cross (Threadgill and
+Churchill 2012) and MAGIC lines (Kover et al. 2009).)  The arguments
+are <code>ngen</code> (number of generations of inbreeding), <code>selfing</code> (default
+<code>FALSE</code>, for sibling mating), <code>parents</code> (a vector of integers for the
+parents; the length must be 2, 4, or 8, and corresponds to the number
+of founder lines), and <code>firstind</code>, the ID number to attach to the
+first individual following the parents (so that the pedigree matrices
+for multiple RIL may be <code>rbind</code>-ed together). Not that there&#39;s no real
+<em>simulation</em> here; the result is entirely deterministic.)</p>
 
 <pre><code class="r">(ril &lt;- sim_ril_pedigree(ngen=4, parents=1:4))
 </code></pre>
@@ -397,6 +412,11 @@ here; the result is entirely deterministic.)</p>
 ## [16,] 16  13  14   1   6
 </code></pre>
 
+<p>The <code>gen</code> column in the output is the generation number, with 0
+corresponding to the founders. The generations are simply sequential
+and so don&#39;t correspond to the numbering scheme used for the
+Collaborative Cross (see, for example, Broman 2012).</p>
+
 <h3>4-way cross pedigree</h3>
 
 <p><code>sim_4way_pedigree</code> generates a pedigree matrix for an intercross
@@ -412,7 +432,7 @@ of the sibships.</p>
 <p>The following generates two F<sub>2</sub> sibships with 3
 offspring in each.</p>
 
-<pre><code class="r">(fourway &lt;- sim_4way_pedigree(2, c(3, 3)))
+<pre><code class="r">(fourway &lt;- sim_4way_pedigree(ngen=2, nsibs=c(3, 3)))
 </code></pre>
 
 <pre><code>##       id mom dad sex gen
@@ -436,10 +456,99 @@ offspring in each.</p>
 
 <h3>AIL pedigree</h3>
 
+<p>Advanced intercross lines (AIL) are generated by crossing two inbred
+lines to form the F<sub>1</sub> hybrid, intercrossing to form the
+F<sub>2</sub> generation, and then performing repeated intercrosses
+with some large set of breeding pairs. At each generation, the mating
+pairs are chosen at random, often with an effort to avoid matings
+between sibling pairs. I would prefer the term &ldquo;advanced
+intercross <em>populations</em>,&rdquo; as it&#39;s a set of heterozygous,
+genetically distinct individuals; they aren&#39;t really <em>lines</em>.</p>
+
 <p><code>sim_ail_pedigree</code> generates a pedigree matrix for 2-way advanced
-intercross lines.</p>
+intercross lines. Unlike <code>sim_ril_pedigree</code> and <code>sim_4way_pedigree</code>,
+this is actually a simulation, as the mating pairs at each generation
+are chosen at random. The arguments are <code>ngen</code> (number of
+generations), <code>npairs</code> (number of mating pairs at each generation),
+<code>nkids_per</code> (for number of kids per sibship in the last generation),
+and <code>design</code> (<code>&quot;nosib&quot;</code> to avoid matings between siblings, or
+<code>&quot;random&quot;</code> to form the matings completely at random).  At each
+generation, each mating pair gives two offspring (one male and one
+female) for the next generation. At the last generation, there are
+<code>nkids_per</code> offspring per mating pair, to give a total of
+<code>npairs*nkids_per</code> at the last generation.</p>
+
+<p>Here&#39;s an example of the use of <code>sim_ail_pedigree</code>:</p>
+
+<pre><code class="r">tab &lt;- sim_ail_pedigree(ngen=12, npairs=100, nkids_per=5)
+nrow(tab)
+</code></pre>
+
+<pre><code>## [1] 2504
+</code></pre>
+
+<pre><code class="r">table(tab[,&quot;gen&quot;])
+</code></pre>
+
+<pre><code>## 
+##   0   1   2   3   4   5   6   7   8   9  10  11  12 
+##   2   2 200 200 200 200 200 200 200 200 200 200 500
+</code></pre>
+
+<p>With 100 breeding pairs and 5 kids per pair in last generation, we
+have 200 individuals for most generations and 500 at the end.</p>
 
 <h3>Diversity Outcross pedigree</h3>
+
+<p>The Diversity Outcross (DO; Svenson et al. 2013) is like AIL, but
+starting with eight inbred lines rather than two. Actually, the mouse
+DO started with partially-inbred individuals from Collaborative Cross
+lines (the so-called preCC; intermediate generations in the
+development of eight-way RIL). Heterogeneous stock (HS; Mott and Flint
+2002) can be viewed as a special case, but starting with the eight
+founder lines.</p>
+
+<p><code>sim_do_pedigree</code> generates a pedigree matrix for a DO population. 
+The arguments are just like those of <code>sim_ail_pedigree</code>, but with one
+addition: <code>ccgen</code>, which is a vector with the numbers of generations
+of inbreeding to form the initial preCC lines that are then used to
+initiate the DO. (The default for <code>ccgen</code> is taken from Figure 1 of
+Svenson et al. 2013.) Use <code>ccgen=0</code> to simulate a pedigree for HS.
+The length <code>ccgen</code> should be <code>npairs</code>, the number of breeding pairs;
+we take two individuals (one female and one male) from each preCC line
+to begin the outcrossing generations.</p>
+
+<pre><code class="r">tab &lt;- sim_do_pedigree(ngen=12)
+nrow(tab)
+</code></pre>
+
+<pre><code>## [1] 6772
+</code></pre>
+
+<pre><code class="r">table(tab[,&quot;do&quot;], tab[,&quot;gen&quot;])
+</code></pre>
+
+<pre><code>##    
+##       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
+##   0  16 576 288 288 288 288 288 288 246 118  70  50  40  22  12   6
+##   1   0 288 288 288 288 288 288 288 288 288 288 288 720   0   0   0
+</code></pre>
+
+<p>The output contains the usual <code>id</code>, <code>mom</code>, <code>dad</code>, and <code>sex</code>, plus
+<code>gen</code> (for generation number) and <code>do</code> (1 indicates part of the DO
+population, 0 indicates part of the earlier generations). As you can
+see from the table above, the generation (<code>gen</code>) has a different
+meaning, according to whether <code>do</code> is 0 or 1. When <code>do==0</code>, it is the
+number of generations following the initial founder lines; when
+<code>do==1</code>, it is the generation number of the outbreeding DO population.</p>
+
+<p>Also note that we start with <em>sixteen</em> lines rather than 8: to
+properly handle the X chromosome, we need to consider a male and
+female from each of the eight founder lines. These are numbered 1&ndash;8
+for the females, and 9&dash;16 for the males. Also note that the preCC
+lines are formed from a cross among the eight founders, with the order
+of the crosses chosen at random (four females and four males, one from
+each of the eight founder lines).</p>
 
 <h2>Simulating from a pedigree</h2>
 
@@ -450,6 +559,10 @@ intercross lines.</p>
 <p>The function <code>convert2geno</code> and <code>get_geno</code>.</p>
 
 <h2>References</h2>
+
+<p>Broman KW (2012)
+<a href="http://www.genetics.org/content/190/2/403.short">Genotype probabilities at intermediate generations in the construction of recombinant inbred lines</a>.
+Genetics 190:403-412</p>
 
 <p>Broman KW, Rowe LB, Churchill GA, Paigen K (2002)
 <a href="http://www.genetics.org/content/160/3/1123.short">Crossover interference in the mouse</a>.
@@ -463,14 +576,27 @@ Genetics 160:1631-1639</p>
 <a href="http://www.genetics.org/content/133/3/681.short">Chiasma interference as a function of genetic distance</a>.
 Genetics 133:681-691</p>
 
+<p>Kover PX, Valdar W, Trakalo J, Scarcelli N, Ehrenreich IM, Purugganan
+MD, Durrant C, Mott R (2009)
+<a href="http://www.%0Aplosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551">A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in <em>Arabidopsis thaliana</em></a>.
+PLoS Genetics 5:e1000551</p>
+
 <p>McPeek MS, Speed TP (1995)
 <a href="http://www.genetics.org/content/139/2/1031.short">Modeling interference in genetic recombination</a>.
 Genetics 139:1031-1044</p>
+
+<p>Mott R, Flint J (2002)
+<a href="http://www.ge%0Anetics.org/content/160/4/1609.short">Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks</a>.
+Genetics 160:1609-1618</p>
 
 <p>Svenson KL, Gatti DM, Valdar W, Welsh CE, Cheng R, Chesler EJ, Palmer
 AA, McMillan L, Churchill GA (2012)
 <a href="http://www.genetics.org/content/190/2/437.short">High-resolution genetic mapping using the mouse Diversity Outbred population.</a>
 Genetics 190:437-447</p>
+
+<p>Threadgill DW, Churchill GA (2012)
+<a href="http://www.genetics.org/content/190/2/291.short">Ten years of the Collaborative Cross</a>.
+Genetics 190:291-294</p>
 
 <p>Zhao H, Speed TP, McPeek MS (1995)
 <a href="http://www.genetics.org/content/139/2/1045.short">Statistical analysis of crossover interference using the chi-square model</a>.

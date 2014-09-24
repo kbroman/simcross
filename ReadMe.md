@@ -1,8 +1,8 @@
-## R/simcross
+## [R/simcross](http://kbroman.org/simcross)
 
 [![Build Status](https://travis-ci.org/kbroman/simcross.png?branch=master)](https://travis-ci.org/kbroman/simcross)
 
-copyright (c) 2014, [Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
+[Karl W Broman](http://kbroman.org)
 
 ---
 
@@ -37,13 +37,13 @@ install_github("kbroman/simcross")
 ### Vignette
 
 A vignette describing the use of the package is available from within
-R. Load the package and then use the `vignette` function.
+R (and [also here](assets/vignettes/simcross.html). Load the package
+and then use the `vignette` function.
 
 ```r
 library(simcross)
 vignette("simcross", package="simcross")
 ```
-
 
 ---
 
@@ -58,5 +58,5 @@ without any warranty; without even the implied warranty of
 merchantability or fitness for a particular purpose.  See the GNU
 General Public License for more details.
 
-A copy of the GNU General Public License, version 3, is available at
+A copy of the GNU General Public License, version 3, is available at  
 <http://www.r-project.org/Licenses/GPL-3>

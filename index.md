@@ -34,6 +34,8 @@ R. Load the package and then use the `vignette` function.
     library(simcross)
     vignette("simcross", package="simcross")
 
+It's also available [here](assets/vignettes/simcross.html).
+
 ### License
 
 The R/simcross package is free software; you can redistribute it

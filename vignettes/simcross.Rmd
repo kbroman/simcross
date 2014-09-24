@@ -70,11 +70,11 @@ indicate whether the offspring is to be male (which only matters if
 `xchr=TRUE`). Further, one may use `obligate_chiasma=TRUE` (default
 `FALSE`) to require at least one chiasma on the 4-strand bundle).
 
-Here's an example, to generate an F<sub>2</sub> individual.
+Here's an example, to generate an F<sub>2</sub> individual.  (The
+outer parentheses cause the result to be printed.)
 
 ```{r sim_f2}
-f2 <- cross(f1, f1)
-print(f2)
+(f2 <- cross(f1, f1))
 ```
 
 The output is list with two components: the maternal and paternal

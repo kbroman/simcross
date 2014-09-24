@@ -153,14 +153,16 @@ matrices for different cross designs: `sim_ril_pedigree`,
 ### RIL pedigree
 
 `sim_ril_pedigree` generates a pedigree matrix for a single
-recombinant inbred line. The arguments are `ngen` (number of
-generations of inbreeding), `selfing` (default `FALSE`, for sibling
-mating), `parents` (a vector of integers for the parents; the length
-must be 2, 4, or 8, and corresponds to the number of founder lines),
-and `firstind`, the ID number to attach to the first individual
-following the parents (so that the pedigree matrices for multiple RIL
-may be `rbind`-ed together). Not that there's no real _simulation_
-here; the result is entirely deterministic.)
+recombinant inbred line derived from 2, 4, or 8 founder
+lines. (Examples include the Collaborative Cross (Threadgill and
+Churchill 2012) and MAGIC lines (Kover et al. 2009).)  The arguments
+are `ngen` (number of generations of inbreeding), `selfing` (default
+`FALSE`, for sibling mating), `parents` (a vector of integers for the
+parents; the length must be 2, 4, or 8, and corresponds to the number
+of founder lines), and `firstind`, the ID number to attach to the
+first individual following the parents (so that the pedigree matrices
+for multiple RIL may be `rbind`-ed together). Not that there's no real
+_simulation_ here; the result is entirely deterministic.)
 
 ```{r sim_ril_ped}
 (ril <- sim_ril_pedigree(ngen=4, parents=1:4))
@@ -250,6 +252,12 @@ Foss E, Lande R, Stahl FW, Steinberg CM (1993)
 [Chiasma interference as a function of genetic distance](http://www.genetics.org/content/133/3/681.short).
 Genetics 133:681-691
 
+Kover PX, Valdar W, Trakalo J, Scarcelli N, Ehrenreich IM, Purugganan
+MD, Durrant C, Mott R, 
+[A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in _Arabidopsis thaliana_](http://www.
+plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551).
+PLoS Genetics 5:e1000551
+
 McPeek MS, Speed TP (1995)
 [Modeling interference in genetic recombination](http://www.genetics.org/content/139/2/1031.short).
 Genetics 139:1031-1044
@@ -263,6 +271,10 @@ Svenson KL, Gatti DM, Valdar W, Welsh CE, Cheng R, Chesler EJ, Palmer
 AA, McMillan L, Churchill GA (2012)
 [High-resolution genetic mapping using the mouse Diversity Outbred population.](http://www.genetics.org/content/190/2/437.short)
 Genetics 190:437-447
+
+Threadgill DW, Churchill GA (2012)
+[Ten years of the Collaborative Cross](http://www.genetics.org/content/190/2/291.short)
+Genetics 190:291-294
 
 Zhao H, Speed TP, McPeek MS (1995)
 [Statistical analysis of crossover interference using the chi-square model](http://www.genetics.org/content/139/2/1045.short).

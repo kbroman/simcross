@@ -144,7 +144,7 @@ head(AILped, n=10)
 
 The function `check_pedigree` can be used to check that a pedigree
 matrix conforms to R/simcross's requirements: founders have
-\code{mom == dad == 0}, all other individuals have both parents
+`mom == dad == 0}, all other individuals have both parents
 present in the pedigree, and parents always preceded any of their
 children. The `check_pedigree` function returns `TRUE` if the pedigree
 matrix is okay; otherwise, it throws an error.
@@ -226,9 +226,9 @@ female) for the next generation. At the last generation, there are
 Here's an example of the use of `sim_ail_pedigree`:
 
 ```{r sim_ail_ped}
-tab <- sim_ail_pedigree(ngen=12, npairs=100, nkids_per=5)
-nrow(tab)
-table(tab[,"gen"])
+ailped <- sim_ail_pedigree(ngen=12, npairs=100, nkids_per=5)
+nrow(ailped)
+table(ailped[,"gen"])
 ```
 
 With 100 breeding pairs and 5 kids per pair in last generation, we
@@ -255,9 +255,9 @@ we take two individuals (one female and one male) from each preCC line
 to begin the outcrossing generations.
 
 ```{r sim_do_ped}
-tab <- sim_do_pedigree(ngen=12)
-nrow(tab)
-table(tab[,"do"], tab[,"gen"])
+doped <- sim_do_pedigree(ngen=12)
+nrow(doped)
+table(doped[,"do"], doped[,"gen"])
 ```
 
 The output contains the usual `id`, `mom`, `dad`, and `sex`, plus
@@ -299,8 +299,8 @@ of right endpoint of each interval).
 Here's an example, for simulating an AIL to generation 8.
 
 ```{r sim_ail_fully}
-tab <- sim_ail_pedigree(ngen=8, npairs=30, nkids_per=5)
-xodat <- sim_from_pedigree(tab, L=100)
+ailped <- sim_ail_pedigree(ngen=8, npairs=30, nkids_per=5)
+xodat <- sim_from_pedigree(ailped, L=100)
 ```
 
 Here's the result for the last individual:
@@ -314,7 +314,7 @@ individuals' two chromosomes, by generation, as follows.
 
 ```{r plot_ave_breakpoints}
 n_breakpoints <- sapply(xodat, function(a) sum(sapply(a, function(b) length(b$alleles)-1)))
-ave_breakpoints <- tapply(n_breakpoints, tab[,"gen"], mean)
+ave_breakpoints <- tapply(n_breakpoints, ailped[,"gen"], mean)
 gen <- as.numeric(names(ave_breakpoints))
 plot(gen, ave_breakpoints,
      xlab="Generation", ylab="Average no. breakpoints", las=1,
@@ -333,7 +333,7 @@ heterozygous, by generation, as follows.
 
 ```{r plot_prop_het}
 prop_het <- sapply(lapply(xodat, where_het), function(a) sum(a[,2]-a[,1])/100)
-ave_prop_het <- tapply(prop_het, tab[,"gen"], mean)
+ave_prop_het <- tapply(prop_het, ailped[,"gen"], mean)
 plot(gen, ave_prop_het,
      xlab="Generation", ylab="Average proportion heterozygous", las=1,
      pch=21, bg="Orchid", main="AIL with 30 breeding pairs")
@@ -350,10 +350,10 @@ set.seed(28998542)
 ```
 
 ```{r ail_few_pairs}
-tab2 <- sim_ail_pedigree(ngen=8, npairs=3, nkids_per=50)
-xodat2 <- sim_from_pedigree(tab2, L=100)
+ailped2 <- sim_ail_pedigree(ngen=8, npairs=3, nkids_per=50)
+xodat2 <- sim_from_pedigree(ailped2, L=100)
 prop_het2 <- sapply(lapply(xodat2, where_het), function(a) sum(a[,2]-a[,1])/100)
-ave_prop_het2 <- tapply(prop_het2, tab2[,"gen"], mean)
+ave_prop_het2 <- tapply(prop_het2, ailped2[,"gen"], mean)
 gen2 <- as.numeric(names(ave_prop_het2))
 plot(gen2, ave_prop_het2,
      xlab="Generation", ylab="Average proportion heterozygous", las=1,
@@ -405,17 +405,47 @@ print the data for the last five individuals.
 
 ```{r convert2geno}
 geno <- convert2geno(xodat, map)
-geno[nrow(geno)-(0:4), ]
+geno[nrow(geno)-(4:0), ]
 ```
 
-Here the genotypes get recoded as `1`/`2`/`3` for `11`/`12`/`22`.
+Here the genotypes get recoded as `1` / `2` / `3` for `11` / `12` / `22`.
 That is, genotypes `1` and `3` are the homozygotes for the allele from
 founders 1 and 2, respectively, and genotype `2` is the heterozygote.
 
-For crosses with more than two founders, the genotypes are replaced
-with integers representing binary codes: the genotype
-(_m_,_n_) will be assigned the integer $2^{m-1} + 2^{n-1}$.
+For crosses with more than two founders, the output of `convert2geno`
+is a three-dimensional array, individuals &times; markers &times;
+alleles (maternal and paternal). For example, here are genotypes
+for the sixth generations of inbreeding of an eight-way RIL.
 
+```{r convert2geno_8wayril}
+rilped <- sim_ril_pedigree(ngen=6, parents=1:8)
+dat <- sim_from_pedigree(rilped, L=100)
+geno <- convert2geno(dat, map)
+geno[nrow(geno)-(1:0),,]
+```
+
+More commonly, one may be interested in individuals' SNP
+genotypes. This can also be obtained with `convert2geno`; one just
+needs to provide a matrix of SNP alleles for the founder lines, with
+the argument `founder_geno`. This should be a matrix of `1`s and `2`s,
+of dimension `n_founders` &times; `n_markers`.
+
+Let's simulate SNP alleles for eight founder lines.
+
+```{r sim_founder_alleles}
+fg <- matrix(sample(1:2, 8*length(map), replace=TRUE), nrow=8)
+```
+
+And then here are the SNP genotypes for the sixth generation of
+inbreeding an eight-way RIL.
+
+```{r convert2geno_8wayril_snps}
+snpgeno <- convert2geno(dat, map, fg)
+snpgeno[nrow(snpgeno)-(1:0),]
+```
+
+The genotypes are again coded as `1` / `2` / `3` for `11` / `12` /
+`22`.
 
 
 ## References

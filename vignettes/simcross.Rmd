@@ -12,16 +12,20 @@ experimental cross. The aim is flexibility rather than speed.
 Meiosis is simulated following the Stahl model (Copenhaver et
 al. 2002) with the interference parameter being an integer. In this
 model, chiasmata locations are the superposition of two processes: a
-proportion _p_ come from a process exhibiting no interference, and the
-remainder (proportion 1-_p_) come from a process following the
-chi-square model (Foss et al. 1993; Zhao et al. 1995). Thus, with
-_p_=0, the model reduces to the chi-square model.  The chi-square
-model has a single parameter, _m_, which is a non-negative integer and
-controls the strength of interference. _m_=0 corresponds to no
-interference.  Broman et al. (2002) estimated _m_=10 for the level of
-interference in the mouse (derived assuming _p_=0).
+proportion _p_ come from a process exhibiting no interference (that
+is, a Poisson process) and the remainder (proportion 1 &ndash; _p_)
+come from a process following the chi-square model (Foss et al. 1993;
+Zhao et al. 1995). Thus, with _p_=0, the model reduces to the
+chi-square model.  The chi-square model has a single parameter, _m_,
+which is a non-negative integer and controls the strength of
+interference. _m_=0 corresponds to no interference.  Broman et
+al. (2002) estimated _m_=10 for the level of interference in the mouse
+(derived assuming _p_=0).  The chi-square model is a special case of
+the gamma model (McPeek and Speed 1995) which has a positive parameter
+_&nu;_; with _&nu;_ = _m_ + 1.
 
-In many organisms, there is always at least one chiasmata on the
+
+In many organisms, there is always at least one chiasma on the
 four-strand bundle at meiosis. Simulations with
 [R/simcross](https://github.com/kbroman/simcross) may be performed
 with this assumption; the same model is used, but with rejection
@@ -111,13 +115,17 @@ Broman KW, Rowe LB, Churchill GA, Paigen K (2002)
 [Crossover interference in the mouse](http://www.genetics.org/content/160/3/1123.short).
 Genetics 160:1123-1131
 
-Copenhaver, G. P., Housworth, E. A. and Stahl, F. W. (2002)
+Copenhaver GP, Housworth EA, Stahl FW (2002)
 [Crossover interference in arabidopsis](http://www.genetics.org/content/160/4/1631.short).
-Genetics 160:1631-1639.
+Genetics 160:1631-1639
 
-Foss, E., Lande, R., Stahl, F. W. and Steinberg, C. M. (1993)
+Foss E, Lande R, Stahl FW, Steinberg CM (1993)
 [Chiasma interference as a function of genetic distance](http://www.genetics.org/content/133/3/681.short).
-Genetics 133:681-691.
+Genetics 133:681-691
+
+McPeek MS, Speed TP (1995)
+[Modeling interference in genetic recombination](http://www.genetics.org/content/139/2/1031.short).
+Genetics 139:1031-1044
 
 Zhao H, Speed TP, McPeek MS (1995)
 [Statistical analysis of crossover interference using the chi-square model](http://www.genetics.org/content/139/2/1045.short).

@@ -5,6 +5,12 @@
 
 # R/simcross User Guide
 
+```{r knitr_options, include=FALSE}
+opts_chunk$set(fig.width=12, fig.height=7,
+               dev.args=list(pointsize=16))
+```
+
+
 [R/simcross](https://github.com/kbroman/simcross) is an
 [R](http://www.r-project.org) package to simulate genotypes from an
 experimental cross. The aim is flexibility rather than speed.
@@ -50,7 +56,7 @@ Here's how to generate two inbred individuals, one from each of strain
 1 and strain 2, and an F<sub>1</sub> individual, with a 100 cM
 chromosome.
 
-```{r set.seed, echo=FALSE, results="hide"}
+```{r set.seed, include=FALSE}
 set.seed(80607574)
 ```
 
@@ -271,7 +277,66 @@ each of the eight founder lines).
 
 ## Simulating from a pedigree
 
-The function `sim_from_pedigree`.
+The point of the construction of a pedigree matrix for a cross design,
+as in the previous section, was in order to simulate genotype data for
+the cross design. The R/simcross function for this is
+`sim_from_pedigree`. Its arguments are `pedigree` (the pedigree
+matrix), `L` (length of chromosome), `xchr` (`TRUE` or `FALSE`, according to
+whether to simulate the X chromosome or an autosome; default `FALSE`),
+and then the parameters governing the crossing over process: `m`, `p`,
+and `obligate_chiasma`, with defaults `m=10`, `p=0`, and
+`obligate_chiasma=FALSE`.
+
+The `sim_from_pedigree` function calls `create_parent` for all
+founding individuals and `cross` for any offspring; the output is a
+list with each component corresponding to one individual and having
+the form output by `cross`: a list with `mat` and `pat`, for the
+maternal and paternal chromosomes, respectively, each of which has
+`alleles` (allele present in each interval) and `locations` (location
+of right endpoint of each interval).
+
+Here's an example, for simulating an AIL to generation 8.
+
+```{r sim_ail_fully}
+tab <- sim_ail_pedigree(ngen=8, npairs=30, nkids_per=5)
+xodat <- sim_from_pedigree(tab, L=100)
+```
+
+Here's the result for the last individual:
+
+```{r last_ail_individual}
+xodat[[length(xodat)]]
+```
+
+We can plot the average number of breakpoints across the
+individuals' two chromosomes, by generation, as follows.
+
+```{r plot_ave_breakpoints}
+n_breakpoints <- sapply(xodat, function(a) sum(sapply(a, function(b) length(b$alleles)-1)))
+ave_breakpoints <- tapply(n_breakpoints, tab[,"gen"], mean)
+gen <- as.numeric(names(ave_breakpoints))
+plot(gen, ave_breakpoints,
+     xlab="Generation", ylab="Average no. breakpoints", las=1,
+     pch=21, bg="Orchid")
+```
+
+The function `where_het` will show the regions where an individual is
+heterozygous.
+
+```{r where_het}
+where_het(xodat[[length(xodat)]])
+```
+
+We can plot the average proportion of the chromosome that is
+heterozygous, by generation, as follows.
+
+```{r plot_prop_het}
+prop_het <- sapply(lapply(xodat, where_het), function(a) sum(a[,2]-a[,1])/100)
+ave_prop_het <- tapply(prop_het, tab[,"gen"], mean)
+plot(gen, ave_prop_het,
+     xlab="Generation", ylab="Average proportion heterozygous", las=1,
+     pch=21, bg="Orchid")
+```
 
 ## Generating marker data
 

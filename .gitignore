@@ -4,4 +4,5 @@
 .Rhistory
 inst/doc/simcross.html
 inst/doc/simcross.md
+inst/doc/figure
 *.Rout

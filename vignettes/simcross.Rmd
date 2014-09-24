@@ -162,7 +162,7 @@ in two pairs to generate a pair of heterozygous individuals. If
 offspring. If `ngen==2`, we generate `length(nsibs)` pairs of
 F<sub>1</sub>s and intercross them to generate a set of F<sub>2</sub>
 sibships; in this case, the input vector `nsibs` determines the sizes
-of the sibships. 
+of the sibships.
 
 The following generates two F<sub>2</sub> sibships with 3
 offspring in each.
@@ -207,6 +207,14 @@ Genetics 133:681-691
 McPeek MS, Speed TP (1995)
 [Modeling interference in genetic recombination](http://www.genetics.org/content/139/2/1031.short).
 Genetics 139:1031-1044
+
+Svenson KL, Gatti DM, Valdar W, Welsh CE, Cheng R, Chesler EJ, Palmer
+AA, McMillan L, Churchill GA (2012)
+[High-resolution genetic mapping using the mouse Diversity Outbred population.](http://www.genetics.org/content/190/2/437.short)
+Genetics 190:437-447
+
+
+
 
 Zhao H, Speed TP, McPeek MS (1995)
 [Statistical analysis of crossover interference using the chi-square model](http://www.genetics.org/content/139/2/1045.short).

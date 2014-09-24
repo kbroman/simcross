@@ -317,7 +317,7 @@ ave_breakpoints <- tapply(n_breakpoints, tab[,"gen"], mean)
 gen <- as.numeric(names(ave_breakpoints))
 plot(gen, ave_breakpoints,
      xlab="Generation", ylab="Average no. breakpoints", las=1,
-     pch=21, bg="Orchid")
+     pch=21, bg="Orchid", main="AIL with 30 breeding pairs")
 ```
 
 The function `where_het` will show the regions where an individual is
@@ -335,13 +335,85 @@ prop_het <- sapply(lapply(xodat, where_het), function(a) sum(a[,2]-a[,1])/100)
 ave_prop_het <- tapply(prop_het, tab[,"gen"], mean)
 plot(gen, ave_prop_het,
      xlab="Generation", ylab="Average proportion heterozygous", las=1,
-     pch=21, bg="Orchid")
+     pch=21, bg="Orchid", main="AIL with 30 breeding pairs")
+abline(h=0.5, lty=2)
 ```
+
+Note: if we'd greatly restricted the number of breeding pairs per
+generation, we'd see evidence of inbreeding, as a reduced proportion
+of heterozygosity. There's considerably more noise, though, since
+we've got just 6 individuals per generation.
+
+```{r reset_seed, include=FALSE}
+set.seed(28998542)
+```
+
+```{r ail_few_pairs}
+tab2 <- sim_ail_pedigree(ngen=8, npairs=3, nkids_per=50)
+xodat2 <- sim_from_pedigree(tab2, L=100)
+prop_het2 <- sapply(lapply(xodat2, where_het), function(a) sum(a[,2]-a[,1])/100)
+ave_prop_het2 <- tapply(prop_het2, tab2[,"gen"], mean)
+gen2 <- as.numeric(names(ave_prop_het2))
+plot(gen2, ave_prop_het2,
+     xlab="Generation", ylab="Average proportion heterozygous", las=1,
+     pch=21, bg="Orchid", main="AIL with 3 breeding pairs")
+abline(h=0.5, lty=2)
+```
+
 
 ## Generating marker data
 
-The function `convert2geno` and `get_geno`.
+R/simcross simulates the locations of crossovers as continuous values
+in the interval (0,L). This is precise and compact, and it allows detailed study
+of the breakpoint process, but it can be cumbersome to work with and
+is often not what you want from simulations. In most cases, one is
+interested in individuals' genotypes at a set of markers.
 
+There are two functions for getting marker genotypes on the basis of
+the the detailed crossover location data: `get_geno` and
+`convert2geno`.
+
+The function `get_geno` will grab the genotype at a specified location
+on the chromosome, returning a matrix with two columns: the maternal
+and paternal alleles for each individual. Continuing with the
+simulation in the previous section (an AIL with 30 breeding pairs),
+here's how to grab the genotype at 30 cM:
+
+```{r get_geno}
+g30 <- get_geno(xodat, 30)
+tail(g30)
+```
+
+The `get_geno` function could be useful, for example, for grabbing QTL
+genotypes for use in constructing a phenotype.
+
+The `convert2geno` function takes the detailed crossover information
+plus a vector of marker locations and returns a matrix with marker
+genotypes.
+
+First, construct a vector with the marker locations.
+
+```{r construct_map}
+map <- seq(0, 100, by=10)
+names(map) <- paste0("m", map)
+map
+```
+
+Then, pass the crossover information and map to `convert2geno`. I
+print the data for the last five individuals.
+
+```{r convert2geno}
+geno <- convert2geno(xodat, map)
+geno[nrow(geno)-(0:4), ]
+```
+
+Here the genotypes get recoded as `1`/`2`/`3` for `11`/`12`/`22`.
+That is, genotypes `1` and `3` are the homozygotes for the allele from
+founders 1 and 2, respectively, and genotype `2` is the heterozygote.
+
+For crosses with more than two founders, the genotypes are replaced
+with integers representing binary codes: the genotype
+(_m_,_n_) will be assigned the integer $2^{m-1} + 2^{n-1}$.
 
 
 

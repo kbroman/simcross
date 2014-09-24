@@ -24,7 +24,6 @@ al. (2002) estimated _m_=10 for the level of interference in the mouse
 the gamma model (McPeek and Speed 1995) which has a positive parameter
 _&nu;_; with _&nu;_ = _m_ + 1.
 
-
 In many organisms, there is always at least one chiasma on the
 four-strand bundle at meiosis. Simulations with
 [R/simcross](https://github.com/kbroman/simcross) may be performed
@@ -47,10 +46,11 @@ individuals. It takes two arguments: the length of the chromosome in
 cM, and the allele or pair of alleles.
 
 Here's how to generate two inbred individuals, one from each of strain
-1 and strain 2, and an F<sub>1</sub> individual.
+1 and strain 2, and an F<sub>1</sub> individual, with a 100 cM
+chromosome.
 
 ```{r set.seed, echo=FALSE, results="hide"}
-set.seed(80605735)
+set.seed(80607574)
 ```
 
 ```{r create_parent}
@@ -60,14 +60,15 @@ p2 <- create_parent(100, 2)
 f1 <- create_parent(100, 1:2)
 ```
 
-The `cross` function is used to generate one progeny from the cross
+The `cross` function is used to generate one offspring from the cross
 between two individuals.  The input is a pair of individuals (e.g., as
 produced by `create_parent`), the interference parameter `m` (default
 `m=10`), the parameter `p` for the Stahl model (default `p=0`), `xchr`
 to indicate whether the chromosome being simulated is the X chromosome
 (`FALSE`, the default, to simulate an autosome), and `male` to
 indicate whether the offspring is to be male (which only matters if
-`xchr=TRUE`).
+`xchr=TRUE`). Further, one may use `obligate_chiasma=TRUE` (default
+`FALSE`) to require at least one chiasma on the 4-strand bundle).
 
 Here's an example, to generate an F<sub>2</sub> individual.
 
@@ -77,26 +78,32 @@ print(f2)
 ```
 
 The output is list with two components: the maternal and paternal
-chromosomes. Each chromsome is a data frame with the allele in a set
+chromosomes. Each chromsome is a list with the allele in a set
 of intervals, and the locations of the right endpoints of the
 intervals.
 
-In the example above, the maternal chromosome is a non-recombinant `1`
+In the example above, the maternal chromosome is a non-recombinant `2`
 chromosome. The paternal chromosome has two crossovers, with the
-the `2` allele up to `r round(f2$pat$locations[1], 1)` cM, the `1` allele
+the `1` allele up to `r round(f2$pat$locations[1], 1)` cM, the `2` allele
 in the interval `r round(f2$pat$locations[1], 1)` &ndash;
-`r round(f2$pat$locations[2], 1)`, and the `2` allele
+`r round(f2$pat$locations[2], 1)`, and the `1` allele
 for the remainder of the chromosome.
 
-There's also a function `sim_meiosis` for simulating a meiotic product
-from a single individual; the `cross` function calls `sim_meiosis` twice
+Behind the scenes, there are two additional
+functions, `sim_crossovers`, for simulating crossover locations on a
+chromosome, and `sim_meiosis`, for simulating a meiotic product from
+an individual, but in general the user need not bother with these.
+The `cross` function calls `sim_meiosis` twice
 (once for each parent) and then combines the results into a single
-individual.
+individual. `sim_meiosis` calls `sim_crossovers` to generate the
+meiotic product.
 
 ## Generating pedigrees
 
-The functions `sim_ril_pedigree`, `sim_ail_pedigree`, and
+The functions `sim_ril_pedigree`, `sim_4way_pedigree`, `sim_ail_pedigree`, and
 `sim_do_pedigree`.
+
+The example pedigree, `AILped`.
 
 ## Simulating from a pedigree
 

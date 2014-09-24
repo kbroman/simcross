@@ -38,13 +38,21 @@ intervals.
 Simulate the cross of two individuals to create a
 single progeny
 }
+\details{
+Simulations are under the Stahl model with the
+interference parameter being an integer. This is an extension of
+the chi-square model, but with chiasmata being the superposition of
+two processes, one following the chi-square model and the other
+exhibiting no interference.
+}
 \examples{
 mom <- create_parent(100, 1:2)
 dad <- create_parent(100, 1:2)
 child <- cross(mom, dad)
 }
 \seealso{
-\code{\link{create_parent}}, \code{\link{sim_meiosis}}
+\code{\link{create_parent}}, \code{\link{sim_meiosis}},
+\code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
 }
 \keyword{datagen}
 

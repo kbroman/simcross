@@ -26,12 +26,32 @@ and locations of the right endpoints of those intervals.
 \description{
 Output a random meiotic product from an input individual.
 }
+\details{
+Simulations are under the Stahl model with the
+interference parameter being an integer. This is an extension of
+the chi-square model, but with chiasmata being the superposition of
+two processes, one following the chi-square model and the other
+exhibiting no interference.
+}
 \examples{
 ind <- create_parent(100, 1:2)
 prod <- sim_meiosis(ind)
 }
+\references{
+Copenhaver, G. P., Housworth, E. A. and Stahl, F. W. (2002) Crossover
+interference in arabidopsis.  \emph{Genetics} \bold{160}, 1631--1639.
+
+Foss, E., Lande, R., Stahl, F. W. and Steinberg, C. M. (1993) Chiasma
+interference as a function of genetic distance. \emph{Genetics}
+\bold{133}, 681--691.
+
+Zhao, H., Speed, T. P. and McPeek, M. S. (1995) Statistical analysis
+of crossover interference using the chi-square model.  \emph{Genetics}
+\bold{139}, 1045--1056.
+}
 \seealso{
-\code{\link{create_parent}}, \code{\link{cross}}
+\code{\link{create_parent}}, \code{\link{cross}},
+\code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
 }
 \keyword{datagen}
 

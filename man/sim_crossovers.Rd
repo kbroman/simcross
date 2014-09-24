@@ -36,6 +36,7 @@ chiasma locations with probability 1/2.
 \examples{
 x <- sim_crossovers(200, 10, 0)
 x <- sim_crossovers(200, 10, 0.04)
+x <- sim_crossovers(100, 0, 0, obligate_chiasma=TRUE)
 }
 \references{
 Copenhaver, G. P., Housworth, E. A. and Stahl, F. W. (2002) Crossover

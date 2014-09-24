@@ -103,9 +103,16 @@ function(ind, tol=1e-12)
 #'
 #' @keywords datagen
 #'
+#' @details Simulations are under the Stahl model with the
+#' interference parameter being an integer. This is an extension of
+#' the chi-square model, but with chiasmata being the superposition of
+#' two processes, one following the chi-square model and the other
+#' exhibiting no interference.
+#'
 #' @examples
 #' x <- sim_crossovers(200, 10, 0)
 #' x <- sim_crossovers(200, 10, 0.04)
+#' x <- sim_crossovers(100, 0, 0, obligate_chiasma=TRUE)
 #'
 #' @references
 #' Copenhaver, G. P., Housworth, E. A. and Stahl, F. W. (2002) Crossover
@@ -153,9 +160,28 @@ function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 #' @return A list with alleles in chromosome intervals (as integers)
 #' and locations of the right endpoints of those intervals.
 #'
+#' @details Simulations are under the Stahl model with the
+#' interference parameter being an integer. This is an extension of
+#' the chi-square model, but with chiasmata being the superposition of
+#' two processes, one following the chi-square model and the other
+#' exhibiting no interference.
+#'
+#' @references
+#' Copenhaver, G. P., Housworth, E. A. and Stahl, F. W. (2002) Crossover
+#' interference in arabidopsis.  \emph{Genetics} \bold{160}, 1631--1639.
+#'
+#' Foss, E., Lande, R., Stahl, F. W. and Steinberg, C. M. (1993) Chiasma
+#' interference as a function of genetic distance. \emph{Genetics}
+#' \bold{133}, 681--691.
+#'
+#' Zhao, H., Speed, T. P. and McPeek, M. S. (1995) Statistical analysis
+#' of crossover interference using the chi-square model.  \emph{Genetics}
+#' \bold{139}, 1045--1056.
+#'
 #' @keywords datagen
 #' @export
-#' @seealso \code{\link{create_parent}}, \code{\link{cross}}
+#' @seealso \code{\link{create_parent}}, \code{\link{cross}},
+#' \code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
 #'
 #' @examples
 #' ind <- create_parent(100, 1:2)
@@ -196,6 +222,12 @@ function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 #' @param Lstar Adjusted chromosome length, if
 #' \code{obligate_chiasma=TRUE}. Calculated if not provided.
 #'
+#' @details Simulations are under the Stahl model with the
+#' interference parameter being an integer. This is an extension of
+#' the chi-square model, but with chiasmata being the superposition of
+#' two processes, one following the chi-square model and the other
+#' exhibiting no interference.
+#'
 #' @return A list with two components, for the individual's two
 #' chromosomes.  Each is a list with alleles in chromosome intervals
 #' (as integers) and locations of the right endpoints of those
@@ -203,7 +235,8 @@ function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 #'
 #' @keywords datagen
 #' @export
-#' @seealso \code{\link{create_parent}}, \code{\link{sim_meiosis}}
+#' @seealso \code{\link{create_parent}}, \code{\link{sim_meiosis}},
+#' \code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
 #'
 #' @examples
 #' mom <- create_parent(100, 1:2)
@@ -234,9 +267,27 @@ function(mom, dad, m=10, p=0, xchr=FALSE, male=FALSE,
     }
 }
 
-# calculate reduced length to give expected no. chiasmata when conditioning on >= 1
-#
-# L and Lstar are in cM
+#' Calculate adjusted chromosome length for obligate chiasma
+#'
+#' Calculate the reduced chromosome length that will give the target
+#' expected number of chiasmata when conditioning on there being at
+#' least one chiasma on the four-strand bundle.
+#'
+#' @param L Length of chromosome (in cM); must be > 50
+#' @param m Interference parameter for chi-square model
+#' @param p Proportion of chiasmata coming from no-interference
+#' process
+#'
+#' @return Adjusted length of chromosome
+#'
+#' @keywords utilities
+#' @export
+#' @seealso \code{\link{cross}}, \code{\link{sim_meiosis}},
+#' \code{\link{sim_crossovers}}
+#'
+#' @examples
+#' calc_Lstar(100, 0, 0)
+#' calc_Lstar(60, 10, 0.1)
 calc_Lstar <-
 function(L, m=0, p=0)
 {

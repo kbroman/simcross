@@ -100,10 +100,84 @@ meiotic product.
 
 ## Generating pedigrees
 
-The functions `sim_ril_pedigree`, `sim_4way_pedigree`, `sim_ail_pedigree`, and
-`sim_do_pedigree`.
+While one could simulate any experimental cross from a series of calls
+to `create_parent` and `cross`, it is generally more efficient to first develop
+a table that describes pedigree for the cross, and then simulate from
+the pedigree with the function `sim_from_pedigree` (see the next
+section).
 
-The example pedigree, `AILped`.
+### Example AIL pedigree matrix
+
+To define a pedigree, we use a numeric matrix with four columns:
+individual ID, mom, dad, and sex (coded as 0=female, 1=male). The
+[R/simcross package](https://github.com/kbroman/simcross) includes a
+sample pedigree for advanced intercross lines, `AILped`, taken from
+the [QTLRel package](http://cran.r-project.org/web/packages/QTLRel/).
+Here is the top of that dataset:
+
+```{r AILped_head}
+head(AILped, n=10)
+```
+
+### Checking a pedigree matrix
+
+The function `check_pedigree` can be used to check that a pedigree
+matrix conforms to R/simcross's requirements: founders have
+\code{mom == dad == 0}, all other individuals have both parents
+present in the pedigree, and parents always preceded any of their
+children. The `check_pedigree` function returns `TRUE` if the pedigree
+matrix is okay; otherwise, it throws an error.
+
+```{r check_AILped}
+check_pedigree(AILped)
+```
+
+R/simcross includes a set of functions for generating pedigree
+matrices for different cross designs: `sim_ril_pedigree`,
+`sim_4way_pedigree`, `sim_ail_pedigree`, and `sim_do_pedigree`.
+
+### RIL pedigree
+
+`sim_ril_pedigree` generates a pedigree matrix for a single
+recombinant inbred line. The arguments are `ngen` (number of
+generations of inbreeding), `selfing` (default `FALSE`, for sibling
+mating), `parents` (a vector of integers for the parents; the length
+must be 2, 4, or 8, and corresponds to the number of founder lines),
+and `firstind`, the ID number to attach to the first individual
+following the parents (so that the pedigree matrices for multiple RIL
+may be `rbind`-ed together). Not that there's no real _simulation_
+here; the result is entirely deterministic.)
+
+```{r sim_ril_ped}
+(ril <- sim_ril_pedigree(ngen=4, parents=1:4))
+```
+
+### 4-way cross pedigree
+
+`sim_4way_pedigree` generates a pedigree matrix for an intercross
+among four inbred lines. The arguments are `ngen` (which must be 1 or
+2) and `nsibs`. We start with four inbred individuals, and cross them
+in two pairs to generate a pair of heterozygous individuals. If
+`ngen==1`, we then just generate a set of `sum(nsibs)` F<sub>1</sub>
+offspring. If `ngen==2`, we generate `length(nsibs)` pairs of
+F<sub>1</sub>s and intercross them to generate a set of F<sub>2</sub>
+sibships; in this case, the input vector `nsibs` determines the sizes
+of the sibships. 
+
+The following generates two F<sub>2</sub> sibships with 3
+offspring in each.
+
+```{r sim_4way_ped}
+(fourway <- sim_4way_pedigree(2, c(3, 3)))
+```
+
+### AIL pedigree
+
+`sim_ail_pedigree` generates a pedigree matrix for 2-way advanced
+intercross lines.
+
+### Diversity Outcross pedigree
+
 
 ## Simulating from a pedigree
 

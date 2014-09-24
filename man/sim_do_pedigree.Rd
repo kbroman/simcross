@@ -62,7 +62,8 @@ tab <- sim_do_pedigree(8, 30, rep(6, 30))
 }
 \seealso{
 \code{\link{sim_from_pedigree}},
-\code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}}
+\code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}},
+\code{\link{sim_4way_pedigree}}
 }
 \keyword{datagen}
 

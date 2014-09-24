@@ -168,6 +168,11 @@ _simulation_ here; the result is entirely deterministic.)
 (ril <- sim_ril_pedigree(ngen=4, parents=1:4))
 ```
 
+The `gen` column in the output is the generation number, with 0
+corresponding to the founders. The generations are simply sequential
+and so don't correspond to the numbering scheme used for the
+Collaborative Cross (see, for example, Broman 2012).
+
 ### 4-way cross pedigree
 
 `sim_4way_pedigree` generates a pedigree matrix for an intercross
@@ -224,8 +229,45 @@ have 200 individuals for most generations and 500 at the end.
 
 ### Diversity Outcross pedigree
 
+The Diversity Outcross (DO; Svenson et al. 2013) is like AIL, but
+starting with eight inbred lines rather than two. Actually, the mouse
+DO started with partially-inbred individuals from Collaborative Cross
+lines (the so-called preCC; intermediate generations in the
+development of eight-way RIL). Heterogeneous stock (HS; Mott and Flint
+2002) can be viewed as a special case, but starting with the eight
+founder lines.
 
+`sim_do_pedigree` generates a pedigree matrix for a DO population. 
+The arguments are just like those of `sim_ail_pedigree`, but with one
+addition: `ccgen`, which is a vector with the numbers of generations
+of inbreeding to form the initial preCC lines that are then used to
+initiate the DO. (The default for `ccgen` is taken from Figure 1 of
+Svenson et al. 2013.) Use `ccgen=0` to simulate a pedigree for HS.
+The length `ccgen` should be `npairs`, the number of breeding pairs;
+we take two individuals (one female and one male) from each preCC line
+to begin the outcrossing generations.
 
+```{r sim_do_ped}
+tab <- sim_do_pedigree(ngen=12)
+nrow(tab)
+table(tab[,"do"], tab[,"gen"])
+```
+
+The output contains the usual `id`, `mom`, `dad`, and `sex`, plus
+`gen` (for generation number) and `do` (1 indicates part of the DO
+population, 0 indicates part of the earlier generations). As you can
+see from the table above, the generation (`gen`) has a different
+meaning, according to whether `do` is 0 or 1. When `do==0`, it is the
+number of generations following the initial founder lines; when
+`do==1`, it is the generation number of the outbreeding DO population.
+
+Also note that we start with _sixteen_ lines rather than 8: to
+properly handle the X chromosome, we need to consider a male and
+female from each of the eight founder lines. These are numbered 1&ndash;8
+for the females, and 9&dash;16 for the males. Also note that the preCC
+lines are formed from a cross among the eight founders, with the order
+of the crosses chosen at random (four females and four males, one from
+each of the eight founder lines).
 
 ## Simulating from a pedigree
 
@@ -239,6 +281,10 @@ The function `convert2geno` and `get_geno`.
 
 
 ## References
+
+Broman KW (2012)
+[Genotype probabilities at intermediate generations in the construction of recombinant inbred lines](http://www.genetics.org/content/190/2/403.short).
+Genetics 190:403-412
 
 Broman KW, Rowe LB, Churchill GA, Paigen K (2002)
 [Crossover interference in the mouse](http://www.genetics.org/content/160/3/1123.short).

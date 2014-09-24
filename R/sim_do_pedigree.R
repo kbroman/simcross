@@ -7,8 +7,9 @@
 #'
 #' @param ngen Number of generations of outbreeding
 #' @param npairs Number of breeding pairs at each generation
-#' @param ccgen Vector of length npairs, with the number of
-#' generations for each CC line
+#' @param ccgen Vector of length \code{npairs}, with the number of
+#' generations for each CC line. If length 1, it is repeated to a
+#' vector of length \code{npairs}.
 #' @param nkids_per Number of offspring per pair for the last
 #' generation
 #' @param design How to choose crosses: either random but avoiding

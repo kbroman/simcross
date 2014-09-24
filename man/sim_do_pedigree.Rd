@@ -11,8 +11,9 @@ sim_do_pedigree(ngen = 12, npairs = 144, ccgen = rep(4:12, c(21, 64, 24,
 
 \item{npairs}{Number of breeding pairs at each generation}
 
-\item{ccgen}{Vector of length npairs, with the number of
-generations for each CC line}
+\item{ccgen}{Vector of length \code{npairs}, with the number of
+generations for each CC line. If length 1, it is repeated to a
+vector of length \code{npairs}.}
 
 \item{nkids_per}{Number of offspring per pair for the last
 generation}

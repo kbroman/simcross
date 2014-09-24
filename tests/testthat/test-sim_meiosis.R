@@ -149,7 +149,7 @@ test_that("average no. crossovers match expectation", {
 
     set.seed(82271836)
     tol <- 0.01
-    n <- 80000
+    n <- 10000
 
     x <- replicate(n, sim_crossovers(L=100, m=0, p=0))
     expect_equal(mean(sapply(x, length)), 1, tolerance=tol)

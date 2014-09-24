@@ -7,7 +7,7 @@
 #'
 #' @param ngen Number of generations of outbreeding
 #' @param npairs Number of breeding pairs at each generation
-#' @param ccgen Vector of same length as npairs, with the number of
+#' @param ccgen Vector of length npairs, with the number of
 #' generations for each CC line
 #' @param nkids_per Number of offspring per pair for the last
 #' generation
@@ -45,6 +45,15 @@
 #' alternating between sibships, with one additional female and then
 #' one additional male.
 #'
+#' The default for \code{ccgen} is taken from Figure 1 of Svenson et
+#' al. (2012).
+#'
+#' @references
+#' Svenson KL, Gatti DM, Valdar W, Welsh CE, Cheng R, Chesler EJ,
+#' Palmer AA, McMillan L, Churchill GA (2012) High-resolution genetic
+#' mapping using the mouse Diversity Outbred population. Genetics
+#' 190:437-447
+#'
 #' @keywords datagen
 #' @export
 #' @seealso \code{\link{sim_from_pedigree}},
@@ -52,10 +61,11 @@
 #' \code{\link{sim_4way_pedigree}}
 #'
 #' @examples
-#' tab <- sim_do_pedigree(8, 30, rep(6, 30))
+#' tab <- sim_do_pedigree(8)
 sim_do_pedigree <-
-function(ngen=12, npairs=30, ccgen=rep(0, npairs), nkids_per=5,
-         design=c("nosib", "random"))
+function(ngen=12, npairs=144,
+         ccgen=rep(4:12, c(21, 64, 24, 10, 5, 9, 5, 3, 3)),
+         nkids_per=5, design=c("nosib", "random"))
 {
     if(length(ccgen)==1) ccgen <- rep(ccgen, npairs)
     stopifnot(length(ccgen) == npairs)

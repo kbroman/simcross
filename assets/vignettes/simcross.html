@@ -268,10 +268,10 @@ indicate whether the offspring is to be male (which only matters if
 <code>xchr=TRUE</code>). Further, one may use <code>obligate_chiasma=TRUE</code> (default
 <code>FALSE</code>) to require at least one chiasma on the 4-strand bundle).</p>
 
-<p>Here&#39;s an example, to generate an F<sub>2</sub> individual.</p>
+<p>Here&#39;s an example, to generate an F<sub>2</sub> individual.  (The
+outer parentheses cause the result to be printed.)</p>
 
-<pre><code class="r">f2 &lt;- cross(f1, f1)
-print(f2)
+<pre><code class="r">(f2 &lt;- cross(f1, f1))
 </code></pre>
 
 <pre><code>## $mat

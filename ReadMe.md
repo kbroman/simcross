@@ -1,4 +1,4 @@
-## R/simcross
+## [R/simcross](http://kbroman.org/simcross)
 
 [![Build Status](https://travis-ci.org/kbroman/simcross.png?branch=master)](https://travis-ci.org/kbroman/simcross)
 
@@ -20,14 +20,14 @@ You can install R/simcross from its
 [GitHub repository](http://github.com/kbroman/simcross). You first need to
 install the [devtools](https://github.com/hadley/devtools) package.
 
-```S
+```r
 install.packages("devtools")
 ```
 
 Then install R/simcross using the `install_github` function in the
 [devtools](http://github.com/hadley/devtools) package.
 
-```S
+```r
 library(devtools)
 install_github("kbroman/simcross")
 ```
@@ -37,13 +37,13 @@ install_github("kbroman/simcross")
 ### Vignette
 
 A vignette describing the use of the package is available from within
-R. Load the package and then use the `vignette` function.
+R (and [also here](assets/vignettes/simcross.html). Load the package
+and then use the `vignette` function.
 
-```S
+```r
 library(simcross)
 vignette("simcross", package="simcross")
 ```
-
 
 ---
 

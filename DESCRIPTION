@@ -17,7 +17,7 @@ Suggests:
     devtools,
     roxygen2
 License: GPL-3
-URL: http://github.com/kbroman/simcross
+URL: http://kbroman.org/simcross
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 LazyData: true

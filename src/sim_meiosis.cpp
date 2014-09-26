@@ -3,7 +3,6 @@ using namespace Rcpp;
 
 #include "random.h"
 #include "sim_meiosis.h"
-#include "debug_util.h"
 
 // [[Rcpp::export]]
 NumericVector fromR_sim_crossovers(const double L, const int m, const double p,
@@ -112,7 +111,7 @@ List fromR_sim_meiosis(const List parent, const int m, const double p,
 
     double L = max(matloc);
     if(fabs(L - max(patloc)) > tol)
-        Rf_error("parent's two chromosomes are not the same length");
+        Rcpp::exception("parent's two chromosomes are not the same length");
 
     // simulate crossover locations; add -1 to the beginning
     NumericVector tmp = cpp_sim_crossovers(L, m, p, obligate_chiasma, Lstar);

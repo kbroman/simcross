@@ -35,5 +35,8 @@ int get_one_geno(const List chr, const double position)
         if(locations[j] >= position)
             return alleles[j];
     }
-    return(-1); // this shouldn't happen
+
+    // shouldn't get here
+    Rcpp::exception("No location to right of position");
+    return -1; // really won't get here
 }

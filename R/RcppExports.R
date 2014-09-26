@@ -13,6 +13,10 @@ fromR_get_geno <- function(xodat, position) {
     .Call('simcross_fromR_get_geno', PACKAGE = 'simcross', xodat, position)
 }
 
+random_int <- function(n, low, high) {
+    .Call('simcross_random_int', PACKAGE = 'simcross', n, low, high)
+}
+
 fromR_sim_crossovers <- function(L, m, p, obligate_chiasma, Lstar) {
     .Call('simcross_fromR_sim_crossovers', PACKAGE = 'simcross', L, m, p, obligate_chiasma, Lstar)
 }

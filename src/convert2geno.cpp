@@ -69,10 +69,8 @@ IntegerVector convertchr2geno(const List chr, const NumericVector map)
 IntegerMatrix combine_mat_and_pat_geno(const IntegerMatrix matmatrix, const IntegerMatrix patmatrix, const int max_geno)
 {
     // don't allow max_geno > 2 here; return empty matrix
-    if(max_geno > 2) {
-        IntegerMatrix result(0,0);
-        return result;
-    }
+    if(max_geno > 2)
+        Rcpp::exception("combine_mat_and_pat_geno can't handle >2 founders");
 
     int n_mar = matmatrix.nrow();
     int n_ind = matmatrix.ncol();

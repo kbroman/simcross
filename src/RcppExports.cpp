@@ -54,6 +54,23 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// random_int
+IntegerVector random_int(const int n, const int low, const int high);
+RcppExport SEXP simcross_random_int(SEXP nSEXP, SEXP lowSEXP, SEXP highSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< const int >::type n(nSEXP );
+        Rcpp::traits::input_parameter< const int >::type low(lowSEXP );
+        Rcpp::traits::input_parameter< const int >::type high(highSEXP );
+        IntegerVector __result = random_int(n, low, high);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // fromR_sim_crossovers
 NumericVector fromR_sim_crossovers(const double L, const int m, const double p, const bool obligate_chiasma, const double Lstar);
 RcppExport SEXP simcross_fromR_sim_crossovers(SEXP LSEXP, SEXP mSEXP, SEXP pSEXP, SEXP obligate_chiasmaSEXP, SEXP LstarSEXP) {

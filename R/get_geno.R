@@ -36,8 +36,7 @@ function(xodat, position)
   if(position > L - tol)
       position <- L - tol
 
-  output <- .Call('simcross_fromR_get_geno', PACKAGE = 'simcross',
-                  xodat, position)
+  output <- .get_geno(xodat, position)
   dimnames(output) <- list(names(xodat), c("mat", "pat"))
 
   output

@@ -4,8 +4,8 @@ using namespace Rcpp;
 #include "convert2geno.h"
 
 // for 2 founders or for case that founder_geno is provided
-// [[Rcpp::export]]
-IntegerMatrix fromR_convert2geno(const List xodat, const NumericVector map, const IntegerMatrix founder_geno)
+// [[Rcpp::export(".convert2geno")]]
+IntegerMatrix convert2geno(const List xodat, const NumericVector map, const IntegerMatrix founder_geno)
 {
     int n_ind = xodat.size();
     int n_mar = map.size();
@@ -100,12 +100,11 @@ IntegerMatrix combine_mat_and_pat_geno_wfounders(const IntegerMatrix matmatrix, 
 
 // this is for the case with >2 founders but not founder genotype matrix
 // [[Rcpp::export]]
-IntegerVector fromR_convert2genoarray(const List xodat, const NumericVector map)
+IntegerVector convert2genoarray(const List xodat, const NumericVector map)
 {
     int n_ind = xodat.size();
     int n_mar = map.size();
     int matrix_size = n_ind * n_mar;
-    //    IntegerVector result(n_mar, n_ind, 2);
     IntegerVector result(matrix_size * 2);
 
     for(int i=0; i<n_ind; i++) {

@@ -3,8 +3,8 @@ using namespace Rcpp;
 
 #include "get_geno.h"
 
-// [[Rcpp::export]]
-IntegerMatrix fromR_get_geno(const List xodat, const double position)
+// [[Rcpp::export(".get_geno")]]
+IntegerMatrix get_geno(const List xodat, const double position)
 {
     int n_ind = xodat.size();
     IntegerMatrix result(n_ind, 2);

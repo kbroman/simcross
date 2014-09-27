@@ -74,14 +74,12 @@ function(xodat, map, founder_geno)
   }
 
   if(length(founder_geno) > 0 || max_geno <= 2) {
-      output <- t(.Call('simcross_fromR_convert2geno', PACKAGE = 'simcross',
-                        xodat, map, founder_geno))
+      output <- t(.convert2geno(xodat, map, founder_geno))
 
       dimnames(output) <- list(names(xodat), names(map))
   }
   else {
-      output <- .Call('simcross_fromR_convert2genoarray', PACKAGE = 'simcross',
-                      xodat, map)
+      output <- convert2genoarray(xodat, map)
       # output was markers x ind x alleles; switch first two dimensions
       output <- aperm(output, c(2, 1, 3))
 

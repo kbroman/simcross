@@ -4,20 +4,9 @@ using namespace Rcpp;
 #include "random.h"
 #include "sim_meiosis.h"
 
-// [[Rcpp::export]]
-NumericVector fromR_sim_crossovers(const double L, const int m, const double p,
-                                   const bool obligate_chiasma, const double Lstar)
-{
-    RNGScope scope; // to set/reset random number seed
-
-    return cpp_sim_crossovers(L, m, p, obligate_chiasma, Lstar);
-
-
-}
-
-// internal function
-NumericVector cpp_sim_crossovers(const double L, const int m, const double p,
-                                 const bool obligate_chiasma, const double Lstar)
+// [[Rcpp::export(".sim_crossovers")]]
+NumericVector sim_crossovers(const double L, const int m, const double p,
+                             const bool obligate_chiasma, const double Lstar)
 {
     if(m==0) { // no-interference model is a lot easier
         int n_xo;
@@ -91,12 +80,10 @@ NumericVector cpp_sim_crossovers(const double L, const int m, const double p,
 
 
 
-// [[Rcpp::export]]
-List fromR_sim_meiosis(const List parent, const int m, const double p,
-                       const bool obligate_chiasma, const double Lstar)
+// [[Rcpp::export(".sim_meiosis")]]
+List sim_meiosis(const List parent, const int m, const double p,
+                 const bool obligate_chiasma, const double Lstar)
 {
-    RNGScope scope; // to set/reset random number seed
-
     const double tol=1e-12; // for comparison of chr lengths in parents
 
     List mat, pat;
@@ -114,7 +101,7 @@ List fromR_sim_meiosis(const List parent, const int m, const double p,
         Rcpp::exception("parent's two chromosomes are not the same length");
 
     // simulate crossover locations; add -1 to the beginning
-    NumericVector tmp = cpp_sim_crossovers(L, m, p, obligate_chiasma, Lstar);
+    NumericVector tmp = sim_crossovers(L, m, p, obligate_chiasma, Lstar);
     NumericVector product(tmp.size() + 1);
     product[0] = -1.0;
     std::copy(tmp.begin(), tmp.end(), product.begin()+1);

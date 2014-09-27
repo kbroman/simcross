@@ -139,8 +139,7 @@ function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
         else Lstar <- L
     }
 
-    .Call('simcross_fromR_sim_crossovers', PACKAGE = 'simcross',
-          L, m, p, obligate_chiasma, Lstar)
+    .sim_crossovers(L, m, p, obligate_chiasma, Lstar)
 }
 
 
@@ -196,8 +195,7 @@ function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
         else Lstar <- L
     }
 
-    .Call('simcross_fromR_sim_meiosis', PACKAGE = 'simcross',
-          parent, m, p, obligate_chiasma, Lstar)
+    .sim_meiosis(parent, m, p, obligate_chiasma, Lstar)
 }
 
 

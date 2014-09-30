@@ -47,8 +47,8 @@ function(ngen=20, selfing=FALSE, parents=1:8, firstind=max(parents)+1)
     }
     else { # 8 parents
         id <- c(parents, 0:5+firstind)
-        mom <- c(rep(0, nparents), parents[1], parents[3], parents[5], parents[7], firstind, firstind+2)
-        dad <- c(rep(0, nparents), parents[2], parents[4], parents[6], parents[8], firstind+1, firstind+3)
+        mom <- c(rep(0, nparents), parents[seq(1, 8, by=2)], firstind,   firstind+2)
+        dad <- c(rep(0, nparents), parents[seq(2, 8, by=2)], firstind+1, firstind+3)
         sex <- rep(c(0, 1), nparents/2 + 3)
         gen <- rep(0:2, c(8, 4, 2))
         nextid <- firstind + 6

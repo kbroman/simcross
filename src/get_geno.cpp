@@ -37,6 +37,6 @@ int get_one_geno(const List chr, const double position)
     }
 
     // shouldn't get here
-    Rcpp::exception("No location to right of position");
+    throw std::range_error("No location to right of position");
     return -1; // really won't get here
 }

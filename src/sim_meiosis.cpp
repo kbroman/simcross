@@ -98,7 +98,7 @@ List sim_meiosis(const List parent, const int m, const double p,
 
     double L = max(matloc);
     if(fabs(L - max(patloc)) > tol)
-        Rcpp::exception("parent's two chromosomes are not the same length");
+        throw std::range_error("parent's two chromosomes are not the same length");
 
     // simulate crossover locations; add -1 to the beginning
     NumericVector tmp = sim_crossovers(L, m, p, obligate_chiasma, Lstar);

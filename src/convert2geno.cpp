@@ -70,7 +70,7 @@ IntegerMatrix combine_mat_and_pat_geno(const IntegerMatrix matmatrix, const Inte
 {
     // don't allow max_geno > 2 here; return empty matrix
     if(max_geno > 2)
-        Rcpp::exception("combine_mat_and_pat_geno can't handle >2 founders");
+        throw std::range_error("combine_mat_and_pat_geno can't handle >2 founders");
 
     int n_mar = matmatrix.nrow();
     int n_ind = matmatrix.ncol();

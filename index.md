@@ -20,8 +20,7 @@ install the [devtools](https://github.com/hadley/devtools) package.
 
     install.packages("devtools")
 
-Then install R/simcross using the `install_github` function in the
-[devtools](http://github.com/hadley/devtools) package.
+Then install R/simcross using `devtools::install_github()`.
 
     library(devtools)
     install_github("kbroman/simcross")

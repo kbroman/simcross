@@ -7,8 +7,8 @@ sim_do_pedigree_last2 <- function(ngen=12, npairs=30, nkids_per=5, n.ccgen=15,
   nkids_la2 <- ceiling(npairs_la2*2/npairs)
   
   ## last but 2 generation
-  ped <- sim_do_pedigree(ngen = n.gen-1, npairs = n.pairs,
-                         ccgen = rep(n.ccgen, n.pairs),
+  ped <- sim_do_pedigree(ngen = ngen-1, npairs = npairs,
+                         ccgen = rep(n.ccgen, npairs),
                          nkids_per=nkids_la2, design=design)
   id <- ped[,"id"]
   mom <- ped[,"mom"]

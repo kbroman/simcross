@@ -124,3 +124,95 @@ IntegerVector convert2genoarray(const List xodat, const NumericVector map)
 
     return result;
 }
+
+// [[Rcpp::export]]
+CharacterMatrix convert2geno_char(const List xodat, const NumericVector map, const CharacterMatrix founder_geno)
+{
+    int n_ind = xodat.size();
+    int n_mar = map.size();
+    IntegerMatrix matmatrix(n_mar, n_ind), patmatrix(n_mar, n_ind);
+
+    for(int i=0; i<n_ind; i++) {
+        List ind = xodat[i];
+        List mat = ind[0];
+        List pat = ind[1];
+
+        // convert mat and pat chr to genotype matrices
+        IntegerVector matdata = convertchr2geno(mat, map);
+        std::copy(matdata.begin(), matdata.end(), matmatrix.begin()+i*n_mar);
+        IntegerVector patdata = convertchr2geno(pat, map);
+        std::copy(patdata.begin(), patdata.end(), patmatrix.begin()+i*n_mar);
+    }
+
+    // convert to SNP genotypes using founder genotypes
+    return combine_mat_and_pat_geno_wfounders_char(matmatrix, patmatrix, founder_geno);
+}
+
+
+CharacterMatrix combine_mat_and_pat_geno_wfounders_char(const IntegerMatrix matmatrix, const IntegerMatrix patmatrix, const CharacterMatrix founder_geno)
+{
+    int n_mar = matmatrix.nrow();
+    int n_ind = matmatrix.ncol();
+    CharacterMatrix result(n_mar, n_ind);
+
+    for(int i=0; i<n_mar; i++){
+      for(int j=0; j<n_ind; j++){
+	const String matallele = founder_geno( matmatrix(i,j) - 1, i);
+	const String patallele = founder_geno( patmatrix(i,j) - 1, i);
+	if(matallele == "N" || patallele == "N") {
+	  result(i,j) = "N";
+	} else if(matallele == "H" || patallele == "H") {
+	  result(i,j) = "H";
+	} else if(matallele == patallele){
+	  result(i,j) = matallele;
+	} else{
+	  result(i,j) = "H";
+	}
+      }
+    }
+
+    return result;
+}
+
+// [[Rcpp::export]]
+CharacterMatrix convert2geno_char_paste(const List xodat, const NumericVector map, const CharacterMatrix founder_geno)
+{
+    int n_ind = xodat.size();
+    int n_mar = map.size();
+    IntegerMatrix matmatrix(n_mar, n_ind), patmatrix(n_mar, n_ind);
+
+    for(int i=0; i<n_ind; i++) {
+        List ind = xodat[i];
+        List mat = ind[0];
+        List pat = ind[1];
+
+        // convert mat and pat chr to genotype matrices
+        IntegerVector matdata = convertchr2geno(mat, map);
+        std::copy(matdata.begin(), matdata.end(), matmatrix.begin()+i*n_mar);
+        IntegerVector patdata = convertchr2geno(pat, map);
+        std::copy(patdata.begin(), patdata.end(), patmatrix.begin()+i*n_mar);
+    }
+
+    // convert to SNP genotypes using founder genotypes
+    return combine_mat_and_pat_geno_wfounders_char_paste(matmatrix, patmatrix, founder_geno);
+}
+
+CharacterMatrix combine_mat_and_pat_geno_wfounders_char_paste(const IntegerMatrix matmatrix, const IntegerMatrix patmatrix, const CharacterMatrix founder_geno)
+{
+  int n_mar = matmatrix.nrow();
+  int n_ind = matmatrix.ncol();
+  CharacterMatrix result(n_mar, n_ind);
+
+  for(int i=0; i<n_mar; i++){
+    for(int j=0; j<n_ind; j++){
+      const String matallele = founder_geno( matmatrix(i,j) - 1, i);
+      const String patallele = founder_geno( patmatrix(i,j) - 1, i);
+      if(matallele > patallele){
+	result(i,j) = std::string(patallele) + std::string(matallele);
+      } else{
+	result(i,j) = std::string(matallele) + std::string(patallele);
+      }
+    }
+  }
+  return result;
+}

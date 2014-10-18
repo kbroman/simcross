@@ -9,6 +9,14 @@ convert2genoarray <- function(xodat, map) {
     .Call('simcross_convert2genoarray', PACKAGE = 'simcross', xodat, map)
 }
 
+convert2geno_char <- function(xodat, map, founder_geno) {
+    .Call('simcross_convert2geno_char', PACKAGE = 'simcross', xodat, map, founder_geno)
+}
+
+convert2geno_char_paste <- function(xodat, map, founder_geno) {
+    .Call('simcross_convert2geno_char_paste', PACKAGE = 'simcross', xodat, map, founder_geno)
+}
+
 .get_geno <- function(xodat, position) {
     .Call('simcross_get_geno', PACKAGE = 'simcross', xodat, position)
 }

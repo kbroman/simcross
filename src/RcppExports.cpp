@@ -38,6 +38,40 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// convert2geno_char
+CharacterMatrix convert2geno_char(const List xodat, const NumericVector map, const CharacterMatrix founder_geno);
+RcppExport SEXP simcross_convert2geno_char(SEXP xodatSEXP, SEXP mapSEXP, SEXP founder_genoSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< const List >::type xodat(xodatSEXP );
+        Rcpp::traits::input_parameter< const NumericVector >::type map(mapSEXP );
+        Rcpp::traits::input_parameter< const CharacterMatrix >::type founder_geno(founder_genoSEXP );
+        CharacterMatrix __result = convert2geno_char(xodat, map, founder_geno);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// convert2geno_char_paste
+CharacterMatrix convert2geno_char_paste(const List xodat, const NumericVector map, const CharacterMatrix founder_geno);
+RcppExport SEXP simcross_convert2geno_char_paste(SEXP xodatSEXP, SEXP mapSEXP, SEXP founder_genoSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< const List >::type xodat(xodatSEXP );
+        Rcpp::traits::input_parameter< const NumericVector >::type map(mapSEXP );
+        Rcpp::traits::input_parameter< const CharacterMatrix >::type founder_geno(founder_genoSEXP );
+        CharacterMatrix __result = convert2geno_char_paste(xodat, map, founder_geno);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // get_geno
 IntegerMatrix get_geno(const List xodat, const double position);
 RcppExport SEXP simcross_get_geno(SEXP xodatSEXP, SEXP positionSEXP) {

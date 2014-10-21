@@ -1,4 +1,3 @@
-
 context("convert2geno")
 
 test_that("convert2geno works for 2-allele case", {
@@ -170,4 +169,27 @@ test_that("convert2geno works for 8-allele case", {
     dimnames(expected2) <- list(as.character(1:4), paste0("marker", 1:21))
 
     expect_equal(expected2, convert2geno(dat, map, founder_geno))
+})
+
+test_that("convert2geno and get_geno give same answer when shifted", {
+
+    # marker map starting at 5
+    map <- seq(20, 80, by=5)
+    names(map) <- paste0("marker", seq(along=map))
+
+    # simulate large ail pedigree
+    set.seed(37513076)
+    tab <- sim_ail_pedigree(6, 100)
+    dat <- sim_from_pedigree(tab, max(map))[tab[,"gen"]==6]
+
+    g <- convert2geno(dat, map)
+    g_shifted <- convert2geno(dat, map, shift_map=TRUE)
+
+    expect_equal(g[,map==30], g_shifted[,map==50])
+
+    qtl_g <- get_geno(dat, 30)
+    qtl_g <- (qtl_g[,1] + qtl_g[,2] - 1)
+    expect_equal(qtl_g, g[,map==30])
+    expect_equal(qtl_g, g_shifted[,map==50])
+
 })

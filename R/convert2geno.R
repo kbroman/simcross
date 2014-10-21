@@ -11,6 +11,7 @@
 #' @param founder_geno Optional matrix (size \code{n_founders} x
 #' \code{length(map)}) of founder genotypes coded as 1/2. If provided,
 #' results are 1/2/3 genotypes
+#' @param shift_map If TRUE, shift genetic map to start at 0
 #'
 #' @return If \code{founder_geno} is provided or there are just two
 #' founders, the result is a numeric matrix of genotypes, individuals
@@ -49,11 +50,13 @@
 #' # if fg not provided, result is a 3d array
 #' genoarray <- convert2geno(dat, map)
 convert2geno <-
-function(xodat, map, founder_geno)
+function(xodat, map, founder_geno, shift_map=FALSE)
 {
-  if(map[1] != 0) map <- map - map[1]
+  if(shift_map) map <- map - map[1]
   if(max(map) > max(xodat[[1]]$mat$locations))
-    warning("maximum simulated position is less than the length of the map.")
+      stop("maximum simulated position is less than the length of the map.")
+  if(any(map < 0))
+      stop("Some markers at < 0 cM")
 
   # maximum founder genotype
   max_geno <- max(sapply(xodat, function(a) max(a$mat$alleles, a$pat$alleles)))

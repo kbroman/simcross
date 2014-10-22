@@ -73,6 +73,3 @@ function(pedigree, L=100, xchr=FALSE, m=10, p=0, obligate_chiasma=FALSE)
     }
     result
 }
-
-
-

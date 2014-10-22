@@ -3,7 +3,7 @@
 #' Simulate genotypes along all chromosomes for a pedigree. This is a
 #' wrap up of sim_from_pedigree.
 #' 
-#' @inheritParamss sim_from_pedigree
+#' @inheritParams sim_from_pedigree
 #' @param map marker locations, a list with elements for each
 #' chromosome
 #' 

@@ -18,7 +18,7 @@ experimental cross. The aim is flexibility rather than speed.
 
 Meiosis is simulated following the Stahl model (Copenhaver et
 al. 2002) with the interference parameter being an integer. In this
-model, chiasmata locations are the superposition of two processes: a
+model, chiasma locations are the superposition of two processes: a
 proportion _p_ come from a process exhibiting no interference (that
 is, a Poisson process) and the remainder (proportion 1 &ndash; _p_)
 come from a process following the chi-square model (Foss et al. 1993;
@@ -39,7 +39,7 @@ with this assumption; the same model is used, but with rejection
 sampling to get results conditional on there being at least one
 chiasma. Note that this isn't an assumption of an obligate
 _crossover_; if there is exactly one chiasma, then a random meiotic
-product will have 0 or 1 crossover, with probability 1/2 each. Also
+product will have 0 or 1 crossovers, with probability 1/2 each. Also
 note that, with the obligate chiasma assumption, chromosomes must be
 greater than 50 cM.
 
@@ -48,7 +48,7 @@ greater than 50 cM.
 There are two basic functions for simulating a cross:
 `create_parent` and `cross`.
 
-`create_parent` parent is for generating a parent object, either an
+`create_parent` is for generating a parent object, either an
 inbred individual or the F<sub>1</sub> offspring of two inbred
 individuals. It takes two arguments: the length of the chromosome in
 cM, and the allele or pair of alleles.
@@ -68,8 +68,8 @@ p2 <- create_parent(L=100, allele=2)
 f1 <- create_parent(L=100, allele=1:2)
 ```
 
-You don't need to specify the arguments by name (e.g., in that last
-line you could just write `create_parent(100, 1:2)`); I'm doing so
+You don't need to specify the arguments by name (e.g., in the last
+line above, you could just write `create_parent(100, 1:2)`); I'm doing so
 here just to better document the names of the arguments.
 
 The `cross` function is used to generate one offspring from the cross
@@ -89,10 +89,17 @@ outer parentheses cause the result to be printed.)
 (f2 <- cross(f1, f1))
 ```
 
-The output is list with two components: the maternal and paternal
+The output is a list with two components: the maternal and paternal
 chromosomes. Each chromsome is a list with the allele in a set
 of intervals, and the locations of the right endpoints of the
 intervals.
+
+In the example above, the maternal chromosome is a non-recombinant `2`
+chromosome. The paternal chromosome has two crossovers, with the
+the `1` allele up to `r round(f2$pat$locations[1], 1)` cM, the `2` allele
+in the interval `r round(f2$pat$locations[1], 1)` &ndash;
+`r round(f2$pat$locations[2], 1)`, and the `1` allele
+for the remainder of the chromosome.
 
 By default, we use `m=10`, `p=0`, and `obligate_chiasma=FALSE`. The
 chromosome length is taken from the input parent objects (`f1` in this case).
@@ -102,13 +109,6 @@ with an obligate chiasma, we'd use:
 ```{r sim_f2_nointerference}
 f2 <- cross(f1, f1, m=0, obligate_chiasma=TRUE)
 ```
-
-In the example above, the maternal chromosome is a non-recombinant `2`
-chromosome. The paternal chromosome has two crossovers, with the
-the `1` allele up to `r round(f2$pat$locations[1], 1)` cM, the `2` allele
-in the interval `r round(f2$pat$locations[1], 1)` &ndash;
-`r round(f2$pat$locations[2], 1)`, and the `1` allele
-for the remainder of the chromosome.
 
 Behind the scenes, there are two additional
 functions, `sim_crossovers`, for simulating crossover locations on a
@@ -144,8 +144,8 @@ head(AILped, n=10)
 
 The function `check_pedigree` can be used to check that a pedigree
 matrix conforms to R/simcross's requirements: founders have
-`mom == dad == 0}, all other individuals have both parents
-present in the pedigree, and parents always preceded any of their
+`mom == dad == 0`, all other individuals have both parents
+present in the pedigree, and parents always precede any of their
 children. The `check_pedigree` function returns `TRUE` if the pedigree
 matrix is okay; otherwise, it throws an error.
 
@@ -168,7 +168,7 @@ are `ngen` (number of generations of inbreeding), `selfing` (default
 parents; the length must be 2, 4, or 8, and corresponds to the number
 of founder lines), and `firstind`, the ID number to attach to the
 first individual following the parents (so that the pedigree matrices
-for multiple RIL may be `rbind`-ed together). Not that there's no real
+for multiple RIL may be `rbind`-ed together). Note that there's no real
 _simulation_ here; the result is entirely deterministic.)
 
 ```{r sim_ril_ped}
@@ -244,7 +244,7 @@ development of eight-way RIL). Heterogeneous stock (HS; Mott and Flint
 2002) can be viewed as a special case, but starting with the eight
 founder lines.
 
-`sim_do_pedigree` generates a pedigree matrix for a DO population. 
+`sim_do_pedigree` generates a pedigree matrix for a DO population.
 The arguments are just like those of `sim_ail_pedigree`, but with one
 addition: `ccgen`, which is a vector with the numbers of generations
 of inbreeding to form the initial preCC lines that are then used to

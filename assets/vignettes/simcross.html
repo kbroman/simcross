@@ -214,7 +214,7 @@ experimental cross. The aim is flexibility rather than speed.</p>
 
 <p>Meiosis is simulated following the Stahl model (Copenhaver et
 al. 2002) with the interference parameter being an integer. In this
-model, chiasmata locations are the superposition of two processes: a
+model, chiasma locations are the superposition of two processes: a
 proportion <em>p</em> come from a process exhibiting no interference (that
 is, a Poisson process) and the remainder (proportion 1 &ndash; <em>p</em>)
 come from a process following the chi-square model (Foss et al. 1993;
@@ -235,7 +235,7 @@ with this assumption; the same model is used, but with rejection
 sampling to get results conditional on there being at least one
 chiasma. Note that this isn&#39;t an assumption of an obligate
 <em>crossover</em>; if there is exactly one chiasma, then a random meiotic
-product will have 0 or 1 crossover, with probability &frac12; each. Also
+product will have 0 or 1 crossovers, with probability &frac12; each. Also
 note that, with the obligate chiasma assumption, chromosomes must be
 greater than 50 cM.</p>
 
@@ -244,7 +244,7 @@ greater than 50 cM.</p>
 <p>There are two basic functions for simulating a cross:
 <code>create_parent</code> and <code>cross</code>.</p>
 
-<p><code>create_parent</code> parent is for generating a parent object, either an
+<p><code>create_parent</code> is for generating a parent object, either an
 inbred individual or the F<sub>1</sub> offspring of two inbred
 individuals. It takes two arguments: the length of the chromosome in
 cM, and the allele or pair of alleles.</p>
@@ -259,8 +259,8 @@ p2 &lt;- create_parent(L=100, allele=2)
 f1 &lt;- create_parent(L=100, allele=1:2)
 </code></pre>
 
-<p>You don&#39;t need to specify the arguments by name (e.g., in that last
-line you could just write <code>create_parent(100, 1:2)</code>); I&#39;m doing so
+<p>You don&#39;t need to specify the arguments by name (e.g., in the last
+line above, you could just write <code>create_parent(100, 1:2)</code>); I&#39;m doing so
 here just to better document the names of the arguments.</p>
 
 <p>The <code>cross</code> function is used to generate one offspring from the cross
@@ -292,13 +292,20 @@ outer parentheses cause the result to be printed.)</p>
 ## [1] 1 2 1
 ## 
 ## $pat$locations
-## [1]  19.41  51.34 100.00
+## [1]  19.41483  51.33810 100.00000
 </code></pre>
 
-<p>The output is list with two components: the maternal and paternal
+<p>The output is a list with two components: the maternal and paternal
 chromosomes. Each chromsome is a list with the allele in a set
 of intervals, and the locations of the right endpoints of the
 intervals.</p>
+
+<p>In the example above, the maternal chromosome is a non-recombinant <code>2</code>
+chromosome. The paternal chromosome has two crossovers, with the
+the <code>1</code> allele up to 19.4 cM, the <code>2</code> allele
+in the interval 19.4 &ndash;
+51.3, and the <code>1</code> allele
+for the remainder of the chromosome.</p>
 
 <p>By default, we use <code>m=10</code>, <code>p=0</code>, and <code>obligate_chiasma=FALSE</code>. The
 chromosome length is taken from the input parent objects (<code>f1</code> in this case).
@@ -307,13 +314,6 @@ with an obligate chiasma, we&#39;d use:</p>
 
 <pre><code class="r">f2 &lt;- cross(f1, f1, m=0, obligate_chiasma=TRUE)
 </code></pre>
-
-<p>In the example above, the maternal chromosome is a non-recombinant <code>2</code>
-chromosome. The paternal chromosome has two crossovers, with the
-the <code>1</code> allele up to 25.9 cM, the <code>2</code> allele
-in the interval 25.9 &ndash;
-100, and the <code>1</code> allele
-for the remainder of the chromosome.</p>
 
 <p>Behind the scenes, there are two additional
 functions, <code>sim_crossovers</code>, for simulating crossover locations on a
@@ -361,9 +361,9 @@ Here is the top of that dataset:</p>
 
 <p>The function <code>check_pedigree</code> can be used to check that a pedigree
 matrix conforms to R/simcross&#39;s requirements: founders have
-<code>mom == dad == 0}, all other individuals have both parents
-present in the pedigree, and parents always preceded any of their
-children. The</code>check_pedigree<code>function returns</code>TRUE if the pedigree
+<code>mom == dad == 0</code>, all other individuals have both parents
+present in the pedigree, and parents always precede any of their
+children. The <code>check_pedigree</code> function returns <code>TRUE</code> if the pedigree
 matrix is okay; otherwise, it throws an error.</p>
 
 <pre><code class="r">check_pedigree(AILped)
@@ -387,7 +387,7 @@ are <code>ngen</code> (number of generations of inbreeding), <code>selfing</code
 parents; the length must be 2, 4, or 8, and corresponds to the number
 of founder lines), and <code>firstind</code>, the ID number to attach to the
 first individual following the parents (so that the pedigree matrices
-for multiple RIL may be <code>rbind</code>-ed together). Not that there&#39;s no real
+for multiple RIL may be <code>rbind</code>-ed together). Note that there&#39;s no real
 <em>simulation</em> here; the result is entirely deterministic.)</p>
 
 <pre><code class="r">(ril &lt;- sim_ril_pedigree(ngen=4, parents=1:4))
@@ -508,7 +508,7 @@ development of eight-way RIL). Heterogeneous stock (HS; Mott and Flint
 2002) can be viewed as a special case, but starting with the eight
 founder lines.</p>
 
-<p><code>sim_do_pedigree</code> generates a pedigree matrix for a DO population. 
+<p><code>sim_do_pedigree</code> generates a pedigree matrix for a DO population.
 The arguments are just like those of <code>sim_ail_pedigree</code>, but with one
 addition: <code>ccgen</code>, which is a vector with the numbers of generations
 of inbreeding to form the initial preCC lines that are then used to
@@ -562,6 +562,13 @@ and then the parameters governing the crossing over process: <code>m</code>, <co
 and <code>obligate_chiasma</code>, with defaults <code>m=10</code>, <code>p=0</code>, and
 <code>obligate_chiasma=FALSE</code>.</p>
 
+<p>(<code>L</code> can also be a vector of chromosome lengths, for simulating
+multiple chromosomes at once. In this case <code>xchr</code> should be either a
+logical vector, of the same length as <code>L</code>, or a character string with
+the name of the chromosome in <code>L</code> that correspond to the X
+chromosome. An example of simulating multiple chromosomes is in the
+final section in this vignette.)</p>
+
 <p>The <code>sim_from_pedigree</code> function calls <code>create_parent</code> for all
 founding individuals and <code>cross</code> for any offspring; the output is a
 list with each component corresponding to one individual and having
@@ -586,7 +593,7 @@ xodat &lt;- sim_from_pedigree(ailped, L=100)
 ## [1] 1 2 1 2 1
 ## 
 ## $mat$locations
-## [1]   9.292  46.096  66.145  88.213 100.000
+## [1]   9.291541  46.096197  66.145449  88.213088 100.000000
 ## 
 ## 
 ## $pat
@@ -594,7 +601,8 @@ xodat &lt;- sim_from_pedigree(ailped, L=100)
 ## [1] 1 2 1 2 1 2 1 2 1
 ## 
 ## $pat$locations
-## [1]  32.78  41.56  45.54  53.23  75.20  79.67  81.74  98.51 100.00
+## [1]  32.77616  41.55678  45.54459  53.23003  75.19660  79.67276  81.74175
+## [8]  98.50607 100.00000
 </code></pre>
 
 <p>We can plot the average number of breakpoints across the
@@ -616,13 +624,13 @@ heterozygous.</p>
 <pre><code class="r">where_het(xodat[[length(xodat)]])
 </code></pre>
 
-<pre><code>##     left right
-## 1  9.292 32.78
-## 2 41.557 45.54
-## 3 46.096 53.23
-## 4 66.145 75.20
-## 5 79.673 81.74
-## 6 88.213 98.51
+<pre><code>##        left    right
+## 1  9.291541 32.77616
+## 2 41.556781 45.54459
+## 3 46.096197 53.23003
+## 4 66.145449 75.19660
+## 5 79.672759 81.74175
+## 6 88.213088 98.50607
 </code></pre>
 
 <p>We can plot the average proportion of the chromosome that is
@@ -773,6 +781,76 @@ snpgeno[nrow(snpgeno)-(1:0),]
 
 <p>The genotypes are again coded as <code>1</code> / <code>2</code> / <code>3</code> for <code>11</code> / <code>12</code> /
 <code>22</code>.</p>
+
+<h2>Simulating multiple chromosomes</h2>
+
+<p>One can use <code>sim_from_pedigree</code> and <code>convert2geno</code> to simulate
+multiple chromosomes at once.</p>
+
+<p>To simulate multiple chromosomes with <code>sim_from_pedigree</code>,
+provide a vector of chromosome lengths.  In this case <code>xchr</code> should be either a
+logical vector, of the same length as <code>L</code>, or a character string with
+the name of the chromosome in <code>L</code> that correspond to the X
+chromosome.</p>
+
+<pre><code class="r">ailped3 &lt;- sim_ail_pedigree(ngen=12, npairs=30, nkids_per=3)
+xodat3 &lt;- sim_from_pedigree(ailped3, c(&quot;1&quot;=100, &quot;2&quot;=75, &quot;X&quot;=100), &quot;X&quot;)
+xodat3alt &lt;- sim_from_pedigree(ailped3, c(&quot;1&quot;=100, &quot;2&quot;=75, &quot;X&quot;=100),
+                               c(FALSE, FALSE, TRUE))
+</code></pre>
+
+<p>To indicate that all chromosomes are autosomes, you can use <code>xchr=&quot;&quot;</code>,
+<code>xchr=FALSE</code>, or <code>xchr=NULL</code>. For example:</p>
+
+<pre><code class="r">xodat3_noX &lt;- sim_from_pedigree(ailped3, c(&quot;1&quot;=100, &quot;2&quot;=75, &quot;3&quot;=100), &quot;&quot;)
+</code></pre>
+
+<p>Having simulated multiple chromosomes with <code>sim_from_pedigree</code>, you
+may wish to use <code>convert2geno</code> to convert those results to marker
+genotypes. This is done by providing the output of <code>sim_from_pedigree</code>
+as well as a genetic marker map that is a <em>list</em> of vectors of marker
+locations.</p>
+
+<p>Let&#39;s first construct the marker map, assuming three chromosomes with
+lengths 100, 75, and 100.</p>
+
+<pre><code class="r">map &lt;- list(&quot;1&quot;=seq(0, 100, by=5),
+            &quot;2&quot;=seq(0, 75, by=5),
+            &quot;X&quot;=seq(0, 100, by=5))
+for(i in seq(along=map))
+    names(map[[i]]) &lt;- paste0(&quot;m&quot;, names(map)[i], &quot;_&quot;, map[[i]])
+</code></pre>
+
+<p>We then use <code>convert2geno</code>, ensuring that the inputs are both lists
+with the same length.</p>
+
+<pre><code class="r">geno &lt;- convert2geno(xodat3, map)
+</code></pre>
+
+<p>For crosses like the DO, in which founder genotypes are needed, the
+input <code>founder_geno</code> must be a list of matrices (one matrix per
+chromosome).</p>
+
+<p>Here are some simulated founder genotypes:</p>
+
+<pre><code class="r">fg &lt;- vector(&quot;list&quot;, length(map))
+for(i in seq(along=map))
+    fg[[i]] &lt;- matrix(sample(1:2, 8*length(map[[i]]), replace=TRUE), nrow=8)
+</code></pre>
+
+<p>To simulate genotypes for the DO, we need to duplicate those founder
+genotypes, with female founders as 1-8 and male founders as 9-16.</p>
+
+<pre><code class="r">for(i in seq(along=fg))
+    fg[[i]] &lt;- rbind(fg[[i]], fg[[i]])
+</code></pre>
+
+<p>And now here is the simulation of a small DO population for multiple chromosomes.</p>
+
+<pre><code class="r">doped &lt;- sim_do_pedigree(ngen=4, nkids_per=1)
+xodat &lt;- sim_from_pedigree(doped, L=c(&quot;1&quot;=100, &quot;2&quot;=75, &quot;X&quot;=100), &quot;X&quot;)
+geno &lt;- convert2geno(xodat, map, fg)
+</code></pre>
 
 <h2>References</h2>
 

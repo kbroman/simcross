@@ -27,6 +27,11 @@
 #' right-endpoints of those intervals; these two vectors should have
 #' the same length.
 #'
+#' If the input \code{L} is a vector, in order to simulate multiple
+#' chromosomes at once, then the output will be a list with length
+#' \code{length(L)}, each component being a chromosome and having the
+#' form described above.
+#'
 #' @export
 #' @keywords datagen
 #' @seealso \code{\link{check_pedigree}},
@@ -45,10 +50,14 @@ sim_from_pedigree <-
 {
     if(length(L) > 1) { # multiple chromosomes
         result <- vector("list", length(L))
+        if(is.null(names(L))) names(L) <- seq(along=L)
         names(result) <- names(L)
 
         if(is.character(xchr)) # xchr is chromosome names
             xchr <- names(L) %in% xchr
+
+        if(is.null(xchr))
+            xchr <- rep(FALSE, length(L))
 
         if(length(xchr) == 1) # if single value, apply to all chromosomes
             xchr <- rep(xchr, length(L))

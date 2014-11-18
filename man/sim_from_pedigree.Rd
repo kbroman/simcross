@@ -36,6 +36,11 @@ as lists with two components: an integer vector of alleles in
 chromosome intervals, and a numeric vector of locations of the
 right-endpoints of those intervals; these two vectors should have
 the same length.
+
+If the input \code{L} is a vector, in order to simulate multiple
+chromosomes at once, then the output will be a list with length
+\code{length(L)}, each component being a chromosome and having the
+form described above.
 }
 \description{
 Simulate genotypes along one chromosome for a pedigree

@@ -48,12 +48,12 @@
 #' # AIL with multiple chromosomes
 #' dat <- sim_from_pedigree(tab, c("1"=100, "2"=75, "X"=100), xchr="X")
 #' # marker map
-#' map <- list("1"=seq(0, 100, by=5),
-#'             "2"=seq(0, 75, by=5),
-#'             "X"=seq(0, 100, by=5))
+#' multmap <- list("1"=seq(0, 100, by=5),
+#'                 "2"=seq(0, 75, by=5),
+#'                 "X"=seq(0, 100, by=5))
 #' for(i in 1:3)
-#'   names(map[[i]]) <- paste0("marker", i, "_", 1:length(map[[i]]))
-#' geno <- convert2geno(dat, map)
+#'   names(multmap[[i]]) <- paste0("marker", i, "_", 1:length(map[[i]]))
+#' geno <- convert2geno(dat, multmap)
 #'
 #' # simulate DO pedigree
 #' tab <- sim_do_pedigree(8)

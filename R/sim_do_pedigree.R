@@ -64,9 +64,9 @@
 #' @examples
 #' tab <- sim_do_pedigree(8)
 sim_do_pedigree <-
-function(ngen=12, npairs=144,
-         ccgen=rep(4:12, c(21, 64, 24, 10, 5, 9, 5, 3, 3)),
-         nkids_per=5, design=c("nosib", "random"))
+    function(ngen=12, npairs=144,
+             ccgen=rep(4:12, c(21, 64, 24, 10, 5, 9, 5, 3, 3)),
+             nkids_per=5, design=c("nosib", "random"))
 {
     if(length(ccgen)==1) ccgen <- rep(ccgen, npairs)
     stopifnot(length(ccgen) == npairs)

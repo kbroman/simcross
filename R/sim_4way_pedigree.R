@@ -38,7 +38,7 @@
 #' # 120 F2s in 10 sibships each of size 12
 #' tab3 <- sim_4way_pedigree(ngen=2, rep(12, 10))
 sim_4way_pedigree <-
-function(ngen=1, nsibs=100)
+    function(ngen=1, nsibs=100)
 {
     if(ngen != 1 && ngen != 2)
         stop("ngen must be 1 or 2")

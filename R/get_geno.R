@@ -24,20 +24,20 @@
 #' # get genotype at position 30 cM
 #' geno <- get_geno(dat, 30)
 get_geno <-
-function(xodat, position)
+    function(xodat, position)
 {
-  L <- max(xodat[[1]]$mat$locations)
+    L <- max(xodat[[1]]$mat$locations)
 
-  if(position < 0 || position > L)
-    stop("position is outside the range of the data")
-  if(position == 0) position <- -1
+    if(position < 0 || position > L)
+        stop("position is outside the range of the data")
+    if(position == 0) position <- -1
 
-  tol <- 1e-8
-  if(position > L - tol)
-      position <- L - tol
+    tol <- 1e-8
+    if(position > L - tol)
+        position <- L - tol
 
-  output <- .get_geno(xodat, position)
-  dimnames(output) <- list(names(xodat), c("mat", "pat"))
+    output <- .get_geno(xodat, position)
+    dimnames(output) <- list(names(xodat), c("mat", "pat"))
 
-  output
+    output
 }

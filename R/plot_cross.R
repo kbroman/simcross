@@ -13,16 +13,16 @@
 #' @examples
 #' CCcolors()
 CCcolors <-
-function() {
-  c("AJ"  =rgb(240,240,  0,maxColorValue=255),
-    "B6"  =rgb(128,128,128,maxColorValue=255),
-    "129" =rgb(240,128,128,maxColorValue=255),
-    "NOD" =rgb( 16, 16,240,maxColorValue=255),
-    "NZO" =rgb(  0,160,240,maxColorValue=255),
-    "CAST"=rgb(  0,160,  0,maxColorValue=255),
-    "PWK" =rgb(240,  0,  0,maxColorValue=255),
-    "WSB" =rgb(144,  0,224,maxColorValue=255))
-}
+    function() {
+        c("AJ"  =rgb(240,240,  0,maxColorValue=255),
+          "B6"  =rgb(128,128,128,maxColorValue=255),
+          "129" =rgb(240,128,128,maxColorValue=255),
+          "NOD" =rgb( 16, 16,240,maxColorValue=255),
+          "NZO" =rgb(  0,160,240,maxColorValue=255),
+          "CAST"=rgb(  0,160,  0,maxColorValue=255),
+          "PWK" =rgb(240,  0,  0,maxColorValue=255),
+          "WSB" =rgb(144,  0,224,maxColorValue=255))
+    }
 
 #  plot_ind
 #
@@ -62,47 +62,47 @@ function() {
 #' plot_ind(kid, loc[[3]])
 #' plot_crosslines(loc[[1]], loc[[2]], loc[[3]])
 plot_ind <-
-function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
-         border="black", lend=1, ljoin=1, allborders=FALSE, ...)
+    function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
+             border="black", lend=1, ljoin=1, allborders=FALSE, ...)
 {
-  max_alleles <- max(sapply(ind, function(a) max(a$alleles)))
-  if(max_alleles > length(col))
-    stop("Need more colors: length(col)=", length(col), " but max allele = ", max_alleles)
+    max_alleles <- max(sapply(ind, function(a) max(a$alleles)))
+    if(max_alleles > length(col))
+        stop("Need more colors: length(col)=", length(col), " but max allele = ", max_alleles)
 
-  for(i in 1:2) {
-    sgn <- i*2-3
-    chr <- ind[[i]]
-    pos <- c(0, ind[[i]]$locations)
-    allele <- ind[[i]]$alleles
+    for(i in 1:2) {
+        sgn <- i*2-3
+        chr <- ind[[i]]
+        pos <- c(0, ind[[i]]$locations)
+        allele <- ind[[i]]$alleles
 
-    # rescale pos
-    top <- center[2]+chrlength/2
-    bottom <- center[2]-chrlength/2
-    if(diff(par("usr")[3:4]) < 0) { # small values at top of figure
-      tmp <- top
-      top <- bottom
-      bottom <- top
+        # rescale pos
+        top <- center[2]+chrlength/2
+        bottom <- center[2]-chrlength/2
+        if(diff(par("usr")[3:4]) < 0) { # small values at top of figure
+            tmp <- top
+            top <- bottom
+            bottom <- top
+        }
+        start <- pos[1]
+        end <- pos[length(pos)]
+        pos <- (pos-start)*(bottom-top)/(end-start) + top
+
+        left <- center[1] + sgn*(gap/2+chrwidth)
+        right <- center[1] + sgn*gap/2
+
+        internalborder <- ifelse(allborders, border, NA)
+        for(j in 2:length(pos))
+            rect(rep(left, length(pos)-1),  pos[-length(pos)],
+                 rep(right, length(pos)-1), pos[-1],
+                 col=col[allele],
+                 border=internalborder, lend=lend, ljoin=ljoin, ...)
+
+        if(!is.na(border) && !is.null(border)) # draw border
+            rect(center[1] + sgn*(gap/2+chrwidth), top,
+                 center[1] + sgn*gap/2,         bottom,
+                 col=NA, border=border, lend=lend, ljoin=ljoin, ...)
     }
-    start <- pos[1]
-    end <- pos[length(pos)]
-    pos <- (pos-start)*(bottom-top)/(end-start) + top
-
-    left <- center[1] + sgn*(gap/2+chrwidth)
-    right <- center[1] + sgn*gap/2
-
-    internalborder <- ifelse(allborders, border, NA)
-    for(j in 2:length(pos))
-      rect(rep(left, length(pos)-1),  pos[-length(pos)],
-           rep(right, length(pos)-1), pos[-1],
-           col=col[allele],
-           border=internalborder, lend=lend, ljoin=ljoin, ...)
-
-    if(!is.na(border) && !is.null(border)) # draw border
-      rect(center[1] + sgn*(gap/2+chrwidth), top,
-           center[1] + sgn*gap/2,         bottom,
-           col=NA, border=border, lend=lend, ljoin=ljoin, ...)
-  }
-  invisible(NULL)
+    invisible(NULL)
 }
 
 #  plot_crosslines
@@ -143,40 +143,40 @@ function(ind, center, chrlength=30, chrwidth=3, gap=3, col=CCcolors(),
 #' for(i in 1:4) plot_ind(kids[[i]], loc[[i+2]])
 #' plot_crosslines(loc[[1]], loc[[2]], loc[3:6])
 plot_crosslines <-
-function(momloc, dadloc, kidsloc, gap=3, chrlength=30, cex=1.5,
-         lwd=2, arrow_length=0.1, col="white", ...)
+    function(momloc, dadloc, kidsloc, gap=3, chrlength=30, cex=1.5,
+             lwd=2, arrow_length=0.1, col="white", ...)
 {
-  stopifnot(length(momloc)==2, length(dadloc)==2)
+    stopifnot(length(momloc)==2, length(dadloc)==2)
 
-  point <- colMeans(rbind(momloc, dadloc))
-  points(point[1], point[2], pch=4, cex=cex, lwd=2, col=col, ...)
+    point <- colMeans(rbind(momloc, dadloc))
+    points(point[1], point[2], pch=4, cex=cex, lwd=2, col=col, ...)
 
-  if(!is.list(kidsloc)) { # 1 kid
-    stopifnot(length(kidsloc)==2)
-    sgn <- sign(kidsloc[2] - point[2])
-    arrows(point[1], point[2]+sgn*gap*2, kidsloc[1], kidsloc[2]-sgn*(chrlength/2+gap),
-           lwd=lwd, length=arrow_length, col=col, ...)
-  } else { # multiple kids
-    if(any(vapply(kidsloc, length, 2) != 2))
-      stop("kidsloc must be a list of vectors of length 2")
+    if(!is.list(kidsloc)) { # 1 kid
+        stopifnot(length(kidsloc)==2)
+        sgn <- sign(kidsloc[2] - point[2])
+        arrows(point[1], point[2]+sgn*gap*2, kidsloc[1], kidsloc[2]-sgn*(chrlength/2+gap),
+               lwd=lwd, length=arrow_length, col=col, ...)
+    } else { # multiple kids
+        if(any(vapply(kidsloc, length, 2) != 2))
+            stop("kidsloc must be a list of vectors of length 2")
 
-    kidx <- vapply(kidsloc, "[", 0, 1)
-    kidy <- vapply(kidsloc, "[", 0, 2)
+        kidx <- vapply(kidsloc, "[", 0, 1)
+        kidy <- vapply(kidsloc, "[", 0, 2)
 
-    ave <- c(mean(kidx), mean(kidy))
-    midpt <- c((point[1]+ave[1])/2, (point[2]+ave[2])/2)
-    sgn <- sign(ave[2] - point[2])
+        ave <- c(mean(kidx), mean(kidy))
+        midpt <- c((point[1]+ave[1])/2, (point[2]+ave[2])/2)
+        sgn <- sign(ave[2] - point[2])
 
-    segments(point[1], point[2]+sgn*gap, point[1], midpt[2],
-             lwd=lwd, col=col, ...)
+        segments(point[1], point[2]+sgn*gap, point[1], midpt[2],
+                 lwd=lwd, col=col, ...)
 
-    segments(min(kidx), midpt[2], max(kidx), midpt[2],
-             lwd=lwd, col=col, ...)
+        segments(min(kidx), midpt[2], max(kidx), midpt[2],
+                 lwd=lwd, col=col, ...)
 
-    arrows(kidx, rep(midpt[2], length(kidx)),
-           kidx, kidy-sgn*(chrlength/2+gap),
-           lwd=lwd, length=arrow_length, col=col, ...)
-  }
+        arrows(kidx, rep(midpt[2], length(kidx)),
+               kidx, kidy-sgn*(chrlength/2+gap),
+               lwd=lwd, length=arrow_length, col=col, ...)
+    }
 
-  invisible(NULL)
+    invisible(NULL)
 }

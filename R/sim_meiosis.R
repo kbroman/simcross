@@ -22,7 +22,7 @@
 #' create_parent(100, 1)
 #' create_parent(100, 1:2)
 create_parent <-
-function(L, allele=1)
+    function(L, allele=1)
 {
     if(length(allele) == 1) allele <- rep(allele,2)
     if(length(allele) != 2)
@@ -40,7 +40,7 @@ function(L, allele=1)
 
 # check that data for an individual conforms to expected format
 check_individual <-
-function(ind, tol=1e-12)
+    function(ind, tol=1e-12)
 {
     # list with two components, named "mat" and "pat"
     if(!is.list(ind) || length(ind)!=2 ||
@@ -131,7 +131,7 @@ function(ind, tol=1e-12)
 #' @importFrom Rcpp sourceCpp
 #'
 sim_crossovers <-
-function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
+    function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 {
     if(missing(Lstar) || is.null(Lstar)) {
         if(obligate_chiasma)
@@ -186,7 +186,7 @@ function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 #' ind <- create_parent(100, 1:2)
 #' prod <- sim_meiosis(ind)
 sim_meiosis <-
-function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
+    function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 {
     if(missing(Lstar) || is.null(Lstar)) {
         L <- max(parent$mat$locations)
@@ -241,8 +241,8 @@ function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
 #' dad <- create_parent(100, 1:2)
 #' child <- cross(mom, dad)
 cross <-
-function(mom, dad, m=10, p=0, xchr=FALSE, male=FALSE,
-         obligate_chiasma=FALSE, Lstar)
+    function(mom, dad, m=10, p=0, xchr=FALSE, male=FALSE,
+             obligate_chiasma=FALSE, Lstar)
 {
     if(missing(Lstar) || is.null(Lstar)) {
         L <- max(mom$mat$locations)
@@ -287,7 +287,7 @@ function(mom, dad, m=10, p=0, xchr=FALSE, male=FALSE,
 #' calc_Lstar(100, 0, 0)
 #' calc_Lstar(60, 10, 0.1)
 calc_Lstar <-
-function(L, m=0, p=0)
+    function(L, m=0, p=0)
 {
     if(L <= 50) stop("Must have L > 50")
     if(m < 0) stop("Must have m==0")

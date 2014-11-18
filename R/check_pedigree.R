@@ -33,7 +33,7 @@
 #' check_pedigree(tab)
 #'
 check_pedigree <-
-function(pedigree, ignore_sex=FALSE)
+    function(pedigree, ignore_sex=FALSE)
 {
     if(ncol(pedigree) < 4)
         stop("pedigree must have at least 4 columns")

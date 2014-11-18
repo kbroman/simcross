@@ -38,7 +38,7 @@
 #' @examples
 #' tab <- sim_ail_pedigree(12, 30)
 sim_ail_pedigree <-
-function(ngen=12, npairs=30, nkids_per=5, design=c("nosib", "random"))
+    function(ngen=12, npairs=30, nkids_per=5, design=c("nosib", "random"))
 {
     design <- match.arg(design)
 

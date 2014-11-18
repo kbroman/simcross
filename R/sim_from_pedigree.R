@@ -41,7 +41,7 @@
 #' # simulate multiple chromosomes
 #' dat <- sim_from_pedigree(tab, c("1"=100, "2"=75, "X"=100), xchr="X")
 sim_from_pedigree <-
-function(pedigree, L=100, xchr=FALSE, m=10, p=0, obligate_chiasma=FALSE)
+    function(pedigree, L=100, xchr=FALSE, m=10, p=0, obligate_chiasma=FALSE)
 {
     if(length(L) > 1) { # multiple chromosomes
         result <- vector("list", length(L))

@@ -24,7 +24,7 @@
 #' @examples
 #' tab <- sim_ril_pedigree(7)
 sim_ril_pedigree <-
-function(ngen=20, selfing=FALSE, parents=1:8, firstind=max(parents)+1)
+    function(ngen=20, selfing=FALSE, parents=1:8, firstind=max(parents)+1)
 {
     nparents <- length(parents)
     stopifnot(nparents == 2 || nparents==4 || nparents==8) # 2, 4, or 8 parents

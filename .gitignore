@@ -1,2 +1,3 @@
 _site
 assets/vignettes/figure/
+assets/vignettes/*.md

@@ -288,6 +288,13 @@ and then the parameters governing the crossing over process: `m`, `p`,
 and `obligate_chiasma`, with defaults `m=10`, `p=0`, and
 `obligate_chiasma=FALSE`.
 
+(`L` can also be a vector of chromosome lengths, for simulating
+multiple chromosomes at once. In this case `xchr` should be either a
+logical vector, of the same length as `L`, or a character string with
+the name of the chromosome in `L` that correspond to the X
+chromosome. An example of simulating multiple chromosomes is in the
+final section in this vignette.)
+
 The `sim_from_pedigree` function calls `create_parent` for all
 founding individuals and `cross` for any offspring; the output is a
 list with each component corresponding to one individual and having
@@ -360,7 +367,6 @@ plot(gen2, ave_prop_het2,
      pch=21, bg="Orchid", main="AIL with 3 breeding pairs")
 abline(h=0.5, lty=2)
 ```
-
 
 ## Generating marker data
 
@@ -446,6 +452,86 @@ snpgeno[nrow(snpgeno)-(1:0),]
 
 The genotypes are again coded as `1` / `2` / `3` for `11` / `12` /
 `22`.
+
+
+## Simulating multiple chromosomes
+
+
+One can use `sim_from_pedigree` and `convert2geno` to simulate
+multiple chromosomes at once.
+
+To simulate multiple chromosomes with `sim_from_pedigree`,
+provide a vector of chromosome lengths.  In this case `xchr` should be either a
+logical vector, of the same length as `L`, or a character string with
+the name of the chromosome in `L` that correspond to the X
+chromosome.
+
+```{r ail_mult_chr}
+ailped3 <- sim_ail_pedigree(ngen=12, npairs=30, nkids_per=3)
+xodat3 <- sim_from_pedigree(ailped3, c("1"=100, "2"=75, "X"=100), "X")
+xodat3alt <- sim_from_pedigree(ailped3, c("1"=100, "2"=75, "X"=100),
+                               c(FALSE, FALSE, TRUE))
+```
+
+
+To indicate that all chromosomes are autosomes, you can use `xchr=""`,
+`xchr=FALSE`, or `xchr=NULL`. For example:
+
+```{r ail_mult_chr_no_X}
+xodat3_noX <- sim_from_pedigree(ailped3, c("1"=100, "2"=75, "3"=100), "")
+```
+
+Having simulated multiple chromosomes with `sim_from_pedigree`, you
+may wish to use `convert2geno` to convert those results to marker
+genotypes. This is done by providing the output of `sim_from_pedigree`
+as well as a genetic marker map that is a _list_ of vectors of marker
+locations.
+
+Let's first construct the marker map, assuming three chromosomes with
+lengths 100, 75, and 100.
+
+```{r construct_marker_map}
+map <- list("1"=seq(0, 100, by=5),
+            "2"=seq(0, 75, by=5),
+            "X"=seq(0, 100, by=5))
+for(i in seq(along=map))
+    names(map[[i]]) <- paste0("m", names(map)[i], "_", map[[i]])
+```
+
+We then use `convert2geno`, ensuring that the inputs are both lists
+with the same length.
+
+```{r convert2geno_multchr}
+geno <- convert2geno(xodat3, map)
+```
+
+For crosses like the DO, in which founder genotypes are needed, the
+input `founder_geno` must be a list of matrices (one matrix per
+chromosome).
+
+Here are some simulated founder genotypes:
+
+```{r do_founder_geno_mult_chr}
+fg <- vector("list", length(map))
+for(i in seq(along=map))
+    fg[[i]] <- matrix(sample(1:2, 8*length(map[[i]]), replace=TRUE), nrow=8)
+```
+
+To simulate genotypes for the DO, we need to duplicate those founder
+genotypes, with female founders as 1-8 and male founders as 9-16.
+
+```{r duplicate_founder_geno}
+for(i in seq(along=fg))
+    fg[[i]] <- rbind(fg[[i]], fg[[i]])
+```
+
+And now here is the simulation of a small DO population for multiple chromosomes.
+
+```{r sim_do_mult_chr}
+doped <- sim_do_pedigree(ngen=4, nkids_per=1)
+xodat <- sim_from_pedigree(doped, L=c("1"=100, "2"=75, "X"=100), "X")
+geno <- convert2geno(xodat, map, fg)
+```
 
 
 ## References

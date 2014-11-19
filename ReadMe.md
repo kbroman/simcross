@@ -13,9 +13,6 @@ and plotting general experimental crosses.
 
 ### Installation
 
-R/simcross is early in development and so is not yet available on
-[CRAN](http://cran.r-project.org).
-
 You can install R/simcross from its
 [GitHub repository](http://github.com/kbroman/simcross). You first need to
 install the [devtools](https://github.com/hadley/devtools) package.
@@ -58,5 +55,5 @@ without any warranty; without even the implied warranty of
 merchantability or fitness for a particular purpose.  See the GNU
 General Public License for more details.
 
-A copy of the GNU General Public License, version 3, is available at  
+A copy of the GNU General Public License, version 3, is available at
 <http://www.r-project.org/Licenses/GPL-3>

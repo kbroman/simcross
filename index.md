@@ -2,6 +2,7 @@
 layout: page
 title: R/simcross
 tagline: simulation of general experimental crosses
+description: R/simcross is an R package to simulate general experimental crosses, including advanced intercross lines and the diversity outcross.
 ---
 
 [R/simcross](https://github.com/kbroman/simcross) is an

@@ -1,9 +1,11 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{R/simcross User Guide}
--->
-
-# R/simcross User Guide
+---
+title: R/simcross User Guide
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{R/simcross User Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8](inputenc)
+---
 
 ```{r knitr_options, include=FALSE}
 library(knitr)
@@ -579,6 +581,3 @@ Genetics 190:291-294
 Zhao H, Speed TP, McPeek MS (1995)
 [Statistical analysis of crossover interference using the chi-square model](http://www.genetics.org/content/139/2/1045.short).
 Genetics 139:1045-1056
-
-<!-- the following to make it look nicer -->
-<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

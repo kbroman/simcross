@@ -9,7 +9,7 @@ vignette: >
 
 ```{r knitr_options, include=FALSE}
 library(knitr)
-opts_chunk$set(fig.width=12, fig.height=7,
+opts_chunk$set(fig.width=7, fig.height=4.5,
                dev.args=list(pointsize=16))
 ```
 

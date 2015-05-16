@@ -6,5 +6,5 @@ vignettes: ${VIGNETTES}
 
 assets/vignettes/%.html: ../simcross/vignettes/%.Rmd
 	cd $(<D); \
-	R -e "library(rmarkdown);render('$(<F)', output_format='html_document')"; \
+	R -e "library(rmarkdown);render('$(<F)')"; \
 	mv $(@F) ../../Web/$(@D)/

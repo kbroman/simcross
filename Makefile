@@ -6,7 +6,7 @@ R_OPTS=--no-save --no-restore --no-init-file --no-site-file
 
 # build package documentation
 doc:
-	R -e 'library(devtools);document()'
+	R -e 'devtools::document()'
 
 vignettes: inst/doc/simcross.html
 

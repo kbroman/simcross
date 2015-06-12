@@ -1,9 +1,9 @@
 #' Simulate AIL pedigree with fixed n
-#' 
+#'
 #' Simulate a pedigree for advanced intercross lines (a table of
 #' individual, mom, dad, sex) so that the last generation reach a
 #' desired sample size n
-#' 
+#'
 #' @param ngen Number of generations of outbreeding
 #' @param npairs Number of breeding pairs at each generation
 #' @param nkids_per Number of offspring per pair for the last
@@ -17,12 +17,12 @@
 #' generation
 #' @param npairs_small value of npairs when method="last2"
 #' @param npairs_big value of npairs when method="sub2"
-#' 
+#'
 #' @return A matrix with five columns: individual ID, mother ID,
 #' father ID, sex, and generation.  Founders have \code{0} for mother
 #' and father ID. Sex is coded 0 for female and 1 for male.
 #'
-#' 
+#'
 #' @export
 #' @keywords datagen
 #' @seealso \code{\link{sim_from_pedigree}},
@@ -32,13 +32,13 @@
 #'
 #' @examples
 #' tab <- sim_ail_pedigree_fix_n(12)
-sim_ail_pedigree_fix_n <- function(ngen=12, nkids_per=5, 
+sim_ail_pedigree_fix_n <- function(ngen=12, nkids_per=5,
                                   nsample_ngen=150, npairs_small=30, npairs_big=300,
                                   method=c("last2", "sub2"),
                                   design=c("nosib", "random")){
   method <- match.arg(method)
   design <- match.arg(design)
-  
+
   if(method =="last2"){
     npairs <- npairs_small
     ped <- sim_ail_pedigree_last2(ngen = ngen, npairs = npairs, nkids_per = nkids_per,
@@ -64,8 +64,8 @@ sim_ail_pedigree_last2 <- function(ngen=12, npairs=30, nkids_per=5, design=c("no
   design <- match.arg(design)
   npairs_la2 <- ceiling(nsample_ngen/nkids_per)
   nkids_la2 <- ceiling(npairs_la2*2/npairs)
-  
-  ## last but 2 generation
+
+  ## second-to-last generation
   ped <- sim_ail_pedigree(ngen=ngen-1, npairs=npairs, nkids_per=nkids_la2,
                           design=design)
   id <- ped[,"id"]
@@ -79,9 +79,9 @@ sim_ail_pedigree_last2 <- function(ngen=12, npairs=30, nkids_per=5, design=c("no
   kids <- 1:(n.last)+max(id)
 
   wh <- which(ped[,"gen"] == ngen-1 & ped[, "sex"] == 0)
-  moms <- ped[wh, "mom"]
+  moms <- ped[wh, "id"]
   wh <- which(ped[,"gen"] == ngen-1 & ped[, "sex"] == 1)
-  dads <- ped[wh, "dad"]
+  dads <- ped[wh, "id"]
   rownames(ped) <- ped[, "id"]
 
   while(design=="nosib") { # sample until no sibs
@@ -96,7 +96,7 @@ sim_ail_pedigree_last2 <- function(ngen=12, npairs=30, nkids_per=5, design=c("no
   dad <- c(dad, rep(dads, each=nkids_per)[wh])
   sex <- c(sex, rep_len(c(0,1), length.out=n.last)[wh])
   gen <- c(gen, rep(ngen, n.last)[wh])
-  
+
   result <- cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
   storage.mode(result) <- "integer"
   result

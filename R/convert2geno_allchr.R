@@ -4,7 +4,7 @@
 #' Wrap up of convert2geno to adequate multiple chromosomes.
 #'
 #' @param xodat The sort of detailed genotype/crossover data generated
-#' by \code{\link{sim_from_pedigree_wholechr}}
+#' by \code{\link{sim_from_pedigree_allchr}}
 #' @param map marker locations, a list with elements for each
 #' chromosome
 #' @param id ids for which individuals genotypes is desired
@@ -40,13 +40,13 @@
 #' # simulate AIL pedigree
 #' tab <- sim_ail_pedigree(12, 30)
 #' # simulate data from that pedigree
-#' dat <- sim_from_pedigree_wholechr(tab, map)
+#' dat <- sim_from_pedigree_allchr(tab, map)
 #' names(map) <- paste0("marker", seq(along=map))
 #' # convert data to marker genotypes
 #' id <- which(tab[, "gen"]==12)
-#' geno <- convert2geno_wholechr(dat, map, id)
+#' geno <- convert2geno_allchr(dat, map, id)
 #'
-convert2geno_wholechr <- function(xodat, map, id, f.geno,
+convert2geno_allchr <- function(xodat, map, id, f.geno,
                                   return.matrix=TRUE, shift_map=FALSE){
 
   stopifnot(length(map) == length(xodat))

@@ -23,9 +23,9 @@
 #' # simulate AIL pedigree
 #' tab <- sim_ail_pedigree(12, 30)
 #' # simulate data from that pedigree
-#' dat <- sim_from_pedigree_wholechr(tab, map)
+#' dat <- sim_from_pedigree_allchr(tab, map)
 #'
-sim_from_pedigree_wholechr <- function(pedigree, map, m=10, p=0, obligate_chiasma=FALSE){
+sim_from_pedigree_allchr <- function(pedigree, map, m=10, p=0, obligate_chiasma=FALSE){
   chr.len <- sapply(map, max)
   is.xchr <- sapply(map, class) == "X"
   dat <- NULL

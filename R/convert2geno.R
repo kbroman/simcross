@@ -107,12 +107,20 @@ convert2geno <-
                  "columns but has ", ncol(founder_geno))
         if(any(is.na(founder_geno)))
             stop("founder genotypes cannot be missing")
-        if(any(founder_geno != 1 & founder_geno != 2))
-            stop("founder_geno must contain only 1's and 2's")
     }
 
     if(length(founder_geno) > 0 || max_geno <= 2) {
         output <- t(.convert2geno(xodat, map, founder_geno))
+
+        if(any(founder_geno != 1 & founder_geno != 2)){
+            if(all(c("A","T","G","C") %in% unique(c(founder_geno)))){
+                output <- t(convert2geno_char(xodat, map, founder_geno))
+            } else {
+                output <- t(convert2geno_char_paste(xodat, map, founder_geno))
+            }
+        } else {
+            output <- t(.convert2geno(xodat, map, founder_geno))
+        }
 
         dimnames(output) <- list(names(xodat), names(map))
     }

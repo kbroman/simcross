@@ -18,10 +18,13 @@
 #' generation.
 #' @param nsample_ngen Number of individuals desired at the last
 #' generation
-#' @param npairs_small value of npairs when method="last2"
-#' @param npairs_big value of npairs when method="sub2"
 #' @param nccgen The number of generations for each CC line, only used
 #' when method is not "fixcc".
+#'
+#' @details The default number of breeding pairs depends on the chosen
+#' \code{method}. With \code{method="last2"}, the default is \code{npairs=30};
+#' with \code{method="sub2"}, the default is \code{npairs=300};
+#' with \code{method="fixcc"}, \code{npairs} is ignored and is fixed at 144.
 #'
 #' @return A matrix with six columns: individual ID, mother ID, father
 #' ID, sex, generation, and 1/0 indicator for whether DO or pre-DO.
@@ -37,7 +40,7 @@
 #' @examples
 #' tab <- sim_do_pedigree_fix_n(8)
 sim_do_pedigree_fix_n <- function(ngen=12, nkids_per=5, nccgen=15,
-                                  nsample_ngen=150, npairs_small=30, npairs_big=300,
+                                  nsample_ngen=150, npairs,
                                   method=c("last2", "sub2", "fixcc"),
                                   design=c("nosib", "random"),
                                   selc.method=c("byfamily","byindiv")){
@@ -46,12 +49,14 @@ sim_do_pedigree_fix_n <- function(ngen=12, nkids_per=5, nccgen=15,
   selc.method <- match.arg(selc.method)
 
   if(method =="last2"){
-    npairs <- npairs_small
+    if(missing(npairs) || is.null(npairs))
+      npairs <- 30
     ped <- sim_do_pedigree_last2(ngen = ngen, npairs = npairs, nkids_per = nkids_per,
                                  nccgen = nccgen, design = design,
                                  nsample_ngen = nsample_ngen)
   } else if(method =="sub2"){
-    npairs <- npairs_big
+    if(missing(npairs) || is.null(npairs))
+      npairs <- 300
     ped <- sim_do_pedigree(ngen = ngen, npairs = npairs,
                            ccgen = rep(nccgen, npairs),
                            nkids_per = nkids_per, design = design)

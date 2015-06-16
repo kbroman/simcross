@@ -5,9 +5,8 @@
 \title{Simulate diversity outcross pedigree with fixed n}
 \usage{
 sim_do_pedigree_fix_n(ngen = 12, nkids_per = 5, nccgen = 15,
-  nsample_ngen = 150, npairs_small = 30, npairs_big = 300,
-  method = c("last2", "sub2", "fixcc"), design = c("nosib", "random"),
-  selc.method = c("byfamily", "byindiv"))
+  nsample_ngen = 150, npairs, method = c("last2", "sub2", "fixcc"),
+  design = c("nosib", "random"), selc.method = c("byfamily", "byindiv"))
 }
 \arguments{
 \item{ngen}{Number of generations of outbreeding}
@@ -21,9 +20,7 @@ when method is not "fixcc".}
 \item{nsample_ngen}{Number of individuals desired at the last
 generation}
 
-\item{npairs_small}{value of npairs when method="last2"}
-
-\item{npairs_big}{value of npairs when method="sub2"}
+\item{npairs}{Number of breeding pairs at each generation}
 
 \item{method}{Method used to generate pedigree: either expand at
 the last two generations or generate pedigree with big number of
@@ -36,8 +33,6 @@ siblings, or completely at random}
 
 \item{selc.method}{Method used to select the individuals from last
 generation.}
-
-\item{npairs}{Number of breeding pairs at each generation}
 }
 \value{
 A matrix with six columns: individual ID, mother ID, father
@@ -48,6 +43,12 @@ female and 1 for male.
 \description{
 Simulate a diversity outcross pedigree (a table of individual, mom,
 dad, sex) so that the last generation reach a desired sample size n
+}
+\details{
+The default number of breeding pairs depends on the chosen
+\code{method}. With \code{method="last2"}, the default is \code{npairs=30};
+with \code{method="sub2"}, the default is \code{npairs=300};
+with \code{method="fixcc"}, \code{npairs} is ignored and is fixed at 144.
 }
 \examples{
 tab <- sim_do_pedigree_fix_n(8)

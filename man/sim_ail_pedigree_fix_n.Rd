@@ -19,7 +19,7 @@ generation}
 \item{npairs}{Number of breeding pairs at each generation}
 
 \item{method}{Method used to generate pedigree: either expand at the last
-two generations or generate pedigreee with big number of pairs and
+two generations or generate pedigree with big number of pairs and
 select a sub set to have the desierd sample size.}
 
 \item{design}{How to choose crosses: either random but avoiding

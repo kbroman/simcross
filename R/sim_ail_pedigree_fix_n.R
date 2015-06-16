@@ -11,7 +11,7 @@
 #' @param design How to choose crosses: either random but avoiding
 #' siblings, or completely at random
 #' @param method Method used to generate pedigree: either expand at the last
-#' two generations or generate pedigreee with big number of pairs and
+#' two generations or generate pedigree with big number of pairs and
 #' select a sub set to have the desierd sample size.
 #' @param nsample_ngen Number of individsuls desired at the last
 #' generation

@@ -5,8 +5,7 @@
 \title{Simulate AIL pedigree with fixed n}
 \usage{
 sim_ail_pedigree_fix_n(ngen = 12, nkids_per = 5, nsample_ngen = 150,
-  npairs_small = 30, npairs_big = 300, method = c("last2", "sub2"),
-  design = c("nosib", "random"))
+  npairs, method = c("last2", "sub2"), design = c("nosib", "random"))
 }
 \arguments{
 \item{ngen}{Number of generations of outbreeding}
@@ -17,9 +16,7 @@ generation}
 \item{nsample_ngen}{Number of individsuls desired at the last
 generation}
 
-\item{npairs_small}{value of npairs when method="last2"}
-
-\item{npairs_big}{value of npairs when method="sub2"}
+\item{npairs}{Number of breeding pairs at each generation}
 
 \item{method}{Method used to generate pedigree: either expand at the last
 two generations or generate pedigreee with big number of pairs and
@@ -27,8 +24,6 @@ select a sub set to have the desierd sample size.}
 
 \item{design}{How to choose crosses: either random but avoiding
 siblings, or completely at random}
-
-\item{npairs}{Number of breeding pairs at each generation}
 }
 \value{
 A matrix with five columns: individual ID, mother ID,
@@ -39,6 +34,11 @@ and father ID. Sex is coded 0 for female and 1 for male.
 Simulate a pedigree for advanced intercross lines (a table of
 individual, mom, dad, sex) so that the last generation reach a
 desired sample size n
+}
+\details{
+The default value for \code{npairs} depends on the choice of \code{method}.
+For \code{method="last2"}, we use a default of \code{npairs=30}; for
+\code{method="sub2"}, we use a default of \code{npairs=300}.
 }
 \examples{
 tab <- sim_ail_pedigree_fix_n(12)

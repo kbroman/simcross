@@ -15,8 +15,10 @@
 #' select a sub set to have the desierd sample size.
 #' @param nsample_ngen Number of individsuls desired at the last
 #' generation
-#' @param npairs_small value of npairs when method="last2"
-#' @param npairs_big value of npairs when method="sub2"
+#'
+#' @details The default value for \code{npairs} depends on the choice of \code{method}.
+#' For \code{method="last2"}, we use a default of \code{npairs=30}; for
+#' \code{method="sub2"}, we use a default of \code{npairs=300}.
 #'
 #' @return A matrix with five columns: individual ID, mother ID,
 #' father ID, sex, and generation.  Founders have \code{0} for mother
@@ -33,19 +35,21 @@
 #' @examples
 #' tab <- sim_ail_pedigree_fix_n(12)
 sim_ail_pedigree_fix_n <- function(ngen=12, nkids_per=5,
-                                  nsample_ngen=150, npairs_small=30, npairs_big=300,
+                                  nsample_ngen=150, npairs,
                                   method=c("last2", "sub2"),
                                   design=c("nosib", "random")){
   method <- match.arg(method)
   design <- match.arg(design)
 
   if(method =="last2"){
-    npairs <- npairs_small
+    if(missing(npairs) || is.null(npairs))
+      npairs <- 30
     ped <- sim_ail_pedigree_last2(ngen = ngen, npairs = npairs, nkids_per = nkids_per,
                                   design = design, nsample_ngen = nsample_ngen)
     id <- which(ped[, "gen"] == ngen)
   } else if(method =="sub2"){
-    npairs <- npairs_big
+    if(missing(npairs) || is.null(npairs))
+      npairs <- 300
     npairs.selc <- nsample_ngen / nkids_per
     ped <- sim_ail_pedigree(ngen = ngen, npairs = npairs,
                             nkids_per = nkids_per, design = design)

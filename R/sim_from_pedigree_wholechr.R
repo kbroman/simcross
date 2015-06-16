@@ -17,6 +17,7 @@
 #' \code{\link{sim_from_pedigree}}
 #'
 #' @examples
+#' library(qtl)
 #' # marker map
 #' map <- sim.map(len=rep(100, 19), n.mar=10, include.x=FALSE)
 #' # simulate AIL pedigree

@@ -16,13 +16,13 @@
 #' @param shift_map If TRUE, shift genetic map to start at 0
 #' @param return.matrix If FALSE, the result is a list of length
 #' \code{n_chrs}, otherwise it is converted into a matrix if size
-#' \code{length(id)} x \code{n_markers}. 
-#' 
+#' \code{length(id)} x \code{n_markers}.
+#'
 #' @return If \code{founder_geno} is provided or there are just two
 #' founders, the result is a numeric matrix of genotypes, individuals
 #' x markers, with genotypes 1/2/3 codes for 11/12/22 genotypes. If
 #' there are more than two founders and \code{founder_geno} are
-#' letters, the result is a character matrix, too. 
+#' letters, the result is a character matrix, too.
 #'
 #' If \code{founder_geno} is not provided and there are more than two
 #' founders, the result is a 3-dimensional array, individuals x
@@ -32,7 +32,7 @@
 #' @export
 #' @keywords utilities
 #' @seealso \code{\link{convert2geno}}
-#' 
+#'
 #' @examples
 #' # marker map
 #' map <- sim.map(len=rep(100, 19), n.mar=10, include.x=FALSE)
@@ -47,10 +47,10 @@
 #'
 convert2geno_wholechr <- function(xodat, map, id, f.geno,
                                   return.matrix=TRUE, shift_map=FALSE){
-  
+
   stopifnot(length(map) == length(xodat))
   if(missing(id)) id <- 1:length(xodat[[1]])
-  
+
   if(missing(f.geno)){
     geno <- NULL
     for(chr in 1:length(map)){
@@ -68,7 +68,7 @@ convert2geno_wholechr <- function(xodat, map, id, f.geno,
       nm.map <- sum(nm.chr)
       nm <- nrow(f.geno)
       if(nm.map!=nm) stop("f.geno should have ", nm.map, " columns but has ", nm)
-      
+
       f.geno <- cbind(f.geno, f.geno)
       f.geno.list <- list()
       for(chr in 1:length(map)){
@@ -86,7 +86,7 @@ convert2geno_wholechr <- function(xodat, map, id, f.geno,
     }
     names(geno) <- names(map)
   }
-  
+
   if(!return.matrix){ ## return the list directly
     return(geno)
   }else{ ## cbind all elememts to make a matrix.

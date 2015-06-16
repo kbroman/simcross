@@ -77,7 +77,7 @@ sim_do_pedigree_fix_n <- function(ngen=12, nkids_per=5, nccgen=15,
       id <- which(ped[,"dad"] %in% selc.dad &
                   ped[, "gen"] == ngen & ped[,"do"]==1)
     }else{
-      id <- ped[ped[, "gen"] == n.gen & ped[, "do"] == 1, "id"]
+      id <- ped[ped[, "gen"] == ngen & ped[, "do"] == 1, "id"]
       id <- sample(id, n.sample)
     }
   }

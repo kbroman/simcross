@@ -45,6 +45,7 @@ maternal and paternal allele.
 Wrap up of convert2geno to adequate multiple chromosomes.
 }
 \examples{
+library(qtl)
 # marker map
 map <- sim.map(len=rep(100, 19), n.mar=10, include.x=FALSE)
 # simulate AIL pedigree

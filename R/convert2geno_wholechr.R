@@ -64,7 +64,7 @@ convert2geno_wholechr <- function(xodat, map, id, f.geno,
       ## check that f.geno is a list of same length as map
       stopifnot(length(f.geno)==length(map))
     }else{  ## f.geno is a matrix.
-      nm.chr <- nmar(map)
+      nm.chr <- sapply(map, length)
       nm.map <- sum(nm.chr)
       nm <- nrow(f.geno)
       if(nm.map!=nm) stop("f.geno should have ", nm.map, " columns but has ", nm)

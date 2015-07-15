@@ -135,7 +135,7 @@ To define a pedigree, we use a numeric matrix with four columns:
 individual ID, mom, dad, and sex (coded as 0=female, 1=male). The
 [R/simcross package](https://github.com/kbroman/simcross) includes a
 sample pedigree for advanced intercross lines, `AILped`, taken from
-the [QTLRel package](http://cran.r-project.org/web/packages/QTLRel/).
+the [QTLRel package](http://cran.r-project.org/package=QTLRel).
 Here is the top of that dataset:
 
 ```{r AILped_head}
@@ -556,8 +556,7 @@ Genetics 133:681-691
 
 Kover PX, Valdar W, Trakalo J, Scarcelli N, Ehrenreich IM, Purugganan
 MD, Durrant C, Mott R (2009)
-[A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in _Arabidopsis thaliana_](http://www.
-plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551).
+[A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in _Arabidopsis thaliana_](http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551).
 PLoS Genetics 5:e1000551
 
 McPeek MS, Speed TP (1995)
@@ -565,8 +564,7 @@ McPeek MS, Speed TP (1995)
 Genetics 139:1031-1044
 
 Mott R, Flint J (2002)
-[Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks](http://www.ge
-netics.org/content/160/4/1609.short).
+[Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks](http://www.genetics.org/content/160/4/1609.short).
 Genetics 160:1609-1618
 
 Svenson KL, Gatti DM, Valdar W, Welsh CE, Cheng R, Chesler EJ, Palmer

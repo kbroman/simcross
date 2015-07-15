@@ -10,6 +10,8 @@
 #'
 #' @keywords color
 #' @export
+#' @importFrom grDevices rgb
+#' @importFrom graphics par points segments
 #' @examples
 #' CCcolors()
 CCcolors <-

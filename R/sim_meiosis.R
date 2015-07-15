@@ -279,6 +279,7 @@ cross <-
 #' @return Adjusted length of chromosome
 #'
 #' @keywords utilities
+#' @importFrom stats uniroot dpois
 #' @export
 #' @seealso \code{\link{cross}}, \code{\link{sim_meiosis}},
 #' \code{\link{sim_crossovers}}

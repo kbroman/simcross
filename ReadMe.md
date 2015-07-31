@@ -22,11 +22,12 @@ install.packages("devtools")
 ```
 
 Then install R/simcross using the `install_github` function in the
-[devtools](http://github.com/hadley/devtools) package.
+[devtools](http://github.com/hadley/devtools) package. (With
+`build_vignettes=TRUE`, the vignettes will be built and installed.)
 
 ```r
 library(devtools)
-install_github("kbroman/simcross")
+install_github("kbroman/simcross", build_vignettes=TRUE)
 ```
 
 ---

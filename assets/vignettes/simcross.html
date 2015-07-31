@@ -95,7 +95,7 @@ f1 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span cla
 <p>While one could simulate any experimental cross from a series of calls to <code>create_parent</code> and <code>cross</code>, it is generally more efficient to first develop a table that describes pedigree for the cross, and then simulate from the pedigree with the function <code>sim_from_pedigree</code> (see the next section).</p>
 <div id="example-ail-pedigree-matrix" class="section level3">
 <h3>Example AIL pedigree matrix</h3>
-<p>To define a pedigree, we use a numeric matrix with four columns: individual ID, mom, dad, and sex (coded as 0=female, 1=male). The <a href="https://github.com/kbroman/simcross">R/simcross package</a> includes a sample pedigree for advanced intercross lines, <code>AILped</code>, taken from the <a href="http://cran.r-project.org/web/packages/QTLRel/">QTLRel package</a>. Here is the top of that dataset:</p>
+<p>To define a pedigree, we use a numeric matrix with four columns: individual ID, mom, dad, and sex (coded as 0=female, 1=male). The <a href="https://github.com/kbroman/simcross">R/simcross package</a> includes a sample pedigree for advanced intercross lines, <code>AILped</code>, taken from the <a href="http://cran.r-project.org/package=QTLRel">QTLRel package</a>. Here is the top of that dataset:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(AILped, <span class="dt">n=</span><span class="dv">10</span>)</code></pre>
 <pre><code>##       id mom dad sex generation
 ##  [1,]  1   0   0   1          0
@@ -351,9 +351,9 @@ geno &lt;-<span class="st"> </span><span class="kw">convert2geno</span>(xodat, m
 <p>Broman KW, Rowe LB, Churchill GA, Paigen K (2002) <a href="http://www.genetics.org/content/160/3/1123.short">Crossover interference in the mouse</a>. Genetics 160:1123-1131</p>
 <p>Copenhaver GP, Housworth EA, Stahl FW (2002) <a href="http://www.genetics.org/content/160/4/1631.short">Crossover interference in arabidopsis</a>. Genetics 160:1631-1639</p>
 <p>Foss E, Lande R, Stahl FW, Steinberg CM (1993) <a href="http://www.genetics.org/content/133/3/681.short">Chiasma interference as a function of genetic distance</a>. Genetics 133:681-691</p>
-<p>Kover PX, Valdar W, Trakalo J, Scarcelli N, Ehrenreich IM, Purugganan MD, Durrant C, Mott R (2009) <a href="http://www.%20plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551">A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in <em>Arabidopsis thaliana</em></a>. PLoS Genetics 5:e1000551</p>
+<p>Kover PX, Valdar W, Trakalo J, Scarcelli N, Ehrenreich IM, Purugganan MD, Durrant C, Mott R (2009) <a href="http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551">A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in <em>Arabidopsis thaliana</em></a>. PLoS Genetics 5:e1000551</p>
 <p>McPeek MS, Speed TP (1995) <a href="http://www.genetics.org/content/139/2/1031.short">Modeling interference in genetic recombination</a>. Genetics 139:1031-1044</p>
-<p>Mott R, Flint J (2002) <a href="http://www.ge%20netics.org/content/160/4/1609.short">Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks</a>. Genetics 160:1609-1618</p>
+<p>Mott R, Flint J (2002) <a href="http://www.genetics.org/content/160/4/1609.short">Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks</a>. Genetics 160:1609-1618</p>
 <p>Svenson KL, Gatti DM, Valdar W, Welsh CE, Cheng R, Chesler EJ, Palmer AA, McMillan L, Churchill GA (2012) <a href="http://www.genetics.org/content/190/2/437.short">High-resolution genetic mapping using the mouse Diversity Outbred population.</a> Genetics 190:437-447</p>
 <p>Threadgill DW, Churchill GA (2012) <a href="http://www.genetics.org/content/190/2/291.short">Ten years of the Collaborative Cross</a>. Genetics 190:291-294</p>
 <p>Zhao H, Speed TP, McPeek MS (1995) <a href="http://www.genetics.org/content/139/2/1045.short">Statistical analysis of crossover interference using the chi-square model</a>. Genetics 139:1045-1056</p>

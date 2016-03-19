@@ -5,8 +5,8 @@
 \title{Convert continuous allele information into marker genotypes for
 multiple chromosomes}
 \usage{
-convert2geno_allchr(xodat, map, id, f.geno, return.matrix = TRUE,
-  shift_map = FALSE)
+convert2geno_allchr(xodat, map, id = NULL, f.geno = NULL,
+  return.matrix = TRUE, shift_map = FALSE)
 }
 \arguments{
 \item{xodat}{The sort of detailed genotype/crossover data generated

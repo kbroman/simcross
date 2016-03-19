@@ -4,7 +4,8 @@
 \alias{sim_meiosis}
 \title{Simulate meiosis}
 \usage{
-sim_meiosis(parent, m = 10, p = 0, obligate_chiasma = FALSE, Lstar)
+sim_meiosis(parent, m = 10, p = 0, obligate_chiasma = FALSE,
+  Lstar = NULL)
 }
 \arguments{
 \item{parent}{An individual object, as output by

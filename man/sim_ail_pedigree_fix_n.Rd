@@ -5,7 +5,8 @@
 \title{Simulate AIL pedigree with fixed n}
 \usage{
 sim_ail_pedigree_fix_n(ngen = 12, nkids_per = 5, nsample_ngen = 150,
-  npairs, method = c("last2", "sub2"), design = c("nosib", "random"))
+  npairs = NULL, method = c("last2", "sub2"), design = c("nosib",
+  "random"))
 }
 \arguments{
 \item{ngen}{Number of generations of outbreeding}
@@ -16,7 +17,9 @@ generation}
 \item{nsample_ngen}{Number of individsuls desired at the last
 generation}
 
-\item{npairs}{Number of breeding pairs at each generation}
+\item{npairs}{Number of breeding pairs at each generation. If
+missing, we use 30 when \code{method="last2"} and 300 when
+\code{method="sub2"}.}
 
 \item{method}{Method used to generate pedigree: either expand at the last
 two generations or generate pedigree with big number of pairs and

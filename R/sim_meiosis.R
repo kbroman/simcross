@@ -131,9 +131,9 @@ check_individual <-
 #' @importFrom Rcpp sourceCpp
 #'
 sim_crossovers <-
-    function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
+    function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar=NULL)
 {
-    if(missing(Lstar) || is.null(Lstar)) {
+    if(is.null(Lstar)) {
         if(obligate_chiasma)
             Lstar <- calc_Lstar(L, m, p)
         else Lstar <- L
@@ -186,9 +186,9 @@ sim_crossovers <-
 #' ind <- create_parent(100, 1:2)
 #' prod <- sim_meiosis(ind)
 sim_meiosis <-
-    function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar)
+    function(parent, m=10, p=0.0, obligate_chiasma=FALSE, Lstar=NULL)
 {
-    if(missing(Lstar) || is.null(Lstar)) {
+    if(is.null(Lstar)) {
         L <- max(parent$mat$locations)
         if(obligate_chiasma)
             Lstar <- calc_Lstar(L, m, p)
@@ -242,9 +242,9 @@ sim_meiosis <-
 #' child <- cross(mom, dad)
 cross <-
     function(mom, dad, m=10, p=0, xchr=FALSE, male=FALSE,
-             obligate_chiasma=FALSE, Lstar)
+             obligate_chiasma=FALSE, Lstar=NULL)
 {
-    if(missing(Lstar) || is.null(Lstar)) {
+    if(is.null(Lstar)) {
         L <- max(mom$mat$locations)
         if(obligate_chiasma)
             Lstar <- calc_Lstar(L, m, p)

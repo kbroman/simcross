@@ -5,7 +5,7 @@
 \title{Simulate diversity outcross pedigree with fixed n}
 \usage{
 sim_do_pedigree_fix_n(ngen = 12, nkids_per = 5, nccgen = 15,
-  nsample_ngen = 150, npairs, method = c("last2", "sub2", "fixcc"),
+  nsample_ngen = 150, npairs = NULL, method = c("last2", "sub2", "fixcc"),
   design = c("nosib", "random"), selc.method = c("byfamily", "byindiv"))
 }
 \arguments{
@@ -20,7 +20,9 @@ when method is not "fixcc".}
 \item{nsample_ngen}{Number of individuals desired at the last
 generation}
 
-\item{npairs}{Number of breeding pairs at each generation}
+\item{npairs}{Number of breeding pairs at each generation. If
+missing, we use 30 when \code{method="last2"} and 300 when
+\code{method="sub2"}.}
 
 \item{method}{Method used to generate pedigree: either expand at
 the last two generations or generate pedigree with big number of

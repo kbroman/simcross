@@ -46,13 +46,13 @@
 #' id <- which(tab[, "gen"]==12)
 #' geno <- convert2geno_allchr(dat, map, id)
 #'
-convert2geno_allchr <- function(xodat, map, id, f.geno,
+convert2geno_allchr <- function(xodat, map, id=NULL, f.geno=NULL,
                                   return.matrix=TRUE, shift_map=FALSE){
 
   stopifnot(length(map) == length(xodat))
-  if(missing(id)) id <- 1:length(xodat[[1]])
+  if(is.null(id)) id <- 1:length(xodat[[1]])
 
-  if(missing(f.geno)){
+  if(is.null(f.geno)){
     geno <- NULL
     for(chr in 1:length(map)){
       geno[[chr]] <- convert2geno(xodat=xodat[[chr]][id], map=map[[chr]])

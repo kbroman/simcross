@@ -5,7 +5,9 @@
 #' desired sample size n
 #'
 #' @param ngen Number of generations of outbreeding
-#' @param npairs Number of breeding pairs at each generation
+#' @param npairs Number of breeding pairs at each generation. If
+#' missing, we use 30 when \code{method="last2"} and 300 when
+#' \code{method="sub2"}.
 #' @param nkids_per Number of offspring per pair for the last
 #' generation
 #' @param design How to choose crosses: either random but avoiding
@@ -35,20 +37,20 @@
 #' @examples
 #' tab <- sim_ail_pedigree_fix_n(12)
 sim_ail_pedigree_fix_n <- function(ngen=12, nkids_per=5,
-                                  nsample_ngen=150, npairs,
+                                  nsample_ngen=150, npairs=NULL,
                                   method=c("last2", "sub2"),
                                   design=c("nosib", "random")){
   method <- match.arg(method)
   design <- match.arg(design)
 
   if(method =="last2"){
-    if(missing(npairs) || is.null(npairs))
+    if(is.null(npairs))
       npairs <- 30
     ped <- sim_ail_pedigree_last2(ngen = ngen, npairs = npairs, nkids_per = nkids_per,
                                   design = design, nsample_ngen = nsample_ngen)
     id <- which(ped[, "gen"] == ngen)
   } else if(method =="sub2"){
-    if(missing(npairs) || is.null(npairs))
+    if(is.null(npairs))
       npairs <- 300
     npairs.selc <- nsample_ngen / nkids_per
     ped <- sim_ail_pedigree(ngen = ngen, npairs = npairs,

@@ -68,14 +68,12 @@
 #' # if fg not provided, result is a 3d array
 #' genoarray <- convert2geno(dat, map)
 convert2geno <-
-    function(xodat, map, founder_geno, shift_map=FALSE)
+    function(xodat, map, founder_geno=NULL, shift_map=FALSE)
 {
     if(is.list(map)) { # map is a list of multiple chromosomes
         if(length(xodat) != length(map))
             stop("length(xodat) != length(map)")
-        if(missing(founder_geno) || is.null(founder_geno))
-            founder_geno <- NULL
-        else {
+        if(!is.null(founder_geno)) {
             if(length(founder_geno) != length(map))
                 stop("length(founder_geno) != length(map)")
         }
@@ -96,7 +94,7 @@ convert2geno <-
     # maximum founder genotype
     max_geno <- max(sapply(xodat, function(a) max(a$mat$alleles, a$pat$alleles)))
 
-    if(missing(founder_geno) || is.null(founder_geno))
+    if(is.null(founder_geno))
         founder_geno <- matrix(nrow=0, ncol=0)
     else {
         if(nrow(founder_geno) < max_geno)

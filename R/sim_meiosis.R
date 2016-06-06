@@ -91,7 +91,7 @@ check_individual <-
 #' chiasma locations with probability 1/2.
 #'
 #' @param L length of chr in cM
-#' @param m Interference paramater (\code{m=0} is no interference)
+#' @param m Interference parameter (\code{m=0} is no interference)
 #' @param p Proportion of chiasmata from no-interference mechanism
 #' (\code{p=0} gives pure chi-square model)
 #' @param obligate_chiasma If TRUE, require an obligate chiasma on the
@@ -211,7 +211,7 @@ sim_meiosis <-
 #' @param dad An individual object, as produced by
 #' \code{\link{create_parent}} or this function.
 #' @param m interference parameter for chi-square model
-#' @param p proption of crossovers coming from no-interference process
+#' @param p proportion of crossovers coming from no-interference process
 #' @param xchr If TRUE, simulate X chromosome
 #' @param male If TRUE, simulate a male (matters only if
 #' \code{xchr=TRUE})

@@ -15,7 +15,7 @@ sim_do_pedigree_fix_n(ngen = 12, nkids_per = 5, nccgen = 15,
 generation}
 
 \item{nccgen}{The number of generations for each CC line, only used
-when method is not "fixcc".}
+when \code{method} is not \code{"fixcc"}.}
 
 \item{nsample_ngen}{Number of individuals desired at the last
 generation}
@@ -24,11 +24,11 @@ generation}
 missing, we use 30 when \code{method="last2"} and 300 when
 \code{method="sub2"}.}
 
-\item{method}{Method used to generate pedigree: either expand at
-the last two generations or generate pedigree with big number of
-pairs and select a sub set to have the desired sample
-size. Method="fixcc" uses the pre-cc generation same as the
-experiment at jax lab.}
+\item{method}{Method used to generate the pedigree: either expand
+at the last two generations or generate a pedigree with a large
+number of pairs and then select a subset to have the desired sample
+size. With \code{method="fixcc"}, we use the pre-CC generations as performed at the
+Jackson Lab.}
 
 \item{design}{How to choose crosses: either random but avoiding
 siblings, or completely at random}
@@ -44,7 +44,7 @@ female and 1 for male.
 }
 \description{
 Simulate a diversity outcross pedigree (a table of individual, mom,
-dad, sex) so that the last generation reach a desired sample size n
+dad, sex) so that the last generation reaches a desired sample size n
 }
 \details{
 The default number of breeding pairs depends on the chosen

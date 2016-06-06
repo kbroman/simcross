@@ -22,7 +22,7 @@ chromosome, in \code{L}.)}
 \item{m}{Crossover interference parameter, for chi-square model
 (m=0 corresponds to no interference).}
 
-\item{p}{proption of crossovers coming from no-interference process}
+\item{p}{proportion of crossovers coming from no-interference process}
 
 \item{obligate_chiasma}{If TRUE, require an obligate chiasma on the
 4-strand bundle at meiosis.}

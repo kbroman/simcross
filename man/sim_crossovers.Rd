@@ -9,7 +9,7 @@ sim_crossovers(L, m = 10, p = 0, obligate_chiasma = FALSE, Lstar = NULL)
 \arguments{
 \item{L}{length of chr in cM}
 
-\item{m}{Interference paramater (\code{m=0} is no interference)}
+\item{m}{Interference parameter (\code{m=0} is no interference)}
 
 \item{p}{Proportion of chiasmata from no-interference mechanism
 (\code{p=0} gives pure chi-square model)}

@@ -36,8 +36,8 @@ CCcolors <-
 #' \code{\link{create_parent}} or \code{\link{cross}}
 #' @param center (x,y) vector for the center of the individual
 #' @param chrlength Length of chromosomes
-#' @param chrwidth Width of chromsomes
-#' @param gap Gap between chromsomes
+#' @param chrwidth Width of chromosomes
+#' @param gap Gap between chromosomes
 #' @param col Vector of colors
 #' @param border Color for border
 #' @param lend Passed to \code{\link[graphics]{rect}}

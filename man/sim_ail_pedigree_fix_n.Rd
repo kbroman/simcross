@@ -14,7 +14,7 @@ sim_ail_pedigree_fix_n(ngen = 12, nkids_per = 5, nsample_ngen = 150,
 \item{nkids_per}{Number of offspring per pair for the last
 generation}
 
-\item{nsample_ngen}{Number of individsuls desired at the last
+\item{nsample_ngen}{Number of individuals desired at the last
 generation}
 
 \item{npairs}{Number of breeding pairs at each generation. If
@@ -22,8 +22,8 @@ missing, we use 30 when \code{method="last2"} and 300 when
 \code{method="sub2"}.}
 
 \item{method}{Method used to generate pedigree: either expand at the last
-two generations or generate pedigree with big number of pairs and
-select a sub set to have the desierd sample size.}
+two generations or generate a pedigree with a large number of pairs and
+select a subset to have the desired sample size.}
 
 \item{design}{How to choose crosses: either random but avoiding
 siblings, or completely at random}
@@ -35,7 +35,7 @@ and father ID. Sex is coded 0 for female and 1 for male.
 }
 \description{
 Simulate a pedigree for advanced intercross lines (a table of
-individual, mom, dad, sex) so that the last generation reach a
+individual, mom, dad, sex) so that the last generation reaches a
 desired sample size n
 }
 \details{

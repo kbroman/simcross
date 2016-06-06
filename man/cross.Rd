@@ -16,7 +16,7 @@ cross(mom, dad, m = 10, p = 0, xchr = FALSE, male = FALSE,
 
 \item{m}{interference parameter for chi-square model}
 
-\item{p}{proption of crossovers coming from no-interference process}
+\item{p}{proportion of crossovers coming from no-interference process}
 
 \item{xchr}{If TRUE, simulate X chromosome}
 

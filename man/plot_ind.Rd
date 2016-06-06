@@ -16,9 +16,9 @@ plot_ind(ind, center, chrlength = 30, chrwidth = 3, gap = 3,
 
 \item{chrlength}{Length of chromosomes}
 
-\item{chrwidth}{Width of chromsomes}
+\item{chrwidth}{Width of chromosomes}
 
-\item{gap}{Gap between chromsomes}
+\item{gap}{Gap between chromosomes}
 
 \item{col}{Vector of colors}
 

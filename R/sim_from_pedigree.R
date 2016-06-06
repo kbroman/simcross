@@ -14,7 +14,7 @@
 #' chromosome, in \code{L}.)
 #' @param m Crossover interference parameter, for chi-square model
 #' (m=0 corresponds to no interference).
-#' @param p proption of crossovers coming from no-interference process
+#' @param p proportion of crossovers coming from no-interference process
 #' @param obligate_chiasma If TRUE, require an obligate chiasma on the
 #' 4-strand bundle at meiosis.
 #'

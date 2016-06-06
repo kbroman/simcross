@@ -1,7 +1,7 @@
 #' Simulate AIL pedigree with fixed n
 #'
 #' Simulate a pedigree for advanced intercross lines (a table of
-#' individual, mom, dad, sex) so that the last generation reach a
+#' individual, mom, dad, sex) so that the last generation reaches a
 #' desired sample size n
 #'
 #' @param ngen Number of generations of outbreeding
@@ -13,9 +13,9 @@
 #' @param design How to choose crosses: either random but avoiding
 #' siblings, or completely at random
 #' @param method Method used to generate pedigree: either expand at the last
-#' two generations or generate pedigree with big number of pairs and
-#' select a sub set to have the desierd sample size.
-#' @param nsample_ngen Number of individsuls desired at the last
+#' two generations or generate a pedigree with a large number of pairs and
+#' select a subset to have the desired sample size.
+#' @param nsample_ngen Number of individuals desired at the last
 #' generation
 #'
 #' @details The default value for \code{npairs} depends on the choice of \code{method}.

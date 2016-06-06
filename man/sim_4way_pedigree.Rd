@@ -13,7 +13,7 @@ sim_4way_pedigree(ngen = 1, nsibs = 100)
 last generation.}
 }
 \value{
-A matrix with five columns: individual ID, mother ID,
+A data frame with five columns: individual ID, mother ID,
 father ID, sex, and generation.  Founders have \code{0} for mother
 and father ID. Sex is coded 0 for female and 1 for male.
 }

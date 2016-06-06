@@ -9,7 +9,7 @@
 #' @param nsibs Vector with number of siblings in the sibships in the
 #' last generation.
 #'
-#' @return A matrix with five columns: individual ID, mother ID,
+#' @return A data frame with five columns: individual ID, mother ID,
 #' father ID, sex, and generation.  Founders have \code{0} for mother
 #' and father ID. Sex is coded 0 for female and 1 for male.
 #'
@@ -75,7 +75,5 @@ sim_4way_pedigree <-
         gen <- c(gen, rep(3, totsibs))
     }
 
-    result <- cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
-    storage.mode(result) <- "integer"
-    result
+    data.frame(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
 }

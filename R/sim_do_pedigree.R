@@ -15,8 +15,8 @@
 #' @param design How to choose crosses: either random but avoiding
 #' siblings, or completely at random
 #'
-#' @return A matrix with six columns: individual ID, mother ID, father
-#' ID, sex, generation, and 1/0 indicator for whether DO or pre-DO.
+#' @return A data frame with six columns: individual ID, mother ID, father
+#' ID, sex, generation, and TRUE/FALSE indicator for whether DO or pre-DO.
 #' Founders have \code{0} for mother and father ID. Sex is coded 0 for
 #' female and 1 for male.
 #'
@@ -79,7 +79,7 @@ sim_do_pedigree <-
     dad <- rep(0, 16)
     sex <- rep(0:1, each=8)
     gen <- rep(0, 16)
-    result <- cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
+    result <- data.frame(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
 
     cur_nind <- 16
     lastgen <- NULL
@@ -93,7 +93,7 @@ sim_do_pedigree <-
         lastgen <- c(lastgen, tab[tab[,"gen"] == max(tab[,"gen"]),1])
         cur_nind <- max(tab[,1])
     }
-    result <- cbind(result, do=rep(0, nrow(result)))
+    result <- data.frame(result, do=rep(FALSE, nrow(result)))
 
     moms <- lastgen[seq(1, length(lastgen), by=2)]
     dads <- lastgen[seq(2, length(lastgen), by=2)]
@@ -124,10 +124,10 @@ sim_do_pedigree <-
         }
         cur_nind <- max(id)
 
-        newrows <- cbind(id, mom, dad, sex, gen, rep(1, length(id)))
+        newrows <- data.frame(id=id, mom=mom, dad=dad, sex=sex, gen=gen,
+                              do=rep(TRUE, length(id)))
         result <- rbind(result, newrows)
     }
 
-    storage.mode(result) <- "integer"
     result
 }

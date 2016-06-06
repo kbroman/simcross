@@ -5,9 +5,10 @@
 #' Perform a series of checks on the tabular data for a pedigree,
 #' checking for problems
 #'
-#' @param pedigree Numeric matrix with four columns: ID, mom ID, dad
-#' ID, sex. Sex is coded as \code{0}=female, \code{1}=male. There can
-#' be additional columns, but they'll be ignored.
+#' @param pedigree Numeric matrix or data frame with four columns: ID,
+#' mom ID, dad ID, sex. Sex is coded as \code{0}=female,
+#' \code{1}=male. There can be additional columns, but they'll be
+#' ignored.
 #' @param ignore_sex If TRUE, ignore the sex values completely
 #' (appropriate for hermaphroditic species.)
 #'

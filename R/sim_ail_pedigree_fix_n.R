@@ -22,7 +22,7 @@
 #' For \code{method="last2"}, we use a default of \code{npairs=30}; for
 #' \code{method="sub2"}, we use a default of \code{npairs=300}.
 #'
-#' @return A matrix with five columns: individual ID, mother ID,
+#' @return A data frame with five columns: individual ID, mother ID,
 #' father ID, sex, and generation.  Founders have \code{0} for mother
 #' and father ID. Sex is coded 0 for female and 1 for male.
 #'
@@ -59,9 +59,8 @@ sim_ail_pedigree_fix_n <- function(ngen=12, nkids_per=5,
                        size=npairs.selc)
     id <- which(ped[, "gen"] == ngen & ped[,"dad"] %in% selc.dad)
   }
-  storage.mode(ped) <- "integer"
   attr(ped, "last.gen.id") <- id
-  return(ped)
+  ped
 }
 
 sim_ail_pedigree_last2 <- function(ngen=12, npairs=30, nkids_per=5, design=c("nosib", "random"),
@@ -103,7 +102,5 @@ sim_ail_pedigree_last2 <- function(ngen=12, npairs=30, nkids_per=5, design=c("no
   sex <- c(sex, rep_len(c(0,1), length.out=n.last)[wh])
   gen <- c(gen, rep(ngen, n.last)[wh])
 
-  result <- cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
-  storage.mode(result) <- "integer"
-  result
+  data.frame(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
 }

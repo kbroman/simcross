@@ -11,7 +11,7 @@
 #' IDs
 #' @param firstind Positive integer to assign to the first child
 #'
-#' @return A matrix with five columns: individual ID, mother ID,
+#' @return A data frame with five columns: individual ID, mother ID,
 #' father ID, sex, and generation.  Founders have \code{0} for mother
 #' and father ID. Sex is coded 0 for female and 1 for male.
 #'
@@ -96,7 +96,5 @@ sim_ril_pedigree <-
         }
     }
 
-    result <- cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
-    storage.mode(result) <- "integer"
-    result
+    data.frame(id=id, mom=mom, dad=dad, sex=sex, gen=gen)
 }

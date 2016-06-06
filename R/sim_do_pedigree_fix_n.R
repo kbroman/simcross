@@ -28,8 +28,8 @@
 #' with \code{method="sub2"}, the default is \code{npairs=300};
 #' with \code{method="fixcc"}, \code{npairs} is ignored and is fixed at 144.
 #'
-#' @return A matrix with six columns: individual ID, mother ID, father
-#' ID, sex, generation, and 1/0 indicator for whether DO or pre-DO.
+#' @return A data frame with six columns: individual ID, mother ID, father
+#' ID, sex, generation, and TRUE/FALSE indicator for whether DO or pre-DO.
 #' Founders have \code{0} for mother and father ID. Sex is coded 0 for
 #' female and 1 for male.
 #'
@@ -90,8 +90,7 @@ sim_do_pedigree_fix_n <- function(ngen=12, nkids_per=5, nccgen=15,
   }
 
   attr(ped, "last.gen.id") <- id
-  storage.mode(ped) <- "integer"
-  return(ped)
+  ped
 }
 
 
@@ -138,7 +137,5 @@ sim_do_pedigree_last2 <- function(ngen=12, npairs=30, nkids_per=5, nccgen=15,
   gen <- c(gen, rep(ngen, n.last)[wh])
   do <- c(do, rep(1, length(wh)))
 
-  result <- cbind(id=id, mom=mom, dad=dad, sex=sex, gen=gen, do=do)
-  storage.mode(result) <- "integer"
-  result
+  data.frame(id=id, mom=mom, dad=dad, sex=sex, gen=gen, do=do)
 }

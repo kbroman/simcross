@@ -8,7 +8,7 @@ sim_from_pedigree_allchr(pedigree, map, m = 10, p = 0,
   obligate_chiasma = FALSE)
 }
 \arguments{
-\item{pedigree}{Matrix describing a pedigree, with first four
+\item{pedigree}{Matrix or data frame describing a pedigree, with first four
 columns being individual ID, mom ID, dad ID, and sex (female as
 \code{0}, male as \code{1}).}
 

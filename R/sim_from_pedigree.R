@@ -4,7 +4,7 @@
 #'
 #' Simulate genotypes along one chromosome for a pedigree
 #'
-#' @param pedigree Matrix describing a pedigree, with first four
+#' @param pedigree Matrix or data frame describing a pedigree, with first four
 #' columns being individual ID, mom ID, dad ID, and sex (female as
 #' \code{0}, male as \code{1}).
 #' @param L Length of chromosome in cM (or a vector of chromosome lengths)

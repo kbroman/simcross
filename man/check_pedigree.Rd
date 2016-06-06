@@ -7,9 +7,10 @@
 check_pedigree(pedigree, ignore_sex = FALSE)
 }
 \arguments{
-\item{pedigree}{Numeric matrix with four columns: ID, mom ID, dad
-ID, sex. Sex is coded as \code{0}=female, \code{1}=male. There can
-be additional columns, but they'll be ignored.}
+\item{pedigree}{Numeric matrix or data frame with four columns: ID,
+mom ID, dad ID, sex. Sex is coded as \code{0}=female,
+\code{1}=male. There can be additional columns, but they'll be
+ignored.}
 
 \item{ignore_sex}{If TRUE, ignore the sex values completely
 (appropriate for hermaphroditic species.)}

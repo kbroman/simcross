@@ -4,7 +4,7 @@
 \name{AILped}
 \alias{AILped}
 \title{Example AIL pedigree}
-\format{A matrix with five columns: individual id, mom, dad, sex (0
+\format{A data frame with five columns: individual id, mom, dad, sex (0
 for females and 1 for males) and generation.}
 \source{
 Derived from the pedF8 dataset in the QTLRel package,

@@ -37,8 +37,8 @@ siblings, or completely at random}
 generation.}
 }
 \value{
-A matrix with six columns: individual ID, mother ID, father
-ID, sex, generation, and 1/0 indicator for whether DO or pre-DO.
+A data frame with six columns: individual ID, mother ID, father
+ID, sex, generation, and TRUE/FALSE indicator for whether DO or pre-DO.
 Founders have \code{0} for mother and father ID. Sex is coded 0 for
 female and 1 for male.
 }

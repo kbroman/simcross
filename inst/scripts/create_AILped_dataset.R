@@ -33,5 +33,5 @@ gen <- factor(paste0("F", AILped[,"generation"]))
 expect_equal(gen, pedF8$generation)
 
 # save to file
+AILped <- as.data.frame(AILped)
 save(AILped, file="../../data/AILped.RData")
-

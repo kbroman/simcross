@@ -11,8 +11,10 @@
 #' vectors (one per chromosome), in which case xodat and founder_geno
 #' must be lists with the same length.
 #' @param founder_geno Optional matrix (size \code{n_founders} x
-#' \code{length(map)}) of founder genotypes coded as 1/2. If provided,
-#' results are 1/2/3 genotypes
+#' \code{length(map)}) of founder genotypes. If coded as 1/2 (or 1/3),
+#' results are 1/2/3 genotypes. If coded as A/T/G/C/N, results are
+#' A/T/G/C/N/H genotypes. If coded as letters A-H for the 8 founders,
+#' results are two-letter genotypes AA-HH with 36 possible values.
 #' @param shift_map If TRUE, shift genetic map to start at 0
 #'
 #' @return If \code{founder_geno} is provided or there are just two
@@ -111,7 +113,11 @@ convert2geno <-
         output <- t(.convert2geno(xodat, map, founder_geno))
 
         if(any(founder_geno != 1 & founder_geno != 2)){
-            if(all(c("A","T","G","C") %in% unique(c(founder_geno)))){
+            if(all(founder_geno == 1 || founder_geno)==3) {
+                founder_geno[founder_geno==3] <- 2
+                output <- t(.convert2geno(xodat, map, founder_geno))
+            }
+            else if(all(c("A","T","G","C") %in% unique(c(founder_geno)))){
                 output <- t(convert2geno_char(xodat, map, founder_geno))
             } else {
                 output <- t(convert2geno_char_paste(xodat, map, founder_geno))

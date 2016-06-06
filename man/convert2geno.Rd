@@ -15,8 +15,10 @@ vectors (one per chromosome), in which case xodat and founder_geno
 must be lists with the same length.}
 
 \item{founder_geno}{Optional matrix (size \code{n_founders} x
-\code{length(map)}) of founder genotypes coded as 1/2. If provided,
-results are 1/2/3 genotypes}
+\code{length(map)}) of founder genotypes. If coded as 1/2 (or 1/3),
+results are 1/2/3 genotypes. If coded as A/T/G/C/N, results are
+A/T/G/C/N/H genotypes. If coded as letters A-H for the 8 founders,
+results are two-letter genotypes AA-HH with 36 possible values.}
 
 \item{shift_map}{If TRUE, shift genetic map to start at 0}
 }

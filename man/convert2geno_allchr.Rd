@@ -5,7 +5,7 @@
 \title{Convert continuous allele information into marker genotypes for
 multiple chromosomes}
 \usage{
-convert2geno_allchr(xodat, map, id = NULL, f.geno = NULL,
+convert2geno_allchr(xodat, map, id = NULL, founder_geno = NULL,
   return.matrix = TRUE, shift_map = FALSE)
 }
 \arguments{
@@ -17,11 +17,11 @@ chromosome}
 
 \item{id}{ids for which individuals genotypes is desired}
 
-\item{f.geno}{Optional matrix (size \code{n_markers} x 8) of
-founder genotypes. If coded as 1/2, results are 1/2/3 genotypes. If
-coded as A/T/G/C/N, results are A/T/G/C/N/H genotypes. If coded as
-letters A-H for the 8 founders, results are two-letter genotypes
-AA-HH with 36 possible values.}
+\item{founder_geno}{Optional matrix (size \code{n_markers} x 8) of
+founder genotypes. If coded as 1/2 (or 1/3), results are 1/2/3
+genotypes. If coded as A/T/G/C/N, results are A/T/G/C/N/H
+genotypes. If coded as letters A-H for the 8 founders, results are
+two-letter genotypes AA-HH with 36 possible values.}
 
 \item{return.matrix}{If FALSE, the result is a list of length
 \code{n_chrs}, otherwise it is converted into a matrix if size

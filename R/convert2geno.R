@@ -112,8 +112,8 @@ convert2geno <-
     if(length(founder_geno) > 0 || max_geno <= 2) {
         output <- t(.convert2geno(xodat, map, founder_geno))
 
-        if(any(founder_geno != 1 & founder_geno != 2)){
-            if(all(founder_geno == 1 || founder_geno)==3) {
+        if(any(founder_geno != 1 & founder_geno != 2)) {
+            if(all(founder_geno == 1 | founder_geno==3)) {
                 founder_geno[founder_geno==3] <- 2
                 output <- t(.convert2geno(xodat, map, founder_geno))
             }

@@ -29,8 +29,8 @@ dat <- sim_from_pedigree(tab)
 dat <- collapse_do_alleles(dat)
 
 # also works with data on multiple chromosomes
-dat <- sim_from_pedigree(tab, c("1"=100, "2"=75, "X"=100), xchr="X")
-dat <- collapse_do_alleles(dat)
+\donttest{dat <- sim_from_pedigree(tab, c("1"=100, "2"=75, "X"=100), xchr="X")
+dat <- collapse_do_alleles(dat)}
 }
 \seealso{
 \code{\link{sim_do_pedigree}}, \code{\link{sim_do_pedigree_fix_n}},

@@ -26,8 +26,8 @@
 #' dat <- collapse_do_alleles(dat)
 #'
 #' # also works with data on multiple chromosomes
-#' dat <- sim_from_pedigree(tab, c("1"=100, "2"=75, "X"=100), xchr="X")
-#' dat <- collapse_do_alleles(dat)
+#' \donttest{dat <- sim_from_pedigree(tab, c("1"=100, "2"=75, "X"=100), xchr="X")
+#' dat <- collapse_do_alleles(dat)}
 
 collapse_do_alleles <-
     function(xodata)

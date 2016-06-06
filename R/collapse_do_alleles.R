@@ -43,12 +43,9 @@ collapse_do_alleles <-
         mata <- a$mat$alleles
         pata <- a$pat$alleles
 
-        if(any(mata > 16) || any(pata > 16))
-            stop("alleles out of range 1-16")
-
         # 9-16 -> 1-8
-        mata[mata > 8] <- mata[mata > 8] - 8
-        pata[pata > 8] <- pata[pata > 8] - 8
+        mata[mata > 8 & mata < 17] <- mata[mata > 8 & mata < 17] - 8
+        pata[pata > 8 & pata < 17] <- pata[pata > 8 & pata < 17] - 8
 
         # paste back into object
         a$mat$alleles <- mata

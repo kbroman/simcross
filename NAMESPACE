@@ -3,6 +3,7 @@
 export(CCcolors)
 export(calc_Lstar)
 export(check_pedigree)
+export(collapse_do_alleles)
 export(convert2geno)
 export(convert2geno_allchr)
 export(create_parent)

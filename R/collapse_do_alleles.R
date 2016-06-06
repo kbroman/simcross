@@ -13,8 +13,8 @@
 #'
 #' @export
 #' @keywords utilities
-#' @seealso \code{\link{sim_do_pedigree}}, \code{sim_do_pedigree_fix_n}},
-#' \code{{\link{sim_from_pedigree}}
+#' @seealso \code{\link{sim_do_pedigree}}, \code{\link{sim_do_pedigree_fix_n}},
+#' \code{\link{sim_from_pedigree}}
 #'
 #' @examples
 #' # simulate DO pedigree

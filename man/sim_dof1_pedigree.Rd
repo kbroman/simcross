@@ -23,10 +23,11 @@ DO generation (each will be crossed to produce one F1)}
 siblings, or completely at random}
 }
 \value{
-A data frame with six columns: individual ID, mother ID, father
-ID, sex, generation, and TRUE/FALSE indicator for whether DO or pre-DO.
-Founders have \code{0} for mother and father ID. Sex is coded 0 for
-female and 1 for male.
+A data frame with seven columns: individual ID, mother ID,
+father ID, sex, generation, a TRUE/FALSE indicator for whether DO
+or pre-DO, and a TRUE/FALSE indicator for whether DOF1.  Founders
+have \code{0} for mother and father ID. Sex is coded 0 for female
+and 1 for male.
 }
 \description{
 Simulate a pedigree for a set of DOF1 individuals: the F1 offspring

@@ -16,10 +16,11 @@
 #' @param design How to choose crosses: either random but avoiding
 #' siblings, or completely at random
 #'
-#' @return A data frame with six columns: individual ID, mother ID, father
-#' ID, sex, generation, and TRUE/FALSE indicator for whether DO or pre-DO.
-#' Founders have \code{0} for mother and father ID. Sex is coded 0 for
-#' female and 1 for male.
+#' @return A data frame with seven columns: individual ID, mother ID,
+#' father ID, sex, generation, a TRUE/FALSE indicator for whether DO
+#' or pre-DO, and a TRUE/FALSE indicator for whether DOF1.  Founders
+#' have \code{0} for mother and father ID. Sex is coded 0 for female
+#' and 1 for male.
 #'
 #' @details A diversity outcross is generated from a set of 8 inbred
 #' lines. We need two individuals from each line (one female and one

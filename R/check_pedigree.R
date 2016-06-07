@@ -96,12 +96,12 @@ check_pedigree <-
 
     # check sex
     if(any(sex[match_mom] != 0)) {
-        male_moms <- momsub[sex[match_mom] != 0]
+        male_moms <- unique(pedigree$mom[momsub[sex[match_mom] != 0]])
         stop("Some moms are male: ",
              paste(male_moms, collapse=" "))
     }
     if(any(sex[match_dad] != 1)) {
-        female_dads <- dadsub[sex[match_dad] != 0]
+        female_dads <- unique(pedigree$dad[dadsub[sex[match_dad] != 1]])
         stop("Some dads are female: ",
              paste(female_dads, collapse=" "))
     }

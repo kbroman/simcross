@@ -1,7 +1,8 @@
-#' Simulate diversity outcross pedigree with fixed n
+#' Simulate a pedigree for Diversity Outbreds for a target sample size
 #'
-#' Simulate a diversity outcross pedigree (a table of individual, mom,
-#' dad, sex) so that the last generation reaches a desired sample size n
+#' Simulate a pedigree for Diversity Outbred (DO) mice (a table of
+#' individual, mom, dad, sex) so that the last generation reaches a
+#' desired sample size.
 #'
 #' @param ngen Number of generations of outbreeding
 #' @param npairs Number of breeding pairs at each generation. If

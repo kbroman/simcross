@@ -236,9 +236,9 @@ table(ailped$gen)
 With 100 breeding pairs and 5 kids per pair in last generation, we
 have 200 individuals for most generations and 500 at the end.
 
-### Diversity Outcross pedigree
+### Diversity Outbred pedigree
 
-The Diversity Outcross (DO; Svenson et al. 2013) is like AIL, but
+The Diversity Outbred population (DO; Svenson et al. 2013) is like AIL, but
 starting with eight inbred lines rather than two. Actually, the mouse
 DO started with partially-inbred individuals from Collaborative Cross
 lines (the so-called preCC; intermediate generations in the

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sim_do_pedigree_fix_n.R
 \name{sim_do_pedigree_fix_n}
 \alias{sim_do_pedigree_fix_n}
-\title{Simulate diversity outcross pedigree with fixed n}
+\title{Simulate a pedigree for Diversity Outbreds for a target sample size}
 \usage{
 sim_do_pedigree_fix_n(ngen = 12, nkids_per = 5, nccgen = 15,
   nsample_ngen = 150, npairs = NULL, method = c("last2", "sub2", "fixcc"),
@@ -43,8 +43,9 @@ Founders have \code{0} for mother and father ID. Sex is coded 0 for
 female and 1 for male.
 }
 \description{
-Simulate a diversity outcross pedigree (a table of individual, mom,
-dad, sex) so that the last generation reaches a desired sample size n
+Simulate a pedigree for Diversity Outbred (DO) mice (a table of
+individual, mom, dad, sex) so that the last generation reaches a
+desired sample size.
 }
 \details{
 The default number of breeding pairs depends on the chosen

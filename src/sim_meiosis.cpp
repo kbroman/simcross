@@ -21,7 +21,8 @@ NumericVector sim_crossovers(const double L, const int m, const double p,
             n_xo = R::rpois(L/100.0);
         }
         
-        return runif(n_xo, 0.0, L);
+        NumericVector tmp = runif(n_xo, 0.0, L);
+        return tmp.sort();
     }
 
     int n_points, first, n_nichi, n_ichi;

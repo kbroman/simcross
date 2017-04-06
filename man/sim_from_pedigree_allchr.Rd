@@ -47,4 +47,3 @@ dat <- sim_from_pedigree_allchr(tab, map)
 \code{\link{sim_from_pedigree}}
 }
 \keyword{datagen}
-

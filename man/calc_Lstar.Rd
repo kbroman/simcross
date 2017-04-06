@@ -31,4 +31,3 @@ calc_Lstar(60, 10, 0.1)
 \code{\link{sim_crossovers}}
 }
 \keyword{utilities}
-

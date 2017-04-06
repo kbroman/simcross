@@ -53,4 +53,3 @@ plot_crosslines(loc[[1]], loc[[2]], loc[3:6])
 \code{\link{plot_ind}}
 }
 \keyword{hplot}
-

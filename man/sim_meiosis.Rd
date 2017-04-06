@@ -56,4 +56,3 @@ of crossover interference using the chi-square model.  \emph{Genetics}
 \code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
 }
 \keyword{datagen}
-

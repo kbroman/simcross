@@ -37,4 +37,3 @@ dat <- collapse_do_alleles(dat)}
 \code{\link{sim_from_pedigree}}
 }
 \keyword{utilities}
-

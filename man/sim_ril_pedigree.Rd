@@ -4,7 +4,7 @@
 \alias{sim_ril_pedigree}
 \title{Generate a ril pedigree}
 \usage{
-sim_ril_pedigree(ngen = 20, selfing = FALSE, parents = 1:8,
+sim_ril_pedigree(ngen = 20, selfing = FALSE, parents = 1:2,
   firstind = max(parents) + 1)
 }
 \arguments{
@@ -12,10 +12,11 @@ sim_ril_pedigree(ngen = 20, selfing = FALSE, parents = 1:8,
 
 \item{selfing}{If TRUE, use selfing}
 
-\item{parents}{Vector of length 2, 4, or 8, indicating the parents'
-IDs}
+\item{parents}{Vector of the parents' IDs. Should be integers, and
+length must be a power of 2 (i.e., 2, 4, 8, ...)}
 
-\item{firstind}{Positive integer to assign to the first child}
+\item{firstind}{Positive integer to assign to the first child. Must
+be greater than \code{max(parents)}.}
 }
 \value{
 A data frame with five columns: individual ID, mother ID,
@@ -35,4 +36,3 @@ tab <- sim_ril_pedigree(7)
 \code{\link{sim_4way_pedigree}}
 }
 \keyword{datagen}
-

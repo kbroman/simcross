@@ -59,4 +59,3 @@ of crossover interference using the chi-square model.  \emph{Genetics}
 \bold{139}, 1045--1056.
 }
 \keyword{datagen}
-

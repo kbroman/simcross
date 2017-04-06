@@ -62,4 +62,3 @@ tab <- sim_do_pedigree_fix_n(8)
 \code{\link{sim_do_pedigree}}, \code{\link{sim_4way_pedigree}},
 \code{\link{sim_ail_pedigree_fix_n}}
 }
-

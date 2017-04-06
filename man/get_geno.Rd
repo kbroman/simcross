@@ -32,4 +32,3 @@ geno <- get_geno(dat, 30)
 \code{\link{sim_from_pedigree}}, \code{\link{convert2geno}}
 }
 \keyword{utilities}
-

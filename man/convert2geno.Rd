@@ -80,4 +80,3 @@ genoarray <- convert2geno(dat, map)
 \code{\link{get_geno}}, \code{\link{sim_from_pedigree}}
 }
 \keyword{utilities}
-

@@ -28,4 +28,3 @@ create_parent(100, 1:2)
 \code{\link{cross}}, \code{\link{sim_meiosis}}
 }
 \keyword{datagen}
-

@@ -16,4 +16,3 @@ Get the vector of colors for the Collaborative Cross
 CCcolors()
 }
 \keyword{color}
-

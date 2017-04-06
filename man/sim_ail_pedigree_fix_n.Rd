@@ -53,4 +53,3 @@ tab <- sim_ail_pedigree_fix_n(12)
 \code{\link{sim_do_pedigree_fix_n}}
 }
 \keyword{datagen}
-

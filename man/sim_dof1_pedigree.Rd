@@ -83,4 +83,3 @@ mapping using the mouse Diversity Outbred population. Genetics
 \code{\link{sim_4way_pedigree}}
 }
 \keyword{datagen}
-

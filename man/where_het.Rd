@@ -27,4 +27,3 @@ where_het(child)
 \code{\link{sim_from_pedigree}},
 \code{\link{convert2geno}}
 }
-

@@ -56,4 +56,3 @@ child <- cross(mom, dad)
 \code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
 }
 \keyword{datagen}
-

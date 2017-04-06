@@ -47,4 +47,3 @@ tab3 <- sim_4way_pedigree(ngen=2, rep(12, 10))
 \code{\link{sim_ail_pedigree}}
 }
 \keyword{datagen}
-

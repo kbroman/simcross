@@ -43,4 +43,3 @@ check_pedigree(tab)
 \code{\link{sim_ril_pedigree}}
 }
 \keyword{utilities}
-

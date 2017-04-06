@@ -59,4 +59,3 @@ dat <- sim_from_pedigree(tab, c("1"=100, "2"=75, "X"=100), xchr="X")
 \code{\link{sim_ril_pedigree}}
 }
 \keyword{datagen}
-

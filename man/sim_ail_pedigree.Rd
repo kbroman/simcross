@@ -50,4 +50,3 @@ tab <- sim_ail_pedigree(12, 30)
 \code{\link{sim_4way_pedigree}}
 }
 \keyword{datagen}
-

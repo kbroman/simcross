@@ -55,4 +55,3 @@ plot_crosslines(loc[[1]], loc[[2]], loc[[3]])
 \code{\link{plot_crosslines}}
 }
 \keyword{hplot}
-

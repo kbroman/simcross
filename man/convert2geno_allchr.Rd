@@ -62,4 +62,3 @@ geno <- convert2geno_allchr(dat, map, id)
 \code{\link{convert2geno}}
 }
 \keyword{utilities}
-

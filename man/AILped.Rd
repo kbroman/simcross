@@ -21,4 +21,3 @@ data(AILped)
 x <- sim_from_pedigree(AILped)
 }
 \keyword{datasets}
-

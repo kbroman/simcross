@@ -162,12 +162,12 @@ matrices for different cross designs: `sim_ril_pedigree`,
 ### RIL pedigree
 
 `sim_ril_pedigree` generates a pedigree matrix for a single
-recombinant inbred line derived from 2, 4, or 8 founder
-lines. (Examples include the Collaborative Cross (Threadgill and
+recombinant inbred line derived from 2^k^ founder
+lines for some k>0. (Examples include the Collaborative Cross (Threadgill and
 Churchill 2012) and MAGIC lines (Kover et al. 2009).)  The arguments
 are `ngen` (number of generations of inbreeding), `selfing` (default
 `FALSE`, for sibling mating), `parents` (a vector of integers for the
-parents; the length must be 2, 4, or 8, and corresponds to the number
+parents; the length must be a power of 2 (i.e., 2, 4, 8, 16, etc.) and corresponds to the number
 of founder lines), and `firstind`, the ID number to attach to the
 first individual following the parents (so that the pedigree matrices
 for multiple RIL may be `rbind`-ed together). Note that there's no real

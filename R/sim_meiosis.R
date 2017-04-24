@@ -127,8 +127,6 @@ check_individual <-
 #' \bold{139}, 1045--1056.
 #'
 #' @export
-#' @useDynLib simcross
-#' @importFrom Rcpp sourceCpp
 #'
 sim_crossovers <-
     function(L, m=10, p=0.0, obligate_chiasma=FALSE, Lstar=NULL)

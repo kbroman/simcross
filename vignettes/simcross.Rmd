@@ -15,7 +15,7 @@ opts_chunk$set(fig.width=7, fig.height=4.5,
 
 
 [R/simcross](https://github.com/kbroman/simcross) is an
-[R](http://www.r-project.org) package to simulate genotypes from an
+[R](https://www.r-project.org) package to simulate genotypes from an
 experimental cross. The aim is flexibility rather than speed.
 
 Meiosis is simulated following the Stahl model (Copenhaver et
@@ -28,7 +28,7 @@ Zhao et al. 1995). Thus, with _p_=0, the model reduces to the
 chi-square model.  The chi-square model has a single parameter, _m_,
 which is a non-negative integer and controls the strength of
 interference. _m_=0 corresponds to no interference.
-[Broman et al. (2002)](http://www.ncbi.nlm.nih.gov/pubmed/11901128) estimated _m_=10 for the level of interference in the mouse
+[Broman et al. (2002)](https://www.ncbi.nlm.nih.gov/pubmed/11901128) estimated _m_=10 for the level of interference in the mouse
 (derived assuming _p_=0).  The chi-square model is a special case of
 the gamma model (McPeek and Speed 1995) which has a positive parameter
 _&nu;_; the chi-square model corresponds to the case that _m_ = _&nu;_
@@ -135,7 +135,7 @@ To define a pedigree, we use a numeric matrix (or data frame) with four columns:
 individual ID, mom, dad, and sex (coded as 0=female, 1=male). The
 [R/simcross package](https://github.com/kbroman/simcross) includes a
 sample pedigree for advanced intercross lines, `AILped`, taken from
-the [QTLRel package](http://cran.r-project.org/package=QTLRel).
+the [QTLRel package](https://cran.r-project.org/package=QTLRel).
 Here is the top of that dataset:
 
 ```{r AILped_head}
@@ -180,7 +180,7 @@ _simulation_ here; the result is entirely deterministic.)
 The `gen` column in the output is the generation number, with 0
 corresponding to the founders. The generations are simply sequential
 and so don't correspond to the numbering scheme used for the
-Collaborative Cross (see, for example, [Broman 2012](http://www.ncbi.nlm.nih.gov/pubmed/22345609)).
+Collaborative Cross (see, for example, [Broman 2012](https://www.ncbi.nlm.nih.gov/pubmed/22345609)).
 
 ### 4-way cross pedigree
 
@@ -538,44 +538,44 @@ geno <- convert2geno(xodat, map, fg)
 ## References
 
 Broman KW (2012)
-[Genotype probabilities at intermediate generations in the construction of recombinant inbred lines](http://www.genetics.org/content/190/2/403.short).
+[Genotype probabilities at intermediate generations in the construction of recombinant inbred lines](https://www.genetics.org/content/190/2/403.short).
 Genetics 190:403-412
-[doi: 10.1534/genetics.111.132647](http://doi.org/10.1534/genetics.111.132647)
+[doi: 10.1534/genetics.111.132647](https://doi.org/10.1534/genetics.111.132647)
 
 Broman KW, Rowe LB, Churchill GA, Paigen K (2002)
-[Crossover interference in the mouse](http://www.genetics.org/content/160/3/1123.short).
+[Crossover interference in the mouse](https://www.genetics.org/content/160/3/1123.short).
 Genetics 160:1123-1131
 
 Copenhaver GP, Housworth EA, Stahl FW (2002)
-[Crossover interference in arabidopsis](http://www.genetics.org/content/160/4/1631.short).
+[Crossover interference in arabidopsis](https://www.genetics.org/content/160/4/1631.short).
 Genetics 160:1631-1639
 
 Foss E, Lande R, Stahl FW, Steinberg CM (1993)
-[Chiasma interference as a function of genetic distance](http://www.genetics.org/content/133/3/681.short).
+[Chiasma interference as a function of genetic distance](https://www.genetics.org/content/133/3/681.short).
 Genetics 133:681-691
 
 Kover PX, Valdar W, Trakalo J, Scarcelli N, Ehrenreich IM, Purugganan
 MD, Durrant C, Mott R (2009)
-[A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in _Arabidopsis thaliana_](http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551).
+[A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in _Arabidopsis thaliana_](https://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551).
 PLoS Genetics 5:e1000551
 
 McPeek MS, Speed TP (1995)
-[Modeling interference in genetic recombination](http://www.genetics.org/content/139/2/1031.short).
+[Modeling interference in genetic recombination](https://www.genetics.org/content/139/2/1031.short).
 Genetics 139:1031-1044
 
 Mott R, Flint J (2002)
-[Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks](http://www.genetics.org/content/160/4/1609.short).
+[Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks](https://www.genetics.org/content/160/4/1609.short).
 Genetics 160:1609-1618
 
 Svenson KL, Gatti DM, Valdar W, Welsh CE, Cheng R, Chesler EJ, Palmer
 AA, McMillan L, Churchill GA (2012)
-[High-resolution genetic mapping using the mouse Diversity Outbred population.](http://www.genetics.org/content/190/2/437.short)
+[High-resolution genetic mapping using the mouse Diversity Outbred population.](https://www.genetics.org/content/190/2/437.short)
 Genetics 190:437-447
 
 Threadgill DW, Churchill GA (2012)
-[Ten years of the Collaborative Cross](http://www.genetics.org/content/190/2/291.short).
+[Ten years of the Collaborative Cross](https://www.genetics.org/content/190/2/291.short).
 Genetics 190:291-294
 
 Zhao H, Speed TP, McPeek MS (1995)
-[Statistical analysis of crossover interference using the chi-square model](http://www.genetics.org/content/139/2/1045.short).
+[Statistical analysis of crossover interference using the chi-square model](https://www.genetics.org/content/139/2/1045.short).
 Genetics 139:1045-1056

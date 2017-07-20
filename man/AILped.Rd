@@ -8,7 +8,7 @@
 for females and 1 for males) and generation.}
 \source{
 Derived from the pedF8 dataset in the QTLRel package,
-\url{http://cran.r-project.org/package=QTLRel}
+\url{https://cran.r-project.org/package=QTLRel}
 }
 \usage{
 data(AILped)

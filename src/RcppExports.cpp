@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // convert2geno
 IntegerMatrix convert2geno(const List xodat, const NumericVector map, const IntegerMatrix founder_geno);
-RcppExport SEXP simcross_convert2geno(SEXP xodatSEXP, SEXP mapSEXP, SEXP founder_genoSEXP) {
+RcppExport SEXP _simcross_convert2geno(SEXP xodatSEXP, SEXP mapSEXP, SEXP founder_genoSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,7 +20,7 @@ END_RCPP
 }
 // convert2genoarray
 IntegerVector convert2genoarray(const List xodat, const NumericVector map);
-RcppExport SEXP simcross_convert2genoarray(SEXP xodatSEXP, SEXP mapSEXP) {
+RcppExport SEXP _simcross_convert2genoarray(SEXP xodatSEXP, SEXP mapSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -32,7 +32,7 @@ END_RCPP
 }
 // convert2geno_char
 CharacterMatrix convert2geno_char(const List xodat, const NumericVector map, const CharacterMatrix founder_geno);
-RcppExport SEXP simcross_convert2geno_char(SEXP xodatSEXP, SEXP mapSEXP, SEXP founder_genoSEXP) {
+RcppExport SEXP _simcross_convert2geno_char(SEXP xodatSEXP, SEXP mapSEXP, SEXP founder_genoSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -45,7 +45,7 @@ END_RCPP
 }
 // convert2geno_char_paste
 CharacterMatrix convert2geno_char_paste(const List xodat, const NumericVector map, const CharacterMatrix founder_geno);
-RcppExport SEXP simcross_convert2geno_char_paste(SEXP xodatSEXP, SEXP mapSEXP, SEXP founder_genoSEXP) {
+RcppExport SEXP _simcross_convert2geno_char_paste(SEXP xodatSEXP, SEXP mapSEXP, SEXP founder_genoSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -58,7 +58,7 @@ END_RCPP
 }
 // get_geno
 IntegerMatrix get_geno(const List xodat, const double position);
-RcppExport SEXP simcross_get_geno(SEXP xodatSEXP, SEXP positionSEXP) {
+RcppExport SEXP _simcross_get_geno(SEXP xodatSEXP, SEXP positionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -70,7 +70,7 @@ END_RCPP
 }
 // sim_crossovers
 NumericVector sim_crossovers(const double L, const int m, const double p, const bool obligate_chiasma, const double Lstar);
-RcppExport SEXP simcross_sim_crossovers(SEXP LSEXP, SEXP mSEXP, SEXP pSEXP, SEXP obligate_chiasmaSEXP, SEXP LstarSEXP) {
+RcppExport SEXP _simcross_sim_crossovers(SEXP LSEXP, SEXP mSEXP, SEXP pSEXP, SEXP obligate_chiasmaSEXP, SEXP LstarSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -85,7 +85,7 @@ END_RCPP
 }
 // sim_meiosis
 List sim_meiosis(const List parent, const int m, const double p, const bool obligate_chiasma, const double Lstar);
-RcppExport SEXP simcross_sim_meiosis(SEXP parentSEXP, SEXP mSEXP, SEXP pSEXP, SEXP obligate_chiasmaSEXP, SEXP LstarSEXP) {
+RcppExport SEXP _simcross_sim_meiosis(SEXP parentSEXP, SEXP mSEXP, SEXP pSEXP, SEXP obligate_chiasmaSEXP, SEXP LstarSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -97,4 +97,20 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(sim_meiosis(parent, m, p, obligate_chiasma, Lstar));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_simcross_convert2geno", (DL_FUNC) &_simcross_convert2geno, 3},
+    {"_simcross_convert2genoarray", (DL_FUNC) &_simcross_convert2genoarray, 2},
+    {"_simcross_convert2geno_char", (DL_FUNC) &_simcross_convert2geno_char, 3},
+    {"_simcross_convert2geno_char_paste", (DL_FUNC) &_simcross_convert2geno_char_paste, 3},
+    {"_simcross_get_geno", (DL_FUNC) &_simcross_get_geno, 2},
+    {"_simcross_sim_crossovers", (DL_FUNC) &_simcross_sim_crossovers, 5},
+    {"_simcross_sim_meiosis", (DL_FUNC) &_simcross_sim_meiosis, 5},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_simcross(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

@@ -556,7 +556,7 @@ Genetics 133:681-691
 
 Kover PX, Valdar W, Trakalo J, Scarcelli N, Ehrenreich IM, Purugganan
 MD, Durrant C, Mott R (2009)
-[A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in _Arabidopsis thaliana_](https://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551).
+[A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in _Arabidopsis thaliana_](http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1000551).
 PLoS Genetics 5:e1000551
 
 McPeek MS, Speed TP (1995)

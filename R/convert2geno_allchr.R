@@ -8,10 +8,11 @@
 #' @param map marker locations, a list with elements for each
 #' chromosome
 #' @param id ids for which individuals genotypes is desired
-#' @param founder_geno Optional matrix (size \code{n_markers} x 8) of
-#' founder genotypes. If coded as 1/2 (or 1/3), results are 1/2/3
+#' @param founder_geno Optional list of matrices (one per chromosome)
+#' of size \code{n_founders} x \code{n_markers}, with the founder genotypes.
+#' If coded as 1/2 (or 1/3), results are 1/2/3
 #' genotypes. If coded as A/T/G/C/N, results are A/T/G/C/N/H
-#' genotypes. If coded as letters A-H for the 8 founders, results are
+#' genotypes. If coded as letters A-H (in the case of 8 founders), results are
 #' two-letter genotypes AA-HH with 36 possible values.
 #' @param shift_map If TRUE, shift genetic map to start at 0
 #' @param return.matrix If FALSE, the result is a list of length

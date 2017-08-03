@@ -2,30 +2,30 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 .convert2geno <- function(xodat, map, founder_geno) {
-    .Call('_simcross_convert2geno', PACKAGE = 'simcross', xodat, map, founder_geno)
+    .Call(`_simcross_convert2geno`, xodat, map, founder_geno)
 }
 
 convert2genoarray <- function(xodat, map) {
-    .Call('_simcross_convert2genoarray', PACKAGE = 'simcross', xodat, map)
+    .Call(`_simcross_convert2genoarray`, xodat, map)
 }
 
 convert2geno_char <- function(xodat, map, founder_geno) {
-    .Call('_simcross_convert2geno_char', PACKAGE = 'simcross', xodat, map, founder_geno)
+    .Call(`_simcross_convert2geno_char`, xodat, map, founder_geno)
 }
 
 convert2geno_char_paste <- function(xodat, map, founder_geno) {
-    .Call('_simcross_convert2geno_char_paste', PACKAGE = 'simcross', xodat, map, founder_geno)
+    .Call(`_simcross_convert2geno_char_paste`, xodat, map, founder_geno)
 }
 
 .get_geno <- function(xodat, position) {
-    .Call('_simcross_get_geno', PACKAGE = 'simcross', xodat, position)
+    .Call(`_simcross_get_geno`, xodat, position)
 }
 
 .sim_crossovers <- function(L, m, p, obligate_chiasma, Lstar) {
-    .Call('_simcross_sim_crossovers', PACKAGE = 'simcross', L, m, p, obligate_chiasma, Lstar)
+    .Call(`_simcross_sim_crossovers`, L, m, p, obligate_chiasma, Lstar)
 }
 
 .sim_meiosis <- function(parent, m, p, obligate_chiasma, Lstar) {
-    .Call('_simcross_sim_meiosis', PACKAGE = 'simcross', parent, m, p, obligate_chiasma, Lstar)
+    .Call(`_simcross_sim_meiosis`, parent, m, p, obligate_chiasma, Lstar)
 }
 

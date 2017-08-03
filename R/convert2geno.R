@@ -104,7 +104,7 @@ convert2geno <-
                  " rows but has ", nrow(founder_geno))
         if(ncol(founder_geno) != length(map))
             stop("founder_geno should have ", length(map),
-                 "columns but has ", ncol(founder_geno))
+                 " columns but has ", ncol(founder_geno))
         if(any(is.na(founder_geno) | founder_geno==0)) # 0 as missing
             stop("founder genotypes cannot be missing")
     }

@@ -6,6 +6,8 @@
 #'
 #' Get the vector of colors for the Collaborative Cross
 #'
+#' @param palette Which version of the colors to use? (New or original)
+#'
 #' @return vector of eight colors
 #'
 #' @keywords color
@@ -15,15 +17,33 @@
 #' @examples
 #' CCcolors()
 CCcolors <-
-    function() {
-        c("AJ"  =rgb(240,240,  0,maxColorValue=255),
-          "B6"  =rgb(128,128,128,maxColorValue=255),
-          "129" =rgb(240,128,128,maxColorValue=255),
-          "NOD" =rgb( 16, 16,240,maxColorValue=255),
-          "NZO" =rgb(  0,160,240,maxColorValue=255),
-          "CAST"=rgb(  0,160,  0,maxColorValue=255),
-          "PWK" =rgb(240,  0,  0,maxColorValue=255),
-          "WSB" =rgb(144,  0,224,maxColorValue=255))
+    function(palette=c("new", "original", "official")) {
+        palette <- match.arg(palette)
+
+        if(palette=="new") {
+            return(
+                c(AJ   ="#FFDC00",
+                  B6   ="#888888",
+                  "129"="#F08080",
+                  NOD  ="#0064C9",
+                  NZO  ="#7FDBFF",
+                  CAST ="#2ECC40",
+                  PWK  ="#FF4136",
+                  WSB  ="#B10DC9")
+            )
+        }
+        else {
+            return(
+                c("AJ"  =rgb(240,240,  0,maxColorValue=255),
+                  "B6"  =rgb(128,128,128,maxColorValue=255),
+                  "129" =rgb(240,128,128,maxColorValue=255),
+                  "NOD" =rgb( 16, 16,240,maxColorValue=255),
+                  "NZO" =rgb(  0,160,240,maxColorValue=255),
+                  "CAST"=rgb(  0,160,  0,maxColorValue=255),
+                  "PWK" =rgb(240,  0,  0,maxColorValue=255),
+                  "WSB" =rgb(144,  0,224,maxColorValue=255))
+            )
+        }
     }
 
 #  plot_ind

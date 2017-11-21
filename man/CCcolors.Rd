@@ -4,7 +4,10 @@
 \alias{CCcolors}
 \title{Collaborative Cross colors}
 \usage{
-CCcolors()
+CCcolors(palette = c("new", "original", "official"))
+}
+\arguments{
+\item{palette}{Which version of the colors to use? (New or original)}
 }
 \value{
 vector of eight colors

@@ -55,7 +55,9 @@ CCcolors <-
 #' @param ind An individual object, as output by
 #' \code{\link{create_parent}} or \code{\link{cross}}
 #' @param center (x,y) vector for the center of the individual
-#' @param chrlength Length of chromosomes
+#' @param chrlength Length of chromosomes (Can be a vector of length
+#' 2, in which case the two chromosomes will be different lengths,
+#' aligned at the top. This is for the X chromosome.)
 #' @param chrwidth Width of chromosomes
 #' @param gap Gap between chromosomes
 #' @param col Vector of colors
@@ -91,6 +93,13 @@ plot_ind <-
     if(max_alleles > length(col))
         stop("Need more colors: length(col)=", length(col), " but max allele = ", max_alleles)
 
+    if(length(chrlength)==0) stop("chrlength has length 0")
+    if(length(chrlength)==1) chrlength <- rep(chrlength, 2)
+    if(length(chrlength)>2) {
+        warning("chrlength should have length 1 or 2; the first two values will be used")
+        chrlength <- chrlength[1:2]
+    }
+
     for(i in 1:2) {
         sgn <- i*2-3
         chr <- ind[[i]]
@@ -98,8 +107,8 @@ plot_ind <-
         allele <- ind[[i]]$alleles
 
         # rescale pos
-        top <- center[2]+chrlength/2
-        bottom <- center[2]-chrlength/2
+        top <- center[2]+max(chrlength)/2
+        bottom <- top - chrlength[i]
         if(diff(par("usr")[3:4]) < 0) { # small values at top of figure
             tmp <- top
             top <- bottom

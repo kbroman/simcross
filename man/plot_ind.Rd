@@ -14,7 +14,9 @@ plot_ind(ind, center, chrlength = 30, chrwidth = 3, gap = 3,
 
 \item{center}{(x,y) vector for the center of the individual}
 
-\item{chrlength}{Length of chromosomes}
+\item{chrlength}{Length of chromosomes (Can be a vector of length
+2, in which case the two chromosomes will be different lengths,
+aligned at the top. This is for the X chromosome.)}
 
 \item{chrwidth}{Width of chromosomes}
 

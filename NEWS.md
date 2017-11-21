@@ -6,6 +6,11 @@
   revised CC colors. `CCcolors("orig")` gives the original, official
   colors.
 
+- The `chrlength` argument for `plot_ind()` can be a vector of length
+  2, in which case the two chromosomes will be different lengths but
+  aligned at the top. This is to allow illustratation of the X and Y
+  chromosomes in males.
+
 
 ## simcross 0.2-22 (2017-04-05)
 

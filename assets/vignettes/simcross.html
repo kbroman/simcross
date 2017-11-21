@@ -70,9 +70,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<p><a href="https://github.com/kbroman/simcross">R/simcross</a> is an <a href="http://www.r-project.org">R</a> package to simulate genotypes from an experimental cross. The aim is flexibility rather than speed.</p>
-<p>Meiosis is simulated following the Stahl model (Copenhaver et al. 2002) with the interference parameter being an integer. In this model, chiasma locations are the superposition of two processes: a proportion <em>p</em> come from a process exhibiting no interference (that is, a Poisson process) and the remainder (proportion 1 – <em>p</em>) come from a process following the chi-square model (Foss et al. 1993; Zhao et al. 1995). Thus, with <em>p</em>=0, the model reduces to the chi-square model. The chi-square model has a single parameter, <em>m</em>, which is a non-negative integer and controls the strength of interference. <em>m</em>=0 corresponds to no interference. <a href="http://www.ncbi.nlm.nih.gov/pubmed/11901128">Broman et al. (2002)</a> estimated <em>m</em>=10 for the level of interference in the mouse (derived assuming <em>p</em>=0). The chi-square model is a special case of the gamma model (McPeek and Speed 1995) which has a positive parameter <em>ν</em>; the chi-square model corresponds to the case that <em>m</em> = <em>ν</em> – 1 is an integer.</p>
-<p>In many organisms, there is always at least one chiasma for each pair of homologous chromosomes at meiosis. Simulations with <a href="https://github.com/kbroman/simcross">R/simcross</a> may be performed with this assumption; the same model is used, but with rejection sampling to get results conditional on there being at least one chiasma. Note that this isn’t an assumption of an obligate <em>crossover</em>; if there is exactly one chiasma, then a random meiotic product will have 0 or 1 crossovers, with probability 1/2 each. Also note that, with the obligate chiasma assumption, chromosomes must be greater than 50 cM.</p>
+<p><a href="http://kbroman.org/simcross">R/simcross</a> is an <a href="https://www.r-project.org">R</a> package to simulate genotypes from an experimental cross. The aim is flexibility rather than speed.</p>
+<p>Meiosis is simulated following the Stahl model (Copenhaver et al. 2002) with the interference parameter being an integer. In this model, chiasma locations are the superposition of two processes: a proportion <em>p</em> come from a process exhibiting no interference (that is, a Poisson process) and the remainder (proportion 1 – <em>p</em>) come from a process following the chi-square model (Foss et al. 1993; Zhao et al. 1995). Thus, with <em>p</em>=0, the model reduces to the chi-square model. The chi-square model has a single parameter, <em>m</em>, which is a non-negative integer and controls the strength of interference. <em>m</em>=0 corresponds to no interference. <a href="https://www.ncbi.nlm.nih.gov/pubmed/11901128">Broman et al. (2002)</a> estimated <em>m</em>=10 for the level of interference in the mouse (derived assuming <em>p</em>=0). The chi-square model is a special case of the gamma model (McPeek and Speed 1995) which has a positive parameter <em>ν</em>; the chi-square model corresponds to the case that <em>m</em> = <em>ν</em> – 1 is an integer.</p>
+<p>In many organisms, there is always at least one chiasma for each pair of homologous chromosomes at meiosis. Simulations with <a href="http://kbroman.org/simcross">R/simcross</a> may be performed with this assumption; the same model is used, but with rejection sampling to get results conditional on there being at least one chiasma. Note that this isn’t an assumption of an obligate <em>crossover</em>; if there is exactly one chiasma, then a random meiotic product will have 0 or 1 crossovers, with probability 1/2 each. Also note that, with the obligate chiasma assumption, chromosomes must be greater than 50 cM.</p>
 <div id="basic-functions" class="section level2">
 <h2>Basic functions</h2>
 <p>There are two basic functions for simulating a cross: <code>create_parent</code> and <code>cross</code>.</p>
@@ -81,7 +81,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simcross)
 p1 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span class="dt">L=</span><span class="dv">100</span>, <span class="dt">allele=</span><span class="dv">1</span>)
 p2 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span class="dt">L=</span><span class="dv">100</span>, <span class="dt">allele=</span><span class="dv">2</span>)
-f1 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span class="dt">L=</span><span class="dv">100</span>, <span class="dt">allele=</span><span class="dv">1</span>:<span class="dv">2</span>)</code></pre></div>
+f1 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span class="dt">L=</span><span class="dv">100</span>, <span class="dt">allele=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</code></pre></div>
 <p>You don’t need to specify the arguments by name (e.g., in the last line above, you could just write <code>create_parent(100, 1:2)</code>); I’m doing so here just to better document the names of the arguments.</p>
 <p>The <code>cross</code> function is used to generate one offspring from the cross between two individuals. The input is a pair of individuals (e.g., as produced by <code>create_parent</code>), the interference parameter <code>m</code> (default <code>m=10</code>), the parameter <code>p</code> for the Stahl model (default <code>p=0</code>), <code>xchr</code> to indicate whether the chromosome being simulated is the X chromosome (<code>FALSE</code>, the default, to simulate an autosome), and <code>male</code> to indicate whether the offspring is to be male (which only matters if <code>xchr=TRUE</code>). Further, one may use <code>obligate_chiasma=TRUE</code> (default <code>FALSE</code>) to require at least one chiasma on the 4-strand bundle).</p>
 <p>Here’s an example, to generate an F<sub>2</sub> individual. (The outer parentheses cause the result to be printed.)</p>
@@ -111,7 +111,7 @@ f1 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span cla
 <p>While one could simulate any experimental cross from a series of calls to <code>create_parent</code> and <code>cross</code>, it is generally more efficient to first develop a table that describes pedigree for the cross, and then simulate from the pedigree with the function <code>sim_from_pedigree</code> (see the next section).</p>
 <div id="example-ail-pedigree-matrix" class="section level3">
 <h3>Example AIL pedigree matrix</h3>
-<p>To define a pedigree, we use a numeric matrix (or data frame) with four columns: individual ID, mom, dad, and sex (coded as 0=female, 1=male). The <a href="https://github.com/kbroman/simcross">R/simcross package</a> includes a sample pedigree for advanced intercross lines, <code>AILped</code>, taken from the <a href="http://cran.r-project.org/package=QTLRel">QTLRel package</a>. Here is the top of that dataset:</p>
+<p>To define a pedigree, we use a numeric matrix (or data frame) with four columns: individual ID, mom, dad, and sex (coded as 0=female, 1=male). The <a href="http://kbroman.org/simcross">R/simcross package</a> includes a sample pedigree for advanced intercross lines, <code>AILped</code>, taken from the <a href="https://cran.r-project.org/package=QTLRel">QTLRel package</a>. Here is the top of that dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(AILped, <span class="dt">n=</span><span class="dv">10</span>)</code></pre></div>
 <pre><code>##    id mom dad sex generation
 ## 1   1   0   0   1          0
@@ -135,7 +135,7 @@ f1 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span cla
 <div id="ril-pedigree" class="section level3">
 <h3>RIL pedigree</h3>
 <p><code>sim_ril_pedigree</code> generates a pedigree matrix for a single recombinant inbred line derived from 2<sup>k</sup> founder lines for some k&gt;0. (Examples include the Collaborative Cross (Threadgill and Churchill 2012) and MAGIC lines (Kover et al. 2009).) The arguments are <code>ngen</code> (number of generations of inbreeding), <code>selfing</code> (default <code>FALSE</code>, for sibling mating), <code>parents</code> (a vector of integers for the parents; the length must be a power of 2 (i.e., 2, 4, 8, 16, etc.) and corresponds to the number of founder lines), and <code>firstind</code>, the ID number to attach to the first individual following the parents (so that the pedigree matrices for multiple RIL may be <code>rbind</code>-ed together). Note that there’s no real <em>simulation</em> here; the result is entirely deterministic.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(ril &lt;-<span class="st"> </span><span class="kw">sim_ril_pedigree</span>(<span class="dt">ngen=</span><span class="dv">4</span>, <span class="dt">parents=</span><span class="dv">1</span>:<span class="dv">4</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(ril &lt;-<span class="st"> </span><span class="kw">sim_ril_pedigree</span>(<span class="dt">ngen=</span><span class="dv">4</span>, <span class="dt">parents=</span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</code></pre></div>
 <pre><code>##    id mom dad sex gen
 ## 1   1   0   0   0   0
 ## 2   2   0   0   1   0
@@ -153,7 +153,7 @@ f1 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span cla
 ## 14 14  11  12   1   5
 ## 15 15  13  14   0   6
 ## 16 16  13  14   1   6</code></pre>
-<p>The <code>gen</code> column in the output is the generation number, with 0 corresponding to the founders. The generations are simply sequential and so don’t correspond to the numbering scheme used for the Collaborative Cross (see, for example, <a href="http://www.ncbi.nlm.nih.gov/pubmed/22345609">Broman 2012</a>).</p>
+<p>The <code>gen</code> column in the output is the generation number, with 0 corresponding to the founders. The generations are simply sequential and so don’t correspond to the numbering scheme used for the Collaborative Cross (see, for example, <a href="https://www.ncbi.nlm.nih.gov/pubmed/22345609">Broman 2012</a>).</p>
 </div>
 <div id="way-cross-pedigree" class="section level3">
 <h3>4-way cross pedigree</h3>
@@ -186,7 +186,7 @@ f1 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span cla
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ailped &lt;-<span class="st"> </span><span class="kw">sim_ail_pedigree</span>(<span class="dt">ngen=</span><span class="dv">12</span>, <span class="dt">npairs=</span><span class="dv">100</span>, <span class="dt">nkids_per=</span><span class="dv">5</span>)
 <span class="kw">nrow</span>(ailped)</code></pre></div>
 <pre><code>## [1] 2504</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(ailped$gen)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(ailped<span class="op">$</span>gen)</code></pre></div>
 <pre><code>## 
 ##   0   1   2   3   4   5   6   7   8   9  10  11  12 
 ##   2   2 200 200 200 200 200 200 200 200 200 200 500</code></pre>
@@ -199,7 +199,7 @@ f1 &lt;-<span class="st"> </span><span class="kw">create_parent</span>(<span cla
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">doped &lt;-<span class="st"> </span><span class="kw">sim_do_pedigree</span>(<span class="dt">ngen=</span><span class="dv">12</span>)
 <span class="kw">nrow</span>(doped)</code></pre></div>
 <pre><code>## [1] 6772</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">do=</span>doped$do, <span class="dt">gen=</span>doped$gen)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="dt">do=</span>doped<span class="op">$</span>do, <span class="dt">gen=</span>doped<span class="op">$</span>gen)</code></pre></div>
 <pre><code>##        gen
 ## do        0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
 ##   FALSE  16 576 288 288 288 288 288 288 246 118  70  50  40  22  12   6
@@ -234,8 +234,8 @@ xodat &lt;-<span class="st"> </span><span class="kw">sim_from_pedigree</span>(ai
 ## [1]  32.77616  41.55678  45.54459  53.23003  75.19660  79.67276  81.74175
 ## [8]  98.50607 100.00000</code></pre>
 <p>We can plot the average number of breakpoints across the individuals’ two chromosomes, by generation, as follows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_breakpoints &lt;-<span class="st"> </span><span class="kw">sapply</span>(xodat, function(a) <span class="kw">sum</span>(<span class="kw">sapply</span>(a, function(b) <span class="kw">length</span>(b$alleles)-<span class="dv">1</span>)))
-ave_breakpoints &lt;-<span class="st"> </span><span class="kw">tapply</span>(n_breakpoints, ailped$gen, mean)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_breakpoints &lt;-<span class="st"> </span><span class="kw">sapply</span>(xodat, <span class="cf">function</span>(a) <span class="kw">sum</span>(<span class="kw">sapply</span>(a, <span class="cf">function</span>(b) <span class="kw">length</span>(b<span class="op">$</span>alleles)<span class="op">-</span><span class="dv">1</span>)))
+ave_breakpoints &lt;-<span class="st"> </span><span class="kw">tapply</span>(n_breakpoints, ailped<span class="op">$</span>gen, mean)
 gen &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(ave_breakpoints))
 <span class="kw">plot</span>(gen, ave_breakpoints,
      <span class="dt">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Average no. breakpoints&quot;</span>, <span class="dt">las=</span><span class="dv">1</span>,
@@ -251,8 +251,8 @@ gen &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class
 ## 5 79.672759 81.74175
 ## 6 88.213088 98.50607</code></pre>
 <p>We can plot the average proportion of the chromosome that is heterozygous, by generation, as follows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prop_het &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">lapply</span>(xodat, where_het), function(a) <span class="kw">sum</span>(a[,<span class="dv">2</span>]-a[,<span class="dv">1</span>])/<span class="dv">100</span>)
-ave_prop_het &lt;-<span class="st"> </span><span class="kw">tapply</span>(prop_het, ailped$gen, mean)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prop_het &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">lapply</span>(xodat, where_het), <span class="cf">function</span>(a) <span class="kw">sum</span>(a[,<span class="dv">2</span>]<span class="op">-</span>a[,<span class="dv">1</span>])<span class="op">/</span><span class="dv">100</span>)
+ave_prop_het &lt;-<span class="st"> </span><span class="kw">tapply</span>(prop_het, ailped<span class="op">$</span>gen, mean)
 <span class="kw">plot</span>(gen, ave_prop_het,
      <span class="dt">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Average proportion heterozygous&quot;</span>, <span class="dt">las=</span><span class="dv">1</span>,
      <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;Orchid&quot;</span>, <span class="dt">main=</span><span class="st">&quot;AIL with 30 breeding pairs&quot;</span>)
@@ -261,8 +261,8 @@ ave_prop_het &lt;-<span class="st"> </span><span class="kw">tapply</span>(prop_h
 <p>Note: if we’d greatly restricted the number of breeding pairs per generation, we’d see evidence of inbreeding, as a reduced proportion of heterozygosity. There’s considerably more noise, though, since we’ve got just 6 individuals per generation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ailped2 &lt;-<span class="st"> </span><span class="kw">sim_ail_pedigree</span>(<span class="dt">ngen=</span><span class="dv">8</span>, <span class="dt">npairs=</span><span class="dv">3</span>, <span class="dt">nkids_per=</span><span class="dv">50</span>)
 xodat2 &lt;-<span class="st"> </span><span class="kw">sim_from_pedigree</span>(ailped2, <span class="dt">L=</span><span class="dv">100</span>)
-prop_het2 &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">lapply</span>(xodat2, where_het), function(a) <span class="kw">sum</span>(a[,<span class="dv">2</span>]-a[,<span class="dv">1</span>])/<span class="dv">100</span>)
-ave_prop_het2 &lt;-<span class="st"> </span><span class="kw">tapply</span>(prop_het2, ailped2$gen, mean)
+prop_het2 &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">lapply</span>(xodat2, where_het), <span class="cf">function</span>(a) <span class="kw">sum</span>(a[,<span class="dv">2</span>]<span class="op">-</span>a[,<span class="dv">1</span>])<span class="op">/</span><span class="dv">100</span>)
+ave_prop_het2 &lt;-<span class="st"> </span><span class="kw">tapply</span>(prop_het2, ailped2<span class="op">$</span>gen, mean)
 gen2 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(ave_prop_het2))
 <span class="kw">plot</span>(gen2, ave_prop_het2,
      <span class="dt">xlab=</span><span class="st">&quot;Generation&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Average proportion heterozygous&quot;</span>, <span class="dt">las=</span><span class="dv">1</span>,
@@ -294,7 +294,7 @@ map</code></pre></div>
 ##    0   10   20   30   40   50   60   70   80   90  100</code></pre>
 <p>Then, pass the crossover information and map to <code>convert2geno</code>. I print the data for the last five individuals.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geno &lt;-<span class="st"> </span><span class="kw">convert2geno</span>(xodat, map)
-geno[<span class="kw">nrow</span>(geno)-(<span class="dv">4</span>:<span class="dv">0</span>), ]</code></pre></div>
+geno[<span class="kw">nrow</span>(geno)<span class="op">-</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">0</span>), ]</code></pre></div>
 <pre><code>##     m0 m10 m20 m30 m40 m50 m60 m70 m80 m90 m100
 ## 510  2   2   2   2   2   2   3   2   2   2    1
 ## 511  2   3   3   3   3   2   2   2   2   2    1
@@ -303,10 +303,10 @@ geno[<span class="kw">nrow</span>(geno)-(<span class="dv">4</span>:<span class="
 ## 514  1   2   2   2   3   2   1   2   2   2    1</code></pre>
 <p>Here the genotypes get recoded as <code>1</code> / <code>2</code> / <code>3</code> for <code>11</code> / <code>12</code> / <code>22</code>. That is, genotypes <code>1</code> and <code>3</code> are the homozygotes for the allele from founders 1 and 2, respectively, and genotype <code>2</code> is the heterozygote.</p>
 <p>For crosses with more than two founders, the output of <code>convert2geno</code> is a three-dimensional array, individuals × markers × alleles (maternal and paternal). For example, here are genotypes for the sixth generations of inbreeding of an eight-way RIL.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rilped &lt;-<span class="st"> </span><span class="kw">sim_ril_pedigree</span>(<span class="dt">ngen=</span><span class="dv">6</span>, <span class="dt">parents=</span><span class="dv">1</span>:<span class="dv">8</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rilped &lt;-<span class="st"> </span><span class="kw">sim_ril_pedigree</span>(<span class="dt">ngen=</span><span class="dv">6</span>, <span class="dt">parents=</span><span class="dv">1</span><span class="op">:</span><span class="dv">8</span>)
 dat &lt;-<span class="st"> </span><span class="kw">sim_from_pedigree</span>(rilped, <span class="dt">L=</span><span class="dv">100</span>)
 geno &lt;-<span class="st"> </span><span class="kw">convert2geno</span>(dat, map)
-geno[<span class="kw">nrow</span>(geno)-(<span class="dv">1</span>:<span class="dv">0</span>),,]</code></pre></div>
+geno[<span class="kw">nrow</span>(geno)<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">0</span>),,]</code></pre></div>
 <pre><code>## , , mat
 ## 
 ##    m0 m10 m20 m30 m40 m50 m60 m70 m80 m90 m100
@@ -320,10 +320,10 @@ geno[<span class="kw">nrow</span>(geno)-(<span class="dv">1</span>:<span class="
 ## 28  7   5   5   5   5   3   3   3   3   3    7</code></pre>
 <p>More commonly, one may be interested in individuals’ SNP genotypes. This can also be obtained with <code>convert2geno</code>; one just needs to provide a matrix of SNP alleles for the founder lines, with the argument <code>founder_geno</code>. This should be a matrix of <code>1</code>s and <code>2</code>s, of dimension <code>n_founders</code> × <code>n_markers</code>.</p>
 <p>Let’s simulate SNP alleles for eight founder lines.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fg &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">8</span>*<span class="kw">length</span>(map), <span class="dt">replace=</span><span class="ot">TRUE</span>), <span class="dt">nrow=</span><span class="dv">8</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fg &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">8</span><span class="op">*</span><span class="kw">length</span>(map), <span class="dt">replace=</span><span class="ot">TRUE</span>), <span class="dt">nrow=</span><span class="dv">8</span>)</code></pre></div>
 <p>And then here are the SNP genotypes for the sixth generation of inbreeding an eight-way RIL.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">snpgeno &lt;-<span class="st"> </span><span class="kw">convert2geno</span>(dat, map, fg)
-snpgeno[<span class="kw">nrow</span>(snpgeno)-(<span class="dv">1</span>:<span class="dv">0</span>),]</code></pre></div>
+snpgeno[<span class="kw">nrow</span>(snpgeno)<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">0</span>),]</code></pre></div>
 <pre><code>##    m0 m10 m20 m30 m40 m50 m60 m70 m80 m90 m100
 ## 27  3   3   1   3   1   1   1   3   1   1    3
 ## 28  3   3   1   3   1   1   1   3   2   2    3</code></pre>
@@ -344,15 +344,15 @@ xodat3alt &lt;-<span class="st"> </span><span class="kw">sim_from_pedigree</span
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">map &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;1&quot;</span>=<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dt">by=</span><span class="dv">5</span>),
             <span class="st">&quot;2&quot;</span>=<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">75</span>, <span class="dt">by=</span><span class="dv">5</span>),
             <span class="st">&quot;X&quot;</span>=<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dt">by=</span><span class="dv">5</span>))
-for(i in <span class="kw">seq</span>(<span class="dt">along=</span>map))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq</span>(<span class="dt">along=</span>map))
     <span class="kw">names</span>(map[[i]]) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;m&quot;</span>, <span class="kw">names</span>(map)[i], <span class="st">&quot;_&quot;</span>, map[[i]])</code></pre></div>
 <p>We then use <code>convert2geno</code>, ensuring that the inputs are both lists with the same length.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geno &lt;-<span class="st"> </span><span class="kw">convert2geno</span>(xodat3, map)</code></pre></div>
 <p>For crosses like the DO, in which founder genotypes are needed, the input <code>founder_geno</code> must be a list of matrices (one matrix per chromosome).</p>
 <p>Here are some simulated founder genotypes:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fg &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(map))
-for(i in <span class="kw">seq</span>(<span class="dt">along=</span>map))
-    fg[[i]] &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">8</span>*<span class="kw">length</span>(map[[i]]), <span class="dt">replace=</span><span class="ot">TRUE</span>), <span class="dt">nrow=</span><span class="dv">8</span>)</code></pre></div>
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq</span>(<span class="dt">along=</span>map))
+    fg[[i]] &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">8</span><span class="op">*</span><span class="kw">length</span>(map[[i]]), <span class="dt">replace=</span><span class="ot">TRUE</span>), <span class="dt">nrow=</span><span class="dv">8</span>)</code></pre></div>
 <p>And now here is the simulation of a small DO population for multiple chromosomes. When simulating the pedigree, we need to have 16 founders (the 8 female founders and then the 8 male founders). After simulating the genotypes with <code>sim_from_pedigree()</code>, we use <code>collapse_do_alleles()</code> to collapse the alleles 9-16 (for the male founders) into 1-8.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">doped &lt;-<span class="st"> </span><span class="kw">sim_do_pedigree</span>(<span class="dt">ngen=</span><span class="dv">4</span>, <span class="dt">nkids_per=</span><span class="dv">1</span>)
 xodat &lt;-<span class="st"> </span><span class="kw">sim_from_pedigree</span>(doped, <span class="dt">L=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>=<span class="dv">100</span>, <span class="st">&quot;2&quot;</span>=<span class="dv">75</span>, <span class="st">&quot;X&quot;</span>=<span class="dv">100</span>), <span class="st">&quot;X&quot;</span>)
@@ -361,7 +361,7 @@ geno &lt;-<span class="st"> </span><span class="kw">convert2geno</span>(xodat, m
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
-<p>Broman KW (2012) <a href="http://www.genetics.org/content/190/2/403.short">Genotype probabilities at intermediate generations in the construction of recombinant inbred lines</a>. Genetics 190:403-412 <a href="http://doi.org/10.1534/genetics.111.132647">doi: 10.1534/genetics.111.132647</a></p>
+<p>Broman KW (2012) <a href="http://www.genetics.org/content/190/2/403.short">Genotype probabilities at intermediate generations in the construction of recombinant inbred lines</a>. Genetics 190:403-412 <a href="https://doi.org/10.1534/genetics.111.132647">doi: 10.1534/genetics.111.132647</a></p>
 <p>Broman KW, Rowe LB, Churchill GA, Paigen K (2002) <a href="http://www.genetics.org/content/160/3/1123.short">Crossover interference in the mouse</a>. Genetics 160:1123-1131</p>
 <p>Copenhaver GP, Housworth EA, Stahl FW (2002) <a href="http://www.genetics.org/content/160/4/1631.short">Crossover interference in arabidopsis</a>. Genetics 160:1631-1639</p>
 <p>Foss E, Lande R, Stahl FW, Steinberg CM (1993) <a href="http://www.genetics.org/content/133/3/681.short">Chiasma interference as a function of genetic distance</a>. Genetics 133:681-691</p>
@@ -380,7 +380,7 @@ geno &lt;-<span class="st"> </span><span class="kw">convert2geno</span>(xodat, m
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

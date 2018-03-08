@@ -1,3 +1,10 @@
+## simcross 0.2-26 (2018-03-08)
+
+### Minor changes
+
+- Byte-compile the R code
+
+
 ## simcross 0.2-25 (2017-11-21)
 
 ### New features

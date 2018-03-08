@@ -1,6 +1,6 @@
 Package: simcross
-Version: 0.2-25
-Date: 2017-11-21
+Version: 0.2-26
+Date: 2018-03-08
 Title: Simulate Experimental Crosses
 Description: Simulate and plot general experimental crosses.
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
@@ -19,8 +19,11 @@ Suggests:
     devtools,
     roxygen2
 License: GPL-3
-URL: http://kbroman.org/simcross
+URL: http://kbroman.org/simcross, https://github.com/kbroman/simcross
+BugReports: https://github.com/kbroman/simcross/issues
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 LazyData: true
+Encoding: UTF-8
+ByteCompile: true
 RoxygenNote: 6.0.1

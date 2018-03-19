@@ -12,3 +12,7 @@ data: data/AILped.RData
 
 data/AILped.RData: inst/scripts/create_AILped_dataset.R
 	cd $(<D);R CMD BATCH ${R_OPTS} $(<F)
+
+# run tests
+test:
+	R -e 'devtools::test()'

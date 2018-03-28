@@ -1,6 +1,8 @@
-## simcross 0.2-26 (2018-03-08)
+## simcross 0.2-27 (2018-03-27)
 
 ### Minor changes
+
+- In C++, avoid calling runif() with n=0
 
 - Byte-compile the R code
 

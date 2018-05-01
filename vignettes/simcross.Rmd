@@ -92,7 +92,7 @@ outer parentheses cause the result to be printed.)
 ```
 
 The output is a list with two components: the maternal and paternal
-chromosomes. Each chromsome is a list with the allele in a set
+chromosomes. Each chromosome is a list with the allele in a set
 of intervals, and the locations of the right endpoints of the
 intervals.
 

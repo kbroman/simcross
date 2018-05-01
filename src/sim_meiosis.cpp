@@ -20,8 +20,9 @@ NumericVector sim_crossovers(const double L, const int m, const double p,
         else {
             n_xo = R::rpois(L/100.0);
         }
-        
-        NumericVector tmp = runif(n_xo, 0.0, L);
+
+        NumericVector tmp(0);
+        if(n_xo > 0) tmp = runif(n_xo, 0.0, L);
         return tmp.sort();
     }
 
@@ -47,7 +48,8 @@ NumericVector sim_crossovers(const double L, const int m, const double p,
     }
 
     // locations of chiasmata and intermediate points for process w/ interference
-    NumericVector point_locations = runif(n_points, 0.0, L);
+    NumericVector point_locations(0);
+    if(n_points > 0) point_locations = runif(n_points, 0.0, L);
     point_locations.sort();
 
     // move every (m+1)st point back to front
@@ -56,7 +58,8 @@ NumericVector sim_crossovers(const double L, const int m, const double p,
         point_locations[n_chi] = point_locations[j];
 
     // chiasma locations from non-interference process
-    NumericVector nichi_locations = runif(n_nichi, 0.0, L);
+    NumericVector nichi_locations(0);
+    if(n_nichi > 0) nichi_locations = runif(n_nichi, 0.0, L);
 
     // combine interference and no interference chiasma locations
     NumericVector chi_locations(n_chi + n_nichi);

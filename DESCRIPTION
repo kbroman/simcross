@@ -1,6 +1,6 @@
 Package: simcross
-Version: 0.2-26
-Date: 2018-03-08
+Version: 0.2-27
+Date: 2018-03-27
 Title: Simulate Experimental Crosses
 Description: Simulate and plot general experimental crosses.
 Author: Karl W Broman <kbroman@biostat.wisc.edu>

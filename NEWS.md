@@ -1,8 +1,9 @@
-## simcross 0.2-27 (2018-03-27)
+## simcross 0.2-28 (2018-05-20)
 
 ### Minor changes
 
-- In C++, avoid calling runif() with n=0
+- In C++, avoid calling runif() with n=0, and require Rcpp 0.12.17
+  (regarding handling of random number generation)
 
 - Byte-compile the R code
 

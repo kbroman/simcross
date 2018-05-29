@@ -1,12 +1,12 @@
-## [R/simcross](http://kbroman.org/simcross)
+## [R/simcross](https://kbroman.org/simcross)
 
 [![Build Status](https://travis-ci.org/kbroman/simcross.svg?branch=master)](https://travis-ci.org/kbroman/simcross)
 
-[Karl W Broman](http://kbroman.org)
+[Karl W Broman](https://kbroman.org)
 
 ---
 
-R/simcross is an [R](http://www.r-project.org) package for simulating
+R/simcross is an [R](https://www.r-project.org) package for simulating
 and plotting general experimental crosses.
 
 ---
@@ -14,7 +14,7 @@ and plotting general experimental crosses.
 ### Installation
 
 You can install R/simcross from its
-[GitHub repository](http://github.com/kbroman/simcross). You first need to
+[GitHub repository](https://github.com/kbroman/simcross). You first need to
 install the [devtools](https://github.com/hadley/devtools) package.
 
 ```r
@@ -22,7 +22,7 @@ install.packages("devtools")
 ```
 
 Then install R/simcross using the `install_github` function in the
-[devtools](http://github.com/hadley/devtools) package.
+[devtools](https://github.com/hadley/devtools) package.
 
 ```r
 library(devtools)
@@ -56,4 +56,4 @@ merchantability or fitness for a particular purpose.  See the GNU
 General Public License for more details.
 
 A copy of the GNU General Public License, version 3, is available at
-<http://www.r-project.org/Licenses/GPL-3>
+<https://www.r-project.org/Licenses/GPL-3>

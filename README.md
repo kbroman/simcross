@@ -1,8 +1,8 @@
-## [R/simcross](http://kbroman.org/simcross)
+## [R/simcross](https://kbroman.org/simcross)
 
 [![Build Status](https://travis-ci.org/kbroman/simcross.svg?branch=master)](https://travis-ci.org/kbroman/simcross)
 
-[Karl W Broman](http://kbroman.org)
+[Karl W Broman](https://kbroman.org)
 
 ---
 

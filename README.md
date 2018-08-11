@@ -35,7 +35,7 @@ install_github("kbroman/simcross", build_vignettes=TRUE)
 ### Vignette
 
 A vignette describing the use of the package is available from within
-R (and [also here](assets/vignettes/simcross.html)). Load the package
+R (and [also here](https://kbroman.org/simcross/assets/vignettes/simcross.html)). Load the package
 and then use the `vignette` function.
 
 ```r

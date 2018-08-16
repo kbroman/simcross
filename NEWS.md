@@ -1,6 +1,9 @@
-## simcross 0.2-28 (2018-05-20)
+## simcross 0.2-29 (2018-08-16)
 
 ### Minor changes
+
+- Added dataset, mouseL_cox and mouseL_mgi, with mouse chromosome
+  lengths in cM.
 
 - In C++, avoid calling runif() with n=0, and require Rcpp 0.12.17
   (regarding handling of random number generation)

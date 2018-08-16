@@ -5,8 +5,9 @@
 \title{Simulate a pedigree for Diversity Outbreds for a target sample size}
 \usage{
 sim_do_pedigree_fix_n(ngen = 12, nkids_per = 5, nccgen = 15,
-  nsample_ngen = 150, npairs = NULL, method = c("last2", "sub2", "fixcc"),
-  design = c("nosib", "random"), selc.method = c("byfamily", "byindiv"))
+  nsample_ngen = 150, npairs = NULL, method = c("last2", "sub2",
+  "fixcc"), design = c("nosib", "random"), selc.method = c("byfamily",
+  "byindiv"))
 }
 \arguments{
 \item{ngen}{Number of generations of outbreeding}

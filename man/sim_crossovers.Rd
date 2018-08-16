@@ -4,7 +4,8 @@
 \alias{sim_crossovers}
 \title{Simulate crossover locations using the Stahl model}
 \usage{
-sim_crossovers(L, m = 10, p = 0, obligate_chiasma = FALSE, Lstar = NULL)
+sim_crossovers(L, m = 10, p = 0, obligate_chiasma = FALSE,
+  Lstar = NULL)
 }
 \arguments{
 \item{L}{length of chr in cM}

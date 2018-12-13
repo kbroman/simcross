@@ -42,14 +42,29 @@ collapse_do_alleles <-
         # grab alleles
         mata <- a$mat$alleles
         pata <- a$pat$alleles
+        matl <- a$mat$locations
+        patl <- a$pat$locations
 
         # 9-16 -> 1-8
         mata[mata > 8] <- mata[mata > 8] - 8
         pata[pata > 8] <- pata[pata > 8] - 8
 
+        if(any(diff(mata)==0)) { # adjacent alleles the same
+            drop <- which(diff(mata)==0)
+            mata <- mata[-(drop+1)]
+            matl <- matl[-drop]
+        }
+        if(any(diff(pata)==0)) { # ajacent alleles the same
+            drop <- which(diff(pata)==0)
+            pata <- pata[-(drop+1)]
+            patl <- patl[-drop]
+        }
+
         # paste back into object
         a$mat$alleles <- mata
         a$pat$alleles <- pata
+        a$mat$locations <- matl
+        a$pat$locations <- patl
 
         a })
 

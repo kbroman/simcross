@@ -1,9 +1,12 @@
-## simcross 0.2-29 (2018-08-16)
+## simcross 0.2-30 (2018-12-12)
 
 ### Minor changes
 
 - Added dataset, mouseL_cox and mouseL_mgi, with mouse chromosome
   lengths in cM.
+
+- collapse_do_alleles() now removes any redudant crossovers (adjacent
+  alleles that are the same.
 
 - In C++, avoid calling runif() with n=0, and require Rcpp 0.12.17
   (regarding handling of random number generation)

@@ -8,7 +8,7 @@ where_het(ind)
 }
 \arguments{
 \item{ind}{An individual object, as output be
-\code{\link{create_parent}} or \code{\link{cross}}}
+\code{\link[=create_parent]{create_parent()}} or \code{\link[=cross]{cross()}}}
 }
 \value{
 A matrix with two columns; each row indicates the start and
@@ -24,6 +24,6 @@ child <- cross(mom, dad)
 where_het(child)
 }
 \seealso{
-\code{\link{sim_from_pedigree}},
-\code{\link{convert2geno}}
+\code{\link[=sim_from_pedigree]{sim_from_pedigree()}},
+\code{\link[=convert2geno]{convert2geno()}}
 }

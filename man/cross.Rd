@@ -9,10 +9,10 @@ cross(mom, dad, m = 10, p = 0, xchr = FALSE, male = FALSE,
 }
 \arguments{
 \item{mom}{An individual object, as produced by
-\code{\link{create_parent}} or this function.}
+\code{\link[=create_parent]{create_parent()}} or this function.}
 
 \item{dad}{An individual object, as produced by
-\code{\link{create_parent}} or this function.}
+\code{\link[=create_parent]{create_parent()}} or this function.}
 
 \item{m}{interference parameter for chi-square model}
 
@@ -52,7 +52,7 @@ dad <- create_parent(100, 1:2)
 child <- cross(mom, dad)
 }
 \seealso{
-\code{\link{create_parent}}, \code{\link{sim_meiosis}},
-\code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
+\code{\link[=create_parent]{create_parent()}}, \code{\link[=sim_meiosis]{sim_meiosis()}},
+\code{\link[=sim_crossovers]{sim_crossovers()}}, \code{\link[=calc_Lstar]{calc_Lstar()}}
 }
 \keyword{datagen}

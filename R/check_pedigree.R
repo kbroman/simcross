@@ -6,8 +6,8 @@
 #' checking for problems
 #'
 #' @param pedigree Numeric matrix or data frame with four columns: ID,
-#' mom ID, dad ID, sex. Sex is coded as \code{0}=female,
-#' \code{1}=male. There can be additional columns, but they'll be
+#' mom ID, dad ID, sex. Sex is coded as `0`=female,
+#' `1`=male. There can be additional columns, but they'll be
 #' ignored.
 #' @param ignore_sex If TRUE, ignore the sex values completely
 #' (appropriate for hermaphroditic species.)
@@ -19,15 +19,15 @@
 #' offspring. Founders should have 0's for mother and father; all
 #' others should have non-zero values for the parents, and the parents
 #' should appear in the pedigree. Father should be male and mothers
-#' should be female (unless \code{ignore_sex=TRUE}). Individual
+#' should be female (unless `ignore_sex=TRUE`). Individual
 #' identifiers should be unique and non-zero. There should be no
-#' missing values anywhere. (\code{NA}s are allowed in the sex column
-#' if \code{ignore_sex=TRUE}.)
+#' missing values anywhere. (`NA`s are allowed in the sex column
+#' if `ignore_sex=TRUE`.)
 #'
 #' @export
 #' @keywords utilities
-#' @seealso \code{\link{sim_from_pedigree}},
-#' \code{\link{sim_ril_pedigree}}
+#' @seealso [sim_from_pedigree()],
+#' [sim_ril_pedigree()]
 #'
 #' @examples
 #' tab <- sim_ril_pedigree(7)

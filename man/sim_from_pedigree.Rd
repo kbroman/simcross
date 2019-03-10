@@ -29,7 +29,7 @@ chromosome, in \code{L}.)}
 }
 \value{
 A list with each component being the data for one
-individual, as produced by the \code{\link{cross}} function.  Those
+individual, as produced by the \code{\link[=cross]{cross()}} function.  Those
 results are a list with two components, corresponding to the
 maternal and paternal chromosomes. The chromosomes are represented
 as lists with two components: an integer vector of alleles in
@@ -54,8 +54,8 @@ dat <- sim_from_pedigree(tab)
 dat <- sim_from_pedigree(tab, c("1"=100, "2"=75, "X"=100), xchr="X")
 }
 \seealso{
-\code{\link{check_pedigree}},
-\code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}},
-\code{\link{sim_ril_pedigree}}
+\code{\link[=check_pedigree]{check_pedigree()}},
+\code{\link[=sim_ril_pedigree]{sim_ril_pedigree()}}, \code{\link[=sim_ail_pedigree]{sim_ail_pedigree()}},
+\code{\link[=sim_ril_pedigree]{sim_ril_pedigree()}}
 }
 \keyword{datagen}

@@ -10,7 +10,7 @@ convert2geno_allchr(xodat, map, id = NULL, founder_geno = NULL,
 }
 \arguments{
 \item{xodat}{The sort of detailed genotype/crossover data generated
-by \code{\link{sim_from_pedigree_allchr}}}
+by \code{\link[=sim_from_pedigree_allchr]{sim_from_pedigree_allchr()}}}
 
 \item{map}{marker locations, a list with elements for each
 chromosome}
@@ -60,6 +60,6 @@ geno <- convert2geno_allchr(dat, map, id)
 
 }
 \seealso{
-\code{\link{convert2geno}}
+\code{\link[=convert2geno]{convert2geno()}}
 }
 \keyword{utilities}

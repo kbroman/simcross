@@ -16,7 +16,7 @@
 #'
 #' @keywords datagen
 #' @export
-#' @seealso \code{\link{cross}}, \code{\link{sim_meiosis}}
+#' @seealso [cross()], [sim_meiosis()]
 #'
 #' @examples
 #' create_parent(100, 1)
@@ -91,13 +91,13 @@ check_individual <-
 #' chiasma locations with probability 1/2.
 #'
 #' @param L length of chr in cM
-#' @param m Interference parameter (\code{m=0} is no interference)
+#' @param m Interference parameter (`m=0` is no interference)
 #' @param p Proportion of chiasmata from no-interference mechanism
-#' (\code{p=0} gives pure chi-square model)
+#' (`p=0` gives pure chi-square model)
 #' @param obligate_chiasma If TRUE, require an obligate chiasma on the
 #' 4-strand bundle at meiosis.
 #' @param Lstar Adjusted chromosome length, if
-#' \code{obligate_chiasma=TRUE}. Calculated if not provided.
+#' `obligate_chiasma=TRUE`. Calculated if not provided.
 #'
 #' @return Numeric vector of crossover locations, in cM
 #'
@@ -146,13 +146,13 @@ sim_crossovers <-
 #' Output a random meiotic product from an input individual.
 #'
 #' @param parent An individual object, as output by
-#' \code{\link{create_parent}} or \code{\link{cross}}
+#' [create_parent()] or [cross()]
 #' @param m interference parameter for chi-square model
 #' @param p Proportion of chiasmata coming from no-interference process.
 #' @param obligate_chiasma If TRUE, require an obligate chiasma on the
 #' 4-strand bundle at meiosis.
 #' @param Lstar Adjusted chromosome length, if
-#' \code{obligate_chiasma=TRUE}. Calculated if not provided.
+#' `obligate_chiasma=TRUE`. Calculated if not provided.
 #'
 #' @return A list with alleles in chromosome intervals (as integers)
 #' and locations of the right endpoints of those intervals.
@@ -177,8 +177,8 @@ sim_crossovers <-
 #'
 #' @keywords datagen
 #' @export
-#' @seealso \code{\link{create_parent}}, \code{\link{cross}},
-#' \code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
+#' @seealso [create_parent()], [cross()],
+#' [sim_crossovers()], [calc_Lstar()]
 #'
 #' @examples
 #' ind <- create_parent(100, 1:2)
@@ -205,18 +205,18 @@ sim_meiosis <-
 #' single progeny
 #'
 #' @param mom An individual object, as produced by
-#' \code{\link{create_parent}} or this function.
+#' [create_parent()] or this function.
 #' @param dad An individual object, as produced by
-#' \code{\link{create_parent}} or this function.
+#' [create_parent()] or this function.
 #' @param m interference parameter for chi-square model
 #' @param p proportion of crossovers coming from no-interference process
 #' @param xchr If TRUE, simulate X chromosome
 #' @param male If TRUE, simulate a male (matters only if
-#' \code{xchr=TRUE})
+#' `xchr=TRUE`)
 #' @param obligate_chiasma If TRUE, require an obligate chiasma on the
 #' 4-strand bundle at meiosis.
 #' @param Lstar Adjusted chromosome length, if
-#' \code{obligate_chiasma=TRUE}. Calculated if not provided.
+#' `obligate_chiasma=TRUE`. Calculated if not provided.
 #'
 #' @details Simulations are under the Stahl model with the
 #' interference parameter being an integer. This is an extension of
@@ -231,8 +231,8 @@ sim_meiosis <-
 #'
 #' @keywords datagen
 #' @export
-#' @seealso \code{\link{create_parent}}, \code{\link{sim_meiosis}},
-#' \code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
+#' @seealso [create_parent()], [sim_meiosis()],
+#' [sim_crossovers()], [calc_Lstar()]
 #'
 #' @examples
 #' mom <- create_parent(100, 1:2)
@@ -279,8 +279,8 @@ cross <-
 #' @keywords utilities
 #' @importFrom stats uniroot dpois
 #' @export
-#' @seealso \code{\link{cross}}, \code{\link{sim_meiosis}},
-#' \code{\link{sim_crossovers}}
+#' @seealso [cross()], [sim_meiosis()],
+#' [sim_crossovers()]
 #'
 #' @examples
 #' calc_Lstar(100, 0, 0)

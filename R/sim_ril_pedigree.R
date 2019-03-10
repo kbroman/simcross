@@ -10,17 +10,17 @@
 #' @param parents Vector of the parents' IDs. Should be integers, and
 #'     length must be a power of 2 (i.e., 2, 4, 8, ...)
 #' @param firstind Positive integer to assign to the first child. Must
-#'     be greater than \code{max(parents)}.
+#'     be greater than `max(parents)`.
 #'
 #'
 #' @return A data frame with five columns: individual ID, mother ID,
-#' father ID, sex, and generation.  Founders have \code{0} for mother
+#' father ID, sex, and generation.  Founders have `0` for mother
 #' and father ID. Sex is coded 0 for female and 1 for male.
 #'
 #' @export
-#' @seealso \code{\link{sim_from_pedigree}},
-#' \code{\link{sim_ail_pedigree}}, \code{\link{sim_do_pedigree}},
-#' \code{\link{sim_4way_pedigree}}
+#' @seealso [sim_from_pedigree()],
+#' [sim_ail_pedigree()], [sim_do_pedigree()],
+#' [sim_4way_pedigree()]
 #' @keywords datagen
 #'
 #' @examples

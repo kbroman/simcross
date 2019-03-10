@@ -39,7 +39,7 @@ check_pedigree(tab)
 
 }
 \seealso{
-\code{\link{sim_from_pedigree}},
-\code{\link{sim_ril_pedigree}}
+\code{\link[=sim_from_pedigree]{sim_from_pedigree()}},
+\code{\link[=sim_ril_pedigree]{sim_ril_pedigree()}}
 }
 \keyword{utilities}

@@ -6,12 +6,12 @@
 #'
 #' @param pedigree Matrix or data frame describing a pedigree, with first four
 #' columns being individual ID, mom ID, dad ID, and sex (female as
-#' \code{0}, male as \code{1}).
+#' `0`, male as `1`).
 #' @param L Length of chromosome in cM (or a vector of chromosome lengths)
-#' @param xchr If TRUE, simulate X chromosome. (If \code{L} is a
+#' @param xchr If TRUE, simulate X chromosome. (If `L` is a
 #' vector, this should be a vector of TRUE/FALSE values, of the same
-#' length as \code{L}, or a character string with the name of the X
-#' chromosome, in \code{L}.)
+#' length as `L`, or a character string with the name of the X
+#' chromosome, in `L`.)
 #' @param m Crossover interference parameter, for chi-square model
 #' (m=0 corresponds to no interference).
 #' @param p proportion of crossovers coming from no-interference process
@@ -19,7 +19,7 @@
 #' 4-strand bundle at meiosis.
 #'
 #' @return A list with each component being the data for one
-#' individual, as produced by the \code{\link{cross}} function.  Those
+#' individual, as produced by the [cross()] function.  Those
 #' results are a list with two components, corresponding to the
 #' maternal and paternal chromosomes. The chromosomes are represented
 #' as lists with two components: an integer vector of alleles in
@@ -27,16 +27,16 @@
 #' right-endpoints of those intervals; these two vectors should have
 #' the same length.
 #'
-#' If the input \code{L} is a vector, in order to simulate multiple
+#' If the input `L` is a vector, in order to simulate multiple
 #' chromosomes at once, then the output will be a list with length
-#' \code{length(L)}, each component being a chromosome and having the
+#' `length(L)`, each component being a chromosome and having the
 #' form described above.
 #'
 #' @export
 #' @keywords datagen
-#' @seealso \code{\link{check_pedigree}},
-#' \code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}},
-#' \code{\link{sim_ril_pedigree}}
+#' @seealso [check_pedigree()],
+#' [sim_ril_pedigree()], [sim_ail_pedigree()],
+#' [sim_ril_pedigree()]
 #'
 #' @examples
 #' # simulate AIL pedigree

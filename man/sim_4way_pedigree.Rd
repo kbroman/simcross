@@ -42,8 +42,8 @@ tab2 <- sim_4way_pedigree(1, rep(10, 10))
 tab3 <- sim_4way_pedigree(ngen=2, rep(12, 10))
 }
 \seealso{
-\code{\link{sim_from_pedigree}},
-\code{\link{sim_ril_pedigree}}, \code{\link{sim_do_pedigree}},
-\code{\link{sim_ail_pedigree}}
+\code{\link[=sim_from_pedigree]{sim_from_pedigree()}},
+\code{\link[=sim_ril_pedigree]{sim_ril_pedigree()}}, \code{\link[=sim_do_pedigree]{sim_do_pedigree()}},
+\code{\link[=sim_ail_pedigree]{sim_ail_pedigree()}}
 }
 \keyword{datagen}

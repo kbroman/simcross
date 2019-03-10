@@ -8,13 +8,13 @@
 #' chromosome
 #'
 #' @return A list with each component being the result from
-#' \code{sim_from_pedigree}, of length same as \code{map}.
+#' `sim_from_pedigree`, of length same as `map`.
 #'
 #' @export
 #' @keywords datagen
-#' @seealso \code{\link{check_pedigree}},
-#' \code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}}
-#' \code{\link{sim_from_pedigree}}
+#' @seealso [check_pedigree()],
+#' [sim_ril_pedigree()], [sim_ail_pedigree()]
+#' [sim_from_pedigree()]
 #'
 #' @examples
 #' library(qtl)

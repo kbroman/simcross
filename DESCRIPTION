@@ -1,6 +1,6 @@
 Package: simcross
-Version: 0.2-30
-Date: 2018-12-13
+Version: 0.2-31
+Date: 2019-03-10
 Title: Simulate Experimental Crosses
 Description: Simulate and plot general experimental crosses.
 Author: Karl W Broman <broman@wisc.edu>
@@ -26,4 +26,5 @@ LinkingTo: Rcpp
 LazyData: true
 Encoding: UTF-8
 ByteCompile: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
+Roxygen: list(markdown=TRUE)

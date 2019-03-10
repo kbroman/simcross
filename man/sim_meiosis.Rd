@@ -9,7 +9,7 @@ sim_meiosis(parent, m = 10, p = 0, obligate_chiasma = FALSE,
 }
 \arguments{
 \item{parent}{An individual object, as output by
-\code{\link{create_parent}} or \code{\link{cross}}}
+\code{\link[=create_parent]{create_parent()}} or \code{\link[=cross]{cross()}}}
 
 \item{m}{interference parameter for chi-square model}
 
@@ -52,7 +52,7 @@ of crossover interference using the chi-square model.  \emph{Genetics}
 \bold{139}, 1045--1056.
 }
 \seealso{
-\code{\link{create_parent}}, \code{\link{cross}},
-\code{\link{sim_crossovers}}, \code{\link{calc_Lstar}}
+\code{\link[=create_parent]{create_parent()}}, \code{\link[=cross]{cross()}},
+\code{\link[=sim_crossovers]{sim_crossovers()}}, \code{\link[=calc_Lstar]{calc_Lstar()}}
 }
 \keyword{datagen}

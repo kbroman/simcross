@@ -4,35 +4,35 @@
 #' Wrap up of convert2geno to adequate multiple chromosomes.
 #'
 #' @param xodat The sort of detailed genotype/crossover data generated
-#' by \code{\link{sim_from_pedigree_allchr}}
+#' by [sim_from_pedigree_allchr()]
 #' @param map marker locations, a list with elements for each
 #' chromosome
 #' @param id ids for which individuals genotypes is desired
 #' @param founder_geno Optional list of matrices (one per chromosome)
-#' of size \code{n_founders} x \code{n_markers}, with the founder genotypes.
+#' of size `n_founders` x `n_markers`, with the founder genotypes.
 #' If coded as 1/2 (or 1/3), results are 1/2/3
 #' genotypes. If coded as A/T/G/C/N, results are A/T/G/C/N/H
 #' genotypes. If coded as letters A-H (in the case of 8 founders), results are
 #' two-letter genotypes AA-HH with 36 possible values.
 #' @param shift_map If TRUE, shift genetic map to start at 0
 #' @param return.matrix If FALSE, the result is a list of length
-#' \code{n_chrs}, otherwise it is converted into a matrix if size
-#' \code{length(id)} x \code{n_markers}.
+#' `n_chrs`, otherwise it is converted into a matrix if size
+#' `length(id)` x `n_markers`.
 #'
-#' @return If \code{founder_geno} is provided or there are just two
+#' @return If `founder_geno` is provided or there are just two
 #' founders, the result is a numeric matrix of genotypes, individuals
 #' x markers, with genotypes 1/2/3 codes for 11/12/22 genotypes. If
-#' there are more than two founders and \code{founder_geno} are
+#' there are more than two founders and `founder_geno` are
 #' letters, the result is a character matrix, too.
 #'
-#' If \code{founder_geno} is not provided and there are more than two
+#' If `founder_geno` is not provided and there are more than two
 #' founders, the result is a 3-dimensional array, individuals x
 #' markers x alleles, with the third dimensional corresponding to the
 #' maternal and paternal allele.
 #'
 #' @export
 #' @keywords utilities
-#' @seealso \code{\link{convert2geno}}
+#' @seealso [convert2geno()]
 #'
 #' @examples
 #' library(qtl)

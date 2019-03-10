@@ -10,24 +10,24 @@
 #' last generation.
 #'
 #' @return A data frame with five columns: individual ID, mother ID,
-#' father ID, sex, and generation.  Founders have \code{0} for mother
+#' father ID, sex, and generation.  Founders have `0` for mother
 #' and father ID. Sex is coded 0 for female and 1 for male.
 #'
 #' @details We start with a set of 4 individuals (representing four
 #' inbred lines), and make a pair of crosses to generate a pair of
 #' heterozygous individuals.  These are then crosses to generate a set
-#' of F1 individuals. If \code{ngen==1}, we stop there, with
-#' \code{sum(nsibs)} individuals in this last generation.  If
-#' \code{gen==2}, we generate \code{length(nsibs)} male/female pairs
+#' of F1 individuals. If `ngen==1`, we stop there, with
+#' `sum(nsibs)` individuals in this last generation.  If
+#' `gen==2`, we generate `length(nsibs)` male/female pairs
 #' of F1 offspring; these are intercrossed to generate a set of
-#' sibships, with lengths defined by the values in \code{nsibs}.
+#' sibships, with lengths defined by the values in `nsibs`.
 #' Individuals in the last generation are alternating female/male.
 #'
 #' @export
 #' @keywords datagen
-#' @seealso \code{\link{sim_from_pedigree}},
-#' \code{\link{sim_ril_pedigree}}, \code{\link{sim_do_pedigree}},
-#' \code{\link{sim_ail_pedigree}}
+#' @seealso [sim_from_pedigree()],
+#' [sim_ril_pedigree()], [sim_do_pedigree()],
+#' [sim_ail_pedigree()]
 #'
 #' @examples
 #' # 100 F1s between heterozygous parents

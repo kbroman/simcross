@@ -24,7 +24,7 @@ kid, or a list of such for multiple kids}
 \item{lwd}{Line width for points, segments, and arrows}
 
 \item{arrow_length}{The \code{length} parameter in the call to
-\code{\link[graphics]{arrows}}}
+\code{\link[graphics:arrows]{graphics::arrows()}}}
 
 \item{col}{Color of lines and points}
 
@@ -50,6 +50,6 @@ for(i in 1:4) plot_ind(kids[[i]], loc[[i+2]])
 plot_crosslines(loc[[1]], loc[[2]], loc[3:6])
 }
 \seealso{
-\code{\link{plot_ind}}
+\code{\link[=plot_ind]{plot_ind()}}
 }
 \keyword{hplot}

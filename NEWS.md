@@ -1,3 +1,10 @@
+## simcross 0.2-31 (2019-03-10)
+
+### Minor changes
+
+- Convert Roxygen documentation to Markdown
+
+
 ## simcross 0.2-30 (2018-12-12)
 
 ### Minor changes

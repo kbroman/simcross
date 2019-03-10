@@ -42,8 +42,8 @@ dat <- sim_from_pedigree_allchr(tab, map)
 
 }
 \seealso{
-\code{\link{check_pedigree}},
-\code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}}
-\code{\link{sim_from_pedigree}}
+\code{\link[=check_pedigree]{check_pedigree()}},
+\code{\link[=sim_ril_pedigree]{sim_ril_pedigree()}}, \code{\link[=sim_ail_pedigree]{sim_ail_pedigree()}}
+\code{\link[=sim_from_pedigree]{sim_from_pedigree()}}
 }
 \keyword{datagen}

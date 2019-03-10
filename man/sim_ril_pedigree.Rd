@@ -31,8 +31,8 @@ of individual, mom, dad, sex)
 tab <- sim_ril_pedigree(7)
 }
 \seealso{
-\code{\link{sim_from_pedigree}},
-\code{\link{sim_ail_pedigree}}, \code{\link{sim_do_pedigree}},
-\code{\link{sim_4way_pedigree}}
+\code{\link[=sim_from_pedigree]{sim_from_pedigree()}},
+\code{\link[=sim_ail_pedigree]{sim_ail_pedigree()}}, \code{\link[=sim_do_pedigree]{sim_do_pedigree()}},
+\code{\link[=sim_4way_pedigree]{sim_4way_pedigree()}}
 }
 \keyword{datagen}

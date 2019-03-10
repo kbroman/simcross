@@ -27,7 +27,7 @@ calc_Lstar(100, 0, 0)
 calc_Lstar(60, 10, 0.1)
 }
 \seealso{
-\code{\link{cross}}, \code{\link{sim_meiosis}},
-\code{\link{sim_crossovers}}
+\code{\link[=cross]{cross()}}, \code{\link[=sim_meiosis]{sim_meiosis()}},
+\code{\link[=sim_crossovers]{sim_crossovers()}}
 }
 \keyword{utilities}

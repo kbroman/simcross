@@ -6,8 +6,8 @@
 #'
 #' @param ngen Number of generations of outbreeding
 #' @param npairs Number of breeding pairs at each generation. If
-#' missing, we use 30 when \code{method="last2"} and 300 when
-#' \code{method="sub2"}.
+#' missing, we use 30 when `method="last2"` and 300 when
+#' `method="sub2"`.
 #' @param nkids_per Number of offspring per pair for the last
 #' generation
 #' @param design How to choose crosses: either random but avoiding
@@ -18,21 +18,21 @@
 #' @param nsample_ngen Number of individuals desired at the last
 #' generation
 #'
-#' @details The default value for \code{npairs} depends on the choice of \code{method}.
-#' For \code{method="last2"}, we use a default of \code{npairs=30}; for
-#' \code{method="sub2"}, we use a default of \code{npairs=300}.
+#' @details The default value for `npairs` depends on the choice of `method`.
+#' For `method="last2"`, we use a default of `npairs=30`; for
+#' `method="sub2"`, we use a default of `npairs=300`.
 #'
 #' @return A data frame with five columns: individual ID, mother ID,
-#' father ID, sex, and generation.  Founders have \code{0} for mother
+#' father ID, sex, and generation.  Founders have `0` for mother
 #' and father ID. Sex is coded 0 for female and 1 for male.
 #'
 #'
 #' @export
 #' @keywords datagen
-#' @seealso \code{\link{sim_from_pedigree}},
-#' \code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}},
-#' \code{\link{sim_do_pedigree}}, \code{\link{sim_4way_pedigree}},
-#' \code{\link{sim_do_pedigree_fix_n}}
+#' @seealso [sim_from_pedigree()],
+#' [sim_ril_pedigree()], [sim_ail_pedigree()],
+#' [sim_do_pedigree()], [sim_4way_pedigree()],
+#' [sim_do_pedigree_fix_n()]
 #'
 #' @examples
 #' tab <- sim_ail_pedigree_fix_n(12)

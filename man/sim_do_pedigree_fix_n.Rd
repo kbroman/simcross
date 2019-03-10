@@ -58,8 +58,8 @@ with \code{method="fixcc"}, \code{npairs} is ignored and is fixed at 144.
 tab <- sim_do_pedigree_fix_n(8)
 }
 \seealso{
-\code{\link{sim_from_pedigree}},
-\code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}},
-\code{\link{sim_do_pedigree}}, \code{\link{sim_4way_pedigree}},
-\code{\link{sim_ail_pedigree_fix_n}}
+\code{\link[=sim_from_pedigree]{sim_from_pedigree()}},
+\code{\link[=sim_ril_pedigree]{sim_ril_pedigree()}}, \code{\link[=sim_ail_pedigree]{sim_ail_pedigree()}},
+\code{\link[=sim_do_pedigree]{sim_do_pedigree()}}, \code{\link[=sim_4way_pedigree]{sim_4way_pedigree()}},
+\code{\link[=sim_ail_pedigree_fix_n]{sim_ail_pedigree_fix_n()}}
 }

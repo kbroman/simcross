@@ -6,8 +6,8 @@
 #'
 #' @param ngen Number of generations of outbreeding
 #' @param npairs Number of breeding pairs at each generation. If
-#' missing, we use 30 when \code{method="last2"} and 300 when
-#' \code{method="sub2"}.
+#' missing, we use 30 when `method="last2"` and 300 when
+#' `method="sub2"`.
 #' @param nkids_per Number of offspring per pair for the last
 #' generation
 #' @param design How to choose crosses: either random but avoiding
@@ -15,30 +15,30 @@
 #' @param method Method used to generate the pedigree: either expand
 #' at the last two generations or generate a pedigree with a large
 #' number of pairs and then select a subset to have the desired sample
-#' size. With \code{method="fixcc"}, we use the pre-CC generations as performed at the
+#' size. With `method="fixcc"`, we use the pre-CC generations as performed at the
 #' Jackson Lab.
 #' @param selc.method Method used to select the individuals from last
 #' generation.
 #' @param nsample_ngen Number of individuals desired at the last
 #' generation
 #' @param nccgen The number of generations for each CC line, only used
-#' when \code{method} is not \code{"fixcc"}.
+#' when `method` is not `"fixcc"`.
 #'
 #' @details The default number of breeding pairs depends on the chosen
-#' \code{method}. With \code{method="last2"}, the default is \code{npairs=30};
-#' with \code{method="sub2"}, the default is \code{npairs=300};
-#' with \code{method="fixcc"}, \code{npairs} is ignored and is fixed at 144.
+#' `method`. With `method="last2"`, the default is `npairs=30`;
+#' with `method="sub2"`, the default is `npairs=300`;
+#' with `method="fixcc"`, `npairs` is ignored and is fixed at 144.
 #'
 #' @return A data frame with six columns: individual ID, mother ID, father
 #' ID, sex, generation, and TRUE/FALSE indicator for whether DO or pre-DO.
-#' Founders have \code{0} for mother and father ID. Sex is coded 0 for
+#' Founders have `0` for mother and father ID. Sex is coded 0 for
 #' female and 1 for male.
 #'
 #' @export
-#' @seealso \code{\link{sim_from_pedigree}},
-#' \code{\link{sim_ril_pedigree}}, \code{\link{sim_ail_pedigree}},
-#' \code{\link{sim_do_pedigree}}, \code{\link{sim_4way_pedigree}},
-#' \code{\link{sim_ail_pedigree_fix_n}}
+#' @seealso [sim_from_pedigree()],
+#' [sim_ril_pedigree()], [sim_ail_pedigree()],
+#' [sim_do_pedigree()], [sim_4way_pedigree()],
+#' [sim_ail_pedigree_fix_n()]
 #'
 #' @examples
 #' tab <- sim_do_pedigree_fix_n(8)

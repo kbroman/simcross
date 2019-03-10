@@ -7,14 +7,14 @@
 #' Find regions of heterozygosity in an individual
 #'
 #' @param ind An individual object, as output be
-#' \code{\link{create_parent}} or \code{\link{cross}}
+#' [create_parent()] or [cross()]
 #'
 #' @return A matrix with two columns; each row indicates the start and
 #' end of a region where the individual is heterozygous
 #'
 #' @export
-#' @seealso \code{\link{sim_from_pedigree}},
-#' \code{\link{convert2geno}}
+#' @seealso [sim_from_pedigree()],
+#' [convert2geno()]
 #' @examples
 #' mom <- create_parent(100, 1:2)
 #' dad <- create_parent(100, 1:2)

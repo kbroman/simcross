@@ -25,6 +25,6 @@ create_parent(100, 1)
 create_parent(100, 1:2)
 }
 \seealso{
-\code{\link{cross}}, \code{\link{sim_meiosis}}
+\code{\link[=cross]{cross()}}, \code{\link[=sim_meiosis]{sim_meiosis()}}
 }
 \keyword{datagen}

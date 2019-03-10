@@ -10,7 +10,7 @@
 #' for females and 1 for males) and generation.
 #'
 #' @source Derived from the pedF8 dataset in the QTLRel package,
-#' \url{https://cran.r-project.org/package=QTLRel}
+#' <https://cran.r-project.org/package=QTLRel>
 #'
 #' @keywords datasets
 #'

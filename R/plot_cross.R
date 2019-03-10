@@ -53,7 +53,7 @@ CCcolors <-
 #' Add an individual, as a pair of chromosomes, to a plot
 #'
 #' @param ind An individual object, as output by
-#' \code{\link{create_parent}} or \code{\link{cross}}
+#' [create_parent()] or [cross()]
 #' @param center (x,y) vector for the center of the individual
 #' @param chrlength Length of chromosomes (Can be a vector of length
 #' 2, in which case the two chromosomes will be different lengths,
@@ -62,8 +62,8 @@ CCcolors <-
 #' @param gap Gap between chromosomes
 #' @param col Vector of colors
 #' @param border Color for border
-#' @param lend Passed to \code{\link[graphics]{rect}}
-#' @param ljoin Passed to \code{\link[graphics]{rect}}
+#' @param lend Passed to [graphics::rect()]
+#' @param ljoin Passed to [graphics::rect()]
 #' @param allborders If TRUE, put borders around all segments
 #' @param ... Additional arguments passed to rect()
 #'
@@ -72,7 +72,7 @@ CCcolors <-
 #' @importFrom graphics rect
 #' @keywords hplot
 #' @export
-#' @seealso \code{\link{plot_crosslines}}
+#' @seealso [plot_crosslines()]
 #' @examples
 #' \dontshow{set.seed(67452378)}
 #' mom <- create_parent(100, 1:2)
@@ -150,8 +150,8 @@ plot_ind <-
 #' @param cex Character expansion for x point
 #' @param chrlength Length of chromosomes
 #' @param lwd Line width for points, segments, and arrows
-#' @param arrow_length The \code{length} parameter in the call to
-#' \code{\link[graphics]{arrows}}
+#' @param arrow_length The `length` parameter in the call to
+#' [graphics::arrows()]
 #' @param col Color of lines and points
 #' @param ... Additional arguments passed to arrows() and segments()
 #'
@@ -160,7 +160,7 @@ plot_ind <-
 #' @importFrom graphics points arrows
 #' @keywords hplot
 #' @export
-#' @seealso \code{\link{plot_ind}}
+#' @seealso [plot_ind()]
 #' @examples
 #' \dontshow{set.seed(67452378)}
 #' mom <- create_parent(100, 1:2)

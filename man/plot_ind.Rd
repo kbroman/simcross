@@ -10,7 +10,7 @@ plot_ind(ind, center, chrlength = 30, chrwidth = 3, gap = 3,
 }
 \arguments{
 \item{ind}{An individual object, as output by
-\code{\link{create_parent}} or \code{\link{cross}}}
+\code{\link[=create_parent]{create_parent()}} or \code{\link[=cross]{cross()}}}
 
 \item{center}{(x,y) vector for the center of the individual}
 
@@ -26,9 +26,9 @@ aligned at the top. This is for the X chromosome.)}
 
 \item{border}{Color for border}
 
-\item{lend}{Passed to \code{\link[graphics]{rect}}}
+\item{lend}{Passed to \code{\link[graphics:rect]{graphics::rect()}}}
 
-\item{ljoin}{Passed to \code{\link[graphics]{rect}}}
+\item{ljoin}{Passed to \code{\link[graphics:rect]{graphics::rect()}}}
 
 \item{allborders}{If TRUE, put borders around all segments}
 
@@ -54,6 +54,6 @@ plot_ind(kid, loc[[3]])
 plot_crosslines(loc[[1]], loc[[2]], loc[[3]])
 }
 \seealso{
-\code{\link{plot_crosslines}}
+\code{\link[=plot_crosslines]{plot_crosslines()}}
 }
 \keyword{hplot}

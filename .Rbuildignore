@@ -2,3 +2,4 @@
 \.gitignore$
 Makefile$
 ^\.travis\.yml$
+^LICENSE.md$

@@ -1,4 +1,12 @@
-## simcross 0.2-31 (2019-03-10)
+## simcross 0.2-32 (2019-04-30)
+
+### Bug fixes
+
+- Insert missing `match.arg()` calls in `sim_do_pedigree()` and
+  `sim_dof1_pedigree()`.
+
+
+## simcross 0.2-32 (2019-03-10)
 
 ### Minor changes
 

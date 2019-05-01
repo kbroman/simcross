@@ -68,6 +68,7 @@ sim_do_pedigree <-
              ccgen=rep(4:12, c(21, 64, 24, 10, 5, 9, 5, 3, 3)),
              nkids_per=5, design=c("nosib", "random"))
 {
+    design <- match.arg(design)
     if(length(ccgen)==1) ccgen <- rep(ccgen, npairs)
     stopifnot(length(ccgen) == npairs)
     stopifnot(all(ccgen >= 0))

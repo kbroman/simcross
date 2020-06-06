@@ -4,8 +4,13 @@
 \alias{sim_from_pedigree_allchr}
 \title{Simulate genotypes for pedigree for multiple chromosomes}
 \usage{
-sim_from_pedigree_allchr(pedigree, map, m = 10, p = 0,
-  obligate_chiasma = FALSE)
+sim_from_pedigree_allchr(
+  pedigree,
+  map,
+  m = 10,
+  p = 0,
+  obligate_chiasma = FALSE
+)
 }
 \arguments{
 \item{pedigree}{Matrix or data frame describing a pedigree, with first four

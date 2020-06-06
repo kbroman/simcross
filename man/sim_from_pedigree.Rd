@@ -4,8 +4,14 @@
 \alias{sim_from_pedigree}
 \title{Simulate genotypes for pedigree}
 \usage{
-sim_from_pedigree(pedigree, L = 100, xchr = FALSE, m = 10, p = 0,
-  obligate_chiasma = FALSE)
+sim_from_pedigree(
+  pedigree,
+  L = 100,
+  xchr = FALSE,
+  m = 10,
+  p = 0,
+  obligate_chiasma = FALSE
+)
 }
 \arguments{
 \item{pedigree}{Matrix or data frame describing a pedigree, with first four

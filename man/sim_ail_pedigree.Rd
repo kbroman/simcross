@@ -4,8 +4,12 @@
 \alias{sim_ail_pedigree}
 \title{Simulate AIL pedigree}
 \usage{
-sim_ail_pedigree(ngen = 12, npairs = 30, nkids_per = 5,
-  design = c("nosib", "random"))
+sim_ail_pedigree(
+  ngen = 12,
+  npairs = 30,
+  nkids_per = 5,
+  design = c("nosib", "random")
+)
 }
 \arguments{
 \item{ngen}{Number of generations of outbreeding}

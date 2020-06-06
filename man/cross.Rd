@@ -4,8 +4,16 @@
 \alias{cross}
 \title{Cross two individuals}
 \usage{
-cross(mom, dad, m = 10, p = 0, xchr = FALSE, male = FALSE,
-  obligate_chiasma = FALSE, Lstar = NULL)
+cross(
+  mom,
+  dad,
+  m = 10,
+  p = 0,
+  xchr = FALSE,
+  male = FALSE,
+  obligate_chiasma = FALSE,
+  Lstar = NULL
+)
 }
 \arguments{
 \item{mom}{An individual object, as produced by

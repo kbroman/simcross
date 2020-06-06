@@ -4,7 +4,9 @@
 \name{mouseL_mgi}
 \alias{mouseL_mgi}
 \title{Mouse chromosome lengths}
-\format{A numeric vector with lengths in cM for the 20 mouse chromosomes.}
+\format{
+A numeric vector with lengths in cM for the 20 mouse chromosomes.
+}
 \source{
 Taken from Table 1 of Cox et al. (2009) A new standard
 genetic map for the laboratory mouse. Genetics 182:1335-1344.

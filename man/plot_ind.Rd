@@ -4,9 +4,19 @@
 \alias{plot_ind}
 \title{Plot an individual}
 \usage{
-plot_ind(ind, center, chrlength = 30, chrwidth = 3, gap = 3,
-  col = CCcolors(), border = "black", lend = 1, ljoin = 1,
-  allborders = FALSE, ...)
+plot_ind(
+  ind,
+  center,
+  chrlength = 30,
+  chrwidth = 3,
+  gap = 3,
+  col = CCcolors(),
+  border = "black",
+  lend = 1,
+  ljoin = 1,
+  allborders = FALSE,
+  ...
+)
 }
 \arguments{
 \item{ind}{An individual object, as output by

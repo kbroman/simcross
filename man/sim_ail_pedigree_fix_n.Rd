@@ -4,9 +4,14 @@
 \alias{sim_ail_pedigree_fix_n}
 \title{Simulate AIL pedigree with fixed n}
 \usage{
-sim_ail_pedigree_fix_n(ngen = 12, nkids_per = 5, nsample_ngen = 150,
-  npairs = NULL, method = c("last2", "sub2"), design = c("nosib",
-  "random"))
+sim_ail_pedigree_fix_n(
+  ngen = 12,
+  nkids_per = 5,
+  nsample_ngen = 150,
+  npairs = NULL,
+  method = c("last2", "sub2"),
+  design = c("nosib", "random")
+)
 }
 \arguments{
 \item{ngen}{Number of generations of outbreeding}

@@ -4,8 +4,12 @@
 \alias{sim_ril_pedigree}
 \title{Generate a ril pedigree}
 \usage{
-sim_ril_pedigree(ngen = 20, selfing = FALSE, parents = 1:2,
-  firstind = max(parents) + 1)
+sim_ril_pedigree(
+  ngen = 20,
+  selfing = FALSE,
+  parents = 1:2,
+  firstind = max(parents) + 1
+)
 }
 \arguments{
 \item{ngen}{Number of generations of inbreeding}

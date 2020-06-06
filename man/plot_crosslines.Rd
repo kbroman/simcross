@@ -4,8 +4,18 @@
 \alias{plot_crosslines}
 \title{Plot cross lines}
 \usage{
-plot_crosslines(momloc, dadloc, kidsloc, gap = 3, chrlength = 30,
-  cex = 1.5, lwd = 2, arrow_length = 0.1, col = "white", ...)
+plot_crosslines(
+  momloc,
+  dadloc,
+  kidsloc,
+  gap = 3,
+  chrlength = 30,
+  cex = 1.5,
+  lwd = 2,
+  arrow_length = 0.1,
+  col = "white",
+  ...
+)
 }
 \arguments{
 \item{momloc}{An (x,y) vector with center location for mother}

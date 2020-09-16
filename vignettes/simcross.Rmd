@@ -14,7 +14,7 @@ opts_chunk$set(fig.width=7, fig.height=4.5,
 ```
 
 
-[R/simcross](https://kbroman.org/simcross) is an
+[R/simcross](https://kbroman.org/simcross/) is an
 [R](https://www.r-project.org) package to simulate genotypes from an
 experimental cross. The aim is flexibility rather than speed.
 
@@ -36,7 +36,7 @@ _&nu;_; the chi-square model corresponds to the case that _m_ = _&nu;_
 
 In many organisms, there is always at least one chiasma for each pair
 of homologous chromosomes at meiosis. Simulations with
-[R/simcross](https://kbroman.org/simcross) may be performed
+[R/simcross](https://kbroman.org/simcross/) may be performed
 with this assumption; the same model is used, but with rejection
 sampling to get results conditional on there being at least one
 chiasma. Note that this isn't an assumption of an obligate
@@ -133,7 +133,7 @@ section).
 
 To define a pedigree, we use a numeric matrix (or data frame) with four columns:
 individual ID, mom, dad, and sex (coded as 0=female, 1=male). The
-[R/simcross package](https://kbroman.org/simcross) includes a
+[R/simcross package](https://kbroman.org/simcross/) includes a
 sample pedigree for advanced intercross lines, `AILped`, taken from
 the [QTLRel package](https://cran.r-project.org/package=QTLRel).
 Here is the top of that dataset:

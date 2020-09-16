@@ -1,4 +1,4 @@
-## simcross 0.3-3 (2020-09-16)
+## simcross 0.3-4 (2020-09-16)
 
 ### Minor changes
 

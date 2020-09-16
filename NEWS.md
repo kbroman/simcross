@@ -1,8 +1,9 @@
-## simcross 0.3-1 (2020-09-14)
+## simcross 0.3-3 (2020-09-16)
 
 ### Minor changes
 
 - Prepare to post to CRAN
+
 
 ## simcross 0.2-32 (2019-04-30)
 

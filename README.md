@@ -13,21 +13,10 @@ and plotting general experimental crosses.
 
 ### Installation
 
-You can install R/simcross from its
-[GitHub repository](https://github.com/kbroman/simcross). You first need to
-install the [devtools](https://github.com/r-lib/devtools) package.
+You can install R/simcross from [CRAN](https://cran.r-project.org):
 
 ```r
-install.packages("devtools")
-```
-
-Then install R/simcross using the `install_github` function in the
-[devtools](https://github.com/r-lib/devtools) package. (With
-`build_vignettes=TRUE`, the vignettes will be built and installed.)
-
-```r
-library(devtools)
-install_github("kbroman/simcross", build_vignettes=TRUE)
+install.packages("simcross")
 ```
 
 ---

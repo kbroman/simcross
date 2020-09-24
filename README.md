@@ -1,6 +1,7 @@
-## [R/simcross](https://kbroman.org/simcross)
+## [R/simcross](https://kbroman.org/simcross/)
 
 [![Build Status](https://travis-ci.org/kbroman/simcross.svg?branch=master)](https://travis-ci.org/kbroman/simcross)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/simcross)](https://cran.r-project.org/package=simcross)
 
 [Karl W Broman](https://kbroman.org)
 
@@ -13,20 +14,10 @@ and plotting general experimental crosses.
 
 ### Installation
 
-You can install R/simcross from its
-[GitHub repository](https://github.com/kbroman/simcross). You first need to
-install the [devtools](https://github.com/hadley/devtools) package.
+You can install R/simcross from [CRAN](https://cran.r-project.org):
 
 ```r
-install.packages("devtools")
-```
-
-Then install R/simcross using the `install_github` function in the
-[devtools](https://github.com/hadley/devtools) package.
-
-```r
-library(devtools)
-install_github("kbroman/simcross")
+install.packages("simcross")
 ```
 
 ---
@@ -34,7 +25,7 @@ install_github("kbroman/simcross")
 ### Vignette
 
 A vignette describing the use of the package is available from within
-R (and [also here](assets/vignettes/simcross.html)). Load the package
+R (and [also here](https://kbroman.org/simcross/assets/vignettes/simcross.html)). Load the package
 and then use the `vignette` function.
 
 ```r

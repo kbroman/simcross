@@ -5,6 +5,9 @@ tagline: simulation of general experimental crosses
 description: R/simcross is an R package to simulate general experimental crosses, including advanced intercross lines and the diversity outcross.
 ---
 
+[![Build Status](https://travis-ci.org/kbroman/simcross.svg?branch=master)](https://travis-ci.org/kbroman/simcross)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/simcross)](https://cran.r-project.org/package=simcross)
+
 [R/simcross](https://github.com/kbroman/simcross) is an
 [R](https://www.r-project.org) package to simulate general experimental
 crosses, including advanced intercross lines and the diversity outcross.
@@ -12,16 +15,11 @@ It is intended to be a companion to [R/qtl](https://www.rqtl.org).
 
 ### Installation
 
-You can install R/simcross from its
-[GitHub repository](https://github.com/kbroman/simcross). You first need to
-install the [devtools](https://github.com/hadley/devtools) package.
+You can install R/simcross from [CRAN](https://cran.r-project.org):
 
-    install.packages("devtools")
-
-Then install R/simcross using `devtools::install_github()`.
-
-    library(devtools)
-    install_github("kbroman/simcross")
+```r
+install.packages("simcross")
+```
 
 ### Vignette
 

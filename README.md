@@ -1,6 +1,7 @@
 ## [R/simcross](https://kbroman.org/simcross/)
 
 [![Build Status](https://travis-ci.org/kbroman/simcross.svg?branch=master)](https://travis-ci.org/kbroman/simcross)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/simcross)](https://cran.r-project.org/package=simcross)
 
 [Karl W Broman](https://kbroman.org)
 

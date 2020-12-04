@@ -5,7 +5,7 @@ tagline: simulation of general experimental crosses
 description: R/simcross is an R package to simulate general experimental crosses, including advanced intercross lines and the diversity outcross.
 ---
 
-[![Build Status](https://travis-ci.org/kbroman/simcross.svg?branch=master)](https://travis-ci.org/kbroman/simcross)
+[![R build status](https://github.com/kbroman/simcross/workflows/R-CMD-check/badge.svg)](https://github.com/kbroman/simcross/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/simcross)](https://cran.r-project.org/package=simcross)
 
 [R/simcross](https://github.com/kbroman/simcross) is an

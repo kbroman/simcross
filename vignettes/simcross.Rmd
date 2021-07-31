@@ -543,39 +543,48 @@ Genetics 190:403-412
 [doi: 10.1534/genetics.111.132647](https://doi.org/10.1534/genetics.111.132647)
 
 Broman KW, Rowe LB, Churchill GA, Paigen K (2002)
-[Crossover interference in the mouse](https://www.genetics.org/content/160/3/1123.short).
+[Crossover interference in the mouse](https://doi.org/10.1093/genetics/160.3.1123).
 Genetics 160:1123-1131
+[doi: 10.1093/genetics/160.3.1123](https://doi.org/10.1093/genetics/160.3.1123)
 
 Copenhaver GP, Housworth EA, Stahl FW (2002)
-[Crossover interference in arabidopsis](https://www.genetics.org/content/160/4/1631.short).
+[Crossover interference in arabidopsis](https://doi.org/10.1093/genetics/160.4.1631).
 Genetics 160:1631-1639
+[doi: 10.1093/genetics/160.4.1631](https://doi.org/10.1093/genetics/160.4.1631)
 
 Foss E, Lande R, Stahl FW, Steinberg CM (1993)
-[Chiasma interference as a function of genetic distance](https://www.genetics.org/content/133/3/681.short).
+[Chiasma interference as a function of genetic distance](https://doi.org/10.1093/genetics/92.2.573).
 Genetics 133:681-691
+[doi: 10.1093/genetics/92.2.573](https://doi.org/10.1093/genetics/92.2.573)
 
 Kover PX, Valdar W, Trakalo J, Scarcelli N, Ehrenreich IM, Purugganan
 MD, Durrant C, Mott R (2009)
 [A Multiparent Advanced Generation Inter-Cross to fine-map quantitative traits in _Arabidopsis thaliana_](https://doi.org/10.1371/journal.pgen.1000551).
 PLoS Genetics 5:e1000551
+[doi: 10.1371/journal.pgen.1000551](https://doi.org/10.1371/journal.pgen.1000551)
 
 McPeek MS, Speed TP (1995)
-[Modeling interference in genetic recombination](https://www.genetics.org/content/139/2/1031.short).
+[Modeling interference in genetic recombination](https://doi.org/10.1093/genetics/139.2.1031).
 Genetics 139:1031-1044
+[doi: 10.1093/genetics/139.2.1031](https://doi.org/10.1093/genetics/139.2.1031)
 
 Mott R, Flint J (2002)
-[Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks](https://www.genetics.org/content/160/4/1609.short).
+[Simultaneous detection and fine mapping of quantitative trait loci in mice using heterogeneous stocks](https://doi.org/10.1093/genetics/160.4.1609).
 Genetics 160:1609-1618
+[doi: 10.1093/genetics/160.4.1609](https://doi.org/10.1093/genetics/160.4.1609)
 
 Svenson KL, Gatti DM, Valdar W, Welsh CE, Cheng R, Chesler EJ, Palmer
 AA, McMillan L, Churchill GA (2012)
-[High-resolution genetic mapping using the mouse Diversity Outbred population.](https://www.genetics.org/content/190/2/437.short)
+[High-resolution genetic mapping using the mouse Diversity Outbred population.](https://doi.org/10.1534/genetics.111.132597).
 Genetics 190:437-447
+[doi: 10.1534/genetics.111.132597](https://doi.org/10.1534/genetics.111.132597)
 
 Threadgill DW, Churchill GA (2012)
-[Ten years of the Collaborative Cross](https://www.genetics.org/content/190/2/291.short).
+[Ten years of the Collaborative Cross](https://doi.org/10.1534/genetics.111.138032).
 Genetics 190:291-294
+[doi: 10.1534/genetics.111.138032](https://doi.org/10.1534/genetics.111.138032)
 
 Zhao H, Speed TP, McPeek MS (1995)
-[Statistical analysis of crossover interference using the chi-square model](https://www.genetics.org/content/139/2/1045.short).
+[Statistical analysis of crossover interference using the chi-square model](https://doi.org/10.1534/genetics.111.138032).
 Genetics 139:1045-1056
+[doi: 10.1534/genetics.111.138032](https://doi.org/10.1534/genetics.111.138032)

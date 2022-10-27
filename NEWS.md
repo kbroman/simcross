@@ -1,4 +1,4 @@
-## simcross 0.5-1 (2022-10-26)
+## simcross 0.5-2 (2022-10-27)
 
 ### Minor changes
 

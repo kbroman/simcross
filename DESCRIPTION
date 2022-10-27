@@ -1,6 +1,6 @@
 Package: simcross
-Version: 0.5-1
-Date: 2022-10-26
+Version: 0.5-2
+Date: 2022-10-27
 Title: Simulate Experimental Crosses
 Description: Simulate and plot general experimental crosses. The focus is on simulating genotypes with an aim towards flexibility rather than speed. Meiosis is simulated following the Stahl model, in which chiasma locations are the superposition of two processes: a proportion p coming from a process exhibiting no interference, and the remainder coming from a process following the chi-square model.
 Author: Karl W Broman [aut, cre] (<https://orcid.org/0000-0002-4914-6671>)

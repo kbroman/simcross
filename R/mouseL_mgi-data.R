@@ -11,7 +11,7 @@
 #'
 #' @source Taken from Table 1 of Cox et al. (2009) A new standard
 #'     genetic map for the laboratory mouse. Genetics 182:1335-1344.
-#'     <https://doi.org/10.1534/genetics.109.105486}{doi:10.1534/genetics.109.105486>
+#'     \doi{10.1534/genetics.109.105486}
 #'
 #' @keywords datasets
 #'

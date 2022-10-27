@@ -1,3 +1,10 @@
+## simcross 0.5-1 (2022-10-26)
+
+### Minor changes
+
+- cross-list some help files
+
+
 ## simcross 0.3-6 (2020-09-17)
 
 ### Minor changes

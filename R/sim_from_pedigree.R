@@ -36,7 +36,7 @@
 #' @keywords datagen
 #' @seealso [check_pedigree()],
 #' [sim_ril_pedigree()], [sim_ail_pedigree()],
-#' [sim_ril_pedigree()]
+#' [sim_from_pedigree_allchr()]
 #'
 #' @examples
 #' # simulate AIL pedigree

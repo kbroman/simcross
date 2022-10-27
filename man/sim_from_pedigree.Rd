@@ -62,6 +62,6 @@ dat <- sim_from_pedigree(tab, c("1"=100, "2"=75, "X"=100), xchr="X")
 \seealso{
 \code{\link[=check_pedigree]{check_pedigree()}},
 \code{\link[=sim_ril_pedigree]{sim_ril_pedigree()}}, \code{\link[=sim_ail_pedigree]{sim_ail_pedigree()}},
-\code{\link[=sim_ril_pedigree]{sim_ril_pedigree()}}
+\code{\link[=sim_from_pedigree_allchr]{sim_from_pedigree_allchr()}}
 }
 \keyword{datagen}

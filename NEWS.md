@@ -1,4 +1,4 @@
-## simcross 0.5-2 (2022-10-27)
+## simcross 0.6 (2023-11-29)
 
 ### Minor changes
 
@@ -20,7 +20,7 @@
   `sim_dof1_pedigree()`.
 
 
-## simcross 0.2-32 (2019-03-10)
+## simcross 0.2-31 (2019-03-10)
 
 ### Minor changes
 

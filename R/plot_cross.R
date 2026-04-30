@@ -175,7 +175,7 @@ plot_ind <-
 #' plot_crosslines(loc[[1]], loc[[2]], loc[3:6])
 plot_crosslines <-
     function(momloc, dadloc, kidsloc, gap=3, chrlength=30, cex=1.5,
-             lwd=2, arrow_length=0.1, col="white", ...)
+             lwd=2, arrow_length=0.1, col="black", ...)
 {
     stopifnot(length(momloc)==2, length(dadloc)==2)
 

@@ -13,7 +13,7 @@ plot_crosslines(
   cex = 1.5,
   lwd = 2,
   arrow_length = 0.1,
-  col = "white",
+  col = "black",
   ...
 )
 }

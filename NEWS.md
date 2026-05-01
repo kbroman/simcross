@@ -1,3 +1,10 @@
+## simcross 0.9-1 (2026-05-01)
+
+### Minor changes
+
+- Revise `CCcolors()` to match the color palettes in R/qtl2.
+
+
 ## simcross 0.8 (2026-05-01)
 
 ### Minor changes

@@ -4,15 +4,23 @@
 \alias{CCcolors}
 \title{Collaborative Cross colors}
 \usage{
-CCcolors(palette = c("new", "original", "official"))
+CCcolors(palette = c("new", "alt", "original", "official"))
 }
 \arguments{
-\item{palette}{Which version of the colors to use? (New or original)}
+\item{palette}{Which version of the colors to use? (New, alternative, or original/official)}
 }
 \value{
 vector of eight colors
 }
 \description{
+The original/official palette is the original eight colors for the
+Collaborative Cross founder strains. The alt palette is a slightly
+modified version, but still not color-blind friendly. The default
+(new) palette was derived from the the Okabe-Ito color blind
+friendly palette in Wong (2011) Nature Methods
+\doi{10.1038/nmeth.1618}.
+}
+\details{
 Get the vector of colors for the Collaborative Cross
 }
 \examples{

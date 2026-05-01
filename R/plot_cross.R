@@ -6,9 +6,17 @@
 #'
 #' Get the vector of colors for the Collaborative Cross
 #'
-#' @param palette Which version of the colors to use? (New or original)
+#' @param palette Which version of the colors to use? (New, alternative, or original/official)
 #'
 #' @return vector of eight colors
+#'
+#' @description
+#' The original/official palette is the original eight colors for the
+#' Collaborative Cross founder strains. The alt palette is a slightly
+#' modified version, but still not color-blind friendly. The default
+#' (new) palette was derived from the the Okabe-Ito color blind
+#' friendly palette in Wong (2011) Nature Methods
+#' \doi{10.1038/nmeth.1618}.
 #'
 #' @keywords color
 #' @export
@@ -17,10 +25,20 @@
 #' @examples
 #' CCcolors()
 CCcolors <-
-    function(palette=c("new", "original", "official")) {
+    function(palette=c("new", "alt", "original", "official")) {
         palette <- match.arg(palette)
 
         if(palette=="new") {
+            c(AJ    = "#F0E442",
+              B6    = "#555555",
+              "129" = "#E69F00",
+              NOD   = "#0072B2",
+              NZO   = "#56B4E9",
+              CAST  = "#009E73",
+              PWK   = "#D55E00",
+              WSB   = "#CC79A7"
+)        }
+        else if(palette == "alt") {
             return(
                 c(AJ   ="#FFDC00",
                   B6   ="#888888",
@@ -31,8 +49,7 @@ CCcolors <-
                   PWK  ="#FF4136",
                   WSB  ="#B10DC9")
             )
-        }
-        else {
+        } else { # original/official
             return(
                 c("AJ"  =rgb(240,240,  0,maxColorValue=255),
                   "B6"  =rgb(128,128,128,maxColorValue=255),

@@ -7,8 +7,8 @@ description: R/simcross is an R package to simulate general experimental crosses
 
 [![R-CMD-check](https://github.com/kbroman/simcross/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbroman/simcross/actions/workflows/R-CMD-check.yaml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/simcross)](https://cran.r-project.org/package=simcross)
-[![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4032914.svg)](https://doi.org/10.5281/zenodo.4032914)
 [![r-universe badge](https://kbroman.r-universe.dev/simcross/badges/version)](https://kbroman.r-universe.dev/simcross)
+[![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4032914.svg)](https://doi.org/10.5281/zenodo.4032914)
 
 [R/simcross](https://github.com/kbroman/simcross) is an
 [R](https://www.r-project.org) package to simulate general experimental

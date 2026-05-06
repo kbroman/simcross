@@ -50,5 +50,5 @@ A copy of the GNU General Public License, version 3, is available at
 
 Sources on [github](https://github.com):
 
-- The [source for the package](https://github.com/kbroman/simcross/tree/master)
+- The [source for the package](https://github.com/kbroman/simcross)
 - The [source for the website](https://github.com/kbroman/simcross/tree/gh-pages)

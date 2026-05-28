@@ -23,6 +23,21 @@ You can install R/simcross from [CRAN](https://cran.r-project.org):
 install.packages("simcross")
 ```
 
+Alternatively, install it from [R
+universe](https://kbroman.r-universe.dev):
+
+```r
+install.packages("simcross", repos=c("https://kbroman.r-universe.dev",
+                                     "https://cloud.r-project.org"))
+```
+
+Or use [remotes](https://remotes.r-lib.org) to install it from its GitHub source:
+
+```r
+install.packages("remotes")
+remotes::install_github("kbroman/simcross")
+```
+
 ### Vignette
 
 A vignette describing the use of the package is available from within

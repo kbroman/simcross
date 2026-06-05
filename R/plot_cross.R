@@ -197,7 +197,7 @@ plot_crosslines <-
     stopifnot(length(momloc)==2, length(dadloc)==2)
 
     point <- colMeans(rbind(momloc, dadloc))
-    points(point[1], point[2], pch=4, cex=cex, lwd=2, col=col, ...)
+    points(point[1], point[2], pch=4, cex=cex, lwd=lwd, col=col, ...)
 
     if(!is.list(kidsloc)) { # 1 kid
         stopifnot(length(kidsloc)==2)

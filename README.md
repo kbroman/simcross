@@ -1,4 +1,4 @@
-## [R/simcross](https://kbroman.org/simcross/)
+## [R/simcross](https://kbroman.org/simcross/) <a href="https://kbroman.org/simcross/"><img src="https://kbroman.org/simcross/assets/pics/simcross_logo.png" align="right" height="138" alt="R/simcross logo"/></a>
 
 [![R-CMD-check](https://github.com/kbroman/simcross/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbroman/simcross/actions/workflows/R-CMD-check.yaml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/simcross)](https://cran.r-project.org/package=simcross)

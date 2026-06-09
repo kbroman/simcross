@@ -596,3 +596,8 @@ Zhao H, Speed TP, McPeek MS (1995)
 [Statistical analysis of crossover interference using the chi-square model](https://doi.org/10.1534/genetics.111.138032).
 Genetics 139:1045-1056
 [doi: 10.1534/genetics.111.138032](https://doi.org/10.1534/genetics.111.138032)
+
+---
+
+[![CC BY](https://i.creativecommons.org/l/by/3.0/88x31.png)](https://creativecommons.org/licenses/by/3.0/)
+&nbsp; &nbsp; [Karl Broman](https://kbroman.org/)

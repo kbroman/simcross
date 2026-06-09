@@ -1,4 +1,4 @@
-## simcross 0.9-2 (2026-06-05)
+## simcross 0.10 (2026-06-08)
 
 ### Minor changes
 

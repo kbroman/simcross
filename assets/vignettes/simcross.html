@@ -347,11 +347,15 @@ margin-left: auto;
 margin-right: auto;
 }
 img { border: 0; }
-a {
+a, a[href^="http:"], a[href^="https:"] {
 color: slateblue;
 text-decoration: none;
 }
-a:hover {
+a:visited {
+color: slateblue;
+text-decoration: none;
+}
+a:hover,a:visited:hover {
 color: white;
 background-color: slateblue;
 text-decoration: none;

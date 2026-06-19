@@ -5,10 +5,6 @@
 [![r-universe badge](https://kbroman.r-universe.dev/simcross/badges/version)](https://kbroman.r-universe.dev/simcross)
 [![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4032914.svg)](https://doi.org/10.5281/zenodo.4032914)
 
-[Karl W Broman](https://kbroman.org)
-
----
-
 R/simcross is an [R](https://www.r-project.org) package for simulating
 and plotting general experimental crosses.
 

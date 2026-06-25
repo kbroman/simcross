@@ -5,10 +5,6 @@
 [![r-universe badge](https://kbroman.r-universe.dev/simcross/badges/version)](https://kbroman.r-universe.dev/simcross)
 [![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4032914.svg)](https://doi.org/10.5281/zenodo.4032914)
 
-[Karl W Broman](https://kbroman.org)
-
----
-
 R/simcross is an [R](https://www.r-project.org) package for simulating
 and plotting general experimental crosses.
 
@@ -20,6 +16,21 @@ You can install R/simcross from [CRAN](https://cran.r-project.org):
 
 ```r
 install.packages("simcross")
+```
+
+Alternatively, install it from [R
+universe](https://kbroman.r-universe.dev):
+
+```r
+install.packages("simcross", repos=c("https://kbroman.r-universe.dev",
+                                     "https://cloud.r-project.org"))
+```
+
+Or use [remotes](https://remotes.r-lib.org) to install it from its GitHub source:
+
+```r
+install.packages("remotes")
+remotes::install_github("kbroman/simcross")
 ```
 
 ---
